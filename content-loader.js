@@ -109,11 +109,13 @@ function loadAnnouncements(s) {
 const BUTTON_OVERRIDES = {
     btn_register_state: 'enabled',
     btn_register_url:   'registration-payment.html',
+    btn_submit_state:   'enabled',
+    btn_submit_url:     'submission.html#submission-closed',
 };
 
 function loadButtonLinks(s) {
-    const submitState   = s['btn_submit_state']   || 'disabled';
-    const submitUrl     = s['btn_submit_url']     || '#';
+    const submitState   = BUTTON_OVERRIDES['btn_submit_state'] || s['btn_submit_state'] || 'disabled';
+    const submitUrl     = BUTTON_OVERRIDES['btn_submit_url']   || s['btn_submit_url']   || '#';
     const registerState = BUTTON_OVERRIDES['btn_register_state'] || s['btn_register_state'] || 'disabled';
     const registerUrl   = BUTTON_OVERRIDES['btn_register_url']   || s['btn_register_url']   || '#';
 
