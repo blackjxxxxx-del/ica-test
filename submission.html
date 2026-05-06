@@ -178,6 +178,15 @@
     }
   }
 </style>
+<style id="submission-anchor-offset">
+  html {
+    scroll-padding-top: calc(var(--global-nav-offset, 170px) + 90px);
+  }
+
+  #submission-closed {
+    scroll-margin-top: calc(var(--global-nav-offset, 170px) + 90px);
+  }
+</style>
 <script id="global-mobile-logo-override-script">
   (function () {
     function setOffset() {
@@ -186,7 +195,26 @@
       var h = nav.getBoundingClientRect().height;
       document.documentElement.style.setProperty('--global-nav-offset', Math.ceil(h) + 'px');
     }
-    window.addEventListener('load', setOffset);
+    function alignHashTarget() {
+      if (!window.location.hash) return;
+      var target = document.querySelector(window.location.hash);
+      if (!target) return;
+      window.requestAnimationFrame(function () {
+        var nav = document.querySelector('header.navbar');
+        var navHeight = nav ? nav.getBoundingClientRect().height : 170;
+        var anchorGap = 90;
+        var top = target.getBoundingClientRect().top + window.pageYOffset - navHeight - anchorGap;
+        window.scrollTo({ top: Math.max(0, top), left: 0 });
+      });
+    }
+    window.addEventListener('DOMContentLoaded', function () {
+      setOffset();
+      alignHashTarget();
+    });
+    window.addEventListener('load', function () {
+      setOffset();
+      alignHashTarget();
+    });
     window.addEventListener('resize', setOffset);
     setOffset();
   })();
