@@ -22,6 +22,27 @@
 
 
 
+<style>
+@keyframes deadlineBlinkRefined{
+  0%,100%{color:#d63b3b;opacity:1;text-shadow:0 0 0 rgba(214,59,59,0)}
+  50%{color:#b91c1c;opacity:.45;text-shadow:0 0 10px rgba(220,38,38,.28)}
+}
+.glow-date{
+  background:none !important;
+  color:#d63b3b !important;
+  font-weight:800 !important;
+  font-size:inherit !important;
+  padding:0 !important;
+  border-radius:0 !important;
+  display:inline !important;
+  animation:deadlineBlinkRefined 1.35s ease-in-out infinite !important;
+  vertical-align:baseline !important;
+  line-height:inherit !important;
+  letter-spacing:0.02em !important;
+  box-shadow:none !important;
+}
+</style>
+
 <style id="global-mobile-logo-override">
   /* Force menu/header to always follow scroll on desktop + mobile */
   header.navbar {
