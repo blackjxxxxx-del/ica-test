@@ -180,11 +180,11 @@
 </style>
 <style id="submission-anchor-offset">
   html {
-    scroll-padding-top: var(--global-nav-offset, 170px);
+    scroll-padding-top: calc(var(--global-nav-offset, 170px) - 120px);
   }
 
   #submission-closed {
-    scroll-margin-top: var(--global-nav-offset, 170px);
+    scroll-margin-top: calc(var(--global-nav-offset, 170px) - 120px);
   }
 </style>
 <script id="global-mobile-logo-override-script">
@@ -202,7 +202,7 @@
       window.requestAnimationFrame(function () {
         var nav = document.querySelector('header.navbar');
         var navHeight = nav ? nav.getBoundingClientRect().height : 170;
-        var anchorGap = 0;
+        var anchorGap = -120;
         var top = target.getBoundingClientRect().top + window.pageYOffset - navHeight - anchorGap;
         window.scrollTo({ top: Math.max(0, top), left: 0 });
       });
