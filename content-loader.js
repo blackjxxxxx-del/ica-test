@@ -103,11 +103,19 @@ function loadAnnouncements(s) {
 
 
 /* ── Button Links ────────────────────────────────────────────── */
+
+/* LOCAL BUTTON OVERRIDES — use relative paths so links work on any host
+   (local file, GitHub Pages, or live site) without redirecting to icahubthailand.org */
+const BUTTON_OVERRIDES = {
+    btn_register_state: 'enabled',
+    btn_register_url:   'registration-payment.html',
+};
+
 function loadButtonLinks(s) {
     const submitState   = s['btn_submit_state']   || 'disabled';
     const submitUrl     = s['btn_submit_url']     || '#';
-    const registerState = s['btn_register_state'] || 'disabled';
-    const registerUrl   = s['btn_register_url']   || '#';
+    const registerState = BUTTON_OVERRIDES['btn_register_state'] || s['btn_register_state'] || 'disabled';
+    const registerUrl   = BUTTON_OVERRIDES['btn_register_url']   || s['btn_register_url']   || '#';
 
     document.querySelectorAll('a.btn').forEach(btn => {
         const text = btn.textContent.trim();
