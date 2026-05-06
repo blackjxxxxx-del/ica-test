@@ -1280,6 +1280,10 @@ import { getAuth, signInWithEmailAndPassword, GoogleAuthProvider, signInWithPopu
 import { getFirestore, doc, getDoc, setDoc, collection, getDocs, addDoc, updateDoc, deleteDoc, serverTimestamp } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore.js";
 import { getStorage, ref, uploadBytesResumable, getDownloadURL, deleteObject } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-storage.js";
 
+const LOCAL_API = (location.hostname==='localhost'||location.hostname==='127.0.0.1')
+    ? 'http://'+location.hostname+':4000'
+    : 'https://icahubthailand.org';
+
 const firebaseConfig = {
   apiKey:            "AIzaSyDfVgPU5k_cjqK9fYca011LbLvVYs7zgiE",
   authDomain:        "ica-th-2026.firebaseapp.com",
@@ -1320,6 +1324,7 @@ function showDashboard(user) {
   // Settings
   document.getElementById('settingsEmail').textContent    = user.email;
   calcDays(); loadArticles(); initPageEditor('home'); loadLinks(); loadKeynotes(); loadFees(); loadTracks(); loadAwards(); loadMessages(); loadNotifyList(); loadAnnouncementToggles(); loadGuidelinesPDF();
+  _fetchLocalJWT();
   const d = new Date();
   document.getElementById('overviewDate').innerHTML =
     d.toLocaleDateString('en-GB',{weekday:'long'}) + '<br>' +
@@ -2419,18 +2424,21 @@ const DISC_LABELS = { none:'—', '20pct':'20% OFF', '100pct':'100% Free' };
 ══════════════════════════════════════════════════════════ */
 let allDiscountRequests = [];
 
-const PHP_API = (location.hostname==='localhost'||location.hostname==='127.0.0.1')
-  ? location.protocol+'//'+location.hostname+':'+location.port+'/api/registrations-json.php'
-  : 'https://icahubthailand.org/admin/ica-cms-php/api/registrations-json.php';
+async function fetchAdminRows(type) {
+  await ensureLocalJWT();
+  const endpoint = type === 'discount' ? '/api/admin/discount-requests' : '/api/admin/registrations';
+  const res = await fetch(LOCAL_API + endpoint + '?_t=' + Date.now(), { headers: localHeaders() });
+  if (!res.ok) throw new Error('Server returned ' + res.status);
+  const raw = await res.json();
+  return (Array.isArray(raw) ? raw : (raw.data || [])).map(normalizeReg);
+}
 
 function fmtDate(s){ if(!s) return '—'; const d=new Date(s); return isNaN(d)?s:d.toLocaleDateString('en-GB'); }
 
 window.loadDiscountRequests = async function() {
-  document.getElementById('disc-table-wrap').innerHTML = '<div class="empty-state"><span class="empty-state-icon">⏳</span><p>Loading…</p></div>';
+    document.getElementById('disc-table-wrap').innerHTML = '<div class="empty-state"><span class="empty-state-icon">⏳</span><p>Loading…</p></div>';
   try {
-    const res = await fetch(PHP_API + '?type=discount');
-    const json = await res.json();
-    allDiscountRequests = json.data || [];
+    allDiscountRequests = await fetchAdminRows('discount');
 
     const pending = allDiscountRequests.filter(r => r.discountApprovalStatus === 'pending').length;
     const badge = document.getElementById('disc-pending-badge');
@@ -2438,7 +2446,7 @@ window.loadDiscountRequests = async function() {
 
     renderDiscountRequests();
   } catch(e) {
-    document.getElementById('disc-table-wrap').innerHTML = '<div class="empty-state"><span class="empty-state-icon">⚠️</span><p>Error: ' + escHtml(e.message) + '</p></div>';
+    document.getElementById('disc-table-wrap').innerHTML = '<div class="empty-state"><span class="empty-state-icon">⚠️</span><p>Error: ' + escHtml(e.message) + '<br><small>Make sure the local server is running (<code>node api/server.js</code>)</small></p></div>';
   }
 };
 
@@ -2468,8 +2476,11 @@ function renderDiscountRequests() {
   const tableRows = pageRows.map(r => {
     const apprColor = {pending:'#e8a020', approved:'#1a8a50', rejected:'#dc3545'}[r.discountApprovalStatus] || '#6b7a95';
     const apprLabel = {pending:'⏳ Pending', approved:'✓ Approved', rejected:'✕ Rejected'}[r.discountApprovalStatus] || r.discountApprovalStatus;
-    const docBtn = r.documentUrl
-      ? `<a href="${escHtml(r.documentUrl)}" target="_blank" class="btn btn-ghost btn-xs">📄 View</a>`
+    const docBtn = r.documentFilename
+      ? `<button onclick="viewDocument('${escHtml(r.documentFilename)}')" class="btn btn-ghost btn-xs">📄 View</button>`
+      : '<span style="color:var(--muted-lt);font-size:12px;">—</span>';
+    const promoCell = r.promoCode
+      ? `<span style="font-family:monospace;font-size:11px;background:#f0f4ff;color:#3730a3;padding:2px 7px;border-radius:4px;">${escHtml(r.promoCode)}</span>`
       : '<span style="color:var(--muted-lt);font-size:12px;">—</span>';
     const actions = r.discountApprovalStatus === 'pending'
       ? `<div style="display:flex;gap:6px;">
@@ -2483,6 +2494,7 @@ function renderDiscountRequests() {
       <td style="font-size:13px;">${escHtml(FMT_LABELS[r.format]||r.format||'')}</td>
       <td style="font-size:13px;">${escHtml(r.attendeeStatus ? (STS_LABELS[r.attendeeStatus]||r.attendeeStatus) : '—')}</td>
       <td><span style="font-size:12px;font-weight:700;color:${r.discountTier==='100pct'?'#1a8a50':'#e8a020'};">${DISC_LABELS[r.discountTier]||r.discountTier}</span></td>
+      <td>${promoCell}</td>
       <td>${docBtn}</td>
       <td><span style="font-size:12px;font-weight:700;color:${apprColor};">${apprLabel}</span></td>
       <td>${actions}</td>
@@ -2494,7 +2506,7 @@ function renderDiscountRequests() {
     <table style="width:100%;border-collapse:collapse;">
       <thead>
         <tr style="border-bottom:1px solid var(--border-lt);">
-          ${['Date','Name / Email','Format','Status','Discount','Document','Approval','Actions']
+          ${['Date','Name / Email','Format','Status','Discount','Promo Code','Document','Approval','Actions']
             .map(h=>`<th style="padding:10px 16px;text-align:left;font-size:11px;font-weight:700;letter-spacing:.6px;text-transform:uppercase;color:var(--muted);white-space:nowrap;">${h}</th>`).join('')}
         </tr>
       </thead>
@@ -2517,10 +2529,10 @@ window.approveDiscount = async function(id) {
   const reg = allDiscountRequests.find(r => r.id == id);
   if (!reg) return;
   try {
-    const res = await fetch(PHP_API, { method:'POST', headers:{'Content-Type':'application/json'},
-      body: JSON.stringify({ action:'approve', id }) });
-    const json = await res.json();
-    if (!json.ok) throw new Error('Server error');
+    const res = await fetch(LOCAL_API + '/api/admin/discount-requests/' + id + '/approve', {
+      method: 'POST', headers: localHeaders()
+    });
+    if (!res.ok) { const e = await res.json(); throw new Error(e.error || 'Server error'); }
     reg.discountApprovalStatus = 'approved';
     reg.paymentStatus = reg.discountTier === '100pct' ? 'paid' : 'pending';
     renderDiscountRequests();
@@ -2536,10 +2548,10 @@ window.rejectDiscount = async function(id) {
   const reg = allDiscountRequests.find(r => r.id == id);
   if (!reg) return;
   try {
-    const res = await fetch(PHP_API, { method:'POST', headers:{'Content-Type':'application/json'},
-      body: JSON.stringify({ action:'reject', id }) });
-    const json = await res.json();
-    if (!json.ok) throw new Error('Server error');
+    const res = await fetch(LOCAL_API + '/api/admin/discount-requests/' + id + '/reject', {
+      method: 'POST', headers: localHeaders()
+    });
+    if (!res.ok) { const e = await res.json(); throw new Error(e.error || 'Server error'); }
     reg.discountApprovalStatus = 'rejected';
     renderDiscountRequests();
     toast('Rejected — notification email sent to ' + reg.email, 'success');
@@ -2572,12 +2584,10 @@ let allRegistrations = [];
 window.loadRegistrations = async function() {
   document.getElementById('reg-table-wrap').innerHTML = '<div class="empty-state"><span class="empty-state-icon">⏳</span><p>Loading…</p></div>';
   try {
-    const res = await fetch(PHP_API + '?type=all');
-    const json = await res.json();
-    allRegistrations = json.data || [];
+    allRegistrations = await fetchAdminRows('all');
     renderRegistrations();
   } catch(e) {
-    document.getElementById('reg-table-wrap').innerHTML = '<div class="empty-state"><span class="empty-state-icon">⚠️</span><p>Error: ' + escHtml(e.message) + '</p></div>';
+    document.getElementById('reg-table-wrap').innerHTML = '<div class="empty-state"><span class="empty-state-icon">⚠️</span><p>Error: ' + escHtml(e.message) + '<br><small>Make sure the local server is running (<code>node api/server.js</code>)</small></p></div>';
   }
 };
 
@@ -2623,6 +2633,7 @@ function renderRegistrations() {
       <td style="font-size:13px;font-weight:600;">${r.price ? r.price.toLocaleString()+' THB' : '—'}</td>
       <td class="reg-pay-cell-${r.id}">${payBadge}</td>
       <td style="font-size:12px;color:var(--muted);">${discAppr}</td>
+      <td style="font-size:11px;font-family:monospace;">${r.promoCode ? `<span style="background:#f0f4ff;color:#3730a3;padding:2px 6px;border-radius:4px;">${escHtml(r.promoCode)}</span>` : '<span style="color:var(--muted-lt);">—</span>'}</td>
       <td class="reg-action-cell-${r.id}">${toggleBtn}</td>
     </tr>`;
   }).join('');
@@ -2632,7 +2643,7 @@ function renderRegistrations() {
     <table style="width:100%;border-collapse:collapse;">
       <thead>
         <tr style="border-bottom:1px solid var(--border-lt);">
-          ${['Date','Name / Email','Format','Status','Discount','Rate','Price','Payment','Disc Approval','Actions']
+          ${['Date','Name / Email','Format','Status','Discount','Rate','Price','Payment','Disc Approval','Promo Code','Actions']
             .map(h=>`<th style="padding:10px 16px;text-align:left;font-size:11px;font-weight:700;letter-spacing:.6px;text-transform:uppercase;color:var(--muted);white-space:nowrap;">${h}</th>`).join('')}
         </tr>
       </thead>
@@ -2651,8 +2662,10 @@ window._setRegPage = function(p) { _regPage = p; renderRegistrations(); };
 
 window.togglePayStatus = async function(id, val) {
   try {
-    await fetch(PHP_API, { method:'POST', headers:{'Content-Type':'application/json'},
-      body: JSON.stringify({ action:'pay', id, val }) });
+    const endpoint = val === 'paid' ? '/mark-paid' : '/mark-pending';
+    await fetch(LOCAL_API + '/api/admin/registrations/' + id + endpoint, {
+      method: 'POST', headers: localHeaders()
+    });
     const reg = allRegistrations.find(r => r.id == id);
     if (reg) reg.paymentStatus = val;
     const isPaid = val === 'paid';
@@ -2697,9 +2710,8 @@ const _origOnAuth = window._onAuthCallback;
 // Load pending badge count after login
 async function refreshDiscBadge() {
   try {
-    const res = await fetch(PHP_API + '?type=discount');
-    const json = await res.json();
-    let pending = (json.data||[]).filter(r => r.discountApprovalStatus === 'pending').length;
+    const rows = await fetchAdminRows('discount');
+    let pending = rows.filter(r => r.discountApprovalStatus === 'pending').length;
     const badge = document.getElementById('disc-pending-badge');
     if (badge) { badge.textContent = pending; badge.style.display = pending > 0 ? 'inline-block' : 'none'; }
   } catch(e) {}
@@ -2772,9 +2784,7 @@ window.showPanel = function(name) {
 async function _pollUpdates() {
   try {
     // ── Discount requests ──
-    const dRes  = await fetch(PHP_API + '?type=discount&_t=' + Date.now());
-    const dJson = await dRes.json();
-    const dData = dJson.data || [];
+    const dData = await fetchAdminRows('discount');
     const pendingNow = dData.filter(r => r.discountApprovalStatus === 'pending').length;
     const discTotal  = dData.length;
 
@@ -2793,9 +2803,7 @@ async function _pollUpdates() {
     _lastPendingCount = pendingNow;
 
     // ── All registrations ──
-    const rRes  = await fetch(PHP_API + '?type=all&_t=' + Date.now());
-    const rJson = await rRes.json();
-    const rData = rJson.data || [];
+    const rData = await fetchAdminRows('all');
     const regTotal = rData.length;
 
     if (_lastRegCount >= 0 && regTotal > _lastRegCount) {
@@ -2819,18 +2827,78 @@ onAuthStateChanged(auth, user => {
 });
 
 /* ══════════════════════════════════════════════════════════
+   LOCAL API HELPERS
+══════════════════════════════════════════════════════════ */
+function localToken() { return localStorage.getItem('ica_admin_token') || ''; }
+function localHeaders(extra) {
+    return Object.assign({ 'Authorization': 'Bearer ' + localToken() }, extra || {});
+}
+async function ensureLocalJWT() {
+    if (localToken()) return localToken();
+    await _fetchLocalJWT();
+    return localToken();
+}
+
+/* Normalise Node.js snake_case rows → camelCase used by render functions */
+function normalizeReg(r) {
+    return {
+        id:                     r.id,
+        fullName:               r.full_name               || r.fullName               || '',
+        email:                  r.email                   || '',
+        format:                 r.format                  || '',
+        attendeeStatus:         r.attendee_status         || r.attendeeStatus         || '',
+        discountTier:           r.discount_tier           || r.discountTier           || 'none',
+        discountApprovalStatus: r.discount_approval_status|| r.discountApprovalStatus || '',
+        paymentStatus:          r.payment_status          || r.paymentStatus          || 'pending',
+        selectedRate:           r.selected_rate           || r.selectedRate           || '',
+        price:                  r.price,
+        createdAt:              r.created_at              || r.createdAt              || '',
+        documentFilename:       r.document_filename       || '',
+        documentOriginalName:   r.document_original_name  || '',
+        promoCode:              r.promo_code              || r.promoCode              || '',
+    };
+}
+
+/* View uploaded document via blob URL (avoids exposing JWT in href) */
+async function viewDocument(filename) {
+    try {
+        const res = await fetch(LOCAL_API + '/api/admin/uploads/' + encodeURIComponent(filename),
+            { headers: localHeaders() });
+        if (!res.ok) { toast('Document not found on server', 'error'); return; }
+        const blob = await res.blob();
+        const url  = URL.createObjectURL(blob);
+        window.open(url, '_blank');
+        setTimeout(() => URL.revokeObjectURL(url), 10000);
+    } catch(e) { toast('Could not load document — is server running?', 'error'); }
+}
+
+/* Auto-obtain JWT from local server right after Firebase login */
+async function _fetchLocalJWT() {
+    try {
+        const res = await fetch(LOCAL_API + '/api/admin/login', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ password: window._ICA_ADMIN_PASS || 'admin123' })
+        });
+        const data = await res.json();
+        if (data.token) localStorage.setItem('ica_admin_token', data.token);
+    } catch(e) { /* server unreachable — promo codes panel will show error */ }
+}
+
+/* ══════════════════════════════════════════════════════════
    PROMO CODES
 ══════════════════════════════════════════════════════════ */
-const LOCAL_API = 'http://localhost:4000';
 let allPromoCodes = [];
 
 async function loadPromoCodes() {
   try {
-    const token = localStorage.getItem('ica_admin_token');
+    const token = await ensureLocalJWT();
     const res = await fetch(LOCAL_API + '/api/admin/promo-codes', {
       headers: { 'Authorization': 'Bearer ' + token }
     });
+    if (!res.ok) throw new Error('Server returned ' + res.status);
     allPromoCodes = await res.json();
+    if (!Array.isArray(allPromoCodes)) throw new Error(allPromoCodes.error || 'Invalid promo response');
     renderPromoCodes();
     renderPromoStats();
   } catch(e) {
@@ -2905,7 +2973,7 @@ async function submitAddCode() {
   const msgEl    = document.getElementById('addCodeMsg');
   if (!code || !category) { msgEl.style.display='block'; msgEl.style.color='#dc2626'; msgEl.textContent='Please fill in all fields.'; return; }
   try {
-    const token = localStorage.getItem('ica_admin_token');
+    const token = await ensureLocalJWT();
     const res = await fetch(LOCAL_API + '/api/admin/promo-codes', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json', 'Authorization': 'Bearer ' + token },
@@ -2923,15 +2991,17 @@ async function submitAddCode() {
 
 async function deletePromoCode(id, code) {
   if (!confirm('Delete code ' + code + '?')) return;
-  const token = localStorage.getItem('ica_admin_token');
-  await fetch(LOCAL_API + '/api/admin/promo-codes/' + id, { method: 'DELETE', headers: { 'Authorization': 'Bearer ' + token } });
+  const token = await ensureLocalJWT();
+  const res = await fetch(LOCAL_API + '/api/admin/promo-codes/' + id, { method: 'DELETE', headers: { 'Authorization': 'Bearer ' + token } });
+  if (!res.ok) { const data = await res.json().catch(()=>({})); toast(data.error || 'Could not delete code', 'error'); return; }
   loadPromoCodes();
 }
 
 async function resetPromoCode(id, code) {
   if (!confirm('Reset code ' + code + ' back to unused?')) return;
-  const token = localStorage.getItem('ica_admin_token');
-  await fetch(LOCAL_API + '/api/admin/promo-codes/' + id + '/reset', { method: 'POST', headers: { 'Authorization': 'Bearer ' + token } });
+  const token = await ensureLocalJWT();
+  const res = await fetch(LOCAL_API + '/api/admin/promo-codes/' + id + '/reset', { method: 'POST', headers: { 'Authorization': 'Bearer ' + token } });
+  if (!res.ok) { toast('Could not reset code', 'error'); return; }
   loadPromoCodes();
 }
 

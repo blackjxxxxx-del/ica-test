@@ -85,6 +85,16 @@ db.exec(`
     );
 `);
 
+function ensureColumn(table, column, definition) {
+    const columns = db.prepare(`PRAGMA table_info(${table})`).all().map(c => c.name);
+    if (!columns.includes(column)) {
+        db.exec(`ALTER TABLE ${table} ADD COLUMN ${column} ${definition}`);
+    }
+}
+
+// Keep older local databases compatible with the current dashboard/API shape.
+ensureColumn('registrations', 'promo_code', 'TEXT');
+
 /* ── Seed promo codes (skip if already exist) ─── */
 const INITIAL_CODES = [
     /* Presenter — 100% discount */
@@ -283,7 +293,7 @@ function adminAuth(req, res, next) {
 ══════════════════════════════════════════════════════════ */
 
 // POST /api/register — called when user clicks Pay (no discount)
-app.post('/api/register', (req, res) => {
+function handleRegister(req, res) {
     const { fullName, email, format, attendeeStatus, rate } = req.body;
     if (!fullName || !email || !format || !rate) {
         return res.status(400).json({ error: 'Missing required fields' });
@@ -299,7 +309,9 @@ app.post('/api/register', (req, res) => {
     `).run(fullName, email, format, attendeeStatus || null, rate, priceData.price, priceData.url);
 
     res.json({ id: result.lastInsertRowid, paymentUrl: priceData.url });
-});
+}
+app.post('/api/register', handleRegister);
+app.post('/api/register.php', handleRegister);
 
 // POST /api/discount-request — submit discount request with document + single-use promo code
 app.post('/api/discount-request', upload.single('document'), async (req, res) => {

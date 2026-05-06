@@ -814,7 +814,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
 /* ── Promo code API base ── */
 var PROMO_API_BASE = (location.hostname==='localhost'||location.hostname==='127.0.0.1')
-    ? location.protocol+'//'+location.hostname+':'+location.port
+    ? location.protocol+'//'+location.hostname+':4000'
     : 'https://icahubthailand.org';
 
 /* ── State ── */
@@ -1066,8 +1066,8 @@ function handlePayNew(event){
     if(state.activePromo !== 'none'){
         // Submit discount request with promo code → admin review
         var UPLOAD_URL = (location.hostname==='localhost'||location.hostname==='127.0.0.1')
-            ? location.protocol+'//'+location.hostname+':'+location.port+'/api/discount-request'
-            : 'https://icahubthailand.org/admin/ica-cms-php/api/upload-document.php';
+            ? location.protocol+'//'+location.hostname+':4000/api/discount-request'
+            : 'https://icahubthailand.org/api/discount-request';
         var fd = new FormData();
         fd.append('fullName', state.name);
         fd.append('email', state.email);
@@ -1100,8 +1100,8 @@ function handlePayNew(event){
         var url = earlyBird ? state.ebUrl : state.stdUrl;
         if(!url) return;
         var REGISTER_URL = (location.hostname==='localhost'||location.hostname==='127.0.0.1')
-            ? location.protocol+'//'+location.hostname+':'+location.port+'/api/register.php'
-            : 'https://icahubthailand.org/admin/ica-cms-php/api/register.php';
+            ? location.protocol+'//'+location.hostname+':4000/api/register'
+            : 'https://icahubthailand.org/api/register';
         var xhrReg = new XMLHttpRequest();
         xhrReg.open('POST', REGISTER_URL);
         xhrReg.setRequestHeader('Content-Type','application/json');
