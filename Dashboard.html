@@ -1,0 +1,2737 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ICA-TH 2026 — Admin</title>
+  <link rel="dns-prefetch" href="https://www.gstatic.com">
+  <link rel="dns-prefetch" href="https://firestore.googleapis.com">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>:root{--navy:#0f2240;--navy-deep:#0a1929;--blue:#1a3a6e;--mid:#2d5fa6;--mid-lt:#4a7fd4;--gold:#e8a020;--gold-lt:#fef3dc;--gold-deep:#c88a18;--red:#dc3545;--green:#1a8a50;--green-lt:#dcf5e8;--bg:#f0f3f8;--bg-subtle:#e8ecf4;--panel:#ffffff;--border:#dde3ed;--border-lt:#eef1f6;--text:#1a2332;--text-soft:#374151;--muted:#6b7a95;--muted-lt:#9aa5bc;--sidebar-w:240px;--sidebar-w-collapsed:0px;--topbar-h:60px;--radius-sm:8px;--radius:12px;--radius-lg:16px;--radius-xl:20px;--shadow-xs:0 1px 3px rgba(15,34,64,.06),0 1px 2px rgba(15,34,64,.04);--shadow-sm:0 2px 8px rgba(15,34,64,.08),0 1px 3px rgba(15,34,64,.05);--shadow-md:0 4px 20px rgba(15,34,64,.10),0 2px 6px rgba(15,34,64,.06);--shadow-lg:0 12px 40px rgba(15,34,64,.14),0 4px 12px rgba(15,34,64,.08);--shadow-xl:0 24px 72px rgba(0,0,0,.22),0 8px 24px rgba(0,0,0,.10)}*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}body{font-family:'Inter',-apple-system,sans-serif;background:var(--bg);color:var(--text);min-height:100vh;-webkit-font-smoothing:antialiased;line-height:1.5}#authScreen{min-height:100vh;display:flex;align-items:center;justify-content:center;background:var(--navy-deep);position:relative;overflow:hidden}#authScreen::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse 80% 60% at 15% 85%,rgba(45,95,166,.4) 0%,transparent 60%),radial-gradient(ellipse 60% 50% at 85% 15%,rgba(232,160,32,.15) 0%,transparent 55%),radial-gradient(ellipse 40% 40% at 50% 50%,rgba(26,58,110,.3) 0%,transparent 70%)}#authScreen::after{content:'';position:absolute;inset:0;background-image:radial-gradient(rgba(255,255,255,.03) 1px,transparent 1px);background-size:32px 32px}.auth-card{background:rgba(255,255,255,.98);border-radius:var(--radius-xl);padding:48px 44px;width:100%;max-width:440px;box-shadow:var(--shadow-xl);position:relative;z-index:1;animation:slideUp .45s cubic-bezier(.22,.68,0,1.2) both;border:1px solid rgba(255,255,255,.2)}@keyframes slideUp{from{opacity:0;transform:translateY(28px)}to{opacity:1;transform:translateY(0)}}.auth-eyebrow{display:flex;align-items:center;gap:10px;margin-bottom:28px}.auth-badge{background:var(--navy);color:white;font-size:11px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;padding:4px 12px;border-radius:20px}.auth-card h2{font-family:'Inter',-apple-system,sans-serif;font-size:28px;font-weight:700;color:var(--navy);margin-bottom:5px;line-height:1.15}.auth-card>p{font-size:14px;color:var(--muted);margin-bottom:28px}.auth-input-group{margin-bottom:14px}.auth-input-group label{font-size:11.5px;font-weight:700;letter-spacing:.6px;text-transform:uppercase;color:var(--muted);display:block;margin-bottom:6px}.auth-input-group input{width:100%;padding:12px 16px;border:1.5px solid var(--border);border-radius:var(--radius-sm);font-family:inherit;font-size:14.5px;color:var(--text);background:#fafcff;transition:border-color .18s,box-shadow .18s}.auth-input-group input:focus{outline:none;border-color:var(--mid);box-shadow:0 0 0 3px rgba(45,95,166,.12)}.password-wrapper{position:relative}.password-wrapper input{padding-right:46px !important}.btn-show-pw{position:absolute;right:12px;top:50%;transform:translateY(-50%);background:none;border:none;cursor:pointer;color:var(--muted);padding:4px;display:flex;align-items:center;transition:color .15s}.btn-show-pw:hover{color:var(--navy)}.btn-login{width:100%;padding:13px;background:var(--navy);color:white;border:none;border-radius:var(--radius-sm);font-family:inherit;font-size:14.5px;font-weight:600;cursor:pointer;transition:all .2s;margin-top:6px;margin-bottom:12px;display:flex;align-items:center;justify-content:center;gap:8px;letter-spacing:.2px}.btn-login:hover{background:var(--blue);transform:translateY(-1px);box-shadow:0 8px 24px rgba(15,34,64,.28)}.btn-google{width:100%;padding:11px;background:white;color:var(--text);border:1.5px solid var(--border);border-radius:var(--radius-sm);font-family:inherit;font-size:13.5px;font-weight:500;cursor:pointer;transition:all .18s;display:flex;align-items:center;justify-content:center;gap:10px}.btn-google:hover{border-color:#bbb;box-shadow:var(--shadow-sm)}.btn-google svg{width:18px;height:18px;flex-shrink:0}.auth-divider{display:flex;align-items:center;gap:12px;margin:14px 0;color:var(--muted-lt);font-size:12px}.auth-divider::before,.auth-divider::after{content:'';flex:1;height:1px;background:var(--border)}.auth-error{background:#fff5f5;border:1px solid #fecaca;color:var(--red);font-size:13px;padding:10px 14px;border-radius:var(--radius-sm);margin-bottom:14px;display:none}#dashScreen{display:none;min-height:100vh}.sidebar-overlay{display:none;position:fixed;inset:0;background:rgba(10,20,40,.55);z-index:99;backdrop-filter:blur(2px)}.sidebar-overlay.visible{display:block}.sidebar{background:var(--navy);position:fixed;top:0;left:0;width:var(--sidebar-w);height:100vh;overflow-y:auto;overflow-x:hidden;z-index:100;display:flex;flex-direction:column;transition:transform .28s cubic-bezier(.4,0,.2,1),box-shadow .28s;scrollbar-width:none}.sidebar::-webkit-scrollbar{display:none}.sidebar::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse 120% 40% at 50% 100%,rgba(45,95,166,.18) 0%,transparent 60%),radial-gradient(ellipse 80% 30% at -10% 20%,rgba(232,160,32,.06) 0%,transparent 50%);pointer-events:none}.sidebar-logo{padding:22px 20px 18px;border-bottom:1px solid rgba(255,255,255,.07);flex-shrink:0;position:relative}.logo-chip{display:inline-flex;align-items:center;gap:6px;background:rgba(232,160,32,.15);border:1px solid rgba(232,160,32,.28);border-radius:20px;padding:3px 10px;margin-bottom:11px}.logo-chip span{color:var(--gold);font-size:10.5px;font-weight:700;letter-spacing:1.2px;text-transform:uppercase}.sidebar-logo strong{color:white;font-size:14.5px;font-weight:700;display:block;line-height:1.35;letter-spacing:-.1px}.sidebar-logo em{color:rgba(255,255,255,.32);font-style:normal;font-size:11px;letter-spacing:.4px;display:block;margin-top:4px}.sidebar-nav{flex:1;padding:10px 0;position:relative}.sidebar-section{padding:0 12px 2px}.sidebar-section+.sidebar-section{margin-top:4px}.sidebar-section-label{font-size:9.5px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:rgba(255,255,255,.22);padding:10px 8px 5px;display:block}.sidebar-divider{height:1px;background:rgba(255,255,255,.06);margin:8px 12px}.nav-item{display:flex;align-items:center;gap:10px;padding:9px 10px;border-radius:var(--radius-sm);color:rgba(255,255,255,.48);font-size:13.5px;font-weight:500;cursor:pointer;transition:background .15s,color .15s,transform .1s;margin-bottom:1px;user-select:none;position:relative}.nav-item:hover{background:rgba(255,255,255,.07);color:rgba(255,255,255,.9);transform:translateX(1px)}.nav-item.active{background:rgba(45,95,166,.5);color:white;font-weight:600}.nav-item.active::before{content:'';position:absolute;left:-12px;top:50%;transform:translateY(-50%);width:3px;height:60%;background:var(--gold);border-radius:0 3px 3px 0}.nav-item .nav-dot{width:5px;height:5px;border-radius:50%;background:transparent;margin-left:auto;flex-shrink:0;transition:background .15s,transform .15s}.nav-item.active .nav-dot{background:var(--gold);transform:scale(1.3)}.nav-icon{width:28px;height:28px;display:flex;align-items:center;justify-content:center;flex-shrink:0;font-size:15px;border-radius:6px;background:rgba(255,255,255,.04);transition:background .15s}.nav-item:hover .nav-icon{background:rgba(255,255,255,.09)}.nav-item.active .nav-icon{background:rgba(232,160,32,.18)}.sidebar-footer{padding:12px;border-top:1px solid rgba(255,255,255,.07);flex-shrink:0;position:relative}.user-chip{display:flex;align-items:center;gap:10px;padding:10px 10px;border-radius:var(--radius-sm);background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.08);transition:background .15s}.user-chip:hover{background:rgba(255,255,255,.08)}.user-avatar{width:32px;height:32px;border-radius:50%;background:linear-gradient(135deg,var(--gold),#f0c040);display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:800;color:var(--navy);flex-shrink:0;box-shadow:0 0 0 2px rgba(232,160,32,.3)}.user-info{overflow:hidden;flex:1}.user-info strong{color:white;font-size:12.5px;font-weight:600;display:block;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;line-height:1.3}.user-info span{color:rgba(255,255,255,.32);font-size:10.5px;display:block;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}.btn-logout{background:none;border:none;color:rgba(255,255,255,.28);cursor:pointer;font-size:15px;padding:5px;transition:color .15s;flex-shrink:0;display:flex;align-items:center;border-radius:6px}.btn-logout:hover{color:#ff7b7b;background:rgba(255,80,80,.1)}.topbar-fixed{position:fixed;top:0;left:var(--sidebar-w);right:0;height:var(--topbar-h);background:rgba(255,255,255,.92);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);border-bottom:1px solid var(--border-lt);display:flex;align-items:center;gap:16px;padding:0 28px;z-index:50;transition:left .28s cubic-bezier(.4,0,.2,1);box-shadow:0 1px 0 rgba(15,34,64,.04),0 2px 12px rgba(15,34,64,.05)}.topbar-hamburger{display:none;background:none;border:none;cursor:pointer;color:var(--muted);padding:6px;border-radius:var(--radius-sm);transition:background .15s,color .15s;flex-shrink:0}.topbar-hamburger:hover{background:var(--bg);color:var(--navy)}.topbar-title{font-family:'Inter',-apple-system,sans-serif;font-size:18px;font-weight:600;color:var(--navy);flex:1;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}.topbar-search{display:flex;align-items:center;gap:8px;background:var(--bg);border:1.5px solid var(--border);border-radius:var(--radius-sm);padding:0 12px;transition:border-color .18s,box-shadow .18s;width:220px;flex-shrink:0}.topbar-search:focus-within{border-color:var(--mid);box-shadow:0 0 0 3px rgba(45,95,166,.1);background:white}.topbar-search svg{color:var(--muted-lt);flex-shrink:0}.topbar-search input{border:none;background:none;font-family:inherit;font-size:13.5px;color:var(--text);width:100%;padding:8px 0}.topbar-search input::placeholder{color:var(--muted-lt)}.topbar-search input:focus{outline:none}.topbar-actions{display:flex;align-items:center;gap:8px;flex-shrink:0}.topbar-icon-btn{width:36px;height:36px;border-radius:var(--radius-sm);background:none;border:1.5px solid var(--border);cursor:pointer;display:flex;align-items:center;justify-content:center;color:var(--muted);transition:all .15s;position:relative}.topbar-icon-btn:hover{background:var(--bg-subtle);color:var(--navy);border-color:var(--navy)}.notif-dot{position:absolute;top:6px;right:6px;width:7px;height:7px;background:var(--gold);border-radius:50%;border:2px solid white}.topbar-avatar-btn{display:flex;align-items:center;gap:8px;background:none;border:1.5px solid var(--border);border-radius:var(--radius-sm);cursor:pointer;padding:4px 10px 4px 5px;transition:all .15s;position:relative}.topbar-avatar-btn:hover{background:var(--bg-subtle);border-color:var(--navy)}.topbar-avatar{width:28px;height:28px;border-radius:50%;background:linear-gradient(135deg,var(--gold),#f0c040);display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:800;color:var(--navy);flex-shrink:0}.topbar-avatar-btn span{font-size:13px;font-weight:600;color:var(--text-soft)}.topbar-avatar-btn svg{color:var(--muted)}.user-dropdown{position:absolute;top:calc(100%+8px);right:0;width:220px;background:white;border:1px solid var(--border);border-radius:var(--radius);box-shadow:var(--shadow-lg);padding:8px;opacity:0;transform:translateY(-6px) scale(.98);transition:opacity .18s,transform .18s;pointer-events:none;z-index:200}.user-dropdown.open{opacity:1;transform:translateY(0) scale(1);pointer-events:auto}.user-dropdown-header{padding:8px 10px 10px;border-bottom:1px solid var(--border-lt);margin-bottom:6px}.user-dropdown-header strong{display:block;font-size:13.5px;font-weight:600;color:var(--text)}.user-dropdown-header span{font-size:11.5px;color:var(--muted)}.dropdown-item{display:flex;align-items:center;gap:9px;padding:8px 10px;border-radius:var(--radius-sm);font-size:13.5px;color:var(--text-soft);cursor:pointer;transition:background .12s;border:none;background:none;width:100%;text-align:left;font-family:inherit}.dropdown-item:hover{background:var(--bg)}.dropdown-item.danger{color:var(--red)}.dropdown-item.danger:hover{background:#fff5f5}.main-content{margin-left:var(--sidebar-w);padding-top:var(--topbar-h);min-height:100vh;transition:margin-left .28s cubic-bezier(.4,0,.2,1)}.page-wrapper{padding:32px 32px 64px}.panel{display:none}.panel.active{display:block;animation:fadeIn .22s ease}@keyframes fadeIn{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:translateY(0)}}.page-header{display:flex;align-items:flex-start;justify-content:space-between;margin-bottom:28px;gap:16px}.page-header-left h2{font-family:'Inter',-apple-system,sans-serif;font-size:24px;font-weight:700;color:var(--navy);line-height:1.1}.page-header-left p{font-size:13.5px;color:var(--muted);margin-top:4px}.page-header-actions{display:flex;align-items:center;gap:8px;flex-shrink:0}.stats-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:16px;margin-bottom:28px}.stat-card{background:var(--panel);border-radius:var(--radius);padding:20px 22px 18px;border:1px solid var(--border-lt);position:relative;overflow:hidden;transition:box-shadow .2s,transform .2s;cursor:default}.stat-card:hover{box-shadow:var(--shadow-md);transform:translateY(-2px)}.stat-card-accent{position:absolute;top:0;left:0;right:0;height:3px;background:linear-gradient(90deg,var(--mid),var(--mid-lt));opacity:0;transition:opacity .22s}.stat-card:hover .stat-card-accent{opacity:1}.stat-card.accent-gold .stat-card-accent{background:linear-gradient(90deg,var(--gold-deep),var(--gold))}.stat-card.accent-green .stat-card-accent{background:linear-gradient(90deg,var(--green),#2cb870)}.stat-card.accent-blue .stat-card-accent{background:linear-gradient(90deg,var(--mid),var(--mid-lt))}.stat-card-icon{width:36px;height:36px;border-radius:var(--radius-sm);display:flex;align-items:center;justify-content:center;font-size:18px;margin-bottom:14px;flex-shrink:0}.stat-card-icon.icon-blue{background:#dbeafe}.stat-card-icon.icon-gold{background:var(--gold-lt)}.stat-card-icon.icon-green{background:var(--green-lt)}.stat-card-icon.icon-navy{background:rgba(15,34,64,.08)}.stat-label{font-size:11px;font-weight:700;letter-spacing:1px;text-transform:uppercase;color:var(--muted);margin-bottom:6px;display:block}.stat-val{font-size:32px;font-weight:800;color:var(--navy);line-height:1;font-variant-numeric:tabular-nums;letter-spacing:-1px}.stat-sub{font-size:12px;color:var(--muted);margin-top:6px;display:flex;align-items:center;gap:5px}.stat-trend{display:inline-flex;align-items:center;gap:3px;font-size:11px;font-weight:700;padding:2px 7px;border-radius:20px;margin-left:2px}.stat-trend.up{background:var(--green-lt);color:var(--green)}.stat-trend.down{background:#fff5f5;color:var(--red)}.stat-trend.neutral{background:var(--gold-lt);color:var(--gold-deep)}.card{background:var(--panel);border-radius:var(--radius);border:1px solid var(--border-lt);padding:24px;margin-bottom:20px;box-shadow:var(--shadow-xs);transition:box-shadow .2s}.card:hover{box-shadow:var(--shadow-sm)}.card-header{display:flex;align-items:flex-start;justify-content:space-between;margin-bottom:20px;gap:12px}.card-title{font-size:15px;font-weight:700;color:var(--navy);letter-spacing:-.1px}.card-subtitle{font-size:12.5px;color:var(--muted);margin-top:3px;font-weight:400}.section-label{font-size:11px;font-weight:700;letter-spacing:1.2px;text-transform:uppercase;color:var(--muted);margin-bottom:12px;margin-top:8px;display:block}.btn{padding:9px 18px;border-radius:var(--radius-sm);font-family:inherit;font-size:13.5px;font-weight:600;cursor:pointer;transition:all .15s;border:none;display:inline-flex;align-items:center;gap:6px;white-space:nowrap;letter-spacing:.1px}.btn:active{transform:scale(.97)}.btn-primary{background:var(--navy);color:white}.btn-primary:hover{background:var(--blue);box-shadow:0 4px 14px rgba(15,34,64,.22);transform:translateY(-1px)}.btn-accent{background:var(--gold);color:var(--navy)}.btn-accent:hover{background:var(--gold-deep);box-shadow:0 4px 14px rgba(232,160,32,.35)}.btn-ghost{background:transparent;color:var(--muted);border:1.5px solid var(--border)}.btn-ghost:hover{border-color:var(--navy);color:var(--navy);background:var(--bg)}.btn-danger{background:#fff5f5;color:var(--red);border:1.5px solid #fecaca}.btn-danger:hover{background:var(--red);color:white;border-color:var(--red)}.btn-sm{padding:6px 14px;font-size:12.5px}.btn-xs{padding:5px 11px;font-size:12px}.form-row{display:grid;gap:16px;margin-bottom:16px}.form-row.cols-2{grid-template-columns:1fr 1fr}.form-row.cols-3{grid-template-columns:1fr 1fr 1fr}.form-group label{font-size:11.5px;font-weight:700;letter-spacing:.5px;text-transform:uppercase;color:var(--muted);display:block;margin-bottom:6px}.form-group input,.form-group textarea,.form-group select{width:100%;padding:10px 14px;border:1.5px solid var(--border);border-radius:var(--radius-sm);font-family:inherit;font-size:14px;color:var(--text);background:#fafcff;transition:border-color .18s,box-shadow .18s;appearance:none;-webkit-appearance:none}.form-group select{background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 24 24' fill='none' stroke='%236b7a95' stroke-width='2.5' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M6 9l6 6 6-6'/%3E%3C/svg%3E");background-repeat:no-repeat;background-position:right 12px center;padding-right:36px}.form-group input:focus,.form-group textarea:focus,.form-group select:focus{outline:none;border-color:var(--mid);box-shadow:0 0 0 3px rgba(45,95,166,.1);background:white}.form-group textarea{resize:vertical;min-height:96px;line-height:1.6}.form-group textarea.tall{min-height:140px}.form-hint{font-size:11.5px;color:var(--muted);margin-top:5px}.toggle-row{display:flex;align-items:center;justify-content:space-between;padding:14px 0;border-bottom:1px solid var(--border-lt);gap:12px;transition:background .12s}.toggle-row:last-child{border-bottom:none}.toggle-row:hover{background:var(--bg);margin:0 -24px;padding-left:24px;padding-right:24px}.toggle-label strong{font-size:14px;font-weight:600;color:var(--text);display:block;line-height:1.3}.toggle-label span{font-size:12px;color:var(--muted);margin-top:2px;display:block;line-height:1.4}.toggle{position:relative;width:44px;height:24px;cursor:pointer;flex-shrink:0}.toggle input{display:none}.toggle-slider{position:absolute;inset:0;background:#cbd5e1;border-radius:12px;transition:background .2s}.toggle-slider::before{content:'';position:absolute;width:18px;height:18px;border-radius:50%;background:white;top:3px;left:3px;transition:transform .2s cubic-bezier(.34,1.56,.64,1);box-shadow:0 1px 4px rgba(0,0,0,.22)}.toggle input:checked+.toggle-slider{background:var(--green)}.toggle input:checked+.toggle-slider::before{transform:translateX(20px)}.table-wrap{overflow-x:auto}table{width:100%;border-collapse:collapse;font-size:13.5px}thead th{text-align:left;padding:11px 16px;font-size:10.5px;font-weight:700;letter-spacing:1.2px;text-transform:uppercase;color:var(--muted);border-bottom:2px solid var(--border-lt);background:#fbfcfd;white-space:nowrap}thead th:first-child{border-radius:var(--radius-sm) 0 0 0}thead th:last-child{border-radius:0 var(--radius-sm) 0 0}tbody td{padding:14px 16px;border-bottom:1px solid var(--border-lt);color:var(--text);vertical-align:middle}tbody tr:last-child td{border-bottom:none}tbody tr{transition:background .12s}tbody tr:hover td{background:#f6f8fc}.table-action-group{display:flex;gap:6px;align-items:center}.badge{display:inline-flex;align-items:center;padding:3px 10px;border-radius:20px;font-size:11px;font-weight:700;white-space:nowrap;gap:4px}.badge-green{background:#dcf5e8;color:#1a8a50}.badge-yellow{background:#fef9c3;color:#92720a}.badge-red{background:#fff5f5;color:var(--red)}.badge-blue{background:#dbeafe;color:#1d4ed8}.badge-gray{background:#f1f5f9;color:var(--muted)}.badge-navy{background:rgba(15,34,64,.1);color:var(--navy)}.badge-dot{width:5px;height:5px;border-radius:50%;flex-shrink:0}.badge-green .badge-dot{background:var(--green)}.badge-yellow .badge-dot{background:#92720a}.badge-red .badge-dot{background:var(--red)}.badge-blue .badge-dot{background:#1d4ed8}.page-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(120px,1fr));gap:10px;margin-bottom:8px}.page-tile{background:var(--bg);border:1.5px solid var(--border);border-radius:var(--radius);padding:16px 10px;cursor:pointer;transition:all .15s;text-align:center}.page-tile:hover{border-color:var(--mid);background:#eff4ff;box-shadow:var(--shadow-sm)}.page-tile.selected{border-color:var(--gold);background:var(--gold-lt);box-shadow:0 0 0 3px rgba(232,160,32,.15)}.page-tile .tile-icon{font-size:22px;margin-bottom:8px}.page-tile .tile-name{font-size:12.5px;font-weight:600;color:var(--navy)}.section-fields{background:var(--bg);border-radius:var(--radius-sm);padding:18px 20px;margin-bottom:12px;border:1px solid var(--border-lt);transition:border-color .15s}.section-fields:focus-within{border-color:var(--border);background:white}.section-fields h4{font-size:11px;font-weight:700;color:var(--muted);letter-spacing:1px;margin-bottom:10px;text-transform:uppercase}.dates-table td:first-child{font-weight:600;color:var(--navy);width:58%;font-size:13.5px}.dates-table input{padding:8px 12px;border:1.5px solid var(--border);border-radius:var(--radius-sm);font-family:inherit;font-size:13px;width:100%;background:white;transition:border-color .18s,box-shadow .18s;color:var(--text)}.dates-table input:focus{outline:none;border-color:var(--mid);box-shadow:0 0 0 2px rgba(45,95,166,.1)}.timeline-item{display:flex;align-items:center;gap:14px;padding:13px 0;border-bottom:1px solid var(--border-lt)}.timeline-item:last-child{border-bottom:none}.timeline-dot{width:10px;height:10px;border-radius:50%;flex-shrink:0}.timeline-dot.passed{background:var(--muted-lt)}.timeline-dot.upcoming{background:var(--gold);box-shadow:0 0 0 3px var(--gold-lt)}.timeline-dot.scheduled{background:var(--mid);box-shadow:0 0 0 3px #dbeafe}.timeline-info{flex:1}.timeline-info strong{font-size:13.5px;font-weight:600;color:var(--text);display:block}.timeline-info span{font-size:12px;color:var(--muted)}.qa-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px}.qa-card{background:var(--bg);border:1.5px solid var(--border);border-radius:var(--radius);padding:16px;cursor:pointer;transition:all .15s;text-align:left}.qa-card:hover{border-color:var(--mid);background:#eff4ff;transform:translateY(-2px);box-shadow:var(--shadow-md)}.qa-icon{font-size:20px;margin-bottom:8px;display:block}.qa-title{font-size:13px;font-weight:700;color:var(--navy);display:block;margin-bottom:2px}.qa-desc{font-size:11.5px;color:var(--muted)}#toast{position:fixed;bottom:28px;right:28px;background:var(--navy);color:white;padding:12px 18px;border-radius:var(--radius);font-size:13.5px;font-weight:500;box-shadow:var(--shadow-lg);transform:translateY(80px);opacity:0;transition:all .3s cubic-bezier(.22,.68,0,1.2);z-index:1000;display:flex;align-items:center;gap:8px;pointer-events:none;max-width:320px}#toast.show{transform:translateY(0);opacity:1}#toast.success{background:#155d3a}#toast.error{background:#b91c1c}.spinner{width:16px;height:16px;border-radius:50%;border:2px solid rgba(255,255,255,.3);border-top-color:white;animation:spin .6s linear infinite;display:inline-block;flex-shrink:0}@keyframes spin{to{transform:rotate(360deg)}}.modal-overlay{position:fixed;inset:0;background:rgba(10,20,40,.55);backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);z-index:200;display:none;align-items:center;justify-content:center;padding:24px}.modal-overlay.open{display:flex;animation:fadeIn .18s ease}.modal{background:white;border-radius:var(--radius-xl);padding:32px;width:100%;max-width:600px;box-shadow:var(--shadow-xl);max-height:90vh;overflow-y:auto;border:1px solid var(--border-lt)}.modal-header{display:flex;align-items:center;justify-content:space-between;margin-bottom:24px;gap:12px}.modal h3{font-family:'Inter',-apple-system,sans-serif;font-size:20px;font-weight:600;color:var(--navy)}.modal-close{background:var(--bg);border:none;cursor:pointer;color:var(--muted);font-size:14px;padding:0;width:32px;height:32px;border-radius:50%;display:flex;align-items:center;justify-content:center;transition:all .15s;flex-shrink:0}.modal-close:hover{background:var(--bg-subtle);color:var(--text)}.modal-footer{display:flex;gap:10px;justify-content:flex-end;margin-top:24px;padding-top:20px;border-top:1px solid var(--border-lt)}.overview-cols{display:grid;grid-template-columns:1fr 1fr;gap:20px}.overview-cols .card{margin-bottom:0}@media (max-width:1200px){.stats-grid{grid-template-columns:repeat(2,1fr)}}@media (max-width:1024px){:root{--sidebar-w:0px}.sidebar{transform:translateX(-240px);width:240px;box-shadow:none}.sidebar.open{transform:translateX(0);box-shadow:8px 0 40px rgba(0,0,0,.25)}.topbar-fixed{left:0}.main-content{margin-left:0}.topbar-hamburger{display:flex}.topbar-search{width:180px}}@media (max-width:768px){.page-wrapper{padding:20px 16px 48px}.stats-grid{grid-template-columns:1fr 1fr;gap:12px}.overview-cols{grid-template-columns:1fr !important}.form-row.cols-2{grid-template-columns:1fr}.form-row.cols-3{grid-template-columns:1fr}.topbar-search{display:none}.topbar-fixed{padding:0 16px}.stat-val{font-size:26px}}@media (max-width:480px){.stats-grid{grid-template-columns:1fr}.qa-grid{grid-template-columns:1fr}.page-header{flex-direction:column;align-items:flex-start}}.empty-state{text-align:center;padding:56px 24px;color:var(--muted)}.empty-state-icon{font-size:40px;margin-bottom:12px;display:block;opacity:.6}.empty-state p{font-size:14px}.img-upload-area{border:2px dashed var(--border);border-radius:var(--radius);padding:28px 20px;cursor:pointer;transition:border-color .18s,background .18s;text-align:center;background:var(--bg);min-height:100px;display:flex;align-items:center;justify-content:center}.img-upload-area:hover{border-color:var(--mid);background:#eff4ff}.img-upload-area.has-image{padding:0;border-style:solid;border-color:var(--border)}.img-upload-area.uploading{border-color:var(--gold);background:var(--gold-lt);pointer-events:none}.img-upload-placeholder{display:flex;flex-direction:column;align-items:center;gap:4px}.img-thumb{width:36px;height:36px;border-radius:6px;object-fit:cover;flex-shrink:0;border:1px solid var(--border)}.link-preview{display:flex;align-items:center;margin-top:16px;padding:14px 16px;background:var(--bg);border-radius:var(--radius-sm);border:1px solid var(--border-lt)}.link-preview-btn{display:inline-flex;align-items:center;padding:9px 22px;border-radius:8px;font-size:14px;font-weight:600;text-decoration:none;transition:all .15s;cursor:pointer}.link-btn-white{background:white;color:var(--navy);border:2px solid white;box-shadow:0 2px 8px rgba(0,0,0,.12)}.link-btn-white:hover{background:#f0f4ff}.link-btn-gold{background:var(--gold);color:var(--navy);border:2px solid var(--gold)}.link-btn-gold:hover{background:var(--gold-deep)}.link-preview-btn.btn-disabled{opacity:.45;cursor:not-allowed;pointer-events:none;filter:grayscale(.4)}.editor-card{background:var(--panel);border:1px solid var(--border-lt);border-radius:var(--radius);padding:20px 22px;margin-bottom:14px;box-shadow:var(--shadow-xs);display:grid;gap:14px}.editor-card-header{display:flex;align-items:center;justify-content:space-between;gap:10px}.editor-card-num{width:28px;height:28px;border-radius:50%;background:var(--navy);color:white;font-size:12px;font-weight:700;display:flex;align-items:center;justify-content:center;flex-shrink:0}.editor-card-actions{display:flex;gap:6px;align-items:center}.fee-row td{padding:10px 0;border-bottom:1px solid var(--border-lt);vertical-align:middle}.fee-row:last-child td{border-bottom:none}.fee-row td:first-child{font-size:13.5px;color:var(--text);padding-right:12px}.fee-category-row td{padding:8px 0 4px}.fee-category-label{font-size:11px;font-weight:700;letter-spacing:1px;text-transform:uppercase;color:var(--muted)}.fee-input{width:100%;padding:7px 10px;border:1.5px solid var(--border);border-radius:var(--radius-sm);font-family:inherit;font-size:13.5px;color:var(--text);background:white}.fee-input:focus{outline:none;border-color:var(--mid);box-shadow:0 0 0 2px rgba(45,95,166,.1)}</style>
+</head>
+<body>
+
+<!-- ═══════════════════════════════════════ AUTH ═══ -->
+<div id="authScreen">
+  <div class="auth-card">
+    <div class="auth-eyebrow">
+      <div class="auth-badge">ICA-TH 2026</div>
+      <span style="font-size:13px;color:var(--muted);">Admin Panel</span>
+    </div>
+    <h2>Welcome back</h2>
+    <p>Sign in to manage the conference website</p>
+    <div class="auth-error" id="authError"></div>
+    <div class="auth-input-group">
+      <label>Email address</label>
+      <input type="email" id="loginEmail" placeholder="admin@ica-th2026.org" autocomplete="email">
+    </div>
+    <div class="auth-input-group">
+      <label>Password</label>
+      <div class="password-wrapper">
+        <input type="password" id="loginPassword" placeholder="••••••••" autocomplete="current-password">
+        <button class="btn-show-pw" type="button" onclick="togglePassword()" title="Show/hide password">
+          <svg id="eyeIcon" xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/>
+          </svg>
+        </button>
+      </div>
+    </div>
+    <button class="btn-login" id="btnEmailLogin" onclick="loginWithEmail()">Sign in</button>
+    <div class="auth-divider">or</div>
+    <button class="btn-google" onclick="loginWithGoogle()">
+      <svg viewBox="0 0 24 24"><path d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z" fill="#4285F4"/><path d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z" fill="#34A853"/><path d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l2.85-2.22.81-.62z" fill="#FBBC05"/><path d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z" fill="#EA4335"/></svg>
+      Continue with Google
+    </button>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════════ DASHBOARD ═══ -->
+<div id="dashScreen">
+
+  <!-- Sidebar overlay (mobile) -->
+  <div class="sidebar-overlay" id="sidebarOverlay" onclick="closeSidebar()"></div>
+
+  <!-- SIDEBAR -->
+  <aside class="sidebar" id="sidebar">
+    <div class="sidebar-logo">
+      <div class="logo-chip"><span>Admin Panel</span></div>
+      <strong>ICA Regional Hub<br>Thailand 2026</strong>
+      <em>6–7 June 2026 · Bangkok</em>
+    </div>
+
+    <nav class="sidebar-nav">
+      <div class="sidebar-section">
+        <span class="sidebar-section-label">Overview</span>
+        <div class="nav-item active" onclick="showPanel('overview')">
+          <span class="nav-icon">
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/></svg>
+          </span>
+          Dashboard
+          <span class="nav-dot"></span>
+        </div>
+      </div>
+
+      <div class="sidebar-divider"></div>
+
+      <div class="sidebar-section">
+        <span class="sidebar-section-label">Content</span>
+        <div class="nav-item" onclick="showPanel('pages')">
+          <span class="nav-icon">
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/><path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"/></svg>
+          </span>
+          Page Editor
+          <span class="nav-dot"></span>
+        </div>
+        <div class="nav-item" onclick="showPanel('articles')">
+          <span class="nav-icon">
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/><polyline points="10 9 9 9 8 9"/></svg>
+          </span>
+          Articles
+          <span class="nav-dot"></span>
+        </div>
+        <div class="nav-item" onclick="showPanel('dates')">
+          <span class="nav-icon">
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
+          </span>
+          Important Dates
+          <span class="nav-dot"></span>
+        </div>
+        <div class="nav-item" onclick="showPanel('keynote')">
+          <span class="nav-icon">
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+          </span>
+          Keynote Speakers
+          <span class="nav-dot"></span>
+        </div>
+        <div class="nav-item" onclick="showPanel('fees')">
+          <span class="nav-icon">
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg>
+          </span>
+          Registration Fees
+          <span class="nav-dot"></span>
+        </div>
+        <div class="nav-item" onclick="showPanel('tracks')">
+          <span class="nav-icon">
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></svg>
+          </span>
+          Conference Tracks
+          <span class="nav-dot"></span>
+        </div>
+      </div>
+
+      <div class="sidebar-divider"></div>
+
+      <div class="sidebar-section">
+        <span class="sidebar-section-label">Site</span>
+        <div class="nav-item" onclick="showPanel('announcements')">
+          <span class="nav-icon">
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 17H2a3 3 0 0 0 3-3V9a7 7 0 0 1 14 0v5a3 3 0 0 0 3 3zm-8.27 4a2 2 0 0 1-3.46 0"/></svg>
+          </span>
+          Announcements
+          <span class="nav-dot"></span>
+        </div>
+        <div class="nav-item" onclick="showPanel('awards')">
+          <span class="nav-icon">
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="6"/><path d="M15.477 12.89L17 22l-5-3-5 3 1.523-9.11"/></svg>
+          </span>
+          Awards
+          <span class="nav-dot"></span>
+        </div>
+        <div class="nav-item" onclick="showPanel('messages')">
+          <span class="nav-icon">
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
+          </span>
+          Messages
+          <span class="nav-dot"></span>
+        </div>
+        <div class="nav-item" onclick="showPanel('notifylist')">
+          <span class="nav-icon">
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+          </span>
+          Notify List
+          <span class="nav-dot"></span>
+        </div>
+        <div class="nav-item" onclick="showPanel('links')">
+          <span class="nav-icon">
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"/><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"/></svg>
+          </span>
+          Button Links
+          <span class="nav-dot"></span>
+        </div>
+        <div class="nav-item" onclick="showPanel('settings')">
+          <span class="nav-icon">
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83-2.83l.06-.06A1.65 1.65 0 0 0 4.68 15a1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 2.83-2.83l.06.06A1.65 1.65 0 0 0 9 4.68a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 2.83l-.06.06A1.65 1.65 0 0 0 19.4 9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z"/></svg>
+          </span>
+          Settings
+          <span class="nav-dot"></span>
+        </div>
+      </div>
+
+      <div class="sidebar-divider"></div>
+
+      <div class="sidebar-section">
+        <span class="sidebar-section-label">Registrations</span>
+        <div class="nav-item" id="nav-discountrequests" onclick="showPanel('discountrequests')">
+          <span class="nav-icon">
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 14l6-6"/><circle cx="9.5" cy="9.5" r="1.5"/><circle cx="14.5" cy="14.5" r="1.5"/><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"/></svg>
+          </span>
+          Discount Requests
+          <span class="nav-badge" id="disc-pending-badge" style="display:none;background:#e8a020;color:#fff;font-size:10px;font-weight:700;padding:1px 7px;border-radius:20px;margin-left:auto;"></span>
+          <span class="nav-dot"></span>
+        </div>
+        <div class="nav-item" id="nav-registrations" onclick="showPanel('registrations')">
+          <span class="nav-icon">
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+          </span>
+          All Registrations
+          <span class="nav-dot"></span>
+        </div>
+      </div>
+
+      <div class="sidebar-section" style="display:none">
+      </div>
+    </nav>
+
+    <div class="sidebar-footer">
+      <div class="user-chip">
+        <div class="user-avatar" id="userAvatar">A</div>
+        <div class="user-info">
+          <strong id="userDisplayName">Admin</strong>
+          <span id="userEmail">—</span>
+        </div>
+        <button class="btn-logout" onclick="logout()" title="Sign out">
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"/><polyline points="16 17 21 12 16 7"/><line x1="21" y1="12" x2="9" y2="12"/></svg>
+        </button>
+      </div>
+    </div>
+  </aside>
+
+  <!-- TOPBAR -->
+  <header class="topbar-fixed" id="topbarFixed">
+    <button class="topbar-hamburger" id="hamburgerBtn" onclick="toggleSidebar()" aria-label="Toggle sidebar">
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
+    </button>
+
+    <div class="topbar-title" id="topbarTitle">Dashboard</div>
+
+    <div class="topbar-search">
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+      <input type="text" placeholder="Search…" id="globalSearch" autocomplete="off">
+    </div>
+
+    <div class="topbar-actions">
+      <button class="topbar-icon-btn" title="Notifications" onclick="window.toast('No new notifications','')">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 17H2a3 3 0 0 0 3-3V9a7 7 0 0 1 14 0v5a3 3 0 0 0 3 3zm-8.27 4a2 2 0 0 1-3.46 0"/></svg>
+        <span class="notif-dot"></span>
+      </button>
+
+      <button class="topbar-icon-btn" title="View website" onclick="window.open('https://ica-th2026.org','_blank')">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+      </button>
+
+      <div style="position:relative;">
+        <button class="topbar-avatar-btn" id="avatarDropdownBtn" onclick="toggleUserDropdown()">
+          <div class="topbar-avatar" id="topbarAvatar">A</div>
+          <span id="topbarUserName">Admin</span>
+          <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
+        </button>
+        <div class="user-dropdown" id="userDropdown">
+          <div class="user-dropdown-header">
+            <strong id="dropdownUserName">Admin</strong>
+            <span id="dropdownUserEmail">—</span>
+          </div>
+          <button class="dropdown-item" onclick="showPanel('settings');toggleUserDropdown()">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83-2.83l.06-.06A1.65 1.65 0 0 0 4.68 15a1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 2.83-2.83l.06.06A1.65 1.65 0 0 0 9 4.68a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 2.83l-.06.06A1.65 1.65 0 0 0 19.4 9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z"/></svg>
+            Account Settings
+          </button>
+          <button class="dropdown-item danger" onclick="logout()">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"/><polyline points="16 17 21 12 16 7"/><line x1="21" y1="12" x2="9" y2="12"/></svg>
+            Sign out
+          </button>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <!-- MAIN CONTENT -->
+  <main class="main-content" id="mainContent">
+    <div class="page-wrapper">
+
+      <!-- ── OVERVIEW ─────────────────────────── -->
+      <div class="panel active" id="panel-overview">
+        <div class="page-header">
+          <div class="page-header-left">
+            <h2>Dashboard</h2>
+            <p>ICA Regional Hub Thailand 2026 — Admin Overview</p>
+          </div>
+          <div style="font-size:12.5px;color:var(--muted);text-align:right;line-height:1.7;" id="overviewDate"></div>
+        </div>
+
+        <div class="stats-grid">
+          <div class="stat-card accent-blue">
+            <div class="stat-card-accent"></div>
+            <div class="stat-card-icon icon-blue">🗓️</div>
+            <span class="stat-label">Days to Conference</span>
+            <div class="stat-val" id="statDays">—</div>
+            <div class="stat-sub">
+              6 June 2026
+              <span class="stat-trend neutral">Bangkok</span>
+            </div>
+          </div>
+          <div class="stat-card accent-gold">
+            <div class="stat-card-accent"></div>
+            <div class="stat-card-icon icon-gold">📰</div>
+            <span class="stat-label">Articles Published</span>
+            <div class="stat-val" id="statArticles">0</div>
+            <div class="stat-sub">live on website</div>
+          </div>
+          <div class="stat-card accent-blue">
+            <div class="stat-card-accent"></div>
+            <div class="stat-card-icon icon-navy">📤</div>
+            <span class="stat-label">Submission Opens</span>
+            <div class="stat-val" style="font-size:22px;padding-top:2px;">31 Mar</div>
+            <div class="stat-sub">
+              2026
+              <span class="stat-trend neutral">Soon</span>
+            </div>
+          </div>
+          <div class="stat-card accent-green">
+            <div class="stat-card-accent"></div>
+            <div class="stat-card-icon icon-green">✅</div>
+            <span class="stat-label">Site Status</span>
+            <div style="margin-top:6px;margin-bottom:6px;">
+              <span class="badge badge-green"><span class="badge-dot"></span>Live</span>
+            </div>
+            <div class="stat-sub">All pages active</div>
+          </div>
+        </div>
+
+        <div class="overview-cols">
+          <div class="card" style="margin-bottom:0;">
+            <div class="card-header" style="margin-bottom:14px;">
+              <div>
+                <div class="card-title">Quick Actions</div>
+                <div class="card-subtitle">Jump to any section</div>
+              </div>
+            </div>
+            <div class="qa-grid">
+              <div class="qa-card" onclick="showPanel('pages')">
+                <span class="qa-icon">✏️</span>
+                <span class="qa-title">Edit Pages</span>
+                <span class="qa-desc">Update website content</span>
+              </div>
+              <div class="qa-card" onclick="openArticleModal()">
+                <span class="qa-icon">📝</span>
+                <span class="qa-title">New Article</span>
+                <span class="qa-desc">Post news &amp; updates</span>
+              </div>
+              <div class="qa-card" onclick="showPanel('dates')">
+                <span class="qa-icon">📅</span>
+                <span class="qa-title">Update Dates</span>
+                <span class="qa-desc">Conference timeline</span>
+              </div>
+              <div class="qa-card" onclick="showPanel('announcements')">
+                <span class="qa-icon">📢</span>
+                <span class="qa-title">Announcements</span>
+                <span class="qa-desc">Site-wide banners</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="card" style="margin-bottom:0;">
+            <div class="card-header" style="margin-bottom:12px;">
+              <div>
+                <div class="card-title">Conference Timeline</div>
+                <div class="card-subtitle">Key milestones at a glance</div>
+              </div>
+            </div>
+            <div class="timeline-item">
+              <div class="timeline-dot passed"></div>
+              <div class="timeline-info">
+                <strong>15 March 2026</strong>
+                <span>Call for Abstracts Open</span>
+              </div>
+              <span class="badge badge-gray">Passed</span>
+            </div>
+            <div class="timeline-item">
+              <div class="timeline-dot upcoming"></div>
+              <div class="timeline-info">
+                <strong>31 March 2026</strong>
+                <span>Submission &amp; Registration Open</span>
+              </div>
+              <span class="badge badge-yellow">Soon</span>
+            </div>
+            <div class="timeline-item">
+              <div class="timeline-dot scheduled"></div>
+              <div class="timeline-info">
+                <strong>30 April 2026</strong>
+                <span>Abstract Deadline</span>
+              </div>
+              <span class="badge badge-blue">Scheduled</span>
+            </div>
+            <div class="timeline-item">
+              <div class="timeline-dot scheduled"></div>
+              <div class="timeline-info">
+                <strong>6–7 June 2026</strong>
+                <span>Conference Days · Bangkok</span>
+              </div>
+              <span class="badge badge-blue">Scheduled</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- ── PAGE EDITOR ─────────────────────────── -->
+      <div class="panel" id="panel-pages">
+        <div class="page-header">
+          <div class="page-header-left">
+            <h2>Page Editor</h2>
+            <p>Edit text content for each page of the website</p>
+          </div>
+        </div>
+
+        <div class="card">
+          <div class="card-header" style="margin-bottom:16px;">
+            <div>
+              <div class="card-title">Select a Page to Edit</div>
+              <div class="card-subtitle">Changes are saved to Firebase and reflected live</div>
+            </div>
+          </div>
+          <div class="page-grid">
+            <div class="page-tile selected" onclick="selectPage('home')" data-page="home"><div class="tile-icon">🏠</div><div class="tile-name">Home</div></div>
+            <div class="page-tile" onclick="selectPage('about')" data-page="about"><div class="tile-icon">ℹ️</div><div class="tile-name">About</div></div>
+            <div class="page-tile" onclick="selectPage('programme')" data-page="programme"><div class="tile-icon">📋</div><div class="tile-name">Programme</div></div>
+            <div class="page-tile" onclick="selectPage('submission')" data-page="submission"><div class="tile-icon">📤</div><div class="tile-name">Submission</div></div>
+            <div class="page-tile" onclick="selectPage('registration')" data-page="registration"><div class="tile-icon">📝</div><div class="tile-name">Registration</div></div>
+            <div class="page-tile" onclick="selectPage('venue')" data-page="venue"><div class="tile-icon">📍</div><div class="tile-name">Venue</div></div>
+            <div class="page-tile" onclick="selectPage('visa')" data-page="visa"><div class="tile-icon">✈️</div><div class="tile-name">Visa</div></div>
+            <div class="page-tile" onclick="selectPage('contact')" data-page="contact"><div class="tile-icon">📩</div><div class="tile-name">Contact</div></div>
+          </div>
+        </div>
+
+        <div class="card" id="pageEditorCard">
+          <div class="card-header">
+            <div>
+              <div class="card-title" id="pageEditorTitle">Editing: Home</div>
+              <div class="card-subtitle">Changes are saved to Firebase and reflected on the website</div>
+            </div>
+            <button class="btn btn-primary btn-sm" onclick="savePageContent()">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M19 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11l5 5v11a2 2 0 0 1-2 2z"/><polyline points="17 21 17 13 7 13 7 21"/><polyline points="7 3 7 8 15 8"/></svg>
+              Save Changes
+            </button>
+          </div>
+          <div id="pageFields"></div>
+        </div>
+      </div>
+
+      <!-- ── ARTICLES ─────────────────────────── -->
+      <div class="panel" id="panel-articles">
+        <div class="page-header">
+          <div class="page-header-left">
+            <h2>Articles</h2>
+            <p>Manage news and announcements for the website</p>
+          </div>
+          <div class="page-header-actions">
+            <button class="btn btn-primary" onclick="openArticleModal()">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+              New Article
+            </button>
+          </div>
+        </div>
+
+        <div class="card" style="padding:0;overflow:hidden;">
+          <div class="table-wrap">
+            <table>
+              <thead>
+                <tr>
+                  <th style="padding-left:24px;width:40%;">Title / Summary</th>
+                  <th>Category</th>
+                  <th>Status</th>
+                  <th>Date</th>
+                  <th style="padding-right:24px;text-align:right;">Actions</th>
+                </tr>
+              </thead>
+              <tbody id="articlesTableBody">
+                <tr>
+                  <td colspan="5">
+                    <div class="empty-state">
+                      <span class="empty-state-icon">📰</span>
+                      <p>No articles yet. Click "+ New Article" to get started.</p>
+                    </div>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+
+      <!-- ── IMPORTANT DATES ─────────────────────────── -->
+      <div class="panel" id="panel-dates">
+        <div class="page-header">
+          <div class="page-header-left">
+            <h2>Important Dates</h2>
+            <p>Update conference timeline dates shown on the website</p>
+          </div>
+          <div class="page-header-actions">
+            <button class="btn btn-primary" onclick="saveDates()">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M19 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11l5 5v11a2 2 0 0 1-2 2z"/><polyline points="17 21 17 13 7 13 7 21"/><polyline points="7 3 7 8 15 8"/></svg>
+              Save All Dates
+            </button>
+          </div>
+        </div>
+
+        <div class="card" style="padding:0;overflow:hidden;">
+          <div class="table-wrap">
+            <table class="dates-table">
+              <thead>
+                <tr>
+                  <th style="padding-left:24px;">Milestone</th>
+                  <th style="padding-right:24px;">Date</th>
+                </tr>
+              </thead>
+              <tbody id="datesTableBody">
+                <tr><td style="padding-left:24px;">Call for Abstracts Open</td><td style="padding-right:24px;"><input type="text" value="15 March 2026" data-key="callOpen"></td></tr>
+                <tr><td style="padding-left:24px;">Submission &amp; Registration Open</td><td style="padding-right:24px;"><input type="text" value="30 March 2026" data-key="subRegOpen"></td></tr>
+                <tr><td style="padding-left:24px;">Abstract Submission Deadline</td><td style="padding-right:24px;"><input type="text" value="30 April 2026" data-key="subDeadline"></td></tr>
+                <tr><td style="padding-left:24px;">Notification of Acceptance</td><td style="padding-right:24px;"><input type="text" value="Rolling basis until 10 May 2026" data-key="notification"></td></tr>
+                <tr><td style="padding-left:24px;">Early-Bird Registration Period</td><td style="padding-right:24px;"><input type="text" value="15 Mar – 10 May 2026" data-key="earlyBird"></td></tr>
+                <tr><td style="padding-left:24px;">Full Paper Submission (Optional)</td><td style="padding-right:24px;"><input type="text" value="30 May 2026" data-key="fullPaper"></td></tr>
+                <tr><td style="padding-left:24px;">Standard Registration Closes</td><td style="padding-right:24px;"><input type="text" value="31 May 2026" data-key="stdReg"></td></tr>
+                <tr><td style="padding-left:24px;">Virtual Presenter Technical Check</td><td style="padding-right:24px;"><input type="text" value="2–3 June 2026" data-key="techCheck"></td></tr>
+                <tr><td style="padding-left:24px;">Welcome Reception</td><td style="padding-right:24px;"><input type="text" value="5 June 2026 (evening)" data-key="reception"></td></tr>
+                <tr><td style="padding-left:24px;">Conference Day 1</td><td style="padding-right:24px;"><input type="text" value="6 June 2026" data-key="day1"></td></tr>
+                <tr><td style="padding-left:24px;">Conference Day 2 + Closing Ceremony</td><td style="padding-right:24px;"><input type="text" value="7 June 2026" data-key="day2"></td></tr>
+                <tr><td style="padding-left:24px;">Conference Proceedings (Digital)</td><td style="padding-right:24px;"><input type="text" value="31 July 2026" data-key="proceedings"></td></tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+
+      <!-- ── ANNOUNCEMENTS ─────────────────────────── -->
+      <div class="panel" id="panel-announcements">
+        <div class="page-header">
+          <div class="page-header-left">
+            <h2>Announcements</h2>
+            <p>Control banners and notices shown on the website</p>
+          </div>
+        </div>
+
+        <div class="card" style="margin-bottom:20px;">
+          <div class="card-header">
+            <div>
+              <div class="card-title">System Notices</div>
+              <div class="card-subtitle">Toggle banners on or off across the website</div>
+            </div>
+          </div>
+          <div class="toggle-row">
+            <div class="toggle-label">
+              <strong>Submission Not Open Notice</strong>
+              <span>Red banner: "The submission system will officially open on 31 March 2026"</span>
+            </div>
+            <label class="toggle"><input type="checkbox" id="toggleSubmission" checked onchange="saveToggle('submissionNotice', this.checked)"><div class="toggle-slider"></div></label>
+          </div>
+          <div class="toggle-row">
+            <div class="toggle-label">
+              <strong>Registration Not Open Notice</strong>
+              <span>Red banner: "The registration system will officially open on 31 March 2026"</span>
+            </div>
+            <label class="toggle"><input type="checkbox" id="toggleRegistration" checked onchange="saveToggle('registrationNotice', this.checked)"><div class="toggle-slider"></div></label>
+          </div>
+          <div class="toggle-row">
+            <div class="toggle-label">
+              <strong>Early-Bird Registration Banner</strong>
+              <span>Gold banner announcing early-bird pricing period</span>
+            </div>
+            <label class="toggle"><input type="checkbox" id="toggleEarlyBird" onchange="saveToggle('earlyBirdBanner', this.checked)"><div class="toggle-slider"></div></label>
+          </div>
+          <div class="toggle-row">
+            <div class="toggle-label">
+              <strong>Abstract Deadline Reminder</strong>
+              <span>Countdown banner showing days remaining to submission deadline</span>
+            </div>
+            <label class="toggle"><input type="checkbox" id="toggleDeadline" onchange="saveToggle('deadlineBanner', this.checked)"><div class="toggle-slider"></div></label>
+          </div>
+        </div>
+
+        <!-- PDF Guidelines Upload -->
+        <div style="background:white;border-radius:12px;border:1px solid #e2e8f0;padding:24px;margin-bottom:20px;box-shadow:0 1px 4px rgba(0,0,0,.06);">
+          <div style="margin-bottom:16px;">
+            <div style="font-size:15px;font-weight:700;color:#1a3a5f;margin-bottom:4px;">PDF Guidelines (Submission Page)</div>
+            <div style="font-size:13px;color:#64748b;">Upload a PDF to show the Download button on the Submission page</div>
+          </div>
+          <div id="pdfCurrentUrl" style="font-size:13px;color:#64748b;margin-bottom:12px;display:none;">
+            Current: <a id="pdfCurrentLink" href="#" target="_blank" style="color:#1a3a5f;font-weight:600;">View current PDF ↗</a>
+          </div>
+          <div style="display:flex;gap:12px;align-items:center;flex-wrap:wrap;">
+            <button onclick="document.getElementById('pdfGuidelinesFile').click()" style="display:inline-flex;align-items:center;gap:8px;background:#1a3a5f;color:#fff;padding:10px 18px;border-radius:8px;cursor:pointer;font-size:14px;font-weight:600;border:none;line-height:1;">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+              Choose PDF
+            </button>
+            <input type="file" id="pdfGuidelinesFile" accept=".pdf" style="display:none;" onchange="uploadGuidelinesPDF(this)">
+            <span id="pdfUploadStatus" style="font-size:13px;color:#64748b;"></span>
+            <button id="pdfRemoveBtn" onclick="removeGuidelinesPDF()" style="display:none;background:none;border:1px solid #ef4444;color:#ef4444;padding:8px 14px;border-radius:8px;cursor:pointer;font-size:13px;line-height:1;">Remove PDF</button>
+          </div>
+        </div>
+
+        <div class="card">
+          <div class="card-header">
+            <div>
+              <div class="card-title">Custom Announcement</div>
+              <div class="card-subtitle">Publish a one-off message to the website</div>
+            </div>
+            <button class="btn btn-primary btn-sm" onclick="saveCustomAnnouncement()">
+              <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M19 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11l5 5v11a2 2 0 0 1-2 2z"/><polyline points="17 21 17 13 7 13 7 21"/><polyline points="7 3 7 8 15 8"/></svg>
+              Save
+            </button>
+          </div>
+          <div class="form-row">
+            <div class="form-group">
+              <label>Message</label>
+              <input type="text" id="customAnnoText" placeholder="e.g. Programme now available — view the full schedule">
+            </div>
+          </div>
+          <div class="form-row cols-2">
+            <div class="form-group">
+              <label>Type</label>
+              <select id="customAnnoType">
+                <option value="info">ℹ️ Info (blue)</option>
+                <option value="success">✅ Success (green)</option>
+                <option value="warning">⚠️ Warning (yellow)</option>
+                <option value="error">🚨 Alert (red)</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label>Show on</label>
+              <select id="customAnnoPage">
+                <option value="all">All pages</option>
+                <option value="home">Home only</option>
+                <option value="submission">Submission only</option>
+                <option value="registration">Registration only</option>
+              </select>
+            </div>
+          </div>
+        </div>
+      </div>
+
+
+      <!-- ── BUTTON LINKS ─────────────────────────── -->
+      <div class="panel" id="panel-links">
+        <div class="page-header">
+          <div class="page-header-left">
+            <h2>Button Links</h2>
+            <p>Control where the main CTA buttons link to — no code editing needed</p>
+          </div>
+          <div class="page-header-actions">
+            <button class="btn btn-primary" onclick="saveLinks()">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M19 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11l5 5v11a2 2 0 0 1-2 2z"/><polyline points="17 21 17 13 7 13 7 21"/><polyline points="7 3 7 8 15 8"/></svg>
+              Save Links
+            </button>
+          </div>
+        </div>
+
+        <!-- Submit Button -->
+        <div class="card">
+          <div class="card-header">
+            <div>
+              <div class="card-title">Submit Your Abstract</div>
+              <div class="card-subtitle">The white button on the hero section of every page</div>
+            </div>
+            <span class="badge badge-blue" id="linkSubmitStatus">—</span>
+          </div>
+          <div class="form-row cols-2">
+            <div class="form-group">
+              <label>Button State</label>
+              <select id="linkSubmitState" onchange="updateLinkPreview()">
+                <option value="disabled">🔒 Disabled (not open yet)</option>
+                <option value="enabled">✅ Enabled (link active)</option>
+              </select>
+              <div class="form-hint">When disabled, button is greyed out and not clickable</div>
+            </div>
+            <div class="form-group">
+              <label>URL (when enabled)</label>
+              <input type="text" id="linkSubmitUrl" placeholder="https://…  or  submit-abstract.html" oninput="updateLinkPreview()">
+              <div class="form-hint">Paste the full submission form URL here</div>
+            </div>
+          </div>
+          <div class="link-preview" id="previewSubmit">
+            <span style="font-size:12px;color:var(--muted);margin-right:10px;">Preview:</span>
+            <a id="previewSubmitBtn" href="#" target="_blank" class="link-preview-btn link-btn-white">Submit Your Abstract</a>
+          </div>
+        </div>
+
+        <!-- Register Button -->
+        <div class="card">
+          <div class="card-header">
+            <div>
+              <div class="card-title">Register to Attend</div>
+              <div class="card-subtitle">The gold/accent button on the hero section of every page</div>
+            </div>
+            <span class="badge badge-yellow" id="linkRegisterStatus">—</span>
+          </div>
+          <div class="form-row cols-2">
+            <div class="form-group">
+              <label>Button State</label>
+              <select id="linkRegisterState" onchange="updateLinkPreview()">
+                <option value="disabled">🔒 Disabled (not open yet)</option>
+                <option value="enabled">✅ Enabled (link active)</option>
+              </select>
+              <div class="form-hint">When disabled, button is greyed out and not clickable</div>
+            </div>
+            <div class="form-group">
+              <label>URL (when enabled)</label>
+              <input type="text" id="linkRegisterUrl" placeholder="https://…  or  registration-form.html" oninput="updateLinkPreview()">
+              <div class="form-hint">Paste the full registration form URL here</div>
+            </div>
+          </div>
+          <div class="link-preview" id="previewRegister">
+            <span style="font-size:12px;color:var(--muted);margin-right:10px;">Preview:</span>
+            <a id="previewRegisterBtn" href="#" target="_blank" class="link-preview-btn link-btn-gold">Register to Attend</a>
+          </div>
+        </div>
+
+        <!-- How it works info box -->
+        <div style="background:var(--bg);border:1px solid var(--border-lt);border-radius:var(--radius);padding:18px 22px;display:flex;gap:14px;align-items:flex-start;">
+          <span style="font-size:20px;flex-shrink:0;">💡</span>
+          <div>
+            <div style="font-size:13.5px;font-weight:600;color:var(--navy);margin-bottom:4px;">How this works</div>
+            <div style="font-size:13px;color:var(--muted);line-height:1.6;">
+              When you save, the links are stored in Firebase. The website reads them automatically — no need to edit any HTML files.
+              Set a button to <strong>Disabled</strong> to show it greyed out with a tooltip, or <strong>Enabled</strong> and paste the real URL.
+            </div>
+          </div>
+        </div>
+      </div>
+
+
+      <!-- ── KEYNOTE SPEAKERS ──────────────────────── -->
+      <div class="panel" id="panel-keynote">
+        <div class="page-header">
+          <div class="page-header-left">
+            <h2>Keynote Speakers</h2>
+            <p>Manage speakers shown in Programme Highlights on programme.html</p>
+          </div>
+          <div class="page-header-actions">
+            <button class="btn btn-ghost" onclick="addKeynote()">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+              Add Session
+            </button>
+            <button class="btn btn-primary" onclick="saveKeynotes()">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M19 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11l5 5v11a2 2 0 0 1-2 2z"/><polyline points="17 21 17 13 7 13 7 21"/><polyline points="7 3 7 8 15 8"/></svg>
+              Save Speakers
+            </button>
+          </div>
+        </div>
+        <div id="keynote-list"></div>
+        <div class="card" style="border-style:dashed;background:transparent;text-align:center;padding:32px;" id="keynote-empty" style="display:none;">
+          <p style="color:var(--muted);font-size:14px;">No speakers yet — click "Add Speaker" to get started</p>
+        </div>
+      </div>
+
+      <!-- ── REGISTRATION FEES ─────────────────────── -->
+      <div class="panel" id="panel-fees">
+        <div class="page-header">
+          <div class="page-header-left">
+            <h2>Registration Fees</h2>
+            <p>ค่าลงทะเบียนที่แสดงใน registration.html — แก้ตรงนี้ไม่ต้องแตะไฟล์</p>
+          </div>
+          <div class="page-header-actions">
+            <button class="btn btn-primary" onclick="saveFees()">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M19 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11l5 5v11a2 2 0 0 1-2 2z"/><polyline points="17 21 17 13 7 13 7 21"/><polyline points="7 3 7 8 15 8"/></svg>
+              Save Fees
+            </button>
+          </div>
+        </div>
+
+        <!-- Early Bird deadline -->
+        <div class="card">
+          <div class="card-header" style="margin-bottom:16px;">
+            <div><div class="card-title">Deadline Labels</div><div class="card-subtitle">ข้อความใต้ column header ในตาราง</div></div>
+          </div>
+          <div class="form-row cols-2">
+            <div class="form-group">
+              <label>Early Bird Label</label>
+              <input type="text" id="feeEarlyLabel" value="THB, Until 10 May">
+            </div>
+            <div class="form-group">
+              <label>Standard Rate Label</label>
+              <input type="text" id="feeStdLabel" value="THB, Until 31 May">
+            </div>
+          </div>
+        </div>
+
+        <!-- Fee rows -->
+        <div class="card">
+          <div class="card-header" style="margin-bottom:0;">
+            <div><div class="card-title">Fee Table</div><div class="card-subtitle">กรอกตัวเลข เช่น 3,000 THB หรือ Free</div></div>
+          </div>
+          <table style="width:100%;border-collapse:collapse;margin-top:20px;">
+            <thead>
+              <tr>
+                <th style="text-align:left;padding:10px 0;font-size:10.5px;font-weight:700;letter-spacing:1px;text-transform:uppercase;color:var(--muted);border-bottom:2px solid var(--border-lt);">Category</th>
+                <th style="text-align:left;padding:10px 12px;font-size:10.5px;font-weight:700;letter-spacing:1px;text-transform:uppercase;color:var(--muted);border-bottom:2px solid var(--border-lt);">Early Bird</th>
+                <th style="text-align:left;padding:10px 12px;font-size:10.5px;font-weight:700;letter-spacing:1px;text-transform:uppercase;color:var(--muted);border-bottom:2px solid var(--border-lt);">Standard</th>
+              </tr>
+            </thead>
+            <tbody id="fees-tbody">
+              <!-- Generated by JS -->
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <!-- ── CONFERENCE TRACKS ──────────────────────── -->
+      <div class="panel" id="panel-tracks">
+        <div class="page-header">
+          <div class="page-header-left">
+            <h2>Conference Tracks</h2>
+            <p>Tracks ที่แสดงใน submission.html และ programme.html</p>
+          </div>
+          <div class="page-header-actions">
+            <button class="btn btn-ghost" onclick="addTrack()">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+              Add Track
+            </button>
+            <button class="btn btn-primary" onclick="saveTracks()">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M19 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11l5 5v11a2 2 0 0 1-2 2z"/><polyline points="17 21 17 13 7 13 7 21"/><polyline points="7 3 7 8 15 8"/></svg>
+              Save Tracks
+            </button>
+          </div>
+        </div>
+        <div id="tracks-list"></div>
+      </div>
+
+
+      <!-- ── AWARDS ────────────────────────────────── -->
+      <div class="panel" id="panel-awards">
+        <div class="page-header">
+          <div class="page-header-left">
+            <h2>Awards</h2>
+            <p>จัดการรางวัลและประกาศผู้ชนะ — แสดงใน Award.html</p>
+          </div>
+          <div class="page-header-actions">
+            <button class="btn btn-primary" onclick="saveAwards()">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M19 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11l5 5v11a2 2 0 0 1-2 2z"/><polyline points="17 21 17 13 7 13 7 21"/><polyline points="7 3 7 8 15 8"/></svg>
+              Save Awards
+            </button>
+          </div>
+        </div>
+
+        <div class="card">
+          <div class="card-header" style="margin-bottom:16px;">
+            <div><div class="card-title">Award Status</div><div class="card-subtitle">ตั้งค่าว่าประกาศผลแล้วหรือยัง</div></div>
+          </div>
+          <div class="form-row cols-2">
+            <div class="form-group">
+              <label>Award Status</label>
+              <select id="awardStatus">
+                <option value="pending">⏳ Pending — ยังไม่ประกาศผล</option>
+                <option value="announced">🏆 Announced — ประกาศผลแล้ว</option>
+              </select>
+              <div class="form-hint">เมื่อตั้งเป็น Announced ชื่อผู้ชนะจะแสดงบนเว็บ</div>
+            </div>
+            <div class="form-group">
+              <label>Ceremony Date</label>
+              <input type="text" id="awardCeremonyDate" value="7 June 2026" placeholder="e.g. 7 June 2026">
+            </div>
+          </div>
+        </div>
+
+        <!-- Award 1 -->
+        <div class="card">
+          <div class="card-header" style="margin-bottom:16px;">
+            <div>
+              <div class="card-title">🏆 Best Oral Presentation Award</div>
+              <div class="card-subtitle">Presented at the closing ceremony</div>
+            </div>
+          </div>
+          <div class="form-row cols-2">
+            <div class="form-group">
+              <label>Winner Name</label>
+              <input type="text" id="award1Winner" placeholder="e.g. Dr. Jane Smith (leave blank if TBA)">
+            </div>
+            <div class="form-group">
+              <label>Institution / Affiliation</label>
+              <input type="text" id="award1Affiliation" placeholder="e.g. Chulalongkorn University">
+            </div>
+          </div>
+          <div class="form-row">
+            <div class="form-group">
+              <label>Paper Title</label>
+              <input type="text" id="award1Paper" placeholder="e.g. Digital Inequalities in the Mekong Region...">
+            </div>
+          </div>
+          <div class="form-row cols-2">
+            <div class="form-group">
+              <label>Award Description</label>
+              <textarea id="award1Desc" rows="2">Presented to the individual or panel that demonstrates the highest quality of research design, argument, methodological rigour, and scholarly communication in an oral presentation format.</textarea>
+            </div>
+            <div class="form-group">
+              <label>Winner Message / Quote <span style="color:var(--muted-lt);font-weight:400;">(optional)</span></label>
+              <textarea id="award1Quote" rows="2" placeholder="Short quote from the winner..."></textarea>
+            </div>
+          </div>
+        </div>
+
+        <!-- Award 2 -->
+        <div class="card">
+          <div class="card-header" style="margin-bottom:16px;">
+            <div>
+              <div class="card-title">🥇 Best Poster Presentation Award</div>
+              <div class="card-subtitle">Presented at the closing ceremony</div>
+            </div>
+          </div>
+          <div class="form-row cols-2">
+            <div class="form-group">
+              <label>Winner Name</label>
+              <input type="text" id="award2Winner" placeholder="e.g. Dr. John Lee (leave blank if TBA)">
+            </div>
+            <div class="form-group">
+              <label>Institution / Affiliation</label>
+              <input type="text" id="award2Affiliation" placeholder="e.g. Thammasat University">
+            </div>
+          </div>
+          <div class="form-row">
+            <div class="form-group">
+              <label>Paper / Poster Title</label>
+              <input type="text" id="award2Paper" placeholder="Poster title...">
+            </div>
+          </div>
+          <div class="form-row cols-2">
+            <div class="form-group">
+              <label>Award Description</label>
+              <textarea id="award2Desc" rows="2">Presented to the presenter whose poster demonstrates the strongest research contribution, visual communication, and engagement with the conference theme and tracks.</textarea>
+            </div>
+            <div class="form-group">
+              <label>Winner Message / Quote <span style="color:var(--muted-lt);font-weight:400;">(optional)</span></label>
+              <textarea id="award2Quote" rows="2" placeholder="Short quote from the winner..."></textarea>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- ── MESSAGES INBOX ─────────────────────────── -->
+      <div class="panel" id="panel-messages">
+        <div class="page-header">
+          <div class="page-header-left">
+            <h2>Messages Inbox</h2>
+            <p>ข้อความที่ส่งมาจาก contact form บนเว็บ</p>
+          </div>
+          <div class="page-header-actions">
+            <button class="btn btn-ghost" onclick="loadMessages()">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="23 4 23 10 17 10"/><path d="M20.49 15a9 9 0 1 1-2.12-9.36L23 10"/></svg>
+              Refresh
+            </button>
+            <button class="btn btn-danger btn-sm" onclick="clearReadMessages()" style="display:none;" id="clearReadBtn">Clear Read</button>
+          </div>
+        </div>
+        <div id="messages-list">
+          <div class="empty-state">
+            <span class="empty-state-icon">💬</span>
+            <p>Loading messages…</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- ── NOTIFY LIST ────────────────────────────── -->
+      <div class="panel" id="panel-notifylist">
+        <div class="page-header">
+          <div class="page-header-left">
+            <h2>Notify List</h2>
+            <p>Email ที่กรอกไว้ในหน้า coming-soon เพื่อรับการแจ้งเตือน</p>
+          </div>
+          <div class="page-header-actions">
+            <button class="btn btn-ghost" onclick="loadNotifyList()">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="23 4 23 10 17 10"/><path d="M20.49 15a9 9 0 1 1-2.12-9.36L23 10"/></svg>
+              Refresh
+            </button>
+            <button class="btn btn-ghost btn-sm" onclick="exportNotifyCSV()" id="exportNotifyBtn">
+              <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+              Export CSV
+            </button>
+          </div>
+        </div>
+        <div id="notify-stats" style="display:flex;gap:16px;margin-bottom:20px;"></div>
+        <div id="notify-list">
+          <div class="empty-state">
+            <span class="empty-state-icon">📧</span>
+            <p>Loading…</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- ── SETTINGS ─────────────────────────── -->
+      <div class="panel" id="panel-settings">
+        <div class="page-header">
+          <div class="page-header-left">
+            <h2>Settings</h2>
+            <p>General site configuration</p>
+          </div>
+        </div>
+
+        <div class="card">
+          <div class="card-header">
+            <div>
+              <div class="card-title">Conference Information</div>
+              <div class="card-subtitle">These values are used across the website</div>
+            </div>
+            <button class="btn btn-primary btn-sm" onclick="saveSettings()">
+              <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M19 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11l5 5v11a2 2 0 0 1-2 2z"/><polyline points="17 21 17 13 7 13 7 21"/><polyline points="7 3 7 8 15 8"/></svg>
+              Save Settings
+            </button>
+          </div>
+          <div class="form-row cols-2">
+            <div class="form-group">
+              <label>Conference Name</label>
+              <input type="text" id="confName" value="ICA Regional Hub Thailand 2026">
+            </div>
+            <div class="form-group">
+              <label>Short Name</label>
+              <input type="text" id="confShort" value="ICA-TH 2026">
+            </div>
+          </div>
+          <div class="form-row cols-2">
+            <div class="form-group">
+              <label>Venue</label>
+              <input type="text" id="confVenue" value="Mandarin Hotel Bangkok">
+            </div>
+            <div class="form-group">
+              <label>Contact Email</label>
+              <input type="text" id="confEmail" value="info@ica-thailandhub.org">
+            </div>
+          </div>
+          <div class="form-row">
+            <div class="form-group">
+              <label>Conference Description</label>
+              <textarea id="confDesc">A two-day hybrid conference connecting scholars, policymakers, and practitioners across Thailand, the Mekong sub-region, and Asian region.</textarea>
+            </div>
+          </div>
+        </div>
+
+        <div class="card">
+          <div class="card-header">
+            <div class="card-title">Admin Account</div>
+          </div>
+          <p style="font-size:14px;color:var(--muted);">Signed in as <strong id="settingsEmail" style="color:var(--text);">—</strong></p>
+          <div style="margin-top:16px;">
+            <button class="btn btn-danger btn-sm" onclick="logout()">Sign out</button>
+          </div>
+        </div>
+      </div>
+
+
+      <!-- ── DISCOUNT REQUESTS ──────────────────────────── -->
+      <div class="panel" id="panel-discountrequests">
+        <div class="page-header">
+          <div class="page-header-left">
+            <h2>Discount Requests</h2>
+            <p>Review and approve/reject partner discount applications</p>
+          </div>
+          <div class="page-header-actions">
+            <button class="btn btn-ghost" onclick="loadDiscountRequests()">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="23 4 23 10 17 10"/><path d="M20.49 15a9 9 0 1 1-2.12-9.36L23 10"/></svg>
+              Refresh
+            </button>
+            <button class="btn btn-ghost btn-sm" onclick="exportDiscountCSV()">
+              <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+              Export CSV
+            </button>
+          </div>
+        </div>
+
+        <!-- Filter bar -->
+        <div style="display:flex;gap:10px;margin-bottom:20px;flex-wrap:wrap;align-items:center;">
+          <select id="disc-filter" onchange="_discPage=1;renderDiscountRequests()" style="border:1px solid var(--border);border-radius:var(--radius-sm);padding:7px 12px;font-size:13px;color:var(--text);background:var(--panel);">
+            <option value="">All Statuses</option>
+            <option value="pending">⏳ Pending</option>
+            <option value="approved">✓ Approved</option>
+            <option value="rejected">✕ Rejected</option>
+          </select>
+        </div>
+
+        <!-- Stats strip -->
+        <div id="disc-stats-strip" style="display:flex;gap:12px;margin-bottom:20px;flex-wrap:wrap;"></div>
+
+        <!-- Table -->
+        <div id="disc-table-wrap" style="background:var(--panel);border:1px solid var(--border);border-radius:var(--radius);overflow:hidden;">
+          <div class="empty-state">
+            <span class="empty-state-icon">📋</span>
+            <p>Loading discount requests…</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- ── ALL REGISTRATIONS ──────────────────────────── -->
+      <div class="panel" id="panel-registrations">
+        <div class="page-header">
+          <div class="page-header-left">
+            <h2>All Registrations</h2>
+            <p>All registrations — mark paid after verifying with Chula OFAS statement</p>
+          </div>
+          <div class="page-header-actions">
+            <button class="btn btn-ghost" onclick="loadRegistrations()">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="23 4 23 10 17 10"/><path d="M20.49 15a9 9 0 1 1-2.12-9.36L23 10"/></svg>
+              Refresh
+            </button>
+            <button class="btn btn-ghost btn-sm" onclick="exportRegistrationsCSV()">
+              <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+              Export CSV
+            </button>
+          </div>
+        </div>
+
+        <!-- Filter bar -->
+        <div style="display:flex;gap:10px;margin-bottom:20px;flex-wrap:wrap;">
+          <select id="reg-pay-filter" onchange="_regPage=1;renderRegistrations()" style="border:1px solid var(--border);border-radius:var(--radius-sm);padding:7px 12px;font-size:13px;color:var(--text);background:var(--panel);">
+            <option value="">All Payment Statuses</option>
+            <option value="pending">Pending</option>
+            <option value="paid">Paid</option>
+          </select>
+          <select id="reg-format-filter" onchange="_regPage=1;renderRegistrations()" style="border:1px solid var(--border);border-radius:var(--radius-sm);padding:7px 12px;font-size:13px;color:var(--text);background:var(--panel);">
+            <option value="">All Formats</option>
+            <option value="onsite">Onsite / Poster</option>
+            <option value="virtual">Virtual</option>
+            <option value="non">Non Presenter</option>
+          </select>
+        </div>
+
+        <!-- Stats strip -->
+        <div id="reg-stats-strip" style="display:flex;gap:12px;margin-bottom:20px;flex-wrap:wrap;"></div>
+
+        <!-- Table -->
+        <div id="reg-table-wrap" style="background:var(--panel);border:1px solid var(--border);border-radius:var(--radius);overflow:hidden;">
+          <div class="empty-state">
+            <span class="empty-state-icon">📝</span>
+            <p>Loading registrations…</p>
+          </div>
+        </div>
+      </div>
+
+    </div><!-- /page-wrapper -->
+  </main>
+</div><!-- /dashScreen -->
+
+<!-- Article Modal -->
+<div class="modal-overlay" id="articleModal">
+  <div class="modal">
+    <div class="modal-header">
+      <h3 id="articleModalTitle">New Article</h3>
+      <button class="modal-close" onclick="closeArticleModal()">✕</button>
+    </div>
+    <div class="form-row">
+      <div class="form-group">
+        <label>Title</label>
+        <input type="text" id="artTitle" placeholder="Article headline">
+      </div>
+    </div>
+    <div class="form-row cols-2">
+      <div class="form-group">
+        <label>Category</label>
+        <select id="artCategory">
+          <option>News</option>
+          <option>Announcement</option>
+          <option>Call for Papers</option>
+          <option>Programme Update</option>
+        </select>
+      </div>
+      <div class="form-group">
+        <label>Status</label>
+        <select id="artStatus">
+          <option value="published">Published</option>
+          <option value="draft">Draft</option>
+        </select>
+      </div>
+    </div>
+    <div class="form-row">
+      <div class="form-group">
+        <label>Summary</label>
+        <textarea id="artSummary" placeholder="Short description shown in article lists…"></textarea>
+        <div class="form-hint">Shown in article listing pages on the website</div>
+      </div>
+    </div>
+    <div class="form-row">
+      <div class="form-group">
+        <label>Full Content</label>
+        <textarea id="artContent" class="tall" placeholder="Full article body…"></textarea>
+      </div>
+    </div>
+
+    <!-- IMAGE UPLOAD -->
+    <div class="form-row">
+      <div class="form-group">
+        <label>Cover Image</label>
+        <div class="img-upload-area" id="imgUploadArea" onclick="document.getElementById('artImageFile').click()">
+          <div class="img-upload-placeholder" id="imgUploadPlaceholder">
+            <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" style="color:var(--muted-lt);margin-bottom:10px;"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg>
+            <span style="font-size:13px;color:var(--muted);font-weight:500;">Click to upload image</span>
+            <span style="font-size:11.5px;color:var(--muted-lt);margin-top:3px;">JPG, PNG, WebP — max 5MB</span>
+          </div>
+          <img id="imgPreview" src="" alt="" style="display:none;width:100%;height:180px;object-fit:cover;border-radius:8px;">
+        </div>
+        <input type="file" id="artImageFile" accept="image/*" style="display:none" onchange="handleImageSelect(event)">
+        <div style="display:flex;align-items:center;gap:8px;margin-top:8px;">
+          <div id="imgUploadStatus" style="font-size:12px;color:var(--muted);flex:1;"></div>
+          <button type="button" class="btn btn-ghost btn-xs" id="imgRemoveBtn" style="display:none;" onclick="removeImage()">Remove image</button>
+        </div>
+        <div class="form-hint">Shown as the article card image on the website</div>
+      </div>
+    </div>
+
+    <div class="modal-footer">
+      <button class="btn btn-ghost" onclick="closeArticleModal()">Cancel</button>
+      <button class="btn btn-primary" id="saveArticleBtn" onclick="saveArticle()">Save Article</button>
+    </div>
+  </div>
+</div>
+
+<div id="toast"></div>
+
+<script type="module">
+import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-app.js";
+import { getAuth, signInWithEmailAndPassword, GoogleAuthProvider, signInWithPopup, signOut, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-auth.js";
+import { getFirestore, doc, getDoc, setDoc, collection, getDocs, addDoc, updateDoc, deleteDoc, serverTimestamp } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore.js";
+import { getStorage, ref, uploadBytesResumable, getDownloadURL, deleteObject } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-storage.js";
+
+const firebaseConfig = {
+  apiKey:            "AIzaSyDfVgPU5k_cjqK9fYca011LbLvVYs7zgiE",
+  authDomain:        "ica-th-2026.firebaseapp.com",
+  projectId:         "ica-th-2026",
+  storageBucket:     "ica-th-2026.firebasestorage.app",
+  messagingSenderId: "18873134358",
+  appId:             "1:18873134358:web:56a28c14bbf32b3e787437",
+  measurementId:     "G-NL85HFMT4Q"
+};
+
+const app     = initializeApp(firebaseConfig);
+const auth    = getAuth(app);
+const db      = getFirestore(app);
+const storage = getStorage(app);
+const gProvider = new GoogleAuthProvider();
+
+onAuthStateChanged(auth, user => { if (user) showDashboard(user); else showAuth(); });
+
+function showAuth() {
+  document.getElementById('authScreen').style.display = 'flex';
+  document.getElementById('dashScreen').style.display = 'none';
+}
+
+function showDashboard(user) {
+  document.getElementById('authScreen').style.display = 'none';
+  document.getElementById('dashScreen').style.display = 'block';
+  const name = user.displayName || user.email.split('@')[0];
+  // Sidebar
+  document.getElementById('userDisplayName').textContent  = name;
+  document.getElementById('userEmail').textContent        = user.email;
+  document.getElementById('userAvatar').textContent       = name[0].toUpperCase();
+  // Topbar
+  document.getElementById('topbarAvatar').textContent     = name[0].toUpperCase();
+  document.getElementById('topbarUserName').textContent   = name;
+  // Dropdown
+  document.getElementById('dropdownUserName').textContent = name;
+  document.getElementById('dropdownUserEmail').textContent = user.email;
+  // Settings
+  document.getElementById('settingsEmail').textContent    = user.email;
+  calcDays(); loadArticles(); initPageEditor('home'); loadLinks(); loadKeynotes(); loadFees(); loadTracks(); loadAwards(); loadMessages(); loadNotifyList(); loadAnnouncementToggles(); loadGuidelinesPDF();
+  const d = new Date();
+  document.getElementById('overviewDate').innerHTML =
+    d.toLocaleDateString('en-GB',{weekday:'long'}) + '<br>' +
+    d.toLocaleDateString('en-GB',{day:'numeric',month:'long',year:'numeric'});
+}
+
+window.loginWithEmail = async function() {
+  const email = document.getElementById('loginEmail').value.trim();
+  const pass  = document.getElementById('loginPassword').value;
+  const btn   = document.getElementById('btnEmailLogin');
+  const err   = document.getElementById('authError');
+  err.style.display = 'none';
+  btn.innerHTML = '<span class="spinner"></span> Signing in…';
+  btn.disabled = true;
+  try { await signInWithEmailAndPassword(auth, email, pass); }
+  catch(e) {
+    err.textContent = friendlyError(e.code);
+    err.style.display = 'block';
+    btn.innerHTML = 'Sign in';
+    btn.disabled = false;
+  }
+};
+
+window.loginWithGoogle = async function() {
+  const err = document.getElementById('authError');
+  err.style.display = 'none';
+  try { await signInWithPopup(auth, gProvider); }
+  catch(e) { err.textContent = friendlyError(e.code); err.style.display = 'block'; }
+};
+
+window.logout = async function() { await signOut(auth); };
+
+function friendlyError(code) {
+  return ({
+    'auth/invalid-email':        'Invalid email address.',
+    'auth/user-not-found':       'No account found with this email.',
+    'auth/wrong-password':       'Incorrect password.',
+    'auth/invalid-credential':   'Incorrect email or password.',
+    'auth/too-many-requests':    'Too many attempts. Please try again later.',
+    'auth/popup-closed-by-user': 'Sign-in popup was closed.'
+  })[code] || 'Sign-in failed. Please try again.';
+}
+
+window.togglePassword = function() {
+  const input = document.getElementById('loginPassword');
+  const icon  = document.getElementById('eyeIcon');
+  const show  = input.type === 'password';
+  input.type  = show ? 'text' : 'password';
+  icon.innerHTML = show
+    ? `<path d="M17.94 17.94A10.07 10.07 0 0 1 12 20c-7 0-11-8-11-8a18.45 18.45 0 0 1 5.06-5.94"/><path d="M9.9 4.24A9.12 9.12 0 0 1 12 4c7 0 11 8 11 8a18.5 18.5 0 0 1-2.16 3.19"/><line x1="1" y1="1" x2="23" y2="23"/>`
+    : `<path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/>`;
+};
+
+document.getElementById('loginPassword').addEventListener('keydown', e => {
+  if (e.key === 'Enter') window.loginWithEmail();
+});
+
+/* ── Panel navigation ── */
+const PANEL_TITLES = {
+  overview: 'Dashboard',
+  pages:    'Page Editor',
+  articles: 'Articles',
+  dates:    'Important Dates',
+  announcements: 'Announcements',
+  links:       'Button Links',
+  awards:      'Awards',
+  messages:    'Messages Inbox',
+  notifylist:  'Notify List',
+  keynote:  'Keynote Speakers',
+  fees:     'Registration Fees',
+  tracks:   'Conference Tracks',
+  settings:         'Settings',
+  discountrequests: 'Discount Requests',
+  registrations:    'All Registrations'
+};
+
+window.showPanel = function(name) {
+  document.querySelectorAll('.panel').forEach(p => p.classList.remove('active'));
+  document.querySelectorAll('.nav-item').forEach(n => n.classList.remove('active'));
+  document.getElementById('panel-' + name).classList.add('active');
+  const navEl = document.querySelector(`[onclick="showPanel('${name}')"]`);
+  if (navEl) navEl.classList.add('active');
+  document.getElementById('topbarTitle').textContent = PANEL_TITLES[name] || name;
+  if (name === 'articles') loadArticles();
+  // Close sidebar on mobile after navigation
+  if (window.innerWidth < 1024) closeSidebar();
+};
+
+/* ── Sidebar toggle (mobile) ── */
+window.toggleSidebar = function() {
+  const sb  = document.getElementById('sidebar');
+  const ov  = document.getElementById('sidebarOverlay');
+  const open = sb.classList.toggle('open');
+  ov.classList.toggle('visible', open);
+};
+window.closeSidebar = function() {
+  document.getElementById('sidebar').classList.remove('open');
+  document.getElementById('sidebarOverlay').classList.remove('visible');
+};
+
+/* ── User dropdown ── */
+window.toggleUserDropdown = function() {
+  document.getElementById('userDropdown').classList.toggle('open');
+};
+document.addEventListener('click', e => {
+  if (!e.target.closest('#avatarDropdownBtn') && !e.target.closest('#userDropdown')) {
+    document.getElementById('userDropdown').classList.remove('open');
+  }
+});
+
+/* ── Days counter ── */
+function calcDays() {
+  const diff = Math.ceil((new Date('2026-06-06') - new Date()) / 86400000);
+  document.getElementById('statDays').textContent = diff > 0 ? diff : '🎉';
+}
+
+/* ── Toast ── */
+window.toast = function(msg, type = '') {
+  const el = document.getElementById('toast');
+  const icons = { success: '✓', error: '✕', '': 'ℹ' };
+  el.innerHTML = `<span>${icons[type] || 'ℹ'}</span> ${msg}`;
+  el.className = 'show ' + type;
+  setTimeout(() => { el.className = ''; }, 3400);
+};
+
+/* ── Page editor ── */
+const PAGE_FIELDS = {
+  home:[
+    {key:'heroSubtitle',label:'Hero Subtitle',type:'text',default:'A two-day hybrid conference connecting scholars…'},
+    {key:'heroMeta',label:'Hero Meta (date/location)',type:'text',default:'6–7 June 2026 • Bangkok • Chulalongkorn University'},
+    {key:'aboutLead',label:'About Lead Text',type:'textarea',default:'ICA Regional Hub Thailand 2026 is the official concurrent event…'},
+    {key:'valueBox1',label:'Value Box 1 — Description',type:'textarea',default:'Specially designated sessions where research is presented…'},
+    {key:'valueBox2',label:'Value Box 2 — Description',type:'textarea',default:'Empowering emerging scholars through advanced methods masterclasses…'}
+  ],
+  about:[
+    {key:'heroText',label:'Hero Paragraph (About page intro)',type:'textarea',default:'ICA Regional Hub Thailand 2026 brings together scholars, practitioners, and policymakers to explore communication inequalities and advance research collaboration across Thailand, the Mekong sub-region, and Asian region.'},
+    {key:'whatItIs',label:'What It Is — Opening Paragraph',type:'textarea',default:'The ICA Regional Hub Thailand 2026 is a two-day academic conference held on 6–7 June 2026 at the Faculty of Communication Arts, Chulalongkorn University, Bangkok, Thailand.'},
+    {key:'whyNow',label:'Why Now — Opening Paragraph',type:'textarea',default:'Navigating a Digital Crossroads: Thailand and the Mekong region are at the forefront of rapid digital transformation.'},
+    {key:'obj3',label:'Objective 3 — Inclusive Knowledge Production',type:'textarea',default:'Address academic publishing inequalities by elevating Asian perspectives and contextually grounded theories within global communication discourse.'}
+  ],
+  programme:[
+    {key:'heroText',label:'Hero Paragraph',type:'textarea',default:'ICA-TH 2026 features keynotes, thematic panels, mentorship sessions, and regional research clinics designed to strengthen communication scholarship across Thailand, the Mekong region, and the broader Asian continent.'},
+    {key:'overviewText',label:'Programme Overview Text',type:'textarea',default:'ICA-TH 2026 runs alongside the 76th Annual Conference of the International Communication Association.'}
+  ],
+  submission:[
+    {key:'overviewText',label:'Submission Overview Text',type:'textarea',default:'The ICA Regional Hub Thailand 2026 welcomes submissions from scholars (including graduate students) and practitioners across Thailand, the Mekong region, and Asia.'},
+    {key:'abstractLen',label:'Abstract Length Requirement (shown in guidelines)',type:'text',default:'350–400 words'}
+  ],
+  registration:[
+    {key:'overviewLead',label:'Registration Overview Lead Text',type:'textarea',default:'Participants may attend the conference either in person in Bangkok or through the online hybrid platform. Registration grants access to all conference sessions, keynote lectures, and networking events.'}
+  ],
+  venue:   [{key:'heroText',label:'Venue Hero Paragraph',type:'textarea',default:'ICA-TH 2026 will take place at the Faculty of Communication Arts, Chulalongkorn University, located in the heart of Bangkok.'}],
+  visa:    [{key:'heroText',label:'Visa Info Hero Paragraph',type:'textarea',default:'Everything international delegates need to know about entering Thailand for ICA-TH 2026, including visa requirements, invitation letters, and arrival tips.'}],
+  contact: [
+    {key:'address',label:'Address (shown on contact page)',type:'textarea',default:'ICA Regional Hub Thailand 2026\nFaculty of Communication Arts, Chulalongkorn University\n254 Phayathai Road, Wangmai, Pathumwan\nBangkok 10330, Thailand'},
+    {key:'email',label:'Contact Email Address',type:'text',default:'info@ica-thailandhub.org'}
+  ],
+};
+
+let currentPage = 'home', pageData = {};
+
+window.selectPage = function(page) {
+  currentPage = page;
+  document.querySelectorAll('.page-tile').forEach(t => t.classList.remove('selected'));
+  document.querySelector(`[data-page="${page}"]`).classList.add('selected');
+  initPageEditor(page);
+};
+
+async function initPageEditor(page) {
+  currentPage = page;
+  document.getElementById('pageEditorTitle').textContent =
+    'Editing: ' + page.charAt(0).toUpperCase() + page.slice(1);
+  try {
+    const snap = await getDoc(doc(db, 'pages', page));
+    pageData = snap.exists() ? snap.data() : {};
+  } catch(e) { pageData = {}; }
+  const container = document.getElementById('pageFields');
+  container.innerHTML = '';
+  const fields = PAGE_FIELDS[page] || [];
+  if (!fields.length) {
+    container.innerHTML = '<p style="color:var(--muted);font-size:14px;padding:8px 0;">No editable fields defined for this page yet.</p>';
+    return;
+  }
+  fields.forEach(f => {
+    const val  = pageData[f.key] ?? f.default;
+    const wrap = document.createElement('div');
+    wrap.className = 'section-fields';
+    if (f.type === 'textarea') {
+      wrap.innerHTML = `<h4>${f.label}</h4><div class="form-group"><textarea id="field_${f.key}" rows="4">${val}</textarea></div>`;
+    } else {
+      wrap.innerHTML = `<h4>${f.label}</h4><div class="form-group"><input type="text" id="field_${f.key}" value="${val}"></div>`;
+    }
+    container.appendChild(wrap);
+  });
+}
+
+window.savePageContent = async function() {
+  const fields = PAGE_FIELDS[currentPage] || [];
+  const data   = { updatedAt: serverTimestamp() };
+  fields.forEach(f => {
+    const el = document.getElementById('field_' + f.key);
+    if (el) data[f.key] = el.value;
+  });
+  try {
+    await setDoc(doc(db, 'pages', currentPage), data, { merge: true });
+    toast('Page saved successfully', 'success');
+  } catch(e) { toast('Save failed: ' + e.message, 'error'); }
+};
+
+/* ── Articles ── */
+let articles = [], editingArticleId = null;
+
+async function loadArticles() {
+  try {
+    const snap = await getDocs(collection(db, 'articles'));
+    articles   = [];
+    snap.forEach(d => articles.push({ id: d.id, ...d.data() }));
+    document.getElementById('statArticles').textContent =
+      articles.filter(a => a.status === 'published').length;
+    renderArticlesTable();
+  } catch(e) { console.log('Load articles error:', e); }
+}
+
+function renderArticlesTable() {
+  const tbody = document.getElementById('articlesTableBody');
+  if (!articles.length) {
+    tbody.innerHTML = `<tr><td colspan="5"><div class="empty-state"><span class="empty-state-icon">📰</span><p>No articles yet. Click "+ New Article" to get started.</p></div></td></tr>`;
+    return;
+  }
+  tbody.innerHTML = articles.map(a => `
+    <tr>
+      <td style="padding-left:24px;">
+        <div style="display:flex;align-items:center;gap:12px;">
+          ${a.imageUrl
+            ? `<img src="${a.imageUrl}" alt="" class="img-thumb">`
+            : `<div style="width:36px;height:36px;border-radius:6px;background:var(--bg-subtle);border:1px solid var(--border);flex-shrink:0;display:flex;align-items:center;justify-content:center;font-size:16px;">📰</div>`
+          }
+          <div>
+            <strong style="font-size:14px;color:var(--navy);">${a.title || '—'}</strong>
+            <div style="font-size:12px;color:var(--muted);margin-top:2px;line-height:1.4;">${(a.summary || '').substring(0, 80)}${(a.summary || '').length > 80 ? '…' : ''}</div>
+          </div>
+        </div>
+      </td>
+      <td><span class="badge badge-blue">${a.category || '—'}</span></td>
+      <td>
+        <span class="badge ${a.status === 'published' ? 'badge-green' : 'badge-yellow'}">
+          <span class="badge-dot"></span>
+          ${a.status || 'draft'}
+        </span>
+      </td>
+      <td style="font-size:13px;color:var(--muted);white-space:nowrap;">${a.createdAt?.toDate?.()?.toLocaleDateString('en-GB') || '—'}</td>
+      <td style="padding-right:24px;">
+        <div class="table-action-group" style="justify-content:flex-end;">
+          <button class="btn btn-ghost btn-xs" onclick="editArticle('${a.id}')">Edit</button>
+          <button class="btn btn-danger btn-xs" onclick="deleteArticle('${a.id}')">Delete</button>
+        </div>
+      </td>
+    </tr>
+  `).join('');
+}
+
+/* ── Image state ── */
+let currentImageFile = null;   // File selected but not yet uploaded
+let currentImageUrl  = '';     // URL already saved to Firestore (when editing)
+
+function resetImageUI() {
+  currentImageFile = null;
+  currentImageUrl  = '';
+  document.getElementById('artImageFile').value = '';
+  document.getElementById('imgPreview').style.display = 'none';
+  document.getElementById('imgPreview').src = '';
+  document.getElementById('imgUploadPlaceholder').style.display = '';
+  document.getElementById('imgRemoveBtn').style.display = 'none';
+  document.getElementById('imgUploadStatus').textContent = '';
+  document.getElementById('imgUploadArea').classList.remove('has-image','uploading');
+}
+
+window.handleImageSelect = function(e) {
+  const file = e.target.files[0];
+  if (!file) return;
+  if (file.size > 10 * 1024 * 1024) { toast('Image must be under 10MB', 'error'); return; }
+
+  const MAX_W = 1200, MAX_H = 800, QUALITY = 0.82;
+  const reader = new FileReader();
+  reader.onload = ev => {
+    const img = new Image();
+    img.onload = () => {
+      // Calculate resize dimensions
+      let w = img.width, h = img.height;
+      if (w > MAX_W || h > MAX_H) {
+        const ratio = Math.min(MAX_W / w, MAX_H / h);
+        w = Math.round(w * ratio);
+        h = Math.round(h * ratio);
+      }
+      // Draw to canvas and compress
+      const canvas = document.createElement('canvas');
+      canvas.width = w; canvas.height = h;
+      canvas.getContext('2d').drawImage(img, 0, 0, w, h);
+      canvas.toBlob(blob => {
+        currentImageFile = blob;
+        const preview = document.getElementById('imgPreview');
+        preview.src = canvas.toDataURL('image/jpeg', QUALITY);
+        preview.style.display = 'block';
+        document.getElementById('imgUploadPlaceholder').style.display = 'none';
+        document.getElementById('imgRemoveBtn').style.display = '';
+        const origKB = (file.size/1024).toFixed(0);
+        const newKB  = (blob.size/1024).toFixed(0);
+        const saved  = Math.max(0, Math.round((1 - blob.size/file.size)*100));
+        document.getElementById('imgUploadStatus').textContent =
+          `${w}×${h}px · ${newKB} KB (compressed from ${origKB} KB, saved ${saved}%) — will upload on save`;
+        document.getElementById('imgUploadArea').classList.add('has-image');
+      }, 'image/jpeg', QUALITY);
+    };
+    img.src = ev.target.result;
+  };
+  reader.readAsDataURL(file);
+};
+
+window.removeImage = function() {
+  resetImageUI();
+  currentImageUrl = '__remove__'; // signal to delete existing image on save
+};
+
+async function uploadImageFile(file, articleId) {
+  const ext  = file.name.split('.').pop().toLowerCase();
+  const path = `articles/${articleId}/cover.${ext}`;
+  const storageRef = ref(storage, path);
+  document.getElementById('imgUploadArea').classList.add('uploading');
+  document.getElementById('imgUploadStatus').textContent = 'Uploading…';
+  return new Promise((resolve, reject) => {
+    const task = uploadBytesResumable(storageRef, file);
+    task.on('state_changed',
+      snap => {
+        const pct = Math.round(snap.bytesTransferred / snap.totalBytes * 100);
+        document.getElementById('imgUploadStatus').textContent = 'Uploading… ' + pct + '%';
+      },
+      err => { document.getElementById('imgUploadArea').classList.remove('uploading'); reject(err); },
+      async () => {
+        const url = await getDownloadURL(task.snapshot.ref);
+        document.getElementById('imgUploadArea').classList.remove('uploading');
+        document.getElementById('imgUploadStatus').textContent = 'Image uploaded ✓';
+        resolve(url);
+      }
+    );
+  });
+}
+
+window.openArticleModal = function() {
+  editingArticleId = null;
+  document.getElementById('articleModalTitle').textContent = 'New Article';
+  ['artTitle','artSummary','artContent'].forEach(id => document.getElementById(id).value = '');
+  document.getElementById('artStatus').value   = 'published';
+  document.getElementById('artCategory').value = 'News';
+  resetImageUI();
+  document.getElementById('articleModal').classList.add('open');
+};
+
+window.editArticle = function(id) {
+  const a = articles.find(x => x.id === id);
+  if (!a) return;
+  editingArticleId = id;
+  document.getElementById('articleModalTitle').textContent = 'Edit Article';
+  document.getElementById('artTitle').value    = a.title    || '';
+  document.getElementById('artSummary').value  = a.summary  || '';
+  document.getElementById('artContent').value  = a.content  || '';
+  document.getElementById('artCategory').value = a.category || 'News';
+  document.getElementById('artStatus').value   = a.status   || 'published';
+  resetImageUI();
+  if (a.imageUrl) {
+    currentImageUrl = a.imageUrl;
+    const preview = document.getElementById('imgPreview');
+    preview.src = a.imageUrl;
+    preview.style.display = 'block';
+    document.getElementById('imgUploadPlaceholder').style.display = 'none';
+    document.getElementById('imgRemoveBtn').style.display = '';
+    document.getElementById('imgUploadStatus').textContent = 'Current cover image';
+    document.getElementById('imgUploadArea').classList.add('has-image');
+  }
+  document.getElementById('articleModal').classList.add('open');
+};
+
+window.closeArticleModal = function() {
+  document.getElementById('articleModal').classList.remove('open');
+};
+
+window.saveArticle = async function() {
+  const data = {
+    title:    document.getElementById('artTitle').value,
+    summary:  document.getElementById('artSummary').value,
+    content:  document.getElementById('artContent').value,
+    category: document.getElementById('artCategory').value,
+    status:   document.getElementById('artStatus').value
+  };
+  if (!data.title.trim()) { toast('Please enter a title', 'error'); return; }
+
+  const btn = document.getElementById('saveArticleBtn');
+  btn.disabled = true;
+  btn.innerHTML = '<span class="spinner"></span> Saving…';
+
+  try {
+    let articleId = editingArticleId;
+
+    // Create/update doc first to get ID
+    if (articleId) {
+      await updateDoc(doc(db, 'articles', articleId), { ...data, updatedAt: serverTimestamp() });
+    } else {
+      const docRef = await addDoc(collection(db, 'articles'), { ...data, createdAt: serverTimestamp() });
+      articleId = docRef.id;
+    }
+
+    // Handle image
+    let finalImageUrl = currentImageUrl === '__remove__' ? '' : (currentImageUrl || '');
+
+    if (currentImageFile) {
+      // Upload new image
+      finalImageUrl = await uploadImageFile(currentImageFile, articleId);
+    } else if (currentImageUrl === '__remove__') {
+      // Try to delete old image from storage (best effort)
+      try {
+        const oldArt = articles.find(x => x.id === articleId);
+        if (oldArt?.imageUrl) {
+          const oldRef = ref(storage, decodeURIComponent(oldArt.imageUrl.split('/o/')[1].split('?')[0]).replace(/%2F/g,'/'));
+          await deleteObject(oldRef);
+        }
+      } catch(e) { /* ignore - file may not exist */ }
+      finalImageUrl = '';
+    }
+
+    // Update imageUrl on the doc
+    await updateDoc(doc(db, 'articles', articleId), { imageUrl: finalImageUrl });
+
+    toast(editingArticleId ? 'Article updated' : 'Article published', 'success');
+    closeArticleModal();
+    loadArticles();
+  } catch(e) {
+    toast('Error: ' + e.message, 'error');
+  } finally {
+    btn.disabled = false;
+    btn.innerHTML = 'Save Article';
+  }
+};
+
+window.deleteArticle = async function(id) {
+  if (!confirm('Delete this article?')) return;
+  try {
+    await deleteDoc(doc(db, 'articles', id));
+    toast('Article deleted', 'success');
+    loadArticles();
+  } catch(e) { toast('Error: ' + e.message, 'error'); }
+};
+
+/* ── Dates ── */
+window.saveDates = async function() {
+  const inputs = document.querySelectorAll('#datesTableBody input');
+  const data   = { updatedAt: serverTimestamp() };
+  inputs.forEach(inp => { data[inp.dataset.key] = inp.value; });
+  try {
+    await setDoc(doc(db, 'settings', 'importantDates'), data, { merge: true });
+    toast('Dates saved', 'success');
+  } catch(e) { toast('Save failed: ' + e.message, 'error'); }
+};
+
+/* ── Announcements ── */
+/* ── PDF Guidelines ── */
+async function loadGuidelinesPDF() {
+  try {
+    const snap = await getDoc(doc(db, 'settings', 'guidelinesPDF'));
+    if (snap.exists() && snap.data().url) {
+      const url = snap.data().url;
+      document.getElementById('pdfCurrentUrl').style.display = 'block';
+      document.getElementById('pdfCurrentLink').href = url;
+      document.getElementById('pdfRemoveBtn').style.display = 'inline-block';
+    }
+  } catch(e) {}
+}
+
+window.uploadGuidelinesPDF = async function(input) {
+  const file = input.files[0];
+  if (!file) return;
+  const status = document.getElementById('pdfUploadStatus');
+  status.textContent = 'Uploading…';
+  try {
+    const storageRef = ref(storage, 'guidelines/submission-guidelines.pdf');
+    const task = uploadBytesResumable(storageRef, file);
+    task.on('state_changed',
+      snap => {
+        const pct = Math.round(snap.bytesTransferred / snap.totalBytes * 100);
+        status.textContent = `Uploading… ${pct}%`;
+      },
+      err => { status.textContent = 'Upload failed: ' + err.message; },
+      async () => {
+        const url = await getDownloadURL(task.snapshot.ref);
+        await setDoc(doc(db, 'settings', 'guidelinesPDF'), { url, updatedAt: serverTimestamp() });
+        status.textContent = 'Uploaded ✓';
+        document.getElementById('pdfCurrentUrl').style.display = 'block';
+        document.getElementById('pdfCurrentLink').href = url;
+        document.getElementById('pdfRemoveBtn').style.display = 'inline-block';
+        toast('PDF uploaded successfully', 'success');
+        input.value = '';
+      }
+    );
+  } catch(e) { status.textContent = 'Error: ' + e.message; }
+};
+
+window.removeGuidelinesPDF = async function() {
+  if (!confirm('Remove the PDF guidelines file?')) return;
+  try {
+    await setDoc(doc(db, 'settings', 'guidelinesPDF'), { url: '', updatedAt: serverTimestamp() });
+    try {
+      await deleteObject(ref(storage, 'guidelines/submission-guidelines.pdf'));
+    } catch(e) {}
+    document.getElementById('pdfCurrentUrl').style.display = 'none';
+    document.getElementById('pdfRemoveBtn').style.display = 'none';
+    document.getElementById('pdfUploadStatus').textContent = 'PDF removed';
+    toast('PDF removed', 'success');
+  } catch(e) { toast('Error: ' + e.message, 'error'); }
+};
+
+window.saveToggle = async function(key, val) {
+  try {
+    await setDoc(doc(db, 'settings', 'announcements'), { [key]: val, updatedAt: serverTimestamp() }, { merge: true });
+    toast(val ? 'Notice enabled' : 'Notice disabled', 'success');
+  } catch(e) { toast('Error: ' + e.message, 'error'); }
+};
+
+async function loadAnnouncementToggles() {
+  try {
+    const snap = await getDoc(doc(db, 'settings', 'announcements'));
+    if (!snap.exists()) return;
+    const data = snap.data();
+    if (data.submissionNotice !== undefined)
+      document.getElementById('toggleSubmission').checked = data.submissionNotice;
+    if (data.registrationNotice !== undefined)
+      document.getElementById('toggleRegistration').checked = data.registrationNotice;
+    if (data.earlyBirdBanner !== undefined)
+      document.getElementById('toggleEarlyBird').checked = data.earlyBirdBanner;
+    if (data.deadlineBanner !== undefined)
+      document.getElementById('toggleDeadline').checked = data.deadlineBanner;
+  } catch(e) { console.warn('loadAnnouncementToggles:', e); }
+}
+
+/* ── Settings ── */
+window.saveSettings = async function() {
+  const data = {
+    conferenceName: document.getElementById('confName').value,
+    shortName:      document.getElementById('confShort').value,
+    venue:          document.getElementById('confVenue').value,
+    contactEmail:   document.getElementById('confEmail').value,
+    description:    document.getElementById('confDesc').value,
+    updatedAt:      serverTimestamp()
+  };
+  try {
+    await setDoc(doc(db, 'settings', 'general'), data, { merge: true });
+    toast('Settings saved', 'success');
+  } catch(e) { toast('Error: ' + e.message, 'error'); }
+};
+
+/* ── Custom Announcement ── */
+window.saveCustomAnnouncement = async function() {
+  const data = {
+    text:    document.getElementById('customAnnoText').value,
+    type:    document.getElementById('customAnnoType').value,
+    page:    document.getElementById('customAnnoPage').value,
+    enabled: true,
+    updatedAt: serverTimestamp()
+  };
+  try {
+    await setDoc(doc(db, 'settings', 'customAnnouncement'), data, { merge: true });
+    toast('Announcement saved', 'success');
+  } catch(e) { toast('Error: ' + e.message, 'error'); }
+};
+
+/* ── Button Links ────────────────────────── */
+async function loadLinks() {
+  try {
+    const snap = await getDoc(doc(db, 'settings', 'buttonLinks'));
+    if (!snap.exists()) return;
+    const d = snap.data();
+    if (d.submitState)   document.getElementById('linkSubmitState').value   = d.submitState;
+    if (d.submitUrl)     document.getElementById('linkSubmitUrl').value     = d.submitUrl;
+    if (d.registerState) document.getElementById('linkRegisterState').value = d.registerState;
+    if (d.registerUrl)   document.getElementById('linkRegisterUrl').value   = d.registerUrl;
+    updateLinkPreview();
+  } catch(e) {}
+}
+
+window.updateLinkPreview = function() {
+  const subState   = document.getElementById('linkSubmitState').value;
+  const subUrl     = document.getElementById('linkSubmitUrl').value.trim() || '#';
+  const regState   = document.getElementById('linkRegisterState').value;
+  const regUrl     = document.getElementById('linkRegisterUrl').value.trim() || '#';
+
+  const subBtn  = document.getElementById('previewSubmitBtn');
+  const regBtn  = document.getElementById('previewRegisterBtn');
+  const subBadge = document.getElementById('linkSubmitStatus');
+  const regBadge = document.getElementById('linkRegisterStatus');
+
+  // Submit button preview
+  subBtn.href = subState === 'enabled' ? subUrl : '#';
+  subBtn.classList.toggle('btn-disabled', subState !== 'enabled');
+  subBadge.textContent  = subState === 'enabled' ? '✅ Active' : '🔒 Disabled';
+  subBadge.className    = 'badge ' + (subState === 'enabled' ? 'badge-green' : 'badge-gray');
+
+  // Register button preview
+  regBtn.href = regState === 'enabled' ? regUrl : '#';
+  regBtn.classList.toggle('btn-disabled', regState !== 'enabled');
+  regBadge.textContent  = regState === 'enabled' ? '✅ Active' : '🔒 Disabled';
+  regBadge.className    = 'badge ' + (regState === 'enabled' ? 'badge-green' : 'badge-gray');
+};
+
+window.saveLinks = async function() {
+  const data = {
+    submitState:   document.getElementById('linkSubmitState').value,
+    submitUrl:     document.getElementById('linkSubmitUrl').value.trim(),
+    registerState: document.getElementById('linkRegisterState').value,
+    registerUrl:   document.getElementById('linkRegisterUrl').value.trim(),
+    updatedAt:     serverTimestamp()
+  };
+  try {
+    await setDoc(doc(db, 'settings', 'buttonLinks'), data, { merge: true });
+    toast('Button links saved', 'success');
+    updateLinkPreview();
+  } catch(e) { toast('Error: ' + e.message, 'error'); }
+};
+
+/* ══════════════════════════════════════════════════════════
+   KEYNOTE SPEAKERS
+══════════════════════════════════════════════════════════ */
+let keynotes = [];
+
+async function loadKeynotes() {
+  try {
+    const snap = await getDoc(doc(db,'settings','keynotes'));
+    keynotes = snap.exists() ? (snap.data().list || []) : [
+      { title:'Opening Keynote Address', speaker:'', affiliation:'', bio:'A leading scholar examines digital power asymmetries and knowledge production across Thailand and the Mekong region.', order:1 },
+      { title:'Regional Hub Online Roundtable', speaker:'', affiliation:'', bio:'Regional ICA hubs connect in a shared dialogue linking local research agendas to global ICA conversations.', order:2 },
+      { title:'Publication Mentorship', speaker:'', affiliation:'', bio:'Small-group consultations with editors and senior scholars supporting publication strategies.', order:3 },
+      { title:'Methods Masterclass', speaker:'', affiliation:'', bio:'A 90-minute intensive workshop focusing on high-demand research methodologies.', order:4 },
+      { title:'Mekong Research Clinics', speaker:'', affiliation:'', bio:'Peer feedback sessions offering methodological guidance and research design consultation.', order:5 },
+      { title:'Consortium Launch', speaker:'', affiliation:'', bio:'The conference concludes with the launch of the Bangkok Hub Report.', order:6 },
+    ];
+  } catch(e) { keynotes = []; }
+  renderKeynotes();
+}
+
+function renderKeynotes() {
+  const list = document.getElementById('keynote-list');
+  const empty = document.getElementById('keynote-empty');
+  if (!keynotes.length) { list.innerHTML=''; empty.style.display=''; return; }
+  empty.style.display='none';
+  list.innerHTML = keynotes.map((k,i) => `
+    <div class="editor-card">
+      <div class="editor-card-header">
+        <div style="display:flex;align-items:center;gap:10px;">
+          <div class="editor-card-num">${i+1}</div>
+          <div style="font-size:14px;font-weight:600;color:var(--navy);">${k.title||'Untitled Session'}</div>
+        </div>
+        <div class="editor-card-actions">
+          ${i>0?`<button class="btn btn-ghost btn-xs" onclick="moveKeynote(${i},-1)">↑</button>`:''}
+          ${i<keynotes.length-1?`<button class="btn btn-ghost btn-xs" onclick="moveKeynote(${i},1)">↓</button>`:''}
+          <button class="btn btn-danger btn-xs" onclick="removeKeynote(${i})">Remove</button>
+        </div>
+      </div>
+      <div class="form-row cols-2" style="margin-bottom:0;">
+        <div class="form-group">
+          <label>Session Title</label>
+          <input type="text" value="${escHtml(k.title||'')}" onchange="keynotes[${i}].title=this.value;updateKeynoteHeader(${i},this.value)" placeholder="e.g. Opening Keynote Address">
+        </div>
+        <div class="form-group">
+          <label>Speaker Name <span style="color:var(--muted-lt);font-weight:400;">(leave blank if TBA)</span></label>
+          <input type="text" value="${escHtml(k.speaker||'')}" onchange="keynotes[${i}].speaker=this.value" placeholder="Prof. Jane Smith">
+        </div>
+      </div>
+      <div class="form-row cols-2" style="margin-bottom:0;">
+        <div class="form-group">
+          <label>Affiliation / University</label>
+          <input type="text" value="${escHtml(k.affiliation||'')}" onchange="keynotes[${i}].affiliation=this.value" placeholder="Chulalongkorn University">
+        </div>
+        <div class="form-group" style="grid-column:1/-1;">
+          <label>Session Description</label>
+          <textarea rows="2" onchange="keynotes[${i}].bio=this.value">${escHtml(k.bio||'')}</textarea>
+        </div>
+      </div>
+    </div>
+  `).join('');
+}
+
+window.updateKeynoteHeader = function(i, val) {
+  // live-update the title display in header
+};
+
+window.addKeynote = function() {
+  keynotes.push({ title:'New Session', speaker:'', affiliation:'', bio:'', order: keynotes.length+1 });
+  renderKeynotes();
+  document.getElementById('keynote-list').lastElementChild?.scrollIntoView({behavior:'smooth'});
+};
+window.removeKeynote = function(i) {
+  if (!confirm('Remove this speaker/session?')) return;
+  keynotes.splice(i,1);
+  renderKeynotes();
+};
+window.moveKeynote = function(i, dir) {
+  const j = i + dir;
+  if (j<0||j>=keynotes.length) return;
+  [keynotes[i],keynotes[j]] = [keynotes[j],keynotes[i]];
+  renderKeynotes();
+};
+window.saveKeynotes = async function() {
+  try {
+    await setDoc(doc(db,'settings','keynotes'), { list: keynotes, updatedAt: serverTimestamp() }, { merge:true });
+    toast('Keynote speakers saved','success');
+  } catch(e) { toast('Error: '+e.message,'error'); }
+};
+
+/* ══════════════════════════════════════════════════════════
+   REGISTRATION FEES
+══════════════════════════════════════════════════════════ */
+const FEE_DEFAULTS = [
+  { category:'1. Onsite / Poster Presenter', isHeader:true },
+  { category:'Student',                      early:'3,000 THB', std:'4,500 THB' },
+  { category:'Academic / Faculty / Professional', early:'5,000 THB', std:'8,000 THB' },
+  { category:'2. Virtual Presenter',         isHeader:true },
+  { category:'Student',                      early:'2,000 THB', std:'3,500 THB' },
+  { category:'Academic / Faculty / Professional', early:'3,500 THB', std:'5,500 THB' },
+  { category:'3. Non Presenters',            isHeader:true },
+  { category:'All Categories',               early:'2,500 THB', std:'4,500 THB' },
+];
+let feesData = JSON.parse(JSON.stringify(FEE_DEFAULTS));
+
+async function loadFees() {
+  try {
+    const snap = await getDoc(doc(db,'settings','registrationFees'));
+    if (snap.exists()) {
+      const d = snap.data();
+      if (d.rows)         feesData = d.rows;
+      if (d.earlyLabel)   document.getElementById('feeEarlyLabel').value = d.earlyLabel;
+      if (d.stdLabel)     document.getElementById('feeStdLabel').value   = d.stdLabel;
+    }
+  } catch(e) {}
+  renderFees();
+}
+
+function renderFees() {
+  const tbody = document.getElementById('fees-tbody');
+  tbody.innerHTML = feesData.map((row, i) => {
+    if (row.isHeader) return `
+      <tr class="fee-category-row">
+        <td colspan="3">
+          <input class="fee-input" style="font-weight:700;background:var(--bg);" value="${escHtml(row.category)}" onchange="feesData[${i}].category=this.value" placeholder="Category name">
+        </td>
+      </tr>`;
+    return `
+      <tr class="fee-row">
+        <td><input class="fee-input" value="${escHtml(row.category)}" onchange="feesData[${i}].category=this.value" placeholder="Type"></td>
+        <td style="padding-left:12px;"><input class="fee-input" value="${escHtml(row.early||'')}" onchange="feesData[${i}].early=this.value" placeholder="e.g. 3,000 THB"></td>
+        <td style="padding-left:12px;"><input class="fee-input" value="${escHtml(row.std||'')}" onchange="feesData[${i}].std=this.value" placeholder="e.g. 4,500 THB"></td>
+      </tr>`;
+  }).join('');
+}
+
+window.saveFees = async function() {
+  const data = {
+    rows:       feesData,
+    earlyLabel: document.getElementById('feeEarlyLabel').value,
+    stdLabel:   document.getElementById('feeStdLabel').value,
+    updatedAt:  serverTimestamp()
+  };
+  try {
+    await setDoc(doc(db,'settings','registrationFees'), data, { merge:true });
+    toast('Registration fees saved','success');
+  } catch(e) { toast('Error: '+e.message,'error'); }
+};
+
+/* ══════════════════════════════════════════════════════════
+   CONFERENCE TRACKS
+══════════════════════════════════════════════════════════ */
+let tracksData = [];
+const TRACKS_DEFAULTS = [
+  { name:'Digital Divides & Algorithmic Justice',   desc:'Research on digital inequality, algorithmic bias, AI governance, and platform labour across Asian societies.' },
+  { name:'Representation & Marginality',             desc:'Studies of media representation, migrant narratives, minority voices, and cultural identity.' },
+  { name:'Health & Environmental Communication',     desc:'Communication research on public health messaging, climate narratives, and environmental justice.' },
+  { name:'Language & Decolonial Knowledge',          desc:'Exploring linguistic power structures in academia and decolonising communication research.' },
+  { name:'Disinformation & Civic Participation',     desc:'Research on misinformation ecosystems, polarisation, and democratic engagement.' },
+  { name:'AI Governance & Innovation',               desc:'Policy frameworks, media automation, and ethical AI communication practices.' },
+  { name:'Marketing Communication & Inclusion',      desc:'Sustainability communication, CSR messaging, and inclusive digital marketing practices.' },
+];
+
+async function loadTracks() {
+  try {
+    const snap = await getDoc(doc(db,'settings','conferenceTracks'));
+    tracksData = snap.exists() ? (snap.data().list || TRACKS_DEFAULTS) : JSON.parse(JSON.stringify(TRACKS_DEFAULTS));
+  } catch(e) { tracksData = JSON.parse(JSON.stringify(TRACKS_DEFAULTS)); }
+  renderTracks();
+}
+
+function renderTracks() {
+  const list = document.getElementById('tracks-list');
+  list.innerHTML = tracksData.map((t,i) => `
+    <div class="editor-card">
+      <div class="editor-card-header">
+        <div style="display:flex;align-items:center;gap:10px;">
+          <div class="editor-card-num" style="background:var(--mid);">${String(i+1).padStart(2,'0')}</div>
+          <div style="font-size:14px;font-weight:600;color:var(--navy);">${escHtml(t.name)||'Untitled Track'}</div>
+        </div>
+        <div class="editor-card-actions">
+          ${i>0?`<button class="btn btn-ghost btn-xs" onclick="moveTrack(${i},-1)">↑</button>`:''}
+          ${i<tracksData.length-1?`<button class="btn btn-ghost btn-xs" onclick="moveTrack(${i},1)">↓</button>`:''}
+          <button class="btn btn-danger btn-xs" onclick="removeTrack(${i})">Remove</button>
+        </div>
+      </div>
+      <div class="form-row" style="margin-bottom:0;">
+        <div class="form-group">
+          <label>Track Name</label>
+          <input type="text" value="${escHtml(t.name||'')}" onchange="tracksData[${i}].name=this.value;this.closest('.editor-card').querySelector('.editor-card-header div div:last-child').textContent=this.value||'Untitled Track'" placeholder="Track name">
+        </div>
+        <div class="form-group">
+          <label>Description</label>
+          <textarea rows="2" onchange="tracksData[${i}].desc=this.value">${escHtml(t.desc||'')}</textarea>
+        </div>
+      </div>
+    </div>
+  `).join('');
+}
+
+window.addTrack = function() {
+  tracksData.push({ name:'New Track', desc:'' });
+  renderTracks();
+  document.getElementById('tracks-list').lastElementChild?.scrollIntoView({behavior:'smooth'});
+};
+window.removeTrack = function(i) {
+  if (!confirm('Remove this track?')) return;
+  tracksData.splice(i,1);
+  renderTracks();
+};
+window.moveTrack = function(i, dir) {
+  const j = i+dir;
+  if (j<0||j>=tracksData.length) return;
+  [tracksData[i],tracksData[j]] = [tracksData[j],tracksData[i]];
+  renderTracks();
+};
+window.saveTracks = async function() {
+  try {
+    await setDoc(doc(db,'settings','conferenceTracks'), { list: tracksData, updatedAt: serverTimestamp() }, { merge:true });
+    toast('Conference tracks saved','success');
+  } catch(e) { toast('Error: '+e.message,'error'); }
+};
+
+/* ── shared helper ── */
+function escHtml(s) {
+  return String(s||'').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
+}
+
+
+/* ══════════════════════════════════════════════════════════
+   AWARDS
+══════════════════════════════════════════════════════════ */
+async function loadAwards() {
+  try {
+    const snap = await getDoc(doc(db,'settings','awards'));
+    if (!snap.exists()) return;
+    const d = snap.data();
+    if (d.status)          document.getElementById('awardStatus').value         = d.status;
+    if (d.ceremonyDate)    document.getElementById('awardCeremonyDate').value    = d.ceremonyDate;
+    if (d.award1Winner)    document.getElementById('award1Winner').value         = d.award1Winner;
+    if (d.award1Affiliation) document.getElementById('award1Affiliation').value  = d.award1Affiliation;
+    if (d.award1Paper)     document.getElementById('award1Paper').value          = d.award1Paper;
+    if (d.award1Desc)      document.getElementById('award1Desc').value           = d.award1Desc;
+    if (d.award1Quote)     document.getElementById('award1Quote').value          = d.award1Quote;
+    if (d.award2Winner)    document.getElementById('award2Winner').value         = d.award2Winner;
+    if (d.award2Affiliation) document.getElementById('award2Affiliation').value  = d.award2Affiliation;
+    if (d.award2Paper)     document.getElementById('award2Paper').value          = d.award2Paper;
+    if (d.award2Desc)      document.getElementById('award2Desc').value           = d.award2Desc;
+    if (d.award2Quote)     document.getElementById('award2Quote').value          = d.award2Quote;
+  } catch(e) {}
+}
+
+window.saveAwards = async function() {
+  const data = {
+    status:            document.getElementById('awardStatus').value,
+    ceremonyDate:      document.getElementById('awardCeremonyDate').value,
+    award1Winner:      document.getElementById('award1Winner').value,
+    award1Affiliation: document.getElementById('award1Affiliation').value,
+    award1Paper:       document.getElementById('award1Paper').value,
+    award1Desc:        document.getElementById('award1Desc').value,
+    award1Quote:       document.getElementById('award1Quote').value,
+    award2Winner:      document.getElementById('award2Winner').value,
+    award2Affiliation: document.getElementById('award2Affiliation').value,
+    award2Paper:       document.getElementById('award2Paper').value,
+    award2Desc:        document.getElementById('award2Desc').value,
+    award2Quote:       document.getElementById('award2Quote').value,
+    updatedAt:         serverTimestamp()
+  };
+  try {
+    await setDoc(doc(db,'settings','awards'), data, { merge: true });
+    toast('Awards saved','success');
+  } catch(e) { toast('Error: '+e.message,'error'); }
+};
+
+/* ══════════════════════════════════════════════════════════
+   MESSAGES INBOX
+══════════════════════════════════════════════════════════ */
+let allMessages = [];
+
+window.loadMessages = async function() {
+  const list = document.getElementById('messages-list');
+  list.innerHTML = '<div class="empty-state"><span class="empty-state-icon">⏳</span><p>Loading messages…</p></div>';
+  try {
+    const snap = await getDocs(collection(db,'contactMessages'));
+    allMessages = [];
+    snap.forEach(d => allMessages.push({ id: d.id, ...d.data() }));
+    allMessages.sort((a,b) => (b.createdAt?.toMillis?.()||0) - (a.createdAt?.toMillis?.()||0));
+    renderMessages();
+  } catch(e) {
+    list.innerHTML = '<div class="empty-state"><span class="empty-state-icon">⚠️</span><p>Cannot load messages. Check Firestore Rules.</p></div>';
+  }
+};
+
+function renderMessages() {
+  const list = document.getElementById('messages-list');
+  const clearBtn = document.getElementById('clearReadBtn');
+  if (!allMessages.length) {
+    list.innerHTML = '<div class="empty-state"><span class="empty-state-icon">💬</span><p>No messages yet. When visitors submit the contact form they will appear here.</p></div>';
+    return;
+  }
+  clearBtn.style.display = '';
+  const _msgTotalPages = Math.ceil(allMessages.length / 20);
+  if (_msgPage > _msgTotalPages) _msgPage = _msgTotalPages;
+  const pageMsgs = allMessages.slice((_msgPage - 1) * 20, _msgPage * 20);
+  list.innerHTML = pageMsgs.map(m => `
+    <div class="card" style="margin-bottom:12px;${m.read ? 'opacity:.7;' : 'border-left:3px solid var(--mid);'}">
+      <div style="display:flex;align-items:flex-start;justify-content:space-between;gap:12px;">
+        <div style="flex:1;">
+          <div style="display:flex;align-items:center;gap:10px;margin-bottom:6px;">
+            ${!m.read ? '<span class="badge badge-blue" style="font-size:10px;">New</span>' : '<span class="badge badge-gray" style="font-size:10px;">Read</span>'}
+            <span style="font-size:13px;font-weight:700;color:var(--navy);">${escHtml(m.name||'Unknown')}</span>
+            <span style="font-size:12px;color:var(--muted);">${escHtml(m.email||'')}</span>
+          </div>
+          ${m.subject ? `<div style="font-size:13px;font-weight:600;color:var(--text-soft);margin-bottom:6px;">${escHtml(m.subject)}</div>` : ''}
+          <div style="font-size:13.5px;color:var(--text);line-height:1.6;white-space:pre-wrap;">${escHtml(m.message||'')}</div>
+          <div style="font-size:11.5px;color:var(--muted);margin-top:8px;">${m.createdAt?.toDate?.()?.toLocaleString('en-GB') || '—'}</div>
+        </div>
+        <div style="display:flex;flex-direction:column;gap:6px;flex-shrink:0;">
+          <a href="mailto:${escHtml(m.email||'')}?subject=Re: ${encodeURIComponent(m.subject||'Your message')}" class="btn btn-primary btn-xs">Reply</a>
+          <button class="btn btn-ghost btn-xs" onclick="markMessageRead('${m.id}',${!m.read})">${m.read ? 'Mark unread' : 'Mark read'}</button>
+          <button class="btn btn-danger btn-xs" onclick="deleteMessage('${m.id}')">Delete</button>
+        </div>
+      </div>
+    </div>`).join('');
+  list.insertAdjacentHTML('beforeend', paginationBar(_msgPage, _msgTotalPages, '_setMsgPage'));
+}
+window._setMsgPage = function(p) { _msgPage = p; renderMessages(); };
+
+window.markMessageRead = async function(id, val) {
+  try {
+    await updateDoc(doc(db,'contactMessages',id), { read: val });
+    const m = allMessages.find(x => x.id===id);
+    if (m) m.read = val;
+    renderMessages();
+  } catch(e) { toast('Error: '+e.message,'error'); }
+};
+
+window.deleteMessage = async function(id) {
+  if (!confirm('Delete this message?')) return;
+  try {
+    await deleteDoc(doc(db,'contactMessages',id));
+    allMessages = allMessages.filter(x => x.id !== id);
+    renderMessages();
+    toast('Message deleted','success');
+  } catch(e) { toast('Error: '+e.message,'error'); }
+};
+
+window.clearReadMessages = async function() {
+  if (!confirm('Delete all read messages?')) return;
+  const readMsgs = allMessages.filter(m => m.read);
+  try {
+    await Promise.all(readMsgs.map(m => deleteDoc(doc(db,'contactMessages',m.id))));
+    allMessages = allMessages.filter(m => !m.read);
+    renderMessages();
+    toast(`Cleared ${readMsgs.length} read messages`,'success');
+  } catch(e) { toast('Error: '+e.message,'error'); }
+};
+
+/* ══════════════════════════════════════════════════════════
+   NOTIFY LIST
+══════════════════════════════════════════════════════════ */
+let notifyEntries = [];
+
+window.loadNotifyList = async function() {
+  const list  = document.getElementById('notify-list');
+  const stats = document.getElementById('notify-stats');
+  list.innerHTML = '<div class="empty-state"><span class="empty-state-icon">⏳</span><p>Loading…</p></div>';
+  try {
+    const snap = await getDocs(collection(db,'notifyList'));
+    notifyEntries = [];
+    snap.forEach(d => notifyEntries.push({ id: d.id, ...d.data() }));
+    notifyEntries.sort((a,b) => (b.createdAt?.toMillis?.()||0) - (a.createdAt?.toMillis?.()||0));
+
+    const submitCount   = notifyEntries.filter(e => e.mode === 'submit').length;
+    const registerCount = notifyEntries.filter(e => e.mode === 'register').length;
+    const total         = notifyEntries.length;
+
+    stats.innerHTML = `
+      <div class="stat-card" style="margin:0;flex:1;">
+        <div class="stat-card-icon icon-blue">📧</div>
+        <span class="stat-label">Total</span>
+        <div class="stat-val" style="font-size:24px;">${total}</div>
+      </div>
+      <div class="stat-card" style="margin:0;flex:1;">
+        <div class="stat-card-icon icon-gold">📤</div>
+        <span class="stat-label">Submission</span>
+        <div class="stat-val" style="font-size:24px;">${submitCount}</div>
+      </div>
+      <div class="stat-card" style="margin:0;flex:1;">
+        <div class="stat-card-icon icon-green">📝</div>
+        <span class="stat-label">Registration</span>
+        <div class="stat-val" style="font-size:24px;">${registerCount}</div>
+      </div>`;
+
+    if (!notifyEntries.length) {
+      list.innerHTML = '<div class="empty-state"><span class="empty-state-icon">📧</span><p>No signups yet. People who fill in the "Notify Me" form on coming-soon.html will appear here.</p></div>';
+      return;
+    }
+
+    list.innerHTML = `
+      <div class="card" style="padding:0;overflow:hidden;">
+        <table>
+          <thead>
+            <tr>
+              <th style="padding-left:24px;">Email</th>
+              <th>Interested in</th>
+              <th>Date</th>
+              <th style="padding-right:24px;text-align:right;">Actions</th>
+            </tr>
+          </thead>
+          <tbody>
+            ${notifyEntries.map(e => `
+              <tr>
+                <td style="padding-left:24px;font-weight:500;">${escHtml(e.email||'')}</td>
+                <td><span class="badge ${e.mode==='submit'?'badge-blue':'badge-green'}">${e.mode==='submit'?'Submission':'Registration'}</span></td>
+                <td style="font-size:12.5px;color:var(--muted);">${e.createdAt?.toDate?.()?.toLocaleDateString('en-GB')||'—'}</td>
+                <td style="padding-right:24px;text-align:right;">
+                  <button class="btn btn-danger btn-xs" onclick="deleteNotify('${e.id}')">Remove</button>
+                </td>
+              </tr>`).join('')}
+          </tbody>
+        </table>
+      </div>`;
+  } catch(e) {
+    list.innerHTML = '<div class="empty-state"><span class="empty-state-icon">⚠️</span><p>Cannot load list. Check Firestore Rules.</p></div>';
+  }
+};
+
+window.deleteNotify = async function(id) {
+  if (!confirm('Remove this email?')) return;
+  try {
+    await deleteDoc(doc(db,'notifyList',id));
+    notifyEntries = notifyEntries.filter(x => x.id !== id);
+    window.loadNotifyList();
+    toast('Removed','success');
+  } catch(e) { toast('Error: '+e.message,'error'); }
+};
+
+window.exportNotifyCSV = function() {
+  if (!notifyEntries.length) { toast('No data to export','error'); return; }
+  const rows = [['Email','Mode','Date']];
+  notifyEntries.forEach(e => rows.push([
+    e.email||'',
+    e.mode||'',
+    e.createdAt?.toDate?.()?.toLocaleDateString('en-GB')||''
+  ]));
+  const csv  = rows.map(r => r.map(v => `"${v}"`).join(',')).join('\n');
+  const blob = new Blob([csv], { type: 'text/csv' });
+  const url  = URL.createObjectURL(blob);
+  const a    = document.createElement('a');
+  a.href = url; a.download = 'notify-list.csv'; a.click();
+  URL.revokeObjectURL(url);
+  toast('CSV exported','success');
+};
+
+/* ══════════════════════════════════════════════════════════
+   PRICE MAP (for approval emails)
+══════════════════════════════════════════════════════════ */
+const REG_PRICE_MAP = {
+  onsite:  { student:  { early: { '20pct': {price:2400,url:'https://ofas.chula.ac.th/Service/DetailTraining?data=VMTejit_AIMZyEV-WIsB4w'}, none:{price:3000,url:'https://ofas.chula.ac.th/Service/DetailTraining?data=9aiLPPbPYWmBMdu3a5XIDQ'} }, standard: { '20pct': {price:3600,url:'https://ofas.chula.ac.th/Service/DetailTraining?data=Ohsi8u1aEML0teGkThWVwQ'}, none:{price:4500,url:'https://ofas.chula.ac.th/Service/DetailTraining?data=CRXtjZ4Z1cGoZMJhISte6g'} } },
+             academic: { early: { '20pct': {price:4000,url:'https://ofas.chula.ac.th/Service/DetailTraining?data=Kx-hxOTLzC6iS19WxA7g4w'}, none:{price:5000,url:'https://ofas.chula.ac.th/Service/DetailTraining?data=xZ_6PEN01bQLvZ47BGcTsQ'} }, standard: { '20pct': {price:6400,url:'https://ofas.chula.ac.th/Service/DetailTraining?data=Vxp7PXyRrXhY2VNClLwxeA'}, none:{price:8000,url:'https://ofas.chula.ac.th/Service/DetailTraining?data=yNyQXCjQXg7IGF7HEwBLfg'} } } },
+  virtual: { student:  { early: { '20pct': {price:1600,url:'https://ofas.chula.ac.th/Service/DetailTraining?data=_v8Zu7FWvQGUNfxOTQToqw'}, none:{price:2000,url:'https://ofas.chula.ac.th/Service/DetailTraining?data=yYaWaIkEK7m70pjvlb7yqQ'} }, standard: { '20pct': {price:2800,url:'https://ofas.chula.ac.th/Service/DetailTraining?data=Lh__Pmmigs2IgchDGa83jA'}, none:{price:3500,url:'https://ofas.chula.ac.th/Service/DetailTraining?data=6yj5RYkypZIaSS8zoKWrRA'} } },
+             academic: { early: { '20pct': {price:2800,url:'https://ofas.chula.ac.th/Service/DetailTraining?data=hqI8xQcw8M5pkQv-TAEwig'}, none:{price:3500,url:'https://ofas.chula.ac.th/Service/DetailTraining?data=o4cEZKdqAIqhIT8kf5-X2Q'} }, standard: { '20pct': {price:4400,url:'https://ofas.chula.ac.th/Service/DetailTraining?data=YJgIi1xltB27YpRvZYxMmA'}, none:{price:5500,url:'https://ofas.chula.ac.th/Service/DetailTraining?data=37xkkPSRrJeiaBg-WDdF0A'} } } },
+  non:     { all:      { early: { '20pct': {price:2000,url:'https://ofas.chula.ac.th/Service/DetailTraining?data=NyDbLMLs1F9z_123qBtHiw'}, none:{price:2500,url:'https://ofas.chula.ac.th/Service/DetailTraining?data=wFd5cxYh6sGPyv5xM3HZbw'} }, standard: { '20pct': {price:3600,url:'https://ofas.chula.ac.th/Service/DetailTraining?data=fjJIj8Ww439WWy10dOdh4Q'}, none:{price:4500,url:'https://ofas.chula.ac.th/Service/DetailTraining?data=T67Rvql7XsczWPVYUrNTvA'} } } }
+};
+const FMT_LABELS = { onsite:'Onsite / Poster Presenter', virtual:'Virtual Presenter', non:'Non Presenter' };
+const STS_LABELS = { student:'Student', academic:'Academic / Faculty / Professional' };
+const DISC_LABELS = { none:'—', '20pct':'20% OFF', '100pct':'100% Free' };
+
+/* ══════════════════════════════════════════════════════════
+   DISCOUNT REQUESTS
+══════════════════════════════════════════════════════════ */
+let allDiscountRequests = [];
+
+const PHP_API = (location.hostname==='localhost'||location.hostname==='127.0.0.1')
+  ? location.protocol+'//'+location.hostname+':'+location.port+'/api/registrations-json.php'
+  : 'https://icahubthailand.org/admin/ica-cms-php/api/registrations-json.php';
+
+function fmtDate(s){ if(!s) return '—'; const d=new Date(s); return isNaN(d)?s:d.toLocaleDateString('en-GB'); }
+
+window.loadDiscountRequests = async function() {
+  document.getElementById('disc-table-wrap').innerHTML = '<div class="empty-state"><span class="empty-state-icon">⏳</span><p>Loading…</p></div>';
+  try {
+    const res = await fetch(PHP_API + '?type=discount');
+    const json = await res.json();
+    allDiscountRequests = json.data || [];
+
+    const pending = allDiscountRequests.filter(r => r.discountApprovalStatus === 'pending').length;
+    const badge = document.getElementById('disc-pending-badge');
+    if (badge) { badge.textContent = pending; badge.style.display = pending > 0 ? 'inline-block' : 'none'; }
+
+    renderDiscountRequests();
+  } catch(e) {
+    document.getElementById('disc-table-wrap').innerHTML = '<div class="empty-state"><span class="empty-state-icon">⚠️</span><p>Error: ' + escHtml(e.message) + '</p></div>';
+  }
+};
+
+function renderDiscountRequests() {
+  const filter = document.getElementById('disc-filter')?.value || '';
+  const rows = filter ? allDiscountRequests.filter(r => r.discountApprovalStatus === filter) : allDiscountRequests;
+
+  // Stats
+  const pending  = allDiscountRequests.filter(r => r.discountApprovalStatus === 'pending').length;
+  const approved = allDiscountRequests.filter(r => r.discountApprovalStatus === 'approved').length;
+  const rejected = allDiscountRequests.filter(r => r.discountApprovalStatus === 'rejected').length;
+  document.getElementById('disc-stats-strip').innerHTML = `
+    ${statPill(allDiscountRequests.length, 'Total')}
+    ${statPill(pending,  'Pending',  '#e8a020')}
+    ${statPill(approved, 'Approved', '#1a8a50')}
+    ${statPill(rejected, 'Rejected', '#dc3545')}`;
+
+  if (!rows.length) {
+    document.getElementById('disc-table-wrap').innerHTML = '<div class="empty-state"><span class="empty-state-icon">📋</span><p>No discount requests found.</p></div>';
+    return;
+  }
+
+  const _discTotalPages = Math.ceil(rows.length / 20);
+  if (_discPage > _discTotalPages) _discPage = _discTotalPages;
+  const pageRows = rows.slice((_discPage - 1) * 20, _discPage * 20);
+
+  const tableRows = pageRows.map(r => {
+    const apprColor = {pending:'#e8a020', approved:'#1a8a50', rejected:'#dc3545'}[r.discountApprovalStatus] || '#6b7a95';
+    const apprLabel = {pending:'⏳ Pending', approved:'✓ Approved', rejected:'✕ Rejected'}[r.discountApprovalStatus] || r.discountApprovalStatus;
+    const docBtn = r.documentUrl
+      ? `<a href="${escHtml(r.documentUrl)}" target="_blank" class="btn btn-ghost btn-xs">📄 View</a>`
+      : '<span style="color:var(--muted-lt);font-size:12px;">—</span>';
+    const actions = r.discountApprovalStatus === 'pending'
+      ? `<div style="display:flex;gap:6px;">
+           <button class="btn btn-xs" style="background:#dcf5e8;color:#1a8a50;border:1px solid #b7e4c7;" onclick="approveDiscount('${r.id}')">✓ Approve</button>
+           <button class="btn btn-xs" style="background:#fde8e8;color:#dc3545;border:1px solid #f5c6cb;" onclick="rejectDiscount('${r.id}')">✕ Reject</button>
+         </div>`
+      : `<span style="font-size:12px;color:var(--muted);">Done</span>`;
+    return `<tr id="disc-row-${r.id}">
+      <td style="color:var(--muted);font-size:12px;">${fmtDate(r.createdAt)}</td>
+      <td><strong>${escHtml(r.fullName||'')}</strong><br><span style="font-size:12px;color:var(--muted);">${escHtml(r.email||'')}</span></td>
+      <td style="font-size:13px;">${escHtml(FMT_LABELS[r.format]||r.format||'')}</td>
+      <td style="font-size:13px;">${escHtml(r.attendeeStatus ? (STS_LABELS[r.attendeeStatus]||r.attendeeStatus) : '—')}</td>
+      <td><span style="font-size:12px;font-weight:700;color:${r.discountTier==='100pct'?'#1a8a50':'#e8a020'};">${DISC_LABELS[r.discountTier]||r.discountTier}</span></td>
+      <td>${docBtn}</td>
+      <td><span style="font-size:12px;font-weight:700;color:${apprColor};">${apprLabel}</span></td>
+      <td>${actions}</td>
+    </tr>`;
+  }).join('');
+
+  document.getElementById('disc-table-wrap').innerHTML = `
+    <div style="overflow-x:auto;">
+    <table style="width:100%;border-collapse:collapse;">
+      <thead>
+        <tr style="border-bottom:1px solid var(--border-lt);">
+          ${['Date','Name / Email','Format','Status','Discount','Document','Approval','Actions']
+            .map(h=>`<th style="padding:10px 16px;text-align:left;font-size:11px;font-weight:700;letter-spacing:.6px;text-transform:uppercase;color:var(--muted);white-space:nowrap;">${h}</th>`).join('')}
+        </tr>
+      </thead>
+      <tbody>${tableRows}</tbody>
+    </table>
+    </div>
+    ${paginationBar(_discPage, _discTotalPages, '_setDiscPage')}`;
+
+  document.querySelectorAll('#disc-table-wrap tbody td').forEach(td => {
+    td.style.padding = '12px 16px';
+    td.style.borderBottom = '1px solid var(--border-lt)';
+    td.style.verticalAlign = 'middle';
+    td.style.fontSize = '13px';
+  });
+}
+window._setDiscPage = function(p) { _discPage = p; renderDiscountRequests(); };
+
+window.approveDiscount = async function(id) {
+  if (!confirm('Approve this discount request?')) return;
+  const reg = allDiscountRequests.find(r => r.id == id);
+  if (!reg) return;
+  try {
+    const res = await fetch(PHP_API, { method:'POST', headers:{'Content-Type':'application/json'},
+      body: JSON.stringify({ action:'approve', id }) });
+    const json = await res.json();
+    if (!json.ok) throw new Error('Server error');
+    reg.discountApprovalStatus = 'approved';
+    reg.paymentStatus = reg.discountTier === '100pct' ? 'paid' : 'pending';
+    renderDiscountRequests();
+    toast('Approved — confirmation email sent to ' + reg.email, 'success');
+    const pending = allDiscountRequests.filter(r => r.discountApprovalStatus === 'pending').length;
+    const badge = document.getElementById('disc-pending-badge');
+    if (badge) { badge.textContent = pending; badge.style.display = pending > 0 ? 'inline-block' : 'none'; }
+  } catch(e) { toast('Error: ' + e.message, 'error'); }
+};
+
+window.rejectDiscount = async function(id) {
+  if (!confirm('Reject this discount request and notify applicant?')) return;
+  const reg = allDiscountRequests.find(r => r.id == id);
+  if (!reg) return;
+  try {
+    const res = await fetch(PHP_API, { method:'POST', headers:{'Content-Type':'application/json'},
+      body: JSON.stringify({ action:'reject', id }) });
+    const json = await res.json();
+    if (!json.ok) throw new Error('Server error');
+    reg.discountApprovalStatus = 'rejected';
+    renderDiscountRequests();
+    toast('Rejected — notification email sent to ' + reg.email, 'success');
+    const pending = allDiscountRequests.filter(r => r.discountApprovalStatus === 'pending').length;
+    const badge = document.getElementById('disc-pending-badge');
+    if (badge) { badge.textContent = pending; badge.style.display = pending > 0 ? 'inline-block' : 'none'; }
+  } catch(e) { toast('Error: ' + e.message, 'error'); }
+};
+
+window.exportDiscountCSV = function() {
+  if (!allDiscountRequests.length) { toast('No data to export', 'error'); return; }
+  const rows = [['Date','Full Name','Email','Format','Status','Discount','Document','Approval Status']];
+  allDiscountRequests.forEach(r => rows.push([
+    r.createdAt?.toDate?.()?.toLocaleDateString('en-GB') || '',
+    r.fullName || '', r.email || '',
+    FMT_LABELS[r.format] || r.format || '',
+    r.attendeeStatus ? (STS_LABELS[r.attendeeStatus] || r.attendeeStatus) : '—',
+    DISC_LABELS[r.discountTier] || r.discountTier || '',
+    r.documentUrl || '',
+    r.discountApprovalStatus || ''
+  ]));
+  downloadCSV(rows, 'discount-requests.csv');
+};
+
+/* ══════════════════════════════════════════════════════════
+   ALL REGISTRATIONS
+══════════════════════════════════════════════════════════ */
+let allRegistrations = [];
+
+window.loadRegistrations = async function() {
+  document.getElementById('reg-table-wrap').innerHTML = '<div class="empty-state"><span class="empty-state-icon">⏳</span><p>Loading…</p></div>';
+  try {
+    const res = await fetch(PHP_API + '?type=all');
+    const json = await res.json();
+    allRegistrations = json.data || [];
+    renderRegistrations();
+  } catch(e) {
+    document.getElementById('reg-table-wrap').innerHTML = '<div class="empty-state"><span class="empty-state-icon">⚠️</span><p>Error: ' + escHtml(e.message) + '</p></div>';
+  }
+};
+
+function renderRegistrations() {
+  const payF  = document.getElementById('reg-pay-filter')?.value || '';
+  const fmtF  = document.getElementById('reg-format-filter')?.value || '';
+  let rows = allRegistrations;
+  if (payF) rows = rows.filter(r => r.paymentStatus === payF);
+  if (fmtF) rows = rows.filter(r => r.format === fmtF);
+
+  const paid    = allRegistrations.filter(r => r.paymentStatus === 'paid').length;
+  const pending = allRegistrations.length - paid;
+  document.getElementById('reg-stats-strip').innerHTML = `
+    ${statPill(allRegistrations.length, 'Total')}
+    ${statPill(paid,    'Paid',    '#1a8a50')}
+    ${statPill(pending, 'Pending', '#e8a020')}`;
+
+  if (!rows.length) {
+    document.getElementById('reg-table-wrap').innerHTML = '<div class="empty-state"><span class="empty-state-icon">📝</span><p>No registrations found.</p></div>';
+    return;
+  }
+
+  const _regTotalPages = Math.ceil(rows.length / 20);
+  if (_regPage > _regTotalPages) _regPage = _regTotalPages;
+  const pageRows = rows.slice((_regPage - 1) * 20, _regPage * 20);
+
+  const tableRows = pageRows.map(r => {
+    const isPaid = r.paymentStatus === 'paid';
+    const payBadge = isPaid
+      ? `<span style="font-size:11px;font-weight:700;color:#1a8a50;">✓ Paid</span>`
+      : `<span style="font-size:11px;font-weight:700;color:#e8a020;">Pending</span>`;
+    const discAppr = {not_required:'—', pending:'⏳ Pending', approved:'✓ Approved', rejected:'✕ Rejected'}[r.discountApprovalStatus] || '—';
+    const toggleBtn = isPaid
+      ? `<button class="btn btn-ghost btn-xs" onclick="togglePayStatus('${r.id}','pending')">↩ Unpaid</button>`
+      : `<button class="btn btn-xs" style="background:#dcf5e8;color:#1a8a50;border:1px solid #b7e4c7;" onclick="togglePayStatus('${r.id}','paid')">✓ Mark Paid</button>`;
+    return `<tr id="reg-row-${r.id}">
+      <td style="color:var(--muted);font-size:12px;">${fmtDate(r.createdAt)}</td>
+      <td><strong>${escHtml(r.fullName||'')}</strong><br><span style="font-size:12px;color:var(--muted);">${escHtml(r.email||'')}</span></td>
+      <td style="font-size:13px;">${escHtml(FMT_LABELS[r.format]||r.format||'')}</td>
+      <td style="font-size:13px;">${escHtml(r.attendeeStatus ? (STS_LABELS[r.attendeeStatus]||r.attendeeStatus) : '—')}</td>
+      <td style="font-size:12px;">${DISC_LABELS[r.discountTier]||'—'}</td>
+      <td style="font-size:13px;">${r.selectedRate==='early'?'Early Bird':r.selectedRate==='standard'?'Standard':'—'}</td>
+      <td style="font-size:13px;font-weight:600;">${r.price ? r.price.toLocaleString()+' THB' : '—'}</td>
+      <td class="reg-pay-cell-${r.id}">${payBadge}</td>
+      <td style="font-size:12px;color:var(--muted);">${discAppr}</td>
+      <td class="reg-action-cell-${r.id}">${toggleBtn}</td>
+    </tr>`;
+  }).join('');
+
+  document.getElementById('reg-table-wrap').innerHTML = `
+    <div style="overflow-x:auto;">
+    <table style="width:100%;border-collapse:collapse;">
+      <thead>
+        <tr style="border-bottom:1px solid var(--border-lt);">
+          ${['Date','Name / Email','Format','Status','Discount','Rate','Price','Payment','Disc Approval','Actions']
+            .map(h=>`<th style="padding:10px 16px;text-align:left;font-size:11px;font-weight:700;letter-spacing:.6px;text-transform:uppercase;color:var(--muted);white-space:nowrap;">${h}</th>`).join('')}
+        </tr>
+      </thead>
+      <tbody>${tableRows}</tbody>
+    </table>
+    </div>
+    ${paginationBar(_regPage, _regTotalPages, '_setRegPage')}`;
+
+  document.querySelectorAll('#reg-table-wrap tbody td').forEach(td => {
+    td.style.padding = '12px 16px';
+    td.style.borderBottom = '1px solid var(--border-lt)';
+    td.style.verticalAlign = 'middle';
+  });
+}
+window._setRegPage = function(p) { _regPage = p; renderRegistrations(); };
+
+window.togglePayStatus = async function(id, val) {
+  try {
+    await fetch(PHP_API, { method:'POST', headers:{'Content-Type':'application/json'},
+      body: JSON.stringify({ action:'pay', id, val }) });
+    const reg = allRegistrations.find(r => r.id == id);
+    if (reg) reg.paymentStatus = val;
+    const isPaid = val === 'paid';
+    const cell   = document.querySelector(`.reg-pay-cell-${id}`);
+    const action = document.querySelector(`.reg-action-cell-${id}`);
+    if (cell) cell.innerHTML = isPaid
+      ? '<span style="font-size:11px;font-weight:700;color:#1a8a50;">✓ Paid</span>'
+      : '<span style="font-size:11px;font-weight:700;color:#e8a020;">Pending</span>';
+    if (action) action.innerHTML = isPaid
+      ? `<button class="btn btn-ghost btn-xs" onclick="togglePayStatus('${id}','pending')">↩ Unpaid</button>`
+      : `<button class="btn btn-xs" style="background:#dcf5e8;color:#1a8a50;border:1px solid #b7e4c7;" onclick="togglePayStatus('${id}','paid')">✓ Mark Paid</button>`;
+    toast(isPaid ? 'Marked as Paid' : 'Marked as Pending', 'success');
+
+    // Re-render stats
+    const paid = allRegistrations.filter(r => r.paymentStatus === 'paid').length;
+    document.getElementById('reg-stats-strip').innerHTML = `
+      ${statPill(allRegistrations.length, 'Total')}
+      ${statPill(paid, 'Paid', '#1a8a50')}
+      ${statPill(allRegistrations.length - paid, 'Pending', '#e8a020')}`;
+  } catch(e) { toast('Error: ' + e.message, 'error'); }
+};
+
+window.exportRegistrationsCSV = function() {
+  if (!allRegistrations.length) { toast('No data to export', 'error'); return; }
+  const rows = [['Date','Full Name','Email','Format','Status','Discount','Rate','Price (THB)','Payment Status','Disc Approval']];
+  allRegistrations.forEach(r => rows.push([
+    r.createdAt?.toDate?.()?.toLocaleDateString('en-GB') || '',
+    r.fullName || '', r.email || '',
+    FMT_LABELS[r.format] || r.format || '',
+    r.attendeeStatus ? (STS_LABELS[r.attendeeStatus] || r.attendeeStatus) : '—',
+    DISC_LABELS[r.discountTier] || '—',
+    r.selectedRate === 'early' ? 'Early Bird' : r.selectedRate === 'standard' ? 'Standard' : '—',
+    r.price || 0,
+    r.paymentStatus || '',
+    r.discountApprovalStatus || ''
+  ]));
+  downloadCSV(rows, 'registrations.csv');
+};
+
+/* ── Load discount requests on auth ── */
+const _origOnAuth = window._onAuthCallback;
+// Load pending badge count after login
+async function refreshDiscBadge() {
+  try {
+    const res = await fetch(PHP_API + '?type=discount');
+    const json = await res.json();
+    let pending = (json.data||[]).filter(r => r.discountApprovalStatus === 'pending').length;
+    const badge = document.getElementById('disc-pending-badge');
+    if (badge) { badge.textContent = pending; badge.style.display = pending > 0 ? 'inline-block' : 'none'; }
+  } catch(e) {}
+}
+
+/* ── Helpers ── */
+function statPill(n, label, color) {
+  return `<div style="background:var(--panel);border:1px solid var(--border);border-radius:var(--radius);padding:12px 18px;min-width:110px;">
+    <div style="font-size:22px;font-weight:800;color:${color||'var(--navy)'};">${n}</div>
+    <div style="font-size:12px;color:var(--muted);margin-top:2px;">${label}</div>
+  </div>`;
+}
+
+function downloadCSV(rows, filename) {
+  const csv  = rows.map(r => r.map(v => `"${String(v).replace(/"/g,'""')}"`).join(',')).join('\n');
+  const blob = new Blob(['\uFEFF'+csv], { type: 'text/csv;charset=utf-8;' });
+  const url  = URL.createObjectURL(blob);
+  const a    = document.createElement('a');
+  a.href = url; a.download = filename; a.click();
+  URL.revokeObjectURL(url);
+  toast('CSV exported', 'success');
+}
+
+/* Hook into showPanel to auto-load data */
+const _origShowPanel = window.showPanel;
+window.showPanel = function(name) {
+  _origShowPanel(name);
+  if (name === 'discountrequests' && allDiscountRequests.length === 0) window.loadDiscountRequests();
+  if (name === 'registrations'    && allRegistrations.length === 0)    window.loadRegistrations();
+};
+
+// Refresh badge after login
+onAuthStateChanged(auth, user => {
+  if (user) setTimeout(refreshDiscBadge, 1500);
+});
+
+/* ── Auto-polling: เช็คคำขอใหม่ทุก 30 วินาที ── */
+// ── Page state ──
+let _discPage = 1;
+let _regPage  = 1;
+let _msgPage  = 1;
+
+function paginationBar(page, totalPages, setFn) {
+  if (totalPages <= 1) return '';
+  const start = Math.max(1, page - 2);
+  const end   = Math.min(totalPages, page + 2);
+  let btns = '';
+  if (page > 1)         btns += `<button class="btn btn-ghost btn-xs" onclick="${setFn}(${page-1})" style="padding:5px 10px;">‹</button>`;
+  for (let i = start; i <= end; i++) {
+    btns += `<button class="btn ${i===page?'btn-primary':'btn-ghost'} btn-xs" onclick="${setFn}(${i})" style="padding:5px 10px;${i===page?'':'font-weight:normal;'}">${i}</button>`;
+  }
+  if (page < totalPages) btns += `<button class="btn btn-ghost btn-xs" onclick="${setFn}(${page+1})" style="padding:5px 10px;">›</button>`;
+  return `<div style="display:flex;align-items:center;padding:12px 16px;border-top:1px solid var(--border-lt);gap:8px;">
+    <span style="font-size:12px;color:var(--muted);">Page ${page} of ${totalPages}</span>
+    <div style="margin-left:auto;display:flex;gap:4px;">${btns}</div>
+  </div>`;
+}
+
+let _lastPendingCount = -1;
+let _lastRegCount     = -1;
+let _currentPanel     = 'overview';
+
+// Track current panel
+const _origShowPanelPoll = window.showPanel;
+window.showPanel = function(name) {
+  _origShowPanelPoll(name);
+  _currentPanel = name;
+};
+
+async function _pollUpdates() {
+  try {
+    // ── Discount requests ──
+    const dRes  = await fetch(PHP_API + '?type=discount&_t=' + Date.now());
+    const dJson = await dRes.json();
+    const dData = dJson.data || [];
+    const pendingNow = dData.filter(r => r.discountApprovalStatus === 'pending').length;
+    const discTotal  = dData.length;
+
+    // Update badge
+    const badge = document.getElementById('disc-pending-badge');
+    if (badge) { badge.textContent = pendingNow; badge.style.display = pendingNow > 0 ? 'inline-block' : 'none'; }
+
+    if (_lastPendingCount >= 0 && pendingNow > _lastPendingCount) {
+      const diff = pendingNow - _lastPendingCount;
+      toast('🔔 New discount request' + (diff > 1 ? 's' : '') + ' (' + diff + ' new) — check Discount Requests', 'success');
+    }
+    if (_currentPanel === 'discountrequests') {
+      allDiscountRequests = dData;
+      renderDiscountRequests();
+    }
+    _lastPendingCount = pendingNow;
+
+    // ── All registrations ──
+    const rRes  = await fetch(PHP_API + '?type=all&_t=' + Date.now());
+    const rJson = await rRes.json();
+    const rData = rJson.data || [];
+    const regTotal = rData.length;
+
+    if (_lastRegCount >= 0 && regTotal > _lastRegCount) {
+      const diff = regTotal - _lastRegCount;
+      toast('🔔 New registration' + (diff > 1 ? 's' : '') + ' (' + diff + ' new) — check All Registrations', 'success');
+    }
+    if (_currentPanel === 'registrations') {
+      allRegistrations = rData;
+      renderRegistrations();
+    }
+    _lastRegCount = regTotal;
+
+  } catch(e) {}
+}
+
+// เริ่ม poll หลัง login — ทุก 30 วินาที
+onAuthStateChanged(auth, user => {
+  if (user) {
+    setTimeout(() => { _pollUpdates(); setInterval(_pollUpdates, 30000); }, 3000);
+  }
+});
+
+
+</script>
+</body>
+</html>

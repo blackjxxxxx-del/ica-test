@@ -1,0 +1,175 @@
+/* Shared announcement layout
+   - Desktop: one line with divider
+   - Mobile: two stacked lines */
+
+@media (min-width: 1024px) {
+  [data-notice="combined"] {
+    width: 100% !important;
+    text-align: center !important;
+  }
+
+  .announcement {
+    text-align: center !important;
+    white-space: nowrap !important;
+    display: table !important;
+    margin: 12px auto 0 !important;
+    width: -moz-fit-content;
+    width: fit-content;
+    max-width: 100%;
+  }
+
+  .announcement .line {
+    display: inline !important;
+    white-space: nowrap !important;
+  }
+
+  .announcement .line + .line::before {
+    content: " \00A0|\00A0 ";
+    font-weight: 300;
+    color: #ffffff;
+  }
+}
+
+@media (max-width: 1023.98px) {
+  .announcement {
+    text-align: center;
+    max-width: min(92%, 34rem);
+    margin: 12px auto 0;
+    line-height: 1.55;
+    font-size: clamp(11px, 3.2vw, 14px);
+    overflow-wrap: break-word;
+    word-break: break-word;
+    padding: 0 8px;
+    box-sizing: border-box;
+  }
+
+  .announcement .line {
+    display: block;
+    white-space: normal;
+  }
+}
+
+/* ============================================================
+   GLOBAL LOGO NORMALIZATION (ALL PAGES)
+   ============================================================ */
+
+/* Header logo row (white bar) */
+header.navbar > div:nth-child(2) > div:first-child,
+.navbar > div:not(.ticker-wrap) > div:first-child {
+  display: flex !important;
+  align-items: center !important;
+  gap: 10px !important;
+}
+
+header.navbar > div:nth-child(2) > div:first-child img,
+.navbar > div:not(.ticker-wrap) > div:first-child img {
+  height: 56px !important;
+  width: auto !important;
+  max-width: 180px !important;
+  object-fit: contain !important;
+}
+
+/* Organizers/Partners logos (same height) */
+.organizers .container > div > div[style] {
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  gap: 22px !important;
+  flex-wrap: wrap !important;
+}
+
+.organizers .container > div > div[style] > img,
+.organizers .org-logos img {
+  height: 86px !important;
+  width: auto !important;
+  max-width: 220px !important;
+  object-fit: contain !important;
+}
+
+/* Footer mobile consistency */
+@media (max-width: 768px) {
+  body {
+    padding-top: 0 !important;
+  }
+
+  .navbar > div:not(.ticker-wrap) {
+    padding: 8px 12px !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: space-between !important;
+    gap: 8px !important;
+  }
+
+  .navbar > div:not(.ticker-wrap) > div:first-child {
+    flex: 1 1 auto !important;
+    min-width: 0 !important;
+    overflow: hidden !important;
+    gap: 6px !important;
+  }
+
+  header.navbar > div:nth-child(2) > div:first-child img,
+  .navbar > div:not(.ticker-wrap) > div:first-child img {
+    height: 34px !important;
+    max-width: 115px !important;
+  }
+
+  .hamburger {
+    flex: 0 0 auto !important;
+    margin-left: 8px !important;
+  }
+
+  .ticker-wrap .ticker-inner span {
+    font-size: 11px !important;
+    letter-spacing: 1.2px !important;
+    padding-right: 48px !important;
+  }
+
+  .organizers .container {
+    padding-left: 12px !important;
+    padding-right: 12px !important;
+  }
+
+  .organizers .container > div > div[style] {
+    gap: 12px !important;
+  }
+
+  .organizers .container > div > div[style] > img,
+  .organizers .org-logos img {
+    height: 64px !important;
+    max-width: 140px !important;
+  }
+
+  .site-footer .footer-top {
+    grid-template-columns: 1fr !important;
+    gap: 28px !important;
+  }
+
+  .site-footer .footer-bottom {
+    flex-direction: column !important;
+    text-align: center !important;
+    gap: 8px !important;
+  }
+
+  .footer-col ul[style] {
+    grid-template-columns: 1fr 1fr !important;
+    gap: 0 12px !important;
+  }
+}
+
+@media (max-width: 430px) {
+  header.navbar > div:nth-child(2) > div:first-child img,
+  .navbar > div:not(.ticker-wrap) > div:first-child img {
+    height: 30px !important;
+    max-width: 96px !important;
+  }
+
+  .organizers .container > div > div[style] > img,
+  .organizers .org-logos img {
+    height: 54px !important;
+    max-width: 120px !important;
+  }
+
+  .footer-col ul[style] {
+    grid-template-columns: 1fr !important;
+  }
+}

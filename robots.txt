@@ -1,0 +1,7 @@
+User-agent: *
+Allow: /
+Disallow: /admin/
+Disallow: /Coming-soon.html
+Disallow: /Coming-soon2.html
+
+Sitemap: https://icahubthailand.org/sitemap.xml

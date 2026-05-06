@@ -1,0 +1,1228 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link rel="icon" href="/favicon.png">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Registration & Payment | ICA-TH 2026</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="announcement.css?v=20260328">
+
+    <style>
+/* ============================================================
+   BASE (copied from about.html)
+============================================================ */
+:root{--primary:#1a3a5f;--secondary:#274c77;--accent:#ffb400;--light-bg:#f8fafc;--white:#ffffff;--text-main:#1e293b;--text-muted:#64748b;--border:#e2e8f0;--transition:all 0.3s cubic-bezier(0.4,0,0.2,1)}
+html,body{overflow-x:hidden;max-width:100%}
+body{margin:0;font-family:'Inter',-apple-system,sans-serif;color:var(--text-main);line-height:1.7;background:var(--white);-webkit-font-smoothing:antialiased;padding-top:0}
+.container{max-width:1200px;margin:auto;padding:0 24px}
+a{text-decoration:none;transition:var(--transition)}
+
+/* Navbar */
+.navbar{height:auto;background:rgba(255,255,255,0.98);backdrop-filter:blur(10px);padding:0;position:sticky;top:0;width:100%;z-index:1000;box-shadow:0 2px 20px rgba(0,0,0,0.08);border-bottom:1px solid var(--border)}
+.nav-container{max-width:1400px;margin:auto;display:flex;justify-content:space-between;align-items:center;padding:0 40px;height:100%}
+.nav-left{display:flex;align-items:center;gap:14px}
+.logo-group{display:flex;gap:10px;padding:0}
+.logo{height:65px;width:auto;max-width:130px;object-fit:contain}
+.site-title{color:var(--primary);display:flex;flex-direction:column;line-height:1.25}
+.site-title span:first-child{font-size:18px;font-weight:700;letter-spacing:0.8px;color:var(--primary)}
+.site-title span:last-child{font-size:13px;font-weight:500;letter-spacing:1px;color:var(--text-muted);text-transform:uppercase}
+.nav-menu{display:flex;align-items:center;gap:18px;list-style:none;margin:0;padding:0}
+.nav-menu a{color:var(--secondary);font-size:14px;font-weight:600;text-transform:uppercase;letter-spacing:0.8px}
+.nav-menu a:hover{color:var(--accent)}
+.dropdown{position:relative}
+.dropdown-menu{position:absolute;top:100%;left:0;background:#ffffff;list-style:none;padding:12px 0;margin:0;min-width:280px;display:none;border-radius:12px;box-shadow:0 10px 40px rgba(0,0,0,0.12);border:1px solid var(--border);white-space:nowrap}
+.dropdown::after{content:'';position:absolute;top:100%;left:0;width:100%;height:15px}
+.dropdown-menu.active{display:block}
+.dropdown-menu li a{color:var(--text-main)!important;padding:12px 24px;font-weight:500}
+.dropdown-menu li:hover{background:#f8fafc}
+.dropdown-menu li:hover a{color:var(--primary)!important}
+.hamburger{display:none;flex-direction:column;gap:5px;background:none;border:none;cursor:pointer;padding:4px}
+.hamburger span{display:block;width:24px;height:2px;background:var(--primary);border-radius:2px;transition:all 0.3s ease}
+.hamburger.open span:nth-child(1){transform:translateY(7px) rotate(45deg)}
+.hamburger.open span:nth-child(2){opacity:0}
+.hamburger.open span:nth-child(3){transform:translateY(-7px) rotate(-45deg)}
+@media(min-width:376px)and(max-width:768px){.nav-container{padding:0 20px}.hamburger{display:flex}.logo{width:38px;height:38px}.site-title span:first-child{display:none}nav{position:absolute;top:100%;left:0;width:100%;background:#f8fafc;border-top:1px solid var(--border);box-shadow:0 10px 30px rgba(0,0,0,0.45);display:none}nav.open{display:block}.nav-menu{flex-direction:column;align-items:stretch;gap:0;padding:12px 0}.nav-menu>li>a{display:block;padding:12px 24px;font-size:15px;border-bottom:1px solid #f8fafc}.dropdown-menu{position:static;box-shadow:none;border:none;border-radius:0;background:rgba(255,255,255,0.06);padding:0;margin:0;display:none}.dropdown-menu.active{display:block}.dropdown-menu li a{padding:10px 36px!important;font-size:14px;border-bottom:1px solid var(--border)}.dropdown::after{display:none}}
+@media(max-width:375px){.nav-container{padding:0 16px}.hamburger{display:flex}.logo{width:34px;height:34px}.site-title span:first-child{display:none}nav{position:absolute;top:100%;left:0;width:100%;background:#f8fafc;border-top:1px solid var(--border);box-shadow:0 10px 30px rgba(0,0,0,0.45);display:none}nav.open{display:block}.nav-menu{flex-direction:column;align-items:stretch;gap:0;padding:12px 0}.nav-menu>li>a{padding:12px 24px!important;font-size:15px}.dropdown-menu{position:static;box-shadow:none;border:none;border-radius:0;background:rgba(255,255,255,0.06);padding:0;margin:0;display:none}.dropdown-menu.active{display:block}.dropdown-menu li a{padding:10px 32px!important;font-size:14px;border-bottom:1px solid var(--border)}.dropdown::after{display:none}}
+@media(min-width:769px){.dropdown:hover .dropdown-menu{display:block;margin-top:15px}}
+
+/* Ticker */
+.ticker-wrap{overflow:hidden;background:#1a3a5f;padding:9px 0}
+.ticker-inner{display:flex;width:max-content}
+.ticker-inner span{color:rgba(255,255,255,0.92);font-size:13px;font-weight:600;letter-spacing:2.5px;text-transform:uppercase;white-space:nowrap;padding-right:100px;flex-shrink:0}
+@keyframes tickerScroll{0%{transform:translateX(0)}100%{transform:translateX(-50%)}}
+
+/* Hero */
+.reg-hero{position:relative;background:linear-gradient(135deg,rgba(15,47,87,0.92) 0%,rgba(39,76,119,0.78) 100%),url("im/wat-arun-temple-bangkok-thailand.webp") center/cover no-repeat;background-attachment:fixed;color:white;text-align:center;padding:80px 20px}
+.reg-hero h1{font-size:44px;font-weight:800;margin:0 0 14px;line-height:1.1}
+.reg-hero p{font-size:17px;max-width:640px;margin:0 auto;opacity:0.88;font-weight:300;line-height:1.7}
+.reg-hero-badge{display:inline-flex;align-items:center;gap:8px;background:rgba(255,255,255,0.12);border:1px solid rgba(255,255,255,0.25);color:white;font-weight:600;font-size:13px;padding:8px 20px;border-radius:50px;margin-top:22px;backdrop-filter:blur(5px)}
+@media(max-width:768px){.reg-hero{padding:60px 20px;background-attachment:scroll}.reg-hero h1{font-size:28px}.reg-hero p{font-size:15px}}
+
+/* ============================================================
+   REGISTRATION WIZARD
+============================================================ */
+.reg-section{padding:60px 0 80px;background:var(--light-bg)}
+
+/* Step indicator */
+.step-indicator{display:flex;align-items:center;justify-content:center;gap:0;margin-bottom:48px}
+.step-dot{display:flex;flex-direction:column;align-items:center;gap:6px;position:relative;z-index:1}
+.step-dot .dot{width:36px;height:36px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-weight:700;font-size:14px;transition:all 0.3s;border:2px solid transparent}
+.step-dot .dot-label{font-size:11px;font-weight:600;letter-spacing:0.5px;text-transform:uppercase;white-space:nowrap;transition:color 0.3s}
+.step-dot.inactive .dot{background:#e2e8f0;color:#94a3b8;border-color:#e2e8f0}
+.step-dot.inactive .dot-label{color:#94a3b8}
+.step-dot.active .dot{background:var(--primary);color:white;border-color:var(--primary);box-shadow:0 4px 14px rgba(26,58,95,0.35)}
+.step-dot.active .dot-label{color:var(--primary);font-weight:700}
+.step-dot.done .dot{background:#22c55e;color:white;border-color:#22c55e}
+.step-dot.done .dot-label{color:#16a34a}
+.step-connector{flex:1;max-width:80px;height:2px;background:#e2e8f0;margin:0 4px;margin-bottom:22px;transition:background 0.3s}
+.step-connector.done{background:#22c55e}
+@media(max-width:480px){.step-connector{max-width:28px}.step-dot .dot-label{font-size:9px}}
+
+/* Card */
+.reg-card{background:var(--white);border-radius:20px;border:1px solid var(--border);box-shadow:0 4px 24px rgba(26,58,95,0.07);max-width:720px;margin:0 auto;padding:40px 48px}
+@media(max-width:600px){.reg-card{padding:28px 20px;border-radius:14px}}
+
+.step-block{display:none}
+.step-block.visible{display:block}
+
+.step-heading{font-size:22px;font-weight:800;color:var(--primary);margin:0 0 6px}
+.step-sub{font-size:14px;color:var(--text-muted);margin:0 0 28px}
+
+/* Form inputs */
+.form-group{margin-bottom:20px}
+.form-group label{display:block;font-size:13px;font-weight:700;color:var(--primary);margin-bottom:7px;letter-spacing:0.3px;text-transform:uppercase}
+.form-group input{width:100%;padding:13px 16px;border:2px solid var(--border);border-radius:10px;font-family:'Inter',sans-serif;font-size:15px;color:var(--text-main);background:var(--white);transition:border-color 0.2s,box-shadow 0.2s;box-sizing:border-box}
+.form-group input:focus{outline:none;border-color:var(--primary);box-shadow:0 0 0 3px rgba(26,58,95,0.1)}
+.form-group input.error{border-color:#ef4444}
+.field-error{font-size:12px;color:#ef4444;margin-top:5px;display:none}
+
+/* Choice buttons */
+.choice-grid{display:grid;gap:12px}
+.choice-grid.cols-3{grid-template-columns:repeat(3,1fr)}
+.choice-grid.cols-2{grid-template-columns:repeat(2,1fr)}
+@media(max-width:500px){.choice-grid.cols-3{grid-template-columns:1fr}.choice-grid.cols-2{grid-template-columns:1fr 1fr}}
+
+.choice-btn{display:flex;flex-direction:column;align-items:flex-start;gap:4px;padding:16px 18px;border:2px solid var(--border);border-radius:12px;background:var(--white);cursor:pointer;transition:all 0.2s;text-align:left}
+.choice-btn:hover{border-color:var(--secondary);background:#f8fafc;transform:translateY(-1px)}
+.choice-btn.selected{border-color:var(--primary);background:rgba(26,58,95,0.05);box-shadow:0 0 0 3px rgba(26,58,95,0.1)}
+.choice-btn .choice-title{font-size:14px;font-weight:700;color:var(--primary);line-height:1.3}
+.choice-btn .choice-desc{font-size:12px;color:var(--text-muted);line-height:1.4}
+.choice-btn .choice-check{width:20px;height:20px;border-radius:50%;border:2px solid var(--border);display:flex;align-items:center;justify-content:center;margin-bottom:8px;transition:all 0.2s;flex-shrink:0}
+.choice-btn.selected .choice-check{background:var(--primary);border-color:var(--primary)}
+.choice-btn.selected .choice-check::after{content:'';display:block;width:6px;height:10px;border:2px solid white;border-top:none;border-left:none;transform:rotate(45deg) translateY(-1px)}
+
+/* Disabled overlay for locked steps */
+.step-locked{opacity:0.45;pointer-events:none;user-select:none}
+
+/* Discount section */
+.discount-wrap{display:flex;gap:10px;align-items:flex-start}
+.discount-wrap input{flex:1;min-width:0}
+.discount-wrap .apply-btn{padding:13px 20px;background:var(--primary);color:white;border:none;border-radius:10px;font-weight:700;font-size:14px;cursor:pointer;transition:background 0.2s;white-space:nowrap;flex-shrink:0}
+.discount-wrap .apply-btn:hover{background:var(--secondary)}
+.discount-msg{margin-top:10px;font-size:13px;font-weight:600;padding:8px 14px;border-radius:8px;display:none}
+.discount-msg.success{background:#dcfce7;color:#16a34a;display:block}
+.discount-msg.error{background:#fee2e2;color:#dc2626;display:block}
+.skip-link{display:inline-block;margin-top:14px;font-size:13px;color:var(--text-muted);cursor:pointer;text-decoration:underline}
+.skip-link:hover{color:var(--primary)}
+
+/* Result summary */
+.result-summary{background:var(--light-bg);border-radius:14px;padding:20px 24px;margin-bottom:24px;border:1px solid var(--border)}
+.result-summary-title{font-size:11px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;color:var(--text-muted);margin-bottom:14px}
+.summary-row{display:flex;justify-content:space-between;align-items:center;padding:7px 0;border-bottom:1px solid var(--border)}
+.summary-row:last-child{border-bottom:none}
+.summary-row .label{font-size:13px;color:var(--text-muted)}
+.summary-row .value{font-size:14px;font-weight:600;color:var(--text-main)}
+
+/* Price cards */
+.price-section-title{font-size:13px;font-weight:700;letter-spacing:1px;text-transform:uppercase;color:var(--text-muted);margin:24px 0 14px}
+.price-cards{display:grid;grid-template-columns:1fr 1fr;gap:16px;align-items:stretch}
+@media(max-width:500px){.price-cards{grid-template-columns:1fr}}
+
+.price-card{border:2px solid var(--border);border-radius:14px;padding:24px 20px;text-align:center;display:flex;flex-direction:column;align-items:center;gap:10px}
+.price-card.early{border-color:#f59e0b;background:#fffbeb}
+.price-card.standard{border-color:#6366f1;background:#f5f3ff}
+.price-card .pc-badge{display:inline-block;font-size:10px;font-weight:800;letter-spacing:1.5px;text-transform:uppercase;padding:3px 10px;border-radius:20px}
+.price-card.early .pc-badge{background:#fef3c7;color:#92400e}
+.price-card.standard .pc-badge{background:#ede9fe;color:#4c1d95}
+.price-card .pc-original{font-size:12px;color:#94a3b8;text-decoration:line-through;display:none}
+.price-card .pc-price{font-size:28px;font-weight:800}
+.price-card.early .pc-price{color:#92400e}
+.price-card.standard .pc-price{color:#4c1d95}
+.price-card .pc-price.discounted{color:#16a34a}
+.price-card .pc-discount-badge{background:#dcfce7;color:#15803d;font-size:11px;font-weight:700;padding:2px 10px;border-radius:20px;display:none}
+.price-card .pc-currency{font-size:14px;font-weight:600;opacity:0.7}
+.pay-btn{display:block;width:100%;padding:14px;border-radius:10px;font-size:15px;font-weight:700;text-align:center;cursor:pointer;border:none;transition:all 0.2s;margin-top:auto;text-decoration:none;box-sizing:border-box}
+.pay-btn-early{background:#f59e0b;color:#1c1917}
+.pay-btn-early:hover{background:#d97706;transform:translateY(-1px)}
+.pay-btn-standard{background:#6366f1;color:white}
+.pay-btn-standard:hover{background:#4f46e5;transform:translateY(-1px)}
+/* Free confirm button */
+.confirm-pay-btn{display:block;width:100%;padding:16px;border-radius:12px;font-size:16px;font-weight:800;text-align:center;cursor:pointer;border:none;transition:all 0.2s;text-decoration:none;box-sizing:border-box;background:#16a34a;color:white;box-shadow:0 6px 20px rgba(22,163,74,0.3)}
+.confirm-pay-btn:hover{background:#15803d;transform:translateY(-2px)}
+
+/* Free ticket */
+.free-ticket{background:#dcfce7;border:2px solid #86efac;border-radius:14px;padding:24px;text-align:center}
+.free-ticket .ft-icon{font-size:40px;margin-bottom:8px}
+.free-ticket h3{color:#15803d;font-size:20px;font-weight:800;margin:0 0 6px}
+.free-ticket p{color:#166534;font-size:14px;margin:0}
+
+/* Edit button */
+.edit-selection-btn{display:inline-flex;align-items:center;gap:6px;font-size:12px;font-weight:600;color:var(--text-muted);cursor:pointer;padding:5px 12px;border:1px solid var(--border);border-radius:8px;background:var(--white);margin-bottom:24px;transition:all 0.2s}
+.edit-selection-btn:hover{border-color:var(--primary);color:var(--primary)}
+.edit-selection-btn svg{width:13px;height:13px;stroke:currentColor;fill:none;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
+
+/* CTA / Organizers / Footer — same as about.html */
+.cta{background:var(--primary);color:white;text-align:center;padding:100px 20px}
+.cta h2{font-size:36px;font-weight:800;margin:0 0 16px;color:white}
+.cta p{font-size:17px;opacity:.85;margin:0 auto 36px;max-width:600px;line-height:1.7}
+.btn{padding:14px 32px;border-radius:8px;font-weight:600;display:inline-block;margin:8px;font-size:15px}
+.btn-white{background:var(--white);color:var(--primary)}
+.btn-white:hover{background:#f0f4f8;transform:translateY(-2px)}
+.btn-accent{background:var(--accent);color:var(--primary);border:none;box-shadow:0 6px 20px rgba(255,180,0,0.35)}
+.btn-accent:hover{background:#ffc107;transform:translateY(-2px)}
+.organizers{background:#f8fafc;padding:40px 0;border-top:1px solid #e2e8f0;border-bottom:1px solid #e2e8f0}
+.organizers .container{max-width:1200px;padding:0 48px}
+.org-group-label{font-size:16px;font-weight:700;letter-spacing:2.5px;text-transform:uppercase;color:var(--text-muted);margin-bottom:28px}
+.org-divider{width:1px;height:72px;background:#e2e8f0;flex-shrink:0}
+.site-footer{background:var(--primary);color:rgba(255,255,255,0.65);padding:20px 0 10px}
+.site-footer .container{max-width:1200px;padding:0 48px}
+.footer-top{display:grid;grid-template-columns:repeat(3,1fr);gap:48px;padding-bottom:18px;border-bottom:1px solid rgba(255,255,255,0.08);margin-bottom:15px}
+.footer-about{margin-top:20px;font-size:14px;line-height:1.75}
+.footer-col h4{font-size:12px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:rgba(255,255,255,0.35);margin-bottom:10px}
+.footer-col ul{list-style:none;padding:0;margin:0}
+.footer-col ul li{margin-bottom:10px}
+.footer-col ul li a{font-size:14px;color:rgba(255,255,255,0.65);transition:color 0.2s}
+.footer-col ul li a:hover{color:var(--white)}
+.footer-contact-item{display:flex;align-items:flex-start;gap:10px;margin-bottom:14px;font-size:14px;line-height:1.5}
+.footer-contact-item svg{width:16px;height:16px;stroke:rgba(255,255,255,0.4);fill:none;stroke-width:1.75;stroke-linecap:round;stroke-linejoin:round;flex-shrink:0;margin-top:2px}
+.footer-bottom{display:flex;justify-content:space-between;align-items:center;font-size:13px;flex-wrap:wrap;gap:12px}
+.footer-bottom a{color:rgba(255,255,255,0.5)}
+.footer-bottom a:hover{color:var(--white)}
+@media(max-width:1279px){.footer-top{grid-template-columns:1fr 1fr}}
+@media(max-width:768px){.footer-top{grid-template-columns:1fr;gap:32px}.footer-bottom{flex-direction:column;text-align:center}}
+@media(max-width:768px){
+  body{padding-top:0!important}
+  .cta{padding:64px 20px!important}
+  .cta h2{font-size:24px!important}
+  .btn{display:block!important;width:100%!important;max-width:280px!important;margin:8px auto!important;padding:14px 24px!important;font-size:15px!important;text-align:center!important;box-sizing:border-box!important}
+  .organizers{padding:40px 0!important}
+}
+    </style>
+
+    <!-- global-mobile-logo-override (same as other pages) -->
+    <style id="global-mobile-logo-override">
+  /* Force menu/header to always follow scroll on desktop + mobile */
+  header.navbar {
+    position: fixed !important;
+    top: 0 !important;
+    left: 0 !important;
+    right: 0 !important;
+    width: 100% !important;
+    z-index: 10000 !important;
+  }
+
+  body {
+    padding-top: var(--global-nav-offset, 120px) !important;
+  }
+
+  /* Header logos: equal height */
+  header.navbar > div:nth-child(2) > div:first-child,
+  .navbar > div:not(.ticker-wrap) > div:first-child {
+    display: flex !important;
+    align-items: center !important;
+    gap: 8px !important;
+  }
+
+  header.navbar > div:nth-child(2) > div:first-child img,
+  .navbar > div:not(.ticker-wrap) > div:first-child img {
+    height: 56px !important;
+    max-height: 56px !important;
+    width: auto !important;
+    max-width: none !important;
+    object-fit: contain !important;
+    display: block !important;
+  }
+
+  /* Organizer/partner logos: equal height */
+  .organizers .container > div > div[style],
+  .organizers .org-logos {
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    gap: 14px !important;
+    flex-wrap: wrap !important;
+  }
+
+  .organizers .container > div > div[style] > img,
+  .organizers .org-logos img {
+    height: 86px !important;
+    max-height: 86px !important;
+    width: auto !important;
+    max-width: none !important;
+    object-fit: contain !important;
+    display: block !important;
+  }
+
+  @media (max-width: 768px) {
+    .container,
+    .organizers .container {
+      width: 100% !important;
+      max-width: 100% !important;
+      padding-left: 20px !important;
+      padding-right: 20px !important;
+      margin-left: auto !important;
+      margin-right: auto !important;
+      box-sizing: border-box !important;
+    }
+
+    header.navbar > div:nth-child(2),
+    .navbar > div:not(.ticker-wrap) {
+      position: relative !important;
+      padding: 8px 12px !important;
+      display: flex !important;
+      align-items: center !important;
+      justify-content: space-between !important;
+      gap: 8px !important;
+    }
+
+    header.navbar > div:nth-child(2) > div:first-child,
+    .navbar > div:not(.ticker-wrap) > div:first-child {
+      flex: 1 1 auto !important;
+      min-width: 0 !important;
+      overflow: hidden !important;
+      gap: 6px !important;
+    }
+
+    header.navbar > div:nth-child(2) > div:first-child img,
+    .navbar > div:not(.ticker-wrap) > div:first-child img {
+      height: 34px !important;
+      max-height: 34px !important;
+    }
+
+    nav#mainNav {
+      position: absolute !important;
+      top: 100% !important;
+      left: 0 !important;
+      right: 0 !important;
+      width: 100% !important;
+      height: auto !important;
+      max-height: calc(100vh - 120px) !important;
+      overflow-y: auto !important;
+      margin: 0 !important;
+      background: #ffffff !important;
+      box-shadow: 0 10px 24px rgba(0,0,0,0.12) !important;
+      z-index: 10001 !important;
+      display: none !important;
+    }
+
+    nav#mainNav.open {
+      display: block !important;
+    }
+
+    .nav-menu {
+      position: static !important;
+      flex-direction: column !important;
+      align-items: stretch !important;
+      gap: 0 !important;
+      padding: 8px 0 !important;
+      margin: 0 !important;
+      background: transparent !important;
+      height: auto !important;
+      width: 100% !important;
+    }
+
+    .nav-menu > li > a {
+      display: block !important;
+      padding: 14px 24px !important;
+      font-size: 15px !important;
+      color: #1a2e4a !important;
+      border-bottom: 1px solid #f1f5f9 !important;
+      font-weight: 600 !important;
+    }
+
+    .dropdown-menu {
+      position: static !important;
+      background: #f8fafc !important;
+      box-shadow: none !important;
+      border: none !important;
+      border-radius: 0 !important;
+      padding: 0 !important;
+      margin: 0 !important;
+      display: none !important;
+    }
+
+    .dropdown-menu.active {
+      display: block !important;
+    }
+
+    .dropdown-menu li a {
+      padding: 12px 40px !important;
+      font-size: 14px !important;
+      color: #1a2e4a !important;
+      border-bottom: 1px solid #e2e8f0 !important;
+      display: block !important;
+    }
+
+    #hamburger,
+    .hamburger {
+      display: flex !important;
+      flex: 0 0 auto !important;
+      margin-left: 8px !important;
+    }
+
+    /* Footer shorter: 2 rows/2 columns nav */
+    .site-footer .footer-top {
+      grid-template-columns: 1fr !important;
+      gap: 28px !important;
+    }
+
+    .site-footer .footer-col ul,
+    .site-footer .footer-col ul[style] {
+      display: grid !important;
+      grid-template-columns: 1fr 1fr !important;
+      gap: 8px 16px !important;
+      margin: 0 !important;
+      padding: 0 !important;
+    }
+
+    .site-footer .footer-col ul li {
+      margin-bottom: 0 !important;
+    }
+
+    .site-footer .footer-bottom {
+      display: grid !important;
+      grid-template-columns: 1fr !important;
+      gap: 6px !important;
+      text-align: center !important;
+    }
+
+    .organizers .container > div > div[style] > img,
+    .organizers .org-logos img {
+      height: 64px !important;
+      max-height: 64px !important;
+    }
+  }
+
+  @media (max-width: 430px) {
+    header.navbar > div:nth-child(2) > div:first-child img,
+    .navbar > div:not(.ticker-wrap) > div:first-child img {
+      height: 30px !important;
+      max-height: 30px !important;
+    }
+
+    .organizers .container > div > div[style] > img,
+    .organizers .org-logos img {
+      height: 54px !important;
+      max-height: 54px !important;
+    }
+  }
+    </style>
+<script id="global-mobile-logo-override-script">
+  (function () {
+    function setOffset() {
+      var nav = document.querySelector('header.navbar');
+      if (!nav) return;
+      var h = nav.getBoundingClientRect().height;
+      document.documentElement.style.setProperty('--global-nav-offset', Math.ceil(h) + 'px');
+    }
+    window.addEventListener('load', setOffset);
+    window.addEventListener('resize', setOffset);
+    setOffset();
+  })();
+</script>
+</head>
+
+<body>
+
+<!-- ============================================================
+     NAVBAR
+============================================================ -->
+<header class="navbar" style="height:auto;min-height:auto;background:transparent;box-shadow:none;border:none;">
+    <div class="ticker-wrap">
+        <div class="ticker-inner" id="tickerInner">
+            <span>76<sup>TH</sup> ANNUAL ICA REGIONAL HUB THAILAND &nbsp;&nbsp;·&nbsp;&nbsp; 6–7 JUNE 2026 &nbsp;&nbsp;·&nbsp;&nbsp; BANGKOK &nbsp;&nbsp;·&nbsp;&nbsp; CHULALONGKORN UNIVERSITY</span>
+        </div>
+    </div>
+    <div style="background:#ffffff;padding:10px 40px;display:flex;align-items:center;justify-content:space-between;box-shadow:0 2px 20px rgba(0,0,0,0.08);border-bottom:1px solid #e2e8f0;">
+        <div style="display:flex;gap:12px;align-items:center;">
+            <img src="im/LogoICA.webp" alt="ICA Logo" style="height:60px;width:auto;">
+            <img src="im/ICA26_regional_hub_-_bangkok_logo.webp" alt="ICA Regional Hub Bangkok" style="height:60px;width:auto;">
+            <img src="im/123.png" alt="Chulalongkorn University Logo" style="height:60px;width:auto;">
+        </div>
+        <button class="hamburger" id="hamburger" aria-label="Toggle menu">
+            <span></span><span></span><span></span>
+        </button>
+        <nav id="mainNav">
+            <ul class="nav-menu" style="padding:0;margin:0;">
+                <li><a href="index.html">Home</a></li>
+                <li><a href="about.html">About</a></li>
+                <li><a href="programme.html">Programme</a></li>
+                <li><a href="submission.html">Submission</a></li>
+                <li><a href="registration.html">Registration</a></li>
+                <li class="dropdown">
+                    <a href="javascript:void(0)" class="dropdown-toggle" id="confInfoLink">Conference Information ▾</a>
+                    <ul class="dropdown-menu" id="confDropdown">
+                        <li><a href="venue.html">Venue</a></li>
+                        <li><a href="Publication.html">Publication</a></li>
+                        <li><a href="Award.html">Award</a></li>
+                        <li><a href="visa.html">Visa Information</a></li>
+                    </ul>
+                </li>
+                <li><a href="contact.html">Contact</a></li>
+            </ul>
+        </nav>
+    </div>
+</header>
+
+
+<!-- ============================================================
+     HERO
+============================================================ -->
+<section class="reg-hero">
+    <div class="container">
+        <h1>Registration &amp; Payment</h1>
+        <p>Complete your registration for ICA Regional Hub Thailand 2026. Follow the steps below to select your participation type and proceed to payment.</p>
+        <span class="reg-hero-badge">6–7 June 2026 &nbsp;·&nbsp; Bangkok &nbsp;·&nbsp; Chulalongkorn University</span>
+    </div>
+</section>
+
+
+<!-- ============================================================
+     REGISTRATION WIZARD
+============================================================ -->
+<section class="reg-section">
+    <div class="container">
+
+        <!-- Step Indicators -->
+        <div class="step-indicator" id="stepIndicator">
+            <div class="step-dot active" id="dot-1">
+                <div class="dot">1</div>
+                <div class="dot-label">Your Info</div>
+            </div>
+            <div class="step-connector" id="conn-1"></div>
+            <div class="step-dot inactive" id="dot-2">
+                <div class="dot">2</div>
+                <div class="dot-label">Format</div>
+            </div>
+            <div class="step-connector" id="conn-2"></div>
+            <div class="step-dot inactive" id="dot-3">
+                <div class="dot">3</div>
+                <div class="dot-label">Status</div>
+            </div>
+        </div>
+
+        <div class="reg-card">
+
+            <!-- ── STEP 1: Personal Info ── -->
+            <div class="step-block visible" id="step-1">
+                <div class="step-heading">Your Information</div>
+                <div class="step-sub">Please provide your name and email address to continue.</div>
+
+                <div class="form-group">
+                    <label for="fullName">Full Name <span style="color:#ef4444">*</span></label>
+                    <input type="text" id="fullName" placeholder="e.g. Somchai Jaidee" autocomplete="name">
+                    <div class="field-error" id="nameError">Please enter your full name.</div>
+                </div>
+                <div class="form-group">
+                    <label for="email">Email Address <span style="color:#ef4444">*</span></label>
+                    <input type="email" id="email" placeholder="e.g. name@university.ac.th" autocomplete="email">
+                    <div class="field-error" id="emailError">Please enter a valid email address.</div>
+                </div>
+
+                <!-- Step 2 preview (locked until valid) -->
+                <div id="steps-2-4-wrapper">
+                    <div style="border-top:1px solid var(--border);margin:32px 0 28px;"></div>
+
+                    <!-- Step 2 inline -->
+                    <div id="step-2-inline" class="step-locked">
+                        <div class="step-heading" style="font-size:18px;">Presentation Format</div>
+                        <div class="step-sub">How will you be participating in the conference?</div>
+                        <div class="choice-grid cols-3" id="formatGrid">
+                            <button class="choice-btn" data-value="onsite" onclick="selectFormat(this)">
+                                <div class="choice-check"></div>
+                                <div class="choice-title">Onsite / Poster Presenter</div>
+                                <div class="choice-desc">In-person presentation in Bangkok</div>
+                            </button>
+                            <button class="choice-btn" data-value="virtual" onclick="selectFormat(this)">
+                                <div class="choice-check"></div>
+                                <div class="choice-title">Virtual Presenter</div>
+                                <div class="choice-desc">Online presentation via livestream</div>
+                            </button>
+                            <button class="choice-btn" data-value="non" onclick="selectFormat(this)">
+                                <div class="choice-check"></div>
+                                <div class="choice-title">Non Presenter</div>
+                                <div class="choice-desc">Attend without presenting</div>
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- Step 3 inline -->
+                    <div id="step-3-inline" class="step-locked" style="display:none;margin-top:32px;border-top:1px solid var(--border);padding-top:28px;">
+                        <div class="step-heading" style="font-size:18px;">Participant Status</div>
+                        <div class="step-sub">Select the category that best describes you.</div>
+                        <div class="choice-grid cols-2" id="statusGrid">
+                            <button class="choice-btn" data-value="student" onclick="selectStatus(this)">
+                                <div class="choice-check"></div>
+                                <div class="choice-title">Student</div>
+                                <div class="choice-desc">Undergraduate, postgraduate, or doctoral student</div>
+                            </button>
+                            <button class="choice-btn" data-value="academic" onclick="selectStatus(this)">
+                                <div class="choice-check"></div>
+                                <div class="choice-title">Academic / Faculty / Professional</div>
+                                <div class="choice-desc">Faculty member, researcher, or professional</div>
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- Student Upload Area -->
+                    <!-- Result -->
+                    <div id="result-block" style="display:none;margin-top:32px;border-top:1px solid var(--border);padding-top:28px;">
+                        <button class="edit-selection-btn" onclick="resetAll()">
+                            <svg viewBox="0 0 24 24"><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/><path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"/></svg>
+                            Change selection
+                        </button>
+
+                        <div class="result-summary">
+                            <div class="result-summary-title">Registration Summary</div>
+                            <div class="summary-row"><span class="label">Name</span><span class="value" id="sum-name">—</span></div>
+                            <div class="summary-row"><span class="label">Email</span><span class="value" id="sum-email">—</span></div>
+                            <div class="summary-row"><span class="label">Format</span><span class="value" id="sum-format">—</span></div>
+                            <div class="summary-row"><span class="label">Status</span><span class="value" id="sum-status">—</span></div>
+                        </div>
+
+                        <!-- Student Verification Document (shown only for students) -->
+                        <div id="student-upload-area" style="display:none;margin-bottom:20px;padding:20px;background:var(--light-bg);border-radius:14px;border:1px solid var(--border);">
+                            <div style="font-size:15px;font-weight:700;color:var(--primary);margin-bottom:6px;">Student Verification Document <span style="color:#ef4444;">*</span></div>
+                            <p style="font-size:13px;color:var(--text-muted);margin-bottom:16px;line-height:1.6;">Please upload one of the following (in English): a valid student ID card, an official letter of enrollment, or a current enrollment certificate. These documents must be valid at the time of registration.</p>
+                            <div id="student-drop-zone"
+                                 onclick="document.getElementById('studentDocFile').click()"
+                                 style="border:2px dashed var(--border);border-radius:12px;padding:28px 20px;text-align:center;cursor:pointer;transition:border-color .2s,background .2s;">
+                                <div style="font-size:28px;margin-bottom:8px;">📎</div>
+                                <div id="student-drop-text" style="font-size:14px;color:var(--text-muted);line-height:1.6;">
+                                    Click to upload your document<br>
+                                    <small>PDF, JPG, PNG — max 10 MB</small>
+                                </div>
+                            </div>
+                            <input type="file" id="studentDocFile" accept=".pdf,.jpg,.jpeg,.png"
+                                   style="display:none" onchange="handleStudentFile(this)">
+                            <div class="discount-msg" id="studentUploadMsg"></div>
+                        </div>
+
+                        <!-- Normal payment options (no discount) -->
+                        <div id="payment-options-block">
+                            <div class="price-section-title">Select Payment Rate</div>
+                            <div class="price-cards">
+                                <div class="price-card early">
+                                    <span class="pc-badge">Early Bird</span>
+                                    <div class="pc-original" id="eb-original"></div>
+                                    <div>
+                                        <span class="pc-price" id="eb-price">—</span>
+                                        <span class="pc-currency"> THB</span>
+                                    </div>
+                                    <span class="pc-discount-badge" id="eb-disc-badge"></span>
+                                </div>
+                                <div class="price-card standard">
+                                    <span class="pc-badge">Standard</span>
+                                    <div class="pc-original" id="std-original"></div>
+                                    <div>
+                                        <span class="pc-price" id="std-price">—</span>
+                                        <span class="pc-currency"> THB</span>
+                                    </div>
+                                    <span class="pc-discount-badge" id="std-disc-badge"></span>
+                                </div>
+                            </div>
+                            <!-- Promo code section -->
+                            <div style="margin-top:20px;padding-top:20px;border-top:1px solid var(--border);">
+                                <label style="font-size:12px;font-weight:700;letter-spacing:1px;text-transform:uppercase;color:var(--primary);display:block;margin-bottom:8px;">
+                                    Promo Code <span style="font-weight:400;color:var(--text-muted);font-size:11px;text-transform:none;letter-spacing:0;">— optional</span>
+                                </label>
+                                <div style="display:flex;gap:10px;">
+                                    <input id="promoInput" type="text" placeholder="Enter code" maxlength="20"
+                                           oninput="this.value=this.value.toUpperCase()"
+                                           onkeydown="if(event.key==='Enter') applyPromoCode()"
+                                           style="flex:1;padding:13px 16px;border:2px solid var(--border);border-radius:10px;font-family:'Inter',sans-serif;font-size:14px;font-weight:600;text-transform:uppercase;letter-spacing:1px;color:var(--primary);transition:border-color .2s,box-shadow .2s;box-sizing:border-box;">
+                                    <button onclick="applyPromoCode()"
+                                            style="padding:13px 20px;background:var(--primary);color:white;border:none;border-radius:10px;font-family:'Inter',sans-serif;font-weight:700;font-size:14px;cursor:pointer;white-space:nowrap;transition:background .2s;"
+                                            onmouseover="this.style.background='var(--secondary)'" onmouseout="this.style.background='var(--primary)'">Apply</button>
+                                </div>
+                                <div id="promoMsg" class="discount-msg"></div>
+                            </div>
+                            <!-- Single pay button -->
+                            <a class="confirm-pay-btn" id="confirmPayBtn" href="#" onclick="handlePayNew(event)" style="display:block;width:100%;padding:16px;margin-top:18px;background:#16a34a;color:white;border:none;border-radius:14px;font-family:'Inter',sans-serif;font-size:16px;font-weight:700;cursor:pointer;text-align:center;text-decoration:none;transition:background .2s,transform .2s;">
+                                Proceed to Payment →
+                            </a>
+                        </div>
+                        <div id="pending-approval-block" style="display:none;margin-top:8px;">
+                            <div style="text-align:center;padding:28px 20px;background:var(--light-bg);border-radius:14px;border:1px solid var(--border);">
+                                <div style="font-size:44px;margin-bottom:12px;">📧</div>
+                                <div style="font-weight:700;font-size:18px;margin-bottom:10px;">Request Submitted!</div>
+                                <div style="color:var(--text-muted);font-size:14px;line-height:1.7;">
+                                    Your discount request has been submitted for review.<br>
+                                    Once approved, you will receive an email with your payment link.
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                </div><!-- /steps-2-4-wrapper -->
+            </div><!-- /step-1 -->
+
+        </div><!-- /reg-card -->
+    </div><!-- /container -->
+</section>
+
+
+
+
+<!-- ============================================================
+     ORGANIZERS
+============================================================ -->
+<section class="organizers">
+    <div class="container">
+        <div style="text-align:center;margin-bottom:40px;">
+            <span class="org-group-label" style="display:block;margin-bottom:28px;">Organized by</span>
+            <div style="display:flex;align-items:center;justify-content:center;gap:40px;flex-wrap:wrap;">
+                <img loading="lazy" src="im/LOGO_Eng.webp" alt="Organizer 1" style="height:110px !important;width:auto !important;object-fit:contain !important;">
+                <img loading="lazy" src="im/1008453.webp" alt="Organizer 2" style="height:110px !important;width:auto !important;object-fit:contain !important;">
+            </div>
+        </div>
+        <div style="text-align:center;">
+            <span class="org-group-label" style="display:block;margin-bottom:28px;">In Partnership with</span>
+            <div style="display:flex !important;flex-wrap:nowrap !important;gap:12px !important;max-width:1200px !important;margin:0 auto !important;align-items:center !important;justify-content:center !important;">
+                <div style="display:flex;align-items:center;justify-content:center;min-height:96px;">
+                    <img loading="lazy" src="im/logooo-1.webp" alt="CMCT" style="height:96px !important;max-width:100%;width:auto !important;object-fit:contain !important;">
+                </div>
+                <div style="display:flex;align-items:center;justify-content:center;min-height:96px;">
+                    <img loading="lazy" src="im/S__13172761_0.webp" alt="COSCI SWU" style="height:96px !important;max-width:100%;width:auto !important;object-fit:contain !important;">
+                </div>
+                <div style="display:flex;align-items:center;justify-content:center;min-height:96px;">
+                    <img loading="lazy" src="im/GSCM.webp" alt="GSCM NIDA" style="height:96px !important;max-width:100%;width:auto !important;object-fit:contain !important;">
+                </div>
+                <div style="display:flex;align-items:center;justify-content:center;min-height:96px;">
+                    <img loading="lazy" src="im/New-JC-Logo-2018-Update-Cleanup_Outline-01.webp" alt="JC Thammasat" style="height:96px !important;max-width:100%;width:auto !important;object-fit:contain !important;">
+                </div>
+                <div style="display:flex;align-items:center;justify-content:center;min-height:96px;">
+                    <img loading="lazy" src="im/S__13172760_0.webp" alt="MassComm Chiang Mai University" style="height:96px !important;max-width:100%;width:auto !important;object-fit:contain !important;">
+                </div>
+                <div style="display:flex;align-items:center;justify-content:center;min-height:96px;">
+                    <img loading="lazy" src="im/psu-masscomm.webp" alt="PSU Faculty of Communication Sciences" style="height:96px !important;max-width:100%;width:auto !important;object-fit:contain !important;">
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+
+<!-- ============================================================
+     FOOTER
+============================================================ -->
+<footer class="site-footer" aria-label="Site footer">
+    <div class="container">
+        <div class="footer-top">
+            <div class="footer-col">
+                <h4>About</h4>
+                <div class="brand-text" style="margin-bottom:16px;display:flex;align-items:center;gap:14px;">
+                    <div style="display:flex;gap:10px;">
+                        <img loading="lazy" src="im/LogoICA.webp" style="width:100px;height:50px;object-fit:contain;" alt="ICA Logo">
+                    </div>
+                    <div>
+                        <div style="color:var(--white);font-size:18px;font-weight:700;letter-spacing:0.8px;">76<sup style="font-size:10px;">TH</sup> ANNUAL ICA</div>
+                        <div style="color:rgba(255,255,255,0.55);font-size:14px;font-weight:500;letter-spacing:1px;">REGIONAL HUB THAILAND</div>
+                    </div>
+                </div>
+                <p class="footer-about">An official concurrent event of the 76<sup>th</sup> Annual ICA Conference, hosted at Chulalongkorn University, Bangkok — 6–7 June 2026.</p>
+            </div>
+            <div class="footer-col">
+                <h4>Navigation</h4>
+                <ul style="display:grid;grid-template-columns:1fr 1fr;gap:0 16px;">
+                    <li><a href="about.html">About</a></li>
+                    <li><a href="programme.html">Programme</a></li>
+                    <li><a href="submission.html">Submission</a></li>
+                    <li><a href="registration.html">Registration</a></li>
+                    <li><a href="venue.html">Venue</a></li>
+                    <li><a href="visa.html">Visa Information</a></li>
+                    <li><a href="Publication.html">Publication</a></li>
+                    <li><a href="Award.html">Awards</a></li>
+                </ul>
+            </div>
+            <div class="footer-col">
+                <h4>Contact</h4>
+                <div class="footer-contact-item">
+                    <svg viewBox="0 0 24 24"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+                    <span>Faculty of Communication Arts,<br>Chulalongkorn University,<br>Bangkok, Thailand</span>
+                </div>
+                <div class="footer-contact-item">
+                    <svg viewBox="0 0 24 24"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+                    <a href="contact.html" style="color:rgba(255,255,255,0.65);">Contact Us</a>
+                </div>
+                <div class="footer-contact-item">
+                    <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M2 12h20M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>
+                    <a href="https://www.icahdq.org" target="_blank" style="color:rgba(255,255,255,0.65);">icahdq.org</a>
+                </div>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>© 2026 ICA Thailand Hub · Faculty of Communication Arts, Chulalongkorn University</p>
+            <p><a href="#">Privacy Policy</a> · <a href="contact.html">Contact Us</a></p>
+        </div>
+    </div>
+</footer>
+
+
+<!-- ============================================================
+     SCRIPTS
+============================================================ -->
+<script>
+/* ── Navbar ── */
+document.addEventListener('DOMContentLoaded', function () {
+    const hamburger    = document.getElementById('hamburger');
+    const mainNav      = document.getElementById('mainNav');
+    const toggleLink   = document.getElementById('confInfoLink');
+    const dropdownMenu = document.getElementById('confDropdown');
+    hamburger.addEventListener('click', function () {
+        hamburger.classList.toggle('open');
+        mainNav.classList.toggle('open');
+    });
+    toggleLink.addEventListener('click', function (e) {
+        if (window.innerWidth <= 768) {
+            e.preventDefault();
+            dropdownMenu.classList.toggle('active');
+        }
+    });
+    document.addEventListener('click', function (e) {
+        if (!hamburger.contains(e.target) && !mainNav.contains(e.target)) {
+            hamburger.classList.remove('open');
+            mainNav.classList.remove('open');
+        }
+    });
+
+    /* ── Live validation: unlock step 2 when both fields valid ── */
+    const nameInput  = document.getElementById('fullName');
+    const emailInput = document.getElementById('email');
+    nameInput.addEventListener('input', checkInfoStep);
+    emailInput.addEventListener('input', checkInfoStep);
+});
+
+/* ── Promo codes ── */
+var PROMO_CODES = {
+    'ICAPARTNER20':  '20pct',
+    'ICAPARTNER100': '100pct'
+};
+
+/* ── State ── */
+var state = {
+    name: '', email: '',
+    format: null,
+    status: null,
+    discountChoice: null, // 'none' | '20pct' | '100pct'
+    requestPending: false,
+    ebUrl: null, stdUrl: null,
+    activePromo: 'none'  // 'none' | '20pct' | '100pct'
+};
+
+/* ── Price & Link Map ── */
+var PRICE_MAP = {
+    // [format][status][rate][discountTier]
+    // discountTier: 'none' | '20pct' | '100pct'
+    onsite: {
+        student: {
+            early:    { none:  { price: 3000, url: 'https://ofas.chula.ac.th/Service/DetailTraining?data=9aiLPPbPYWmBMdu3a5XIDQ' },
+                        '20pct':{ price: 2400, url: 'https://ofas.chula.ac.th/Service/DetailTraining?data=VMTejit_AIMZyEV-WIsB4w' },
+                        '100pct':{ price: 0, url: null } },
+            standard: { none:  { price: 4500, url: 'https://ofas.chula.ac.th/Service/DetailTraining?data=CRXtjZ4Z1cGoZMJhISte6g' },
+                        '20pct':{ price: 3600, url: 'https://ofas.chula.ac.th/Service/DetailTraining?data=Ohsi8u1aEML0teGkThWVwQ' },
+                        '100pct':{ price: 0, url: null } }
+        },
+        academic: {
+            early:    { none:  { price: 5000, url: 'https://ofas.chula.ac.th/Service/DetailTraining?data=xZ_6PEN01bQLvZ47BGcTsQ' },
+                        '20pct':{ price: 4000, url: 'https://ofas.chula.ac.th/Service/DetailTraining?data=Kx-hxOTLzC6iS19WxA7g4w' },
+                        '100pct':{ price: 0, url: null } },
+            standard: { none:  { price: 8000, url: 'https://ofas.chula.ac.th/Service/DetailTraining?data=yNyQXCjQXg7IGF7HEwBLfg' },
+                        '20pct':{ price: 6400, url: 'https://ofas.chula.ac.th/Service/DetailTraining?data=Vxp7PXyRrXhY2VNClLwxeA' },
+                        '100pct':{ price: 0, url: null } }
+        }
+    },
+    virtual: {
+        student: {
+            early:    { none:  { price: 2000, url: 'https://ofas.chula.ac.th/Service/DetailTraining?data=yYaWaIkEK7m70pjvlb7yqQ' },
+                        '20pct':{ price: 1600, url: 'https://ofas.chula.ac.th/Service/DetailTraining?data=_v8Zu7FWvQGUNfxOTQToqw' },
+                        '100pct':{ price: 0, url: null } },
+            standard: { none:  { price: 3500, url: 'https://ofas.chula.ac.th/Service/DetailTraining?data=6yj5RYkypZIaSS8zoKWrRA' },
+                        '20pct':{ price: 2800, url: 'https://ofas.chula.ac.th/Service/DetailTraining?data=Lh__Pmmigs2IgchDGa83jA' },
+                        '100pct':{ price: 0, url: null } }
+        },
+        academic: {
+            early:    { none:  { price: 3500, url: 'https://ofas.chula.ac.th/Service/DetailTraining?data=o4cEZKdqAIqhIT8kf5-X2Q' },
+                        '20pct':{ price: 2800, url: 'https://ofas.chula.ac.th/Service/DetailTraining?data=hqI8xQcw8M5pkQv-TAEwig' },
+                        '100pct':{ price: 0, url: null } },
+            standard: { none:  { price: 5500, url: 'https://ofas.chula.ac.th/Service/DetailTraining?data=37xkkPSRrJeiaBg-WDdF0A' },
+                        '20pct':{ price: 4400, url: 'https://ofas.chula.ac.th/Service/DetailTraining?data=YJgIi1xltB27YpRvZYxMmA' },
+                        '100pct':{ price: 0, url: null } }
+        }
+    },
+    non: {
+        all: {
+            early:    { none:  { price: 2500, url: 'https://ofas.chula.ac.th/Service/DetailTraining?data=wFd5cxYh6sGPyv5xM3HZbw' },
+                        '20pct':{ price: 2000, url: 'https://ofas.chula.ac.th/Service/DetailTraining?data=NyDbLMLs1F9z_123qBtHiw' },
+                        '100pct':{ price: 0, url: null } },
+            standard: { none:  { price: 4500, url: 'https://ofas.chula.ac.th/Service/DetailTraining?data=T67Rvql7XsczWPVYUrNTvA' },
+                        '20pct':{ price: 3600, url: 'https://ofas.chula.ac.th/Service/DetailTraining?data=fjJIj8Ww439WWy10dOdh4Q' },
+                        '100pct':{ price: 0, url: null } }
+        }
+    }
+};
+
+
+/* ── Helpers ── */
+function isValidEmail(v){ return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(v); }
+
+function setDotState(n, s){
+    var d = document.getElementById('dot-'+n);
+    d.className = 'step-dot ' + s;
+}
+function setConnState(n, done){
+    var c = document.getElementById('conn-'+n);
+    if(c) c.className = 'step-connector' + (done?' done':'');
+}
+
+function unlock(el){ el.classList.remove('step-locked'); }
+function lock(el){ el.classList.add('step-locked'); }
+
+/* ── Step 1: validate info fields ── */
+function checkInfoStep(){
+    var name  = document.getElementById('fullName').value.trim();
+    var email = document.getElementById('email').value.trim();
+    var step2 = document.getElementById('step-2-inline');
+    if(name.length >= 2 && isValidEmail(email)){
+        state.name  = name;
+        state.email = email;
+        unlock(step2);
+        setDotState(1,'done');
+        setConnState(1, false);
+    } else {
+        lock(step2);
+        // also re-lock downstream
+        lock(document.getElementById('step-3-inline'));
+        setDotState(1,'active');
+        setDotState(2,'inactive');
+        setDotState(3,'inactive');
+    }
+}
+
+/* ── Step 2: select format ── */
+function selectFormat(btn){
+    // deselect others
+    document.querySelectorAll('#formatGrid .choice-btn').forEach(function(b){ b.classList.remove('selected'); });
+    btn.classList.add('selected');
+    state.format = btn.dataset.value;
+    state.status = null;
+
+    setDotState(2,'done');
+    setConnState(1,true);
+
+    var step3 = document.getElementById('step-3-inline');
+    var resultBlock = document.getElementById('result-block');
+    resultBlock.style.display = 'none';
+
+    if(state.format === 'non'){
+        step3.style.display = 'none';
+        setDotState(3,'done');
+        setConnState(2,true);
+        document.getElementById('result-block').style.display = 'none';
+        document.getElementById('student-upload-area').style.display = 'none';
+        showResult();
+    } else {
+        step3.style.display = 'block';
+        document.querySelectorAll('#statusGrid .choice-btn').forEach(function(b){ b.classList.remove('selected'); });
+        unlock(step3);
+        setDotState(3,'active');
+        setConnState(2,false);
+        document.getElementById('result-block').style.display = 'none';
+        document.getElementById('student-upload-area').style.display = 'none';
+    }
+}
+
+/* ── Step 3: select status ── */
+function selectStatus(btn){
+    document.querySelectorAll('#statusGrid .choice-btn').forEach(function(b){ b.classList.remove('selected'); });
+    btn.classList.add('selected');
+    state.status = btn.dataset.value;
+    setDotState(3,'done');
+    setConnState(2,true);
+    showResult();
+}
+
+function handleStudentFile(input){
+    var zone = document.getElementById('student-drop-zone');
+    var txt  = document.getElementById('student-drop-text');
+    var msg  = document.getElementById('studentUploadMsg');
+    if(input.files && input.files[0]){
+        var f = input.files[0];
+        if(f.size > 10 * 1024 * 1024){
+            msg.className='discount-msg error';
+            msg.textContent='File is too large. Maximum size is 10 MB.';
+            input.value='';
+            return;
+        }
+        msg.className='discount-msg'; msg.textContent='';
+        zone.style.borderColor='var(--primary)';
+        zone.style.background='rgba(99,102,241,0.05)';
+        txt.innerHTML='<strong style="color:var(--primary);">📄 '+f.name+'</strong><br><small style="color:var(--text-muted);">'+Math.round(f.size/1024)+' KB — click to change</small>';
+    }
+}
+
+
+function applyPromoCode(){
+    var raw   = document.getElementById('promoInput').value.trim().toUpperCase();
+    var input = document.getElementById('promoInput');
+    var msg   = document.getElementById('promoMsg');
+
+    input.style.borderColor = '';
+    msg.className = 'discount-msg';
+    msg.textContent = '';
+
+    if(!raw){
+        state.activePromo = 'none';
+        updateConfirmButton();
+        return;
+    }
+    if(PROMO_CODES[raw]){
+        state.activePromo = PROMO_CODES[raw];
+        input.style.borderColor = '#16a34a';
+        msg.className = 'discount-msg success';
+        msg.textContent = state.activePromo === '100pct'
+            ? '✓ Code valid! You qualify for 100% free registration. Our team will send you a confirmation email.'
+            : '✓ Code valid! You qualify for a 20% discount. Our team will send you the payment link via email.';
+        updateConfirmButton();
+    } else {
+        state.activePromo = 'none';
+        input.style.borderColor = '#dc2626';
+        msg.className = 'discount-msg error';
+        msg.textContent = '✕ Invalid or expired promo code.';
+        updateConfirmButton();
+    }
+}
+
+function updateConfirmButton(){
+    var btn = document.getElementById('confirmPayBtn');
+    if(!btn) return;
+    if(state.activePromo !== 'none'){
+        btn.textContent = 'Submit Discount Request →';
+        btn.style.background = 'var(--primary)';
+    } else {
+        btn.textContent = 'Proceed to Payment →';
+        btn.style.background = '#16a34a';
+    }
+}
+
+function handlePayNew(event){
+    event.preventDefault();
+    // Validate student document upload
+    if(state.status === 'student' && state.format !== 'non'){
+        var studentInput = document.getElementById('studentDocFile');
+        if(!studentInput || !studentInput.files || !studentInput.files[0]){
+            var uploadMsg = document.getElementById('studentUploadMsg');
+            uploadMsg.className = 'discount-msg error';
+            uploadMsg.textContent = 'Please upload your student verification document before proceeding.';
+            document.getElementById('student-upload-area').scrollIntoView({behavior:'smooth', block:'nearest'});
+            return;
+        }
+    }
+    if(state.activePromo !== 'none'){
+        // Upload student doc + promo → admin review
+        var UPLOAD_URL = (location.hostname==='localhost'||location.hostname==='127.0.0.1')
+            ? location.protocol+'//'+location.hostname+':'+location.port+'/api/upload-document.php'
+            : 'https://icahubthailand.org/admin/ica-cms-php/api/upload-document.php';
+        var fd = new FormData();
+        fd.append('fullName', state.name);
+        fd.append('email', state.email);
+        fd.append('format', state.format);
+        fd.append('attendeeStatus', state.status || '');
+        fd.append('discountTier', state.activePromo);
+        fd.append('promoCode', document.getElementById('promoInput').value.trim().toUpperCase());
+        var studentFile = document.getElementById('studentDocFile');
+        if(studentFile && studentFile.files && studentFile.files[0]){
+            fd.append('document', studentFile.files[0]);
+        }
+        var btn = document.getElementById('confirmPayBtn');
+        btn.textContent = 'Submitting…';
+        btn.style.pointerEvents = 'none';
+        var xhr = new XMLHttpRequest();
+        xhr.onload = function(){
+            document.getElementById('payment-options-block').style.display = 'none';
+            document.getElementById('pending-approval-block').style.display = 'block';
+        };
+        xhr.onerror = function(){
+            // Still show pending on error (fire-and-forget)
+            document.getElementById('payment-options-block').style.display = 'none';
+            document.getElementById('pending-approval-block').style.display = 'block';
+        };
+        xhr.open('POST', UPLOAD_URL);
+        xhr.send(fd);
+    } else {
+        // No promo → direct payment
+        var earlyBird = isEarlyBird();
+        var url = earlyBird ? state.ebUrl : state.stdUrl;
+        if(!url) return;
+        var REGISTER_URL = (location.hostname==='localhost'||location.hostname==='127.0.0.1')
+            ? location.protocol+'//'+location.hostname+':'+location.port+'/api/register.php'
+            : 'https://icahubthailand.org/admin/ica-cms-php/api/register.php';
+        var xhrReg = new XMLHttpRequest();
+        xhrReg.open('POST', REGISTER_URL);
+        xhrReg.setRequestHeader('Content-Type','application/json');
+        xhrReg.send(JSON.stringify({
+            fullName: state.name, email: state.email,
+            format: state.format, attendeeStatus: state.status,
+            rate: earlyBird ? 'early' : 'standard'
+        }));
+        window.open(url, '_blank');
+    }
+}
+
+/* ── Show result ── */
+// Early Bird deadline: 10 May 2026 23:59:59 ICT (UTC+7)
+var EARLY_BIRD_END = new Date('2026-05-10T23:59:59+07:00');
+function isEarlyBird(){ return new Date() <= EARLY_BIRD_END; }
+
+function showResult(){
+    var statusKey  = (state.format==='non') ? 'all' : state.status;
+    var discKey    = 'none';
+    var formatMap  = PRICE_MAP[state.format];
+    var statusData = formatMap[statusKey];
+    var ebData     = statusData.early[discKey];
+    var stdData    = statusData.standard[discKey];
+    var earlyBird  = isEarlyBird();
+
+    // Reset promo code
+    state.activePromo = 'none';
+    var pi = document.getElementById('promoInput');
+    if(pi){ pi.value=''; pi.style.borderColor=''; }
+    var pm = document.getElementById('promoMsg');
+    if(pm){ pm.className='discount-msg'; pm.textContent=''; }
+    document.getElementById('payment-options-block').style.display = 'block';
+    document.getElementById('pending-approval-block').style.display = 'none';
+    updateConfirmButton();
+
+    // Populate summary
+    document.getElementById('sum-name').textContent   = state.name;
+    document.getElementById('sum-email').textContent  = state.email;
+
+    var formatLabels = { onsite:'Onsite / Poster Presenter', virtual:'Virtual Presenter', non:'Non Presenter' };
+    var statusLabels = { student:'Student', academic:'Academic / Faculty / Professional' };
+    document.getElementById('sum-format').textContent = formatLabels[state.format];
+    document.getElementById('sum-status').textContent = (state.format==='non') ? 'All Participants' : statusLabels[state.status];
+
+    // แสดงเฉพาะ card ที่ตรงกับช่วงเวลา + จัดกึ่งกลางเต็มความกว้าง
+    var ebCard    = document.querySelector('.price-card.early');
+    var stdCard   = document.querySelector('.price-card.standard');
+    var cardsWrap = document.querySelector('.price-cards');
+    ebCard.style.display  = earlyBird ? '' : 'none';
+    stdCard.style.display = earlyBird ? 'none' : '';
+    cardsWrap.style.gridTemplateColumns = '1fr';
+    cardsWrap.style.maxWidth  = '100%';
+    cardsWrap.style.margin    = '0 auto';
+
+    // Store URLs in state for handlePayNew()
+    state.ebUrl  = ebData.url;
+    state.stdUrl = stdData.url;
+
+    // Early Bird card
+    document.getElementById('eb-price').textContent = ebData.price.toLocaleString();
+    document.getElementById('eb-original').style.display  = 'none';
+    document.getElementById('eb-disc-badge').style.display = 'none';
+    document.getElementById('eb-price').className = 'pc-price';
+
+    // Standard card
+    document.getElementById('std-price').textContent = stdData.price.toLocaleString();
+    document.getElementById('std-original').style.display  = 'none';
+    document.getElementById('std-disc-badge').style.display = 'none';
+    document.getElementById('std-price').className = 'pc-price';
+
+    // Show/hide student upload inside result block
+    var uploadArea = document.getElementById('student-upload-area');
+    if(uploadArea){
+        if(state.status === 'student'){
+            uploadArea.style.display = 'block';
+            var inp = document.getElementById('studentDocFile');
+            if(inp) inp.value = '';
+            document.getElementById('student-drop-text').innerHTML = 'Click to upload your document<br><small>PDF, JPG, PNG — max 10 MB</small>';
+            document.getElementById('student-drop-zone').style.borderColor = '';
+            document.getElementById('student-drop-zone').style.background = '';
+            document.getElementById('studentUploadMsg').className = 'discount-msg';
+            document.getElementById('studentUploadMsg').textContent = '';
+        } else {
+            uploadArea.style.display = 'none';
+        }
+    }
+
+    document.getElementById('result-block').style.display = 'block';
+    // Smooth scroll to result
+    setTimeout(function(){
+        document.getElementById('result-block').scrollIntoView({behavior:'smooth',block:'nearest'});
+    }, 100);
+}
+
+/* ── Reset all ── */
+function resetAll(){
+    state = { name:'', email:'', format:null, status:null, discountChoice:null, requestPending:false, ebUrl:null, stdUrl:null, activePromo:'none' };
+
+    // Reset form fields
+    document.getElementById('fullName').value = '';
+    document.getElementById('email').value    = '';
+
+    // Reset choices
+    document.querySelectorAll('.choice-btn').forEach(function(b){ b.classList.remove('selected'); });
+
+    // Reset step indicators
+    setDotState(1,'active'); setDotState(2,'inactive'); setDotState(3,'inactive');
+    setConnState(1,false); setConnState(2,false);
+
+    // Re-lock
+    lock(document.getElementById('step-2-inline'));
+    lock(document.getElementById('step-3-inline'));
+
+    // Hide/show sections
+    document.getElementById('step-3-inline').style.display = 'block';
+    document.getElementById('result-block').style.display  = 'none';
+
+    // Reset promo
+    state.activePromo = 'none';
+    var pi = document.getElementById('promoInput');
+    if(pi){ pi.value=''; pi.style.borderColor=''; }
+    var pm = document.getElementById('promoMsg');
+    if(pm){ pm.className='discount-msg'; pm.textContent=''; }
+
+    // Reset student upload
+    document.getElementById('student-upload-area').style.display = 'none';
+    var sf = document.getElementById('studentDocFile');
+    if(sf) sf.value='';
+}
+</script>
+
+
+<script>window.ICA_PAGE="registration-payment";</script>
+<script src="content-loader.js" defer></script>
+<script>
+(function() {
+    var inner = document.getElementById('tickerInner');
+    if (!inner) return;
+    var original = inner.querySelector('span');
+    for (var i = 0; i < 5; i++) {
+        inner.appendChild(original.cloneNode(true));
+    }
+    var spanW = original.offsetWidth + 100;
+    var totalW = spanW * 6;
+    // Match visual speed used across current pages (about 40px/s)
+    var duration = totalW / 240;
+    var style = document.createElement('style');
+    style.textContent = '@keyframes tickerScroll{0%{transform:translateX(0)}100%{transform:translateX(-' + spanW + 'px)}}';
+    document.head.appendChild(style);
+    inner.style.animation = 'tickerScroll ' + duration + 's linear infinite';
+})();
+</script>
+
+</body>
+</html>

@@ -1,0 +1,37 @@
+# ── HTTPS Redirect ──────────────────────────────────────────────
+RewriteEngine On
+RewriteCond %{HTTPS} off
+RewriteRule ^ https://%{HTTP_HOST}%{REQUEST_URI} [L,R=301]
+
+# ── Clean URLs ───────────────────────────────────────────────────
+RewriteRule ^sitemap\.xml$ /sitemap.php [L]
+
+# ── Security Headers ─────────────────────────────────────────────
+<IfModule mod_headers.c>
+    Header always set X-Frame-Options "SAMEORIGIN"
+    Header always set X-Content-Type-Options "nosniff"
+    Header always set X-XSS-Protection "1; mode=block"
+    Header always set Referrer-Policy "strict-origin-when-cross-origin"
+    Header always set Permissions-Policy "geolocation=(), microphone=(), camera=()"
+</IfModule>
+
+# ── Cache static assets ──────────────────────────────────────────
+<IfModule mod_expires.c>
+    ExpiresActive On
+    ExpiresByType image/svg+xml "access plus 1 month"
+    ExpiresByType image/webp "access plus 1 month"
+    ExpiresByType image/png  "access plus 1 month"
+    ExpiresByType image/jpeg "access plus 1 month"
+    ExpiresByType text/css   "access plus 1 week"
+    ExpiresByType application/javascript "access plus 1 week"
+</IfModule>
+
+<IfModule mod_mime.c>
+    AddType image/svg+xml .svg .svgz
+</IfModule>
+
+# ── Hide sensitive files ─────────────────────────────────────────
+<FilesMatch "\.(env|json|md|lock|git)$">
+    Order allow,deny
+    Deny from all
+</FilesMatch>
