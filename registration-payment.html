@@ -512,6 +512,11 @@ a{text-decoration:none;transition:var(--transition)}
                 <div class="dot">3</div>
                 <div class="dot-label">Status</div>
             </div>
+            <div class="conn" id="conn-3"></div>
+            <div class="step-dot inactive" id="dot-4">
+                <div class="dot-circle">4</div>
+                <div class="dot-label">Completion</div>
+            </div>
         </div>
 
         <div class="reg-card">
@@ -636,9 +641,10 @@ a{text-decoration:none;transition:var(--transition)}
                             </div>
                             <!-- Promo code section -->
                             <div style="margin-top:20px;padding-top:20px;border-top:1px solid var(--border);">
-                                <label style="font-size:12px;font-weight:700;letter-spacing:1px;text-transform:uppercase;color:var(--primary);display:block;margin-bottom:8px;">
-                                    Promo Code <span style="font-weight:400;color:var(--text-muted);font-size:11px;text-transform:none;letter-spacing:0;">— optional</span>
-                                </label>
+                                <div style="margin-bottom:12px;">
+                                    <div style="font-size:13px;font-weight:700;color:var(--primary);margin-bottom:4px;">Partner/Sponsor Registration Code <span style="font-weight:400;color:var(--text-muted);font-size:11px;">— optional</span></div>
+                                    <div style="font-size:12px;color:var(--text-muted);line-height:1.6;">As provided in the invitation email, eligible participants may use this code to access a designated registration rate supported by partners or sponsors.</div>
+                                </div>
                                 <div style="display:flex;gap:10px;">
                                     <input id="promoInput" type="text" placeholder="Enter code" maxlength="20"
                                            oninput="this.value=this.value.toUpperCase()"
@@ -806,11 +812,10 @@ document.addEventListener('DOMContentLoaded', function () {
     emailInput.addEventListener('input', checkInfoStep);
 });
 
-/* ── Promo codes ── */
-var PROMO_CODES = {
-    'ICAPARTNER20':  '20pct',
-    'ICAPARTNER100': '100pct'
-};
+/* ── Promo code API base ── */
+var PROMO_API_BASE = (location.hostname==='localhost'||location.hostname==='127.0.0.1')
+    ? location.protocol+'//'+location.hostname+':'+location.port
+    : 'https://icahubthailand.org';
 
 /* ── State ── */
 var state = {
@@ -979,6 +984,7 @@ function applyPromoCode(){
     var raw   = document.getElementById('promoInput').value.trim().toUpperCase();
     var input = document.getElementById('promoInput');
     var msg   = document.getElementById('promoMsg');
+    var applyBtn = document.querySelector('.discount-wrap .apply-btn');
 
     input.style.borderColor = '';
     msg.className = 'discount-msg';
@@ -989,21 +995,47 @@ function applyPromoCode(){
         updateConfirmButton();
         return;
     }
-    if(PROMO_CODES[raw]){
-        state.activePromo = PROMO_CODES[raw];
-        input.style.borderColor = '#16a34a';
-        msg.className = 'discount-msg success';
-        msg.textContent = state.activePromo === '100pct'
-            ? '✓ Code valid! You qualify for 100% free registration. Our team will send you a confirmation email.'
-            : '✓ Code valid! You qualify for a 20% discount. Our team will send you the payment link via email.';
+
+    // Show loading
+    msg.className = 'discount-msg';
+    msg.style.display = 'block';
+    msg.style.color = 'var(--text-muted)';
+    msg.textContent = 'Validating code…';
+    if(applyBtn) applyBtn.disabled = true;
+
+    fetch(PROMO_API_BASE + '/api/validate-promo', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ code: raw })
+    })
+    .then(function(r){ return r.json(); })
+    .then(function(data){
+        if(applyBtn) applyBtn.disabled = false;
+        msg.style.color = '';
+        if(data.valid){
+            state.activePromo = data.discountTier;
+            input.style.borderColor = '#16a34a';
+            msg.className = 'discount-msg success';
+            msg.textContent = data.discountTier === '100pct'
+                ? '✓ Code accepted! You qualify for 100% free registration. Our team will send you a confirmation email.'
+                : '✓ Code accepted! You qualify for a 20% discount. Our team will send you the payment link via email.';
+        } else {
+            state.activePromo = 'none';
+            input.style.borderColor = '#dc2626';
+            msg.className = 'discount-msg error';
+            msg.textContent = '✕ ' + (data.reason || 'Invalid or expired code.');
+        }
         updateConfirmButton();
-    } else {
+    })
+    .catch(function(){
+        // Offline / API unavailable — show generic error
+        if(applyBtn) applyBtn.disabled = false;
         state.activePromo = 'none';
         input.style.borderColor = '#dc2626';
         msg.className = 'discount-msg error';
-        msg.textContent = '✕ Invalid or expired promo code.';
+        msg.textContent = '✕ Unable to validate code. Please try again.';
         updateConfirmButton();
-    }
+    });
 }
 
 function updateConfirmButton(){
@@ -1032,9 +1064,9 @@ function handlePayNew(event){
         }
     }
     if(state.activePromo !== 'none'){
-        // Upload student doc + promo → admin review
+        // Submit discount request with promo code → admin review
         var UPLOAD_URL = (location.hostname==='localhost'||location.hostname==='127.0.0.1')
-            ? location.protocol+'//'+location.hostname+':'+location.port+'/api/upload-document.php'
+            ? location.protocol+'//'+location.hostname+':'+location.port+'/api/discount-request'
             : 'https://icahubthailand.org/admin/ica-cms-php/api/upload-document.php';
         var fd = new FormData();
         fd.append('fullName', state.name);
@@ -1158,6 +1190,8 @@ function showResult(){
         }
     }
 
+    setDotState(4, 'done');
+    setConnState(3, true);
     document.getElementById('result-block').style.display = 'block';
     // Smooth scroll to result
     setTimeout(function(){
@@ -1178,6 +1212,7 @@ function resetAll(){
 
     // Reset step indicators
     setDotState(1,'active'); setDotState(2,'inactive'); setDotState(3,'inactive');
+    setDotState(4,'inactive'); setConnState(3,false);
     setConnState(1,false); setConnState(2,false);
 
     // Re-lock

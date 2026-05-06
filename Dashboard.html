@@ -187,6 +187,13 @@
           All Registrations
           <span class="nav-dot"></span>
         </div>
+        <div class="nav-item" id="nav-promo-codes" onclick="showPanel('promo-codes')">
+          <span class="nav-icon">
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="1" y="4" width="22" height="16" rx="2"/><line x1="1" y1="10" x2="23" y2="10"/></svg>
+          </span>
+          Promo Codes
+          <span class="nav-dot"></span>
+        </div>
       </div>
 
       <div class="sidebar-section" style="display:none">
@@ -1109,9 +1116,88 @@
         </div>
       </div>
 
+      <!-- ── PROMO CODES ──────────────────────────── -->
+      <div class="panel" id="panel-promo-codes">
+        <div class="page-header">
+          <div class="page-header-left">
+            <h2>Promo Codes</h2>
+            <p>Single-use partner/sponsor registration codes — each code can only be used once</p>
+          </div>
+          <div class="page-header-actions">
+            <button class="btn-primary" onclick="showAddCodeModal()">+ Add Code</button>
+          </div>
+        </div>
+
+        <!-- Stats -->
+        <div id="promo-stats-strip" style="display:flex;gap:12px;margin-bottom:20px;flex-wrap:wrap;"></div>
+
+        <!-- Filter -->
+        <div style="display:flex;gap:10px;margin-bottom:16px;flex-wrap:wrap;">
+          <select id="promoFilterStatus" onchange="renderPromoCodes()" style="padding:8px 12px;border:1px solid var(--border);border-radius:8px;font-size:13px;">
+            <option value="all">All Codes</option>
+            <option value="unused">Unused</option>
+            <option value="used">Used</option>
+          </select>
+          <select id="promoFilterTier" onchange="renderPromoCodes()" style="padding:8px 12px;border:1px solid var(--border);border-radius:8px;font-size:13px;">
+            <option value="all">All Tiers</option>
+            <option value="100pct">100% Free</option>
+            <option value="20pct">20% OFF</option>
+          </select>
+        </div>
+
+        <!-- Table -->
+        <div style="background:var(--panel);border:1px solid var(--border);border-radius:var(--radius);overflow:hidden;">
+          <table style="width:100%;border-collapse:collapse;">
+            <thead>
+              <tr style="background:var(--primary);color:#fff;">
+                <th style="padding:12px 16px;text-align:left;font-size:12px;font-weight:700;letter-spacing:0.5px;">CODE</th>
+                <th style="padding:12px 16px;text-align:left;font-size:12px;font-weight:700;letter-spacing:0.5px;">DISCOUNT</th>
+                <th style="padding:12px 16px;text-align:left;font-size:12px;font-weight:700;letter-spacing:0.5px;">CATEGORY</th>
+                <th style="padding:12px 16px;text-align:left;font-size:12px;font-weight:700;letter-spacing:0.5px;">STATUS</th>
+                <th style="padding:12px 16px;text-align:left;font-size:12px;font-weight:700;letter-spacing:0.5px;">USED BY</th>
+                <th style="padding:12px 16px;text-align:left;font-size:12px;font-weight:700;letter-spacing:0.5px;">USED AT</th>
+                <th style="padding:12px 16px;text-align:center;font-size:12px;font-weight:700;letter-spacing:0.5px;">ACTION</th>
+              </tr>
+            </thead>
+            <tbody id="promoTableBody">
+              <tr><td colspan="7" style="padding:40px;text-align:center;color:#64748b;">Loading…</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
     </div><!-- /page-wrapper -->
   </main>
 </div><!-- /dashScreen -->
+
+<!-- Add Promo Code Modal -->
+<div class="modal-overlay" id="addCodeModal" style="display:none;position:fixed;inset:0;background:rgba(0,0,0,0.5);z-index:9999;display:none;align-items:center;justify-content:center;">
+  <div style="background:#fff;border-radius:16px;padding:32px;width:420px;max-width:90vw;">
+    <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:20px;">
+      <h3 style="margin:0;color:#1a3a5f;">Add Promo Code</h3>
+      <button onclick="document.getElementById('addCodeModal').style.display='none'" style="background:none;border:none;font-size:20px;cursor:pointer;">✕</button>
+    </div>
+    <div style="display:flex;flex-direction:column;gap:14px;">
+      <div>
+        <label style="font-size:12px;font-weight:700;color:#64748b;display:block;margin-bottom:6px;">CODE</label>
+        <input id="newCodeInput" type="text" placeholder="e.g. ICA-TH2026-0010" style="width:100%;padding:10px 14px;border:1px solid #e2e8f0;border-radius:8px;font-size:14px;box-sizing:border-box;text-transform:uppercase;">
+      </div>
+      <div>
+        <label style="font-size:12px;font-weight:700;color:#64748b;display:block;margin-bottom:6px;">DISCOUNT TIER</label>
+        <select id="newCodeTier" style="width:100%;padding:10px 14px;border:1px solid #e2e8f0;border-radius:8px;font-size:14px;">
+          <option value="100pct">100% Free</option>
+          <option value="20pct">20% OFF</option>
+        </select>
+      </div>
+      <div>
+        <label style="font-size:12px;font-weight:700;color:#64748b;display:block;margin-bottom:6px;">CATEGORY</label>
+        <input id="newCodeCat" type="text" placeholder="e.g. Presenter (100%)" style="width:100%;padding:10px 14px;border:1px solid #e2e8f0;border-radius:8px;font-size:14px;box-sizing:border-box;">
+      </div>
+      <div id="addCodeMsg" style="font-size:13px;display:none;"></div>
+      <button onclick="submitAddCode()" style="padding:12px;background:#1a3a5f;color:#fff;border:none;border-radius:10px;font-weight:700;font-size:15px;cursor:pointer;">Add Code</button>
+    </div>
+  </div>
+</div>
 
 <!-- Article Modal -->
 <div class="modal-overlay" id="articleModal">
@@ -1307,7 +1393,8 @@ const PANEL_TITLES = {
   tracks:   'Conference Tracks',
   settings:         'Settings',
   discountrequests: 'Discount Requests',
-  registrations:    'All Registrations'
+  registrations:    'All Registrations',
+  'promo-codes':    'Promo Codes'
 };
 
 window.showPanel = function(name) {
@@ -2730,6 +2817,130 @@ onAuthStateChanged(auth, user => {
     setTimeout(() => { _pollUpdates(); setInterval(_pollUpdates, 30000); }, 3000);
   }
 });
+
+/* ══════════════════════════════════════════════════════════
+   PROMO CODES
+══════════════════════════════════════════════════════════ */
+const LOCAL_API = 'http://localhost:4000';
+let allPromoCodes = [];
+
+async function loadPromoCodes() {
+  try {
+    const token = localStorage.getItem('ica_admin_token');
+    const res = await fetch(LOCAL_API + '/api/admin/promo-codes', {
+      headers: { 'Authorization': 'Bearer ' + token }
+    });
+    allPromoCodes = await res.json();
+    renderPromoCodes();
+    renderPromoStats();
+  } catch(e) {
+    document.getElementById('promoTableBody').innerHTML =
+      '<tr><td colspan="7" style="padding:32px;text-align:center;color:#ef4444;">⚠️ Could not load promo codes. Is the local server running?</td></tr>';
+  }
+}
+
+function renderPromoStats() {
+  const total  = allPromoCodes.length;
+  const used   = allPromoCodes.filter(c => c.is_used).length;
+  const unused = total - used;
+  const strip  = document.getElementById('promo-stats-strip');
+  if (!strip) return;
+  strip.innerHTML = [
+    { label: 'Total Codes', val: total,  color: '#1a3a5f' },
+    { label: 'Unused',      val: unused, color: '#16a34a' },
+    { label: 'Used',        val: used,   color: '#dc2626' },
+  ].map(s => `<div style="background:#fff;border:1px solid #e2e8f0;border-radius:10px;padding:12px 20px;min-width:120px;">
+    <div style="font-size:22px;font-weight:800;color:${s.color};">${s.val}</div>
+    <div style="font-size:11px;font-weight:700;color:#64748b;text-transform:uppercase;letter-spacing:0.5px;">${s.label}</div>
+  </div>`).join('');
+}
+
+function renderPromoCodes() {
+  const filterStatus = document.getElementById('promoFilterStatus')?.value || 'all';
+  const filterTier   = document.getElementById('promoFilterTier')?.value   || 'all';
+  let rows = allPromoCodes;
+  if (filterStatus === 'used')   rows = rows.filter(c => c.is_used);
+  if (filterStatus === 'unused') rows = rows.filter(c => !c.is_used);
+  if (filterTier !== 'all')     rows = rows.filter(c => c.discount_tier === filterTier);
+
+  const tbody = document.getElementById('promoTableBody');
+  if (!rows.length) {
+    tbody.innerHTML = '<tr><td colspan="7" style="padding:32px;text-align:center;color:#64748b;">No codes found.</td></tr>';
+    return;
+  }
+  tbody.innerHTML = rows.map(c => {
+    const badge = c.is_used
+      ? '<span style="background:#fee2e2;color:#dc2626;font-size:11px;font-weight:700;padding:3px 10px;border-radius:20px;">USED</span>'
+      : '<span style="background:#dcfce7;color:#16a34a;font-size:11px;font-weight:700;padding:3px 10px;border-radius:20px;">AVAILABLE</span>';
+    const tierLabel = c.discount_tier === '100pct'
+      ? '<span style="background:#fef3c7;color:#92400e;font-size:11px;font-weight:700;padding:3px 10px;border-radius:20px;">100% FREE</span>'
+      : '<span style="background:#e0e7ff;color:#3730a3;font-size:11px;font-weight:700;padding:3px 10px;border-radius:20px;">20% OFF</span>';
+    const usedBy  = c.is_used ? (c.used_by_name || '') + '<br><small style="color:#64748b;">' + (c.used_by_email || '') + '</small>' : '—';
+    const usedAt  = c.is_used && c.used_at ? c.used_at.split(' ')[0] : '—';
+    const actions = c.is_used
+      ? `<button onclick="resetPromoCode(${c.id},'${c.code}')" style="padding:4px 10px;background:#fef3c7;color:#92400e;border:1px solid #fbbf24;border-radius:6px;font-size:11px;font-weight:700;cursor:pointer;">↺ Reset</button>`
+      : `<button onclick="deletePromoCode(${c.id},'${c.code}')" style="padding:4px 10px;background:#fee2e2;color:#dc2626;border:1px solid #fca5a5;border-radius:6px;font-size:11px;font-weight:700;cursor:pointer;">🗑 Delete</button>`;
+    return `<tr style="border-bottom:1px solid #f1f5f9;">
+      <td style="padding:12px 16px;font-family:monospace;font-weight:700;font-size:13px;">${c.code}</td>
+      <td style="padding:12px 16px;">${tierLabel}</td>
+      <td style="padding:12px 16px;font-size:13px;color:#64748b;">${c.category}</td>
+      <td style="padding:12px 16px;">${badge}</td>
+      <td style="padding:12px 16px;font-size:13px;">${usedBy}</td>
+      <td style="padding:12px 16px;font-size:13px;color:#64748b;">${usedAt}</td>
+      <td style="padding:12px 16px;text-align:center;">${actions}</td>
+    </tr>`;
+  }).join('');
+}
+
+function showAddCodeModal() {
+  document.getElementById('addCodeModal').style.display = 'flex';
+  document.getElementById('newCodeInput').value = '';
+  document.getElementById('addCodeMsg').style.display = 'none';
+}
+
+async function submitAddCode() {
+  const code     = document.getElementById('newCodeInput').value.trim().toUpperCase();
+  const tier     = document.getElementById('newCodeTier').value;
+  const category = document.getElementById('newCodeCat').value.trim();
+  const msgEl    = document.getElementById('addCodeMsg');
+  if (!code || !category) { msgEl.style.display='block'; msgEl.style.color='#dc2626'; msgEl.textContent='Please fill in all fields.'; return; }
+  try {
+    const token = localStorage.getItem('ica_admin_token');
+    const res = await fetch(LOCAL_API + '/api/admin/promo-codes', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json', 'Authorization': 'Bearer ' + token },
+      body: JSON.stringify({ code, discountTier: tier, category })
+    });
+    const data = await res.json();
+    if (data.success) {
+      document.getElementById('addCodeModal').style.display = 'none';
+      loadPromoCodes();
+    } else {
+      msgEl.style.display='block'; msgEl.style.color='#dc2626'; msgEl.textContent = data.error || 'Error adding code.';
+    }
+  } catch(e) { msgEl.style.display='block'; msgEl.style.color='#dc2626'; msgEl.textContent='Server error.'; }
+}
+
+async function deletePromoCode(id, code) {
+  if (!confirm('Delete code ' + code + '?')) return;
+  const token = localStorage.getItem('ica_admin_token');
+  await fetch(LOCAL_API + '/api/admin/promo-codes/' + id, { method: 'DELETE', headers: { 'Authorization': 'Bearer ' + token } });
+  loadPromoCodes();
+}
+
+async function resetPromoCode(id, code) {
+  if (!confirm('Reset code ' + code + ' back to unused?')) return;
+  const token = localStorage.getItem('ica_admin_token');
+  await fetch(LOCAL_API + '/api/admin/promo-codes/' + id + '/reset', { method: 'POST', headers: { 'Authorization': 'Bearer ' + token } });
+  loadPromoCodes();
+}
+
+/* Auto-load when switching to panel */
+const _origShowPanelPromo = window.showPanel;
+window.showPanel = function(name) {
+  _origShowPanelPromo(name);
+  if (name === 'promo-codes') loadPromoCodes();
+};
 
 
 </script>

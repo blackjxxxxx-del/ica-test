@@ -68,9 +68,41 @@ db.exec(`
         payment_status          TEXT    NOT NULL DEFAULT 'pending',
         discount_approval_status TEXT   NOT NULL DEFAULT 'not_required',
         document_filename       TEXT,
-        document_original_name  TEXT
+        document_original_name  TEXT,
+        promo_code              TEXT
+    );
+
+    CREATE TABLE IF NOT EXISTS promo_codes (
+        id            INTEGER PRIMARY KEY AUTOINCREMENT,
+        code          TEXT    NOT NULL UNIQUE,
+        discount_tier TEXT    NOT NULL,   -- '20pct' or '100pct'
+        category      TEXT    NOT NULL,   -- e.g. 'Presenter 100%', 'Non-presenter 20%'
+        is_used       INTEGER NOT NULL DEFAULT 0,
+        used_by_name  TEXT,
+        used_by_email TEXT,
+        used_at       TEXT,
+        created_at    TEXT    DEFAULT (datetime('now','localtime'))
     );
 `);
+
+/* ── Seed promo codes (skip if already exist) ─── */
+const INITIAL_CODES = [
+    /* Presenter — 100% discount */
+    ...['0001','0002','0003','0004','0005','0006','0007','0008','0009']
+        .map(n => ({ code: `ICA-TH2026-${n}`,       tier: '100pct', cat: 'Presenter (100%)' })),
+    /* Non-presenter — 20% discount */
+    ...['N001','N002','N003']
+        .map(n => ({ code: `ICA-TH2026-${n}`,       tier: '20pct',  cat: 'Non-presenter (20%)' })),
+    /* Non-presenter Nitade — 100% discount */
+    ...Array.from({length:16},(_,i)=>String(i+1).padStart(3,'0'))
+        .map(n => ({ code: `ICA-TH2026-Nitade${n}`, tier: '100pct', cat: 'Non-presenter Nitade (100%)' })),
+];
+
+const insertCode = db.prepare(`
+    INSERT OR IGNORE INTO promo_codes (code, discount_tier, category)
+    VALUES (@code, @tier, @cat)
+`);
+for (const row of INITIAL_CODES) insertCode.run(row);
 
 /* ══════════════════════════════════════════════════════════
    PRICE MAP  (mirrors registration-payment.html)
@@ -269,34 +301,62 @@ app.post('/api/register', (req, res) => {
     res.json({ id: result.lastInsertRowid, paymentUrl: priceData.url });
 });
 
-// POST /api/discount-request — submit discount request with document
+// POST /api/discount-request — submit discount request with document + single-use promo code
 app.post('/api/discount-request', upload.single('document'), async (req, res) => {
     try {
-        const { fullName, email, format, attendeeStatus, discountTier } = req.body;
+        const { fullName, email, format, attendeeStatus, discountTier, promoCode } = req.body;
         if (!fullName || !email || !format || !discountTier)
             return res.status(400).json({ error: 'Missing required fields' });
         if (!['20pct', '100pct'].includes(discountTier))
             return res.status(400).json({ error: 'Invalid discount tier' });
-        if (!req.file)
-            return res.status(400).json({ error: 'Supporting document is required' });
+
+        // Validate & lock promo code atomically
+        let resolvedCode = null;
+        if (promoCode) {
+            const codeUpper = promoCode.trim().toUpperCase();
+            const codeRow = db.prepare('SELECT * FROM promo_codes WHERE UPPER(code) = ?').get(codeUpper);
+            if (!codeRow)         return res.status(400).json({ error: 'Invalid promo code' });
+            if (codeRow.is_used)  return res.status(400).json({ error: 'This promo code has already been used' });
+            if (codeRow.discount_tier !== discountTier)
+                return res.status(400).json({ error: 'Code does not match the selected discount tier' });
+            // Mark as used immediately
+            db.prepare(`
+                UPDATE promo_codes SET is_used=1, used_by_name=?, used_by_email=?,
+                    used_at=datetime('now','localtime') WHERE id=?
+            `).run(fullName, email, codeRow.id);
+            resolvedCode = codeRow.code;
+        }
 
         const result = db.prepare(`
             INSERT INTO registrations
                 (full_name, email, format, attendee_status, discount_tier,
                  payment_status, discount_approval_status,
-                 document_filename, document_original_name)
-            VALUES (?, ?, ?, ?, ?, 'pending', 'pending', ?, ?)
+                 document_filename, document_original_name, promo_code)
+            VALUES (?, ?, ?, ?, ?, 'pending', 'pending', ?, ?, ?)
         `).run(fullName, email, format, attendeeStatus || null, discountTier,
-               req.file.filename, req.file.originalname);
+               req.file ? req.file.filename : null,
+               req.file ? req.file.originalname : null,
+               resolvedCode);
 
-        res.json({ id: result.lastInsertRowid, message: 'Discount request submitted. You will receive an email once reviewed.' });
+        res.json({ id: result.lastInsertRowid, message: 'Request submitted. You will receive an email once reviewed.' });
     } catch (err) {
         console.error(err);
-        // Clean up uploaded file if DB fails
         if (req.file && fs.existsSync(path.join(UPLOADS_DIR, req.file.filename)))
             fs.unlinkSync(path.join(UPLOADS_DIR, req.file.filename));
         res.status(500).json({ error: err.message });
     }
+});
+
+// POST /api/validate-promo — check if a promo code is valid & unused
+app.post('/api/validate-promo', (req, res) => {
+    const code = (req.body.code || '').trim().toUpperCase();
+    if (!code) return res.status(400).json({ valid: false, reason: 'No code provided' });
+
+    const row = db.prepare('SELECT * FROM promo_codes WHERE UPPER(code) = ?').get(code);
+    if (!row)        return res.json({ valid: false, reason: 'Invalid code' });
+    if (row.is_used) return res.json({ valid: false, reason: 'This code has already been used' });
+
+    res.json({ valid: true, discountTier: row.discount_tier, category: row.category, displayCode: row.code });
 });
 
 /* ══════════════════════════════════════════════════════════
@@ -364,6 +424,44 @@ app.post('/api/admin/discount-requests/:id/reject', adminAuth, async (req, res) 
 // POST /api/admin/registrations/:id/mark-paid
 app.post('/api/admin/registrations/:id/mark-paid', adminAuth, (req, res) => {
     db.prepare(`UPDATE registrations SET payment_status = 'paid' WHERE id = ?`).run(req.params.id);
+    res.json({ success: true });
+});
+
+// GET /api/admin/promo-codes — list all codes
+app.get('/api/admin/promo-codes', adminAuth, (req, res) => {
+    const rows = db.prepare('SELECT * FROM promo_codes ORDER BY category, code').all();
+    res.json(rows);
+});
+
+// POST /api/admin/promo-codes — add new code
+app.post('/api/admin/promo-codes', adminAuth, (req, res) => {
+    const { code, discountTier, category } = req.body;
+    if (!code || !discountTier || !category)
+        return res.status(400).json({ error: 'Missing fields: code, discountTier, category' });
+    if (!['20pct', '100pct'].includes(discountTier))
+        return res.status(400).json({ error: 'discountTier must be 20pct or 100pct' });
+    try {
+        db.prepare('INSERT INTO promo_codes (code, discount_tier, category) VALUES (?, ?, ?)')
+          .run(code.trim().toUpperCase(), discountTier, category);
+        res.json({ success: true });
+    } catch (e) {
+        res.status(400).json({ error: 'Code already exists' });
+    }
+});
+
+// DELETE /api/admin/promo-codes/:id — remove a code (only if unused)
+app.delete('/api/admin/promo-codes/:id', adminAuth, (req, res) => {
+    const row = db.prepare('SELECT * FROM promo_codes WHERE id=?').get(req.params.id);
+    if (!row) return res.status(404).json({ error: 'Not found' });
+    if (row.is_used) return res.status(400).json({ error: 'Cannot delete a used code' });
+    db.prepare('DELETE FROM promo_codes WHERE id=?').run(req.params.id);
+    res.json({ success: true });
+});
+
+// POST /api/admin/promo-codes/:id/reset — reset used code back to unused
+app.post('/api/admin/promo-codes/:id/reset', adminAuth, (req, res) => {
+    db.prepare(`UPDATE promo_codes SET is_used=0, used_by_name=NULL, used_by_email=NULL, used_at=NULL WHERE id=?`)
+      .run(req.params.id);
     res.json({ success: true });
 });
 
