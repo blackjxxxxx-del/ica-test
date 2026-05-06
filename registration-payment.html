@@ -67,19 +67,19 @@ a{text-decoration:none;transition:var(--transition)}
 .reg-section{padding:60px 0 80px;background:var(--light-bg)}
 
 /* Step indicator */
-.step-indicator{display:flex;align-items:center;justify-content:center;gap:0;margin-bottom:48px}
-.step-dot{display:flex;flex-direction:column;align-items:center;gap:6px;position:relative;z-index:1}
-.step-dot .dot{width:36px;height:36px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-weight:700;font-size:14px;transition:all 0.3s;border:2px solid transparent}
-.step-dot .dot-label{font-size:11px;font-weight:600;letter-spacing:0.5px;text-transform:uppercase;white-space:nowrap;transition:color 0.3s}
+.step-indicator{display:flex;align-items:flex-start;justify-content:center;gap:0;margin-bottom:48px}
+.step-dot{display:flex;flex-direction:column;align-items:center;gap:10px;position:relative;z-index:1;flex:0 0 112px;max-width:112px;text-align:center}
+.step-dot .dot{width:44px;height:44px;border-radius:999px;display:flex;align-items:center;justify-content:center;font-weight:800;font-size:18px;line-height:1;transition:all 0.3s;border:2px solid transparent}
+.step-dot .dot-label{font-size:11px;font-weight:700;letter-spacing:1px;text-transform:uppercase;white-space:normal;line-height:1.25;min-height:28px;transition:color 0.3s}
 .step-dot.inactive .dot{background:#e2e8f0;color:#94a3b8;border-color:#e2e8f0}
 .step-dot.inactive .dot-label{color:#94a3b8}
-.step-dot.active .dot{background:var(--primary);color:white;border-color:var(--primary);box-shadow:0 4px 14px rgba(26,58,95,0.35)}
-.step-dot.active .dot-label{color:var(--primary);font-weight:700}
-.step-dot.done .dot{background:#22c55e;color:white;border-color:#22c55e}
+.step-dot.active .dot{background:var(--primary);color:white;border-color:var(--primary);box-shadow:0 8px 22px rgba(26,58,95,0.24)}
+.step-dot.active .dot-label{color:var(--primary)}
+.step-dot.done .dot{background:#22c55e;color:white;border-color:#22c55e;box-shadow:0 8px 20px rgba(34,197,94,0.22)}
 .step-dot.done .dot-label{color:#16a34a}
-.step-connector{flex:1;max-width:80px;height:2px;background:#e2e8f0;margin:0 4px;margin-bottom:22px;transition:background 0.3s}
+.step-connector{flex:0 1 96px;max-width:96px;height:2px;background:#e2e8f0;margin:21px 10px 0;transition:background 0.3s}
 .step-connector.done{background:#22c55e}
-@media(max-width:480px){.step-connector{max-width:28px}.step-dot .dot-label{font-size:9px}}
+@media(max-width:640px){.step-dot{flex-basis:78px;max-width:78px}.step-dot .dot{width:38px;height:38px;font-size:16px}.step-dot .dot-label{font-size:9px;letter-spacing:.8px;min-height:22px}.step-connector{flex-basis:36px;max-width:36px;margin:18px 6px 0}}
 
 /* Card */
 .reg-card{background:var(--white);border-radius:20px;border:1px solid var(--border);box-shadow:0 4px 24px rgba(26,58,95,0.07);max-width:720px;margin:0 auto;padding:40px 48px}
@@ -512,9 +512,9 @@ a{text-decoration:none;transition:var(--transition)}
                 <div class="dot">3</div>
                 <div class="dot-label">Status</div>
             </div>
-            <div class="conn" id="conn-3"></div>
+            <div class="step-connector" id="conn-3"></div>
             <div class="step-dot inactive" id="dot-4">
-                <div class="dot-circle">4</div>
+                <div class="dot">4</div>
                 <div class="dot-label">Completion</div>
             </div>
         </div>
