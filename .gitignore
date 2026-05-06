@@ -14,3 +14,7 @@ api/uploads/
 # Logs
 *.log
 npm-debug.log*
+
+# PHP CMS secrets / runtime uploads
+admin/ica-cms-php/config.php
+admin/ica-cms-php/uploads/
