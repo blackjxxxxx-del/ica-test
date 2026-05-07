@@ -124,8 +124,14 @@ $stmt  = $db->prepare($sql);
 $stmt->execute($params);
 $rows  = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
+// Base URL for uploaded documents (admin-accessible)
+$docBase = (
+    isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] === 'on'
+        ? 'https://' : 'http://'
+) . ($_SERVER['HTTP_HOST'] ?? 'icahubthailand.org') . '/admin/ica-cms-php/uploads/registrations/';
+
 // แปลง field names ให้ตรงกับที่ Dashboard ใช้
-$result = array_map(function($r) {
+$result = array_map(function($r) use ($docBase) {
     return [
         'id'                     => $r['id'],
         'fullName'               => $r['full_name'],
@@ -140,6 +146,8 @@ $result = array_map(function($r) {
         'discountApprovalStatus' => $r['discount_approval_status'],
         'documentFilename'       => $r['document_filename'],
         'documentOriginalName'   => $r['document_original_name'],
+        'documentUrl'            => $r['document_filename'] ? $docBase . rawurlencode($r['document_filename']) : null,
+        'promoCode'              => $r['promo_code'] ?? null,
         'createdAt'              => $r['created_at'],
     ];
 }, $rows);

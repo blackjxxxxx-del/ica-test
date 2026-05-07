@@ -812,10 +812,10 @@ document.addEventListener('DOMContentLoaded', function () {
     emailInput.addEventListener('input', checkInfoStep);
 });
 
-/* ── Promo code API base ── */
-var PROMO_API_BASE = (location.hostname==='localhost'||location.hostname==='127.0.0.1')
-    ? location.protocol+'//'+location.hostname+':4000'
-    : 'https://icahubthailand.org';
+/* ── PHP CMS API base ── */
+var PHP_CMS_BASE = (location.hostname==='localhost'||location.hostname==='127.0.0.1')
+    ? location.protocol+'//'+location.hostname+(location.port?':'+location.port:'')+'/admin/ica-cms-php/api'
+    : 'https://icahubthailand.org/admin/ica-cms-php/api';
 
 /* ── State ── */
 var state = {
@@ -1003,10 +1003,10 @@ function applyPromoCode(){
     msg.textContent = 'Validating code…';
     if(applyBtn) applyBtn.disabled = true;
 
-    fetch(PROMO_API_BASE + '/api/validate-promo', {
+    fetch(PHP_CMS_BASE + '/promo-codes.php', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ code: raw })
+        body: JSON.stringify({ action: 'validate', code: raw })
     })
     .then(function(r){ return r.json(); })
     .then(function(data){
@@ -1065,9 +1065,7 @@ function handlePayNew(event){
     }
     if(state.activePromo !== 'none'){
         // Submit discount request with promo code → admin review
-        var UPLOAD_URL = (location.hostname==='localhost'||location.hostname==='127.0.0.1')
-            ? location.protocol+'//'+location.hostname+':4000/api/discount-request'
-            : 'https://icahubthailand.org/api/discount-request';
+        var UPLOAD_URL = PHP_CMS_BASE + '/discount-request.php';
         var fd = new FormData();
         fd.append('fullName', state.name);
         fd.append('email', state.email);
@@ -1099,9 +1097,7 @@ function handlePayNew(event){
         var earlyBird = isEarlyBird();
         var url = earlyBird ? state.ebUrl : state.stdUrl;
         if(!url) return;
-        var REGISTER_URL = (location.hostname==='localhost'||location.hostname==='127.0.0.1')
-            ? location.protocol+'//'+location.hostname+':4000/api/register'
-            : 'https://icahubthailand.org/api/register';
+        var REGISTER_URL = PHP_CMS_BASE + '/register.php';
         var xhrReg = new XMLHttpRequest();
         xhrReg.open('POST', REGISTER_URL);
         xhrReg.setRequestHeader('Content-Type','application/json');

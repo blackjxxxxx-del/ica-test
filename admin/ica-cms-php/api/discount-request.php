@@ -17,6 +17,7 @@ $email       = trim($_POST['email']          ?? '');
 $format      = trim($_POST['format']         ?? '');
 $attendeeSts = trim($_POST['attendeeStatus'] ?? '');
 $discTier    = trim($_POST['discountTier']   ?? '');
+$promoCode   = strtoupper(trim($_POST['promoCode'] ?? ''));
 
 // Validate required fields
 if (!$fullName || !$email || !$format || !$discTier) {
@@ -71,15 +72,71 @@ if (!move_uploaded_file($file['tmp_name'], $destPath)) {
     exit;
 }
 
+// Validate & lock promo code (if provided)
+$resolvedCode = null;
+if ($promoCode) {
+    // Include promo-codes logic inline to avoid circular dependency
+    $db = getDB();
+
+    // Ensure promo_codes table exists
+    $db->exec("CREATE TABLE IF NOT EXISTS `promo_codes` (
+        `id` int(11) NOT NULL AUTO_INCREMENT,
+        `code` varchar(100) NOT NULL,
+        `discount_tier` varchar(20) NOT NULL,
+        `category` varchar(100) NOT NULL,
+        `is_used` tinyint(1) NOT NULL DEFAULT 0,
+        `used_by_name` varchar(255) DEFAULT NULL,
+        `used_by_email` varchar(255) DEFAULT NULL,
+        `used_at` datetime DEFAULT NULL,
+        `created_at` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
+        PRIMARY KEY (`id`),
+        UNIQUE KEY `promo_codes_code_uq` (`code`)
+    ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci");
+
+    $stmt = $db->prepare("SELECT * FROM promo_codes WHERE UPPER(code) = ?");
+    $stmt->execute([$promoCode]);
+    $codeRow = $stmt->fetch(PDO::FETCH_ASSOC);
+
+    if (!$codeRow) {
+        @unlink($destPath);
+        http_response_code(400);
+        echo json_encode(['error' => 'Invalid promo code']);
+        exit;
+    }
+    if ($codeRow['is_used']) {
+        @unlink($destPath);
+        http_response_code(400);
+        echo json_encode(['error' => 'This promo code has already been used']);
+        exit;
+    }
+    if ($codeRow['discount_tier'] !== $discTier) {
+        @unlink($destPath);
+        http_response_code(400);
+        echo json_encode(['error' => 'Code does not match the selected discount tier']);
+        exit;
+    }
+
+    // Mark code as used atomically
+    $db->prepare("UPDATE promo_codes SET is_used=1, used_by_name=?, used_by_email=?, used_at=NOW() WHERE id=?")
+       ->execute([$fullName, $email, $codeRow['id']]);
+
+    $resolvedCode = $codeRow['code'];
+}
+
 // Insert to database
 try {
-    $db = getDB();
+    $db = $db ?? getDB();
+
+    // Ensure promo_code column exists on registrations
+    try { $db->exec("ALTER TABLE registrations ADD COLUMN `promo_code` varchar(100) DEFAULT NULL"); }
+    catch (Exception $e) { /* already exists */ }
+
     $db->prepare("
         INSERT INTO registrations
             (full_name, email, format, attendee_status, discount_tier,
              payment_status, discount_approval_status,
-             document_filename, document_original_name)
-        VALUES (?, ?, ?, ?, ?, 'pending', 'pending', ?, ?)
+             document_filename, document_original_name, promo_code)
+        VALUES (?, ?, ?, ?, ?, 'pending', 'pending', ?, ?, ?)
     ")->execute([
         $fullName,
         $email,
@@ -88,6 +145,7 @@ try {
         $discTier,
         $savedFilename,
         $file['name'],
+        $resolvedCode,
     ]);
 
     echo json_encode(['id' => $db->lastInsertId(), 'message' => 'Discount request submitted successfully']);
