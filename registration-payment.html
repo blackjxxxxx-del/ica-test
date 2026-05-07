@@ -666,8 +666,12 @@ a{text-decoration:none;transition:var(--transition)}
                                 <div style="font-size:44px;margin-bottom:12px;">📧</div>
                                 <div style="font-weight:700;font-size:18px;margin-bottom:10px;">Request Submitted!</div>
                                 <div style="color:var(--text-muted);font-size:14px;line-height:1.7;">
-                                    Your discount request has been submitted for review.<br>
+                                    Your request has been submitted for review.<br>
                                     Once approved, you will receive an email with your payment link.
+                                </div>
+                                <div style="margin-top:18px;padding:14px 18px;background:#fff8e1;border:1.5px solid #f59e0b;border-radius:10px;text-align:left;">
+                                    <span style="font-weight:800;color:#b45309;font-size:13px;">⚠️ Important:</span>
+                                    <span style="color:#78350f;font-size:13px;line-height:1.6;"> Please wait for a confirmation email (within 1 working day) before proceeding with the payment.</span>
                                 </div>
                             </div>
                         </div>
@@ -1044,6 +1048,9 @@ function updateConfirmButton(){
     if(state.activePromo !== 'none'){
         btn.textContent = 'Submit Discount Request →';
         btn.style.background = 'var(--primary)';
+    } else if(state.status === 'student'){
+        btn.textContent = 'Submit for Verification →';
+        btn.style.background = 'var(--primary)';
     } else {
         btn.textContent = 'Proceed to Payment →';
         btn.style.background = '#16a34a';
@@ -1052,7 +1059,8 @@ function updateConfirmButton(){
 
 function handlePayNew(event){
     event.preventDefault();
-    // Validate student document upload
+
+    // Students must upload their student ID before submitting
     if(state.status === 'student' && state.format !== 'non'){
         var studentInput = document.getElementById('studentDocFile');
         if(!studentInput || !studentInput.files || !studentInput.files[0]){
@@ -1063,16 +1071,18 @@ function handlePayNew(event){
             return;
         }
     }
-    if(state.activePromo !== 'none'){
-        // Submit discount request with promo code → admin review
-        var UPLOAD_URL = PHP_CMS_BASE + '/discount-request.php';
+
+    // Admin-review path: promo code users OR student status
+    if(state.activePromo !== 'none' || state.status === 'student'){
         var fd = new FormData();
         fd.append('fullName', state.name);
         fd.append('email', state.email);
         fd.append('format', state.format);
         fd.append('attendeeStatus', state.status || '');
-        fd.append('discountTier', state.activePromo);
-        fd.append('promoCode', document.getElementById('promoInput').value.trim().toUpperCase());
+        fd.append('discountTier', state.activePromo !== 'none' ? state.activePromo : 'none');
+        if(state.activePromo !== 'none'){
+            fd.append('promoCode', document.getElementById('promoInput').value.trim().toUpperCase());
+        }
         var studentFile = document.getElementById('studentDocFile');
         if(studentFile && studentFile.files && studentFile.files[0]){
             fd.append('document', studentFile.files[0]);
@@ -1081,25 +1091,19 @@ function handlePayNew(event){
         btn.textContent = 'Submitting…';
         btn.style.pointerEvents = 'none';
         var xhr = new XMLHttpRequest();
-        xhr.onload = function(){
+        xhr.onload = xhr.onerror = function(){
             document.getElementById('payment-options-block').style.display = 'none';
             document.getElementById('pending-approval-block').style.display = 'block';
         };
-        xhr.onerror = function(){
-            // Still show pending on error (fire-and-forget)
-            document.getElementById('payment-options-block').style.display = 'none';
-            document.getElementById('pending-approval-block').style.display = 'block';
-        };
-        xhr.open('POST', UPLOAD_URL);
+        xhr.open('POST', PHP_CMS_BASE + '/discount-request.php');
         xhr.send(fd);
     } else {
-        // No promo → direct payment
+        // Direct payment: academic / non-presenter without promo code
         var earlyBird = isEarlyBird();
         var url = earlyBird ? state.ebUrl : state.stdUrl;
         if(!url) return;
-        var REGISTER_URL = PHP_CMS_BASE + '/register.php';
         var xhrReg = new XMLHttpRequest();
-        xhrReg.open('POST', REGISTER_URL);
+        xhrReg.open('POST', PHP_CMS_BASE + '/register.php');
         xhrReg.setRequestHeader('Content-Type','application/json');
         xhrReg.send(JSON.stringify({
             fullName: state.name, email: state.email,

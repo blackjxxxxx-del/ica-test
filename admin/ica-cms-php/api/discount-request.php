@@ -30,46 +30,58 @@ if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
     echo json_encode(['error' => 'Invalid email']);
     exit;
 }
-if (!in_array($discTier, ['20pct', '100pct'])) {
+if (!in_array($discTier, ['20pct', '100pct', 'none'])) {
     http_response_code(400);
     echo json_encode(['error' => 'Invalid discount tier']);
     exit;
 }
 
-// Validate file upload
-if (empty($_FILES['document']) || $_FILES['document']['error'] !== UPLOAD_ERR_OK) {
+// Document required for student verification (discountTier=none) and optional for promo code tiers
+$hasDocument = !empty($_FILES['document']) && $_FILES['document']['error'] === UPLOAD_ERR_OK;
+if (!$hasDocument && $discTier === 'none') {
     http_response_code(400);
-    echo json_encode(['error' => 'Supporting document is required']);
+    echo json_encode(['error' => 'Supporting document is required for student verification']);
     exit;
 }
-
-$file     = $_FILES['document'];
-$maxSize  = 10 * 1024 * 1024; // 10 MB
-$allowExt = ['pdf', 'jpg', 'jpeg', 'png'];
-$ext      = strtolower(pathinfo($file['name'], PATHINFO_EXTENSION));
-
-if ($file['size'] > $maxSize) {
-    http_response_code(400);
-    echo json_encode(['error' => 'File too large. Maximum size is 10 MB']);
-    exit;
-}
-if (!in_array($ext, $allowExt)) {
-    http_response_code(400);
-    echo json_encode(['error' => 'Only PDF, JPG, PNG files are allowed']);
-    exit;
+if (!$hasDocument && in_array($discTier, ['20pct', '100pct'])) {
+    // Promo code tiers: document upload is optional — skip file handling
+    $hasDocument = false;
 }
 
-// Save file
-$uploadDir = __DIR__ . '/../uploads/registrations/';
-if (!is_dir($uploadDir)) mkdir($uploadDir, 0755, true);
+$savedFilename = null;
+$originalName  = null;
+$destPath      = null;
 
-$savedFilename = uniqid('doc_') . '_' . time() . '.' . $ext;
-$destPath      = $uploadDir . $savedFilename;
+if ($hasDocument) {
+    $file     = $_FILES['document'];
+    $maxSize  = 10 * 1024 * 1024; // 10 MB
+    $allowExt = ['pdf', 'jpg', 'jpeg', 'png'];
+    $ext      = strtolower(pathinfo($file['name'], PATHINFO_EXTENSION));
 
-if (!move_uploaded_file($file['tmp_name'], $destPath)) {
-    http_response_code(500);
-    echo json_encode(['error' => 'Failed to save document']);
-    exit;
+    if ($file['size'] > $maxSize) {
+        http_response_code(400);
+        echo json_encode(['error' => 'File too large. Maximum size is 10 MB']);
+        exit;
+    }
+    if (!in_array($ext, $allowExt)) {
+        http_response_code(400);
+        echo json_encode(['error' => 'Only PDF, JPG, PNG files are allowed']);
+        exit;
+    }
+
+    // Save file
+    $uploadDir = __DIR__ . '/../uploads/registrations/';
+    if (!is_dir($uploadDir)) mkdir($uploadDir, 0755, true);
+
+    $savedFilename = uniqid('doc_') . '_' . time() . '.' . $ext;
+    $destPath      = $uploadDir . $savedFilename;
+    $originalName  = $file['name'];
+
+    if (!move_uploaded_file($file['tmp_name'], $destPath)) {
+        http_response_code(500);
+        echo json_encode(['error' => 'Failed to save document']);
+        exit;
+    }
 }
 
 // Validate & lock promo code (if provided)
@@ -144,14 +156,14 @@ try {
         $attendeeSts ?: null,
         $discTier,
         $savedFilename,
-        $file['name'],
+        $originalName,
         $resolvedCode,
     ]);
 
     echo json_encode(['id' => $db->lastInsertId(), 'message' => 'Discount request submitted successfully']);
 } catch (Exception $e) {
     // Clean up uploaded file if DB fails
-    @unlink($destPath);
+    if ($destPath) @unlink($destPath);
     http_response_code(500);
     echo json_encode(['error' => 'Database error']);
 }

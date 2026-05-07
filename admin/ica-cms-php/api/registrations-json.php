@@ -14,11 +14,36 @@ require_once __DIR__ . '/../includes/db.php';
 require_once __DIR__ . '/../includes/mailer.php';
 
 $PRICE_MAP = [
-    'onsite'  => ['student' => ['early' => ['20pct' => ['price'=>2400,'url'=>'https://ofas.chula.ac.th/Service/DetailTraining?data=VMTejit_AIMZyEV-WIsB4w']], 'standard' => ['20pct' => ['price'=>3600,'url'=>'https://ofas.chula.ac.th/Service/DetailTraining?data=Ohsi8u1aEML0teGkThWVwQ']]],
-                  'academic' => ['early' => ['20pct' => ['price'=>4000,'url'=>'https://ofas.chula.ac.th/Service/DetailTraining?data=Kx-hxOTLzC6iS19WxA7g4w']], 'standard' => ['20pct' => ['price'=>6400,'url'=>'https://ofas.chula.ac.th/Service/DetailTraining?data=Vxp7PXyRrXhY2VNClLwxeA']]]],
-    'virtual' => ['student' => ['early' => ['20pct' => ['price'=>1600,'url'=>'https://ofas.chula.ac.th/Service/DetailTraining?data=_v8Zu7FWvQGUNfxOTQToqw']], 'standard' => ['20pct' => ['price'=>2800,'url'=>'https://ofas.chula.ac.th/Service/DetailTraining?data=Lh__Pmmigs2IgchDGa83jA']]],
-                  'academic' => ['early' => ['20pct' => ['price'=>2800,'url'=>'https://ofas.chula.ac.th/Service/DetailTraining?data=hqI8xQcw8M5pkQv-TAEwig']], 'standard' => ['20pct' => ['price'=>4400,'url'=>'https://ofas.chula.ac.th/Service/DetailTraining?data=YJgIi1xltB27YpRvZYxMmA']]]],
-    'non'     => ['all' => ['early' => ['20pct' => ['price'=>2000,'url'=>'https://ofas.chula.ac.th/Service/DetailTraining?data=NyDbLMLs1F9z_123qBtHiw']], 'standard' => ['20pct' => ['price'=>3600,'url'=>'https://ofas.chula.ac.th/Service/DetailTraining?data=fjJIj8Ww439WWy10dOdh4Q']]]],
+    'onsite'  => [
+        'student'  => [
+            'early'    => ['none' => ['price'=>3000,'url'=>'https://ofas.chula.ac.th/Service/DetailTraining?data=9aiLPPbPYWmBMdu3a5XIDQ'],
+                           '20pct' => ['price'=>2400,'url'=>'https://ofas.chula.ac.th/Service/DetailTraining?data=VMTejit_AIMZyEV-WIsB4w']],
+            'standard' => ['none' => ['price'=>4500,'url'=>'https://ofas.chula.ac.th/Service/DetailTraining?data=CRXtjZ4Z1cGoZMJhISte6g'],
+                           '20pct' => ['price'=>3600,'url'=>'https://ofas.chula.ac.th/Service/DetailTraining?data=Ohsi8u1aEML0teGkThWVwQ']],
+        ],
+        'academic' => [
+            'early'    => ['20pct' => ['price'=>4000,'url'=>'https://ofas.chula.ac.th/Service/DetailTraining?data=Kx-hxOTLzC6iS19WxA7g4w']],
+            'standard' => ['20pct' => ['price'=>6400,'url'=>'https://ofas.chula.ac.th/Service/DetailTraining?data=Vxp7PXyRrXhY2VNClLwxeA']],
+        ],
+    ],
+    'virtual' => [
+        'student'  => [
+            'early'    => ['none' => ['price'=>2000,'url'=>'https://ofas.chula.ac.th/Service/DetailTraining?data=yYaWaIkEK7m70pjvlb7yqQ'],
+                           '20pct' => ['price'=>1600,'url'=>'https://ofas.chula.ac.th/Service/DetailTraining?data=_v8Zu7FWvQGUNfxOTQToqw']],
+            'standard' => ['none' => ['price'=>3500,'url'=>'https://ofas.chula.ac.th/Service/DetailTraining?data=6yj5RYkypZIaSS8zoKWrRA'],
+                           '20pct' => ['price'=>2800,'url'=>'https://ofas.chula.ac.th/Service/DetailTraining?data=Lh__Pmmigs2IgchDGa83jA']],
+        ],
+        'academic' => [
+            'early'    => ['20pct' => ['price'=>2800,'url'=>'https://ofas.chula.ac.th/Service/DetailTraining?data=hqI8xQcw8M5pkQv-TAEwig']],
+            'standard' => ['20pct' => ['price'=>4400,'url'=>'https://ofas.chula.ac.th/Service/DetailTraining?data=YJgIi1xltB27YpRvZYxMmA']],
+        ],
+    ],
+    'non'     => [
+        'all' => [
+            'early'    => ['20pct' => ['price'=>2000,'url'=>'https://ofas.chula.ac.th/Service/DetailTraining?data=NyDbLMLs1F9z_123qBtHiw']],
+            'standard' => ['20pct' => ['price'=>3600,'url'=>'https://ofas.chula.ac.th/Service/DetailTraining?data=fjJIj8Ww439WWy10dOdh4Q']],
+        ],
+    ],
 ];
 $FMT_LABELS = ['onsite'=>'Onsite / Poster Presenter','virtual'=>'Virtual Presenter','non'=>'Non Presenter'];
 $STS_LABELS = ['student'=>'Student','academic'=>'Academic / Faculty / Professional'];
@@ -52,25 +77,39 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                     </div>"
                 );
             } else {
-                $statusKey  = ($reg['format'] === 'non') ? 'all' : $reg['attendee_status'];
+                $statusKey    = ($reg['format'] === 'non') ? 'all' : $reg['attendee_status'];
                 $earlyBirdEnd = new DateTime('2026-05-10 23:59:59', new DateTimeZone('Asia/Bangkok'));
-                $rateKey    = (new DateTime('now', new DateTimeZone('Asia/Bangkok')) <= $earlyBirdEnd) ? 'early' : 'standard';
-                $rateData   = $PRICE_MAP[$reg['format']][$statusKey][$rateKey]['20pct'] ?? null;
-                $btnStyle   = $rateKey === 'early'
+                $rateKey      = (new DateTime('now', new DateTimeZone('Asia/Bangkok')) <= $earlyBirdEnd) ? 'early' : 'standard';
+                $discKey      = ($reg['discount_tier'] === '20pct') ? '20pct' : 'none';
+                $rateData     = $PRICE_MAP[$reg['format']][$statusKey][$rateKey][$discKey] ?? null;
+                $btnStyle     = $rateKey === 'early'
                     ? 'background:#f59e0b;color:#1c1917;'
                     : 'background:#6366f1;color:#fff;';
-                $btnLabel   = $rateKey === 'early'
+                $btnLabel     = $rateKey === 'early'
                     ? '🐦 Early Bird Rate'
                     : '📅 Standard Rate';
-                $payLinks   = $rateData
+                $payLinks     = $rateData
                     ? "<a href='{$rateData['url']}' style='display:inline-block;{$btnStyle}text-decoration:none;padding:14px 28px;border-radius:10px;font-weight:700;'>{$btnLabel} — ".number_format($rateData['price'])." THB</a>"
                     : '';
-                $subject = 'ICA-TH 2026 — Discount Approved — Complete Your Payment';
-                $body = buildEmailHtml('Discount Approved! 🎉',
-                    "<p>Dear <strong>".htmlspecialchars($reg['full_name'])."</strong>,</p>
-                    <p>Your <strong>20% discount</strong> has been approved. Please complete your registration:</p>
-                    <div style='margin:16px 0;'>$payLinks</div>"
-                );
+
+                if ($discKey === 'none') {
+                    // Student verification approved — send full-price payment link
+                    $subject = 'ICA-TH 2026 — Verification Approved — Complete Your Payment';
+                    $body = buildEmailHtml('Student Verification Approved! ✓',
+                        "<p>Dear <strong>".htmlspecialchars($reg['full_name'])."</strong>,</p>
+                        <p>Your student status has been verified. Please complete your registration by clicking the payment link below:</p>
+                        <div style='margin:16px 0;'>$payLinks</div>
+                        <p style='font-size:13px;color:#64748b;'>Please complete your payment as soon as possible to secure your spot.</p>"
+                    );
+                } else {
+                    // 20% discount approved
+                    $subject = 'ICA-TH 2026 — Discount Approved — Complete Your Payment';
+                    $body = buildEmailHtml('Discount Approved! 🎉',
+                        "<p>Dear <strong>".htmlspecialchars($reg['full_name'])."</strong>,</p>
+                        <p>Your <strong>20% discount</strong> has been approved. Please complete your registration:</p>
+                        <div style='margin:16px 0;'>$payLinks</div>"
+                    );
+                }
             }
             sendMail($reg['email'], $subject, $body, '', true);
         }
