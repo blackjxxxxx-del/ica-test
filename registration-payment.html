@@ -107,6 +107,8 @@ a{text-decoration:none;transition:var(--transition)}
 
 .choice-btn{display:flex;flex-direction:column;align-items:flex-start;gap:4px;padding:16px 18px;border:2px solid var(--border);border-radius:12px;background:var(--white);cursor:pointer;transition:all 0.2s;text-align:left}
 .choice-btn:hover{border-color:var(--secondary);background:#f8fafc;transform:translateY(-1px)}
+.choice-btn:disabled,.choice-btn.is-disabled{opacity:.42;cursor:not-allowed;background:#f8fafc;filter:grayscale(.55)}
+.choice-btn:disabled:hover,.choice-btn.is-disabled:hover{border-color:var(--border);transform:none}
 .choice-btn.selected{border-color:var(--primary);background:rgba(26,58,95,0.05);box-shadow:0 0 0 3px rgba(26,58,95,0.1)}
 .choice-btn .choice-title{font-size:14px;font-weight:700;color:var(--primary);line-height:1.3}
 .choice-btn .choice-desc{font-size:12px;color:var(--text-muted);line-height:1.4}
@@ -581,22 +583,22 @@ a{text-decoration:none;transition:var(--transition)}
                     <!-- Step 2 inline -->
                     <div id="step-2-inline" class="step-locked">
                         <div class="step-heading" style="font-size:18px;">Presentation Format</div>
-                        <div class="step-sub">How will you be participating in the conference?</div>
+                        <div class="step-sub">Only Attendee/Non-presenter registration is currently available.</div>
                         <div class="choice-grid cols-3" id="formatGrid">
-                            <button class="choice-btn" data-value="onsite" onclick="selectFormat(this)">
+                            <button class="choice-btn is-disabled" data-value="onsite" onclick="selectFormat(this)" disabled aria-disabled="true">
                                 <div class="choice-check"></div>
                                 <div class="choice-title">Onsite / Poster Presenter</div>
-                                <div class="choice-desc">In-person presentation in Bangkok</div>
+                                <div class="choice-desc">Currently unavailable</div>
                             </button>
-                            <button class="choice-btn" data-value="virtual" onclick="selectFormat(this)">
+                            <button class="choice-btn is-disabled" data-value="virtual" onclick="selectFormat(this)" disabled aria-disabled="true">
                                 <div class="choice-check"></div>
                                 <div class="choice-title">Virtual Presenter</div>
-                                <div class="choice-desc">Online presentation via livestream</div>
+                                <div class="choice-desc">Currently unavailable</div>
                             </button>
                             <button class="choice-btn" data-value="non" onclick="selectFormat(this)">
                                 <div class="choice-check"></div>
-                                <div class="choice-title">Non Presenter</div>
-                                <div class="choice-desc">Attend without presenting</div>
+                                <div class="choice-title">Attendee/Non-presenter</div>
+                                <div class="choice-desc">Valid until 7 June 2026</div>
                             </button>
                         </div>
                     </div>
@@ -667,7 +669,7 @@ a{text-decoration:none;transition:var(--transition)}
                                     <span class="pc-discount-badge" id="eb-disc-badge"></span>
                                 </div>
                                 <div class="price-card standard">
-                                    <span class="pc-badge">Standard</span>
+                                    <span class="pc-badge">Valid until 7 June 2026</span>
                                     <div class="pc-original" id="std-original"></div>
                                     <div>
                                         <span class="pc-price" id="std-price">—</span>
@@ -931,7 +933,7 @@ var PRICE_MAP = {
     },
     non: {
         all: {
-            early:    { none:  { price: 2500, url: 'https://ofas.chula.ac.th/Service/DetailTraining?data=wFd5cxYh6sGPyv5xM3HZbw' },
+            early:    { none:  { price: 4500, url: 'https://ofas.chula.ac.th/Service/DetailTraining?data=T67Rvql7XsczWPVYUrNTvA' },
                         '20pct':{ price: 2000, url: 'https://ofas.chula.ac.th/Service/DetailTraining?data=NyDbLMLs1F9z_123qBtHiw' },
                         '100pct':{ price: 0, url: null } },
             standard: { none:  { price: 4500, url: 'https://ofas.chula.ac.th/Service/DetailTraining?data=T67Rvql7XsczWPVYUrNTvA' },
@@ -980,6 +982,7 @@ function checkInfoStep(){
 
 /* ── Step 2: select format ── */
 function selectFormat(btn){
+    if(btn.disabled || btn.getAttribute('aria-disabled') === 'true') return;
     // deselect others
     document.querySelectorAll('#formatGrid .choice-btn').forEach(function(b){ b.classList.remove('selected'); });
     btn.classList.add('selected');
@@ -1199,7 +1202,7 @@ function showResult(){
     document.getElementById('sum-name').textContent   = state.name;
     document.getElementById('sum-email').textContent  = state.email;
 
-    var formatLabels = { onsite:'Onsite / Poster Presenter', virtual:'Virtual Presenter', non:'Non Presenter' };
+    var formatLabels = { onsite:'Onsite / Poster Presenter', virtual:'Virtual Presenter', non:'Attendee/Non-presenter' };
     var statusLabels = { student:'Student', academic:'Academic / Faculty / Professional' };
     document.getElementById('sum-format').textContent = formatLabels[state.format];
     document.getElementById('sum-status').textContent = (state.format==='non') ? 'All Participants' : statusLabels[state.status];
