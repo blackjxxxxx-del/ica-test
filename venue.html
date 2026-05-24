@@ -31,6 +31,119 @@
   font-weight:800;
   animation:venueDateBlink 1.35s ease-in-out infinite;
 }
+.accommodation-panel{
+  margin-top:48px;
+  padding:0;
+  background:linear-gradient(135deg,#ffffff 0%,#f8fafc 100%);
+  border:1px solid #dbe4ef;
+  border-radius:18px;
+  overflow:hidden;
+  box-shadow:0 18px 50px rgba(26,58,95,.08);
+}
+.accommodation-panel-inner{
+  display:grid;
+  grid-template-columns:minmax(280px,.9fr) minmax(0,1.4fr);
+  gap:0;
+}
+.accommodation-lead{
+  padding:38px;
+  background:var(--primary);
+  color:#ffffff;
+}
+.accommodation-eyebrow{
+  color:var(--accent);
+  font-size:12px;
+  font-weight:800;
+  letter-spacing:1.8px;
+  text-transform:uppercase;
+  margin-bottom:14px;
+}
+.accommodation-lead h4{
+  font-size:26px;
+  line-height:1.2;
+  margin:0 0 16px;
+  color:#ffffff;
+}
+.accommodation-lead p{
+  color:rgba(255,255,255,.82);
+  font-size:15px;
+  line-height:1.8;
+  margin:0;
+}
+.reservation-cta{
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  margin-top:26px;
+  padding:13px 24px;
+  border-radius:8px;
+  background:var(--accent);
+  color:var(--primary);
+  font-weight:800;
+  font-size:14px;
+  box-shadow:0 10px 22px rgba(255,180,0,.22);
+}
+.reservation-cta:hover{
+  background:#ffc533;
+  transform:translateY(-2px);
+}
+.reservation-note{
+  margin-top:22px;
+  padding:14px 16px;
+  border-left:4px solid var(--accent);
+  background:rgba(255,255,255,.08);
+  color:rgba(255,255,255,.9);
+  font-size:13px;
+  line-height:1.65;
+}
+.reservation-steps{
+  padding:34px;
+  display:grid;
+  gap:18px;
+}
+.reservation-step{
+  display:grid;
+  grid-template-columns:44px minmax(0,1fr);
+  gap:16px;
+  align-items:start;
+  padding:20px 0;
+  border-bottom:1px solid #e2e8f0;
+}
+.reservation-step:last-child{
+  border-bottom:none;
+}
+.reservation-number{
+  width:44px;
+  height:44px;
+  border-radius:50%;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  background:#e8eef7;
+  color:var(--primary);
+  font-weight:800;
+  font-size:15px;
+}
+.reservation-step h5{
+  color:var(--primary);
+  font-size:18px;
+  margin:0 0 8px;
+  line-height:1.35;
+}
+.reservation-step p{
+  color:var(--text-muted);
+  font-size:15px;
+  line-height:1.8;
+  margin:0;
+}
+.reservation-step a{
+  color:var(--primary);
+  font-weight:800;
+}
+@media(max-width:900px){
+  .accommodation-panel-inner{grid-template-columns:1fr}
+  .accommodation-lead,.reservation-steps{padding:28px}
+}
 </style>
 
 <style id="global-mobile-logo-override">
@@ -372,6 +485,44 @@
                         <div class="v-feature">🌆 City Centre Location</div>
                     </div>
 
+                </div>
+            </div>
+
+            <div class="accommodation-panel">
+                <div class="accommodation-panel-inner">
+                    <div class="accommodation-lead">
+                        <div class="accommodation-eyebrow">Delegate Hotel Offer</div>
+                        <h4>Accommodation &amp; Special Rates</h4>
+                        <p>We are pleased to offer an exclusive room rate at The Mandarin Hotel Bangkok for all delegates attending the ICA Regional Hub Thailand 2026 conference.</p>
+                        <a href="https://drive.google.com/file/d/1qsxdZc7JtOSKTagxwqwz2UADdA-gziaC/view?usp=sharing" target="_blank" rel="noopener" class="reservation-cta">Hotel Reservation Form</a>
+                        <div class="reservation-note"><strong>Submit by May 28, 2026.</strong> After this deadline, room availability and special rates will be subject to the hotel's daily occupancy.</div>
+                    </div>
+
+                    <div class="reservation-steps">
+                        <div class="reservation-step">
+                            <div class="reservation-number">01</div>
+                            <div>
+                                <h5>Complete the Reservation Form</h5>
+                                <p>Please download and complete the Hotel Reservation Form.</p>
+                            </div>
+                        </div>
+
+                        <div class="reservation-step">
+                            <div class="reservation-number">02</div>
+                            <div>
+                                <h5>Submit Your Form</h5>
+                                <p>Please email your completed reservation form directly to the hotel's reservation department at: <a href="mailto:rsvn@mandarin-bkk.com">rsvn@mandarin-bkk.com</a></p>
+                            </div>
+                        </div>
+
+                        <div class="reservation-step">
+                            <div class="reservation-number">03</div>
+                            <div>
+                                <h5>Receive Booking Confirmation</h5>
+                                <p>Your reservation will be officially confirmed once the hotel receives and verifies your detailed credit card guarantee information.</p>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
 
