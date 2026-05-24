@@ -158,7 +158,7 @@ function loadButtonLinks(s) {
             btn.style.opacity = submitState === 'enabled' ? '' : '0.5';
             btn.style.cursor  = submitState === 'enabled' ? '' : 'not-allowed';
         }
-        if (text === 'Register to Attend' || text === 'Register to Attend as Attendee') {
+        if (text === 'Join as An Attendee' || text === 'Register to Attend' || text === 'Register to Attend as Attendee') {
             btn.href = registerState === 'enabled' ? registerUrl : 'javascript:void(0)';
             btn.style.opacity = registerState === 'enabled' ? '' : '0.5';
             btn.style.cursor  = registerState === 'enabled' ? '' : 'not-allowed';
