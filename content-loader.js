@@ -3,12 +3,14 @@
  * Replaces firebase-loader.js. Fetches settings & content from PHP backend.
  */
 
-const BASE = 'https://icahubthailand.org/admin/ica-cms-php';
+const BASE = (location.hostname === 'localhost' || location.hostname === '127.0.0.1')
+    ? location.protocol + '//' + location.hostname + (location.port ? ':' + location.port : '') + '/ica-cms-php'
+    : 'https://icahubthailand.org/admin/ica-cms-php';
 
 /* ── Notice Banner CSS — production, injected once for all pages */
 (function(){
     const s = document.createElement('style');
-    s.textContent = '[data-notice="combined"]{display:none;margin-top:16px;width:100%;justify-content:center;}.announcement{border:1.5px solid #ef4444;border-radius:8px;padding:6px 20px;background:rgba(239,68,68,0.15);max-width:min(94vw,800px);box-sizing:border-box;color:#ffffff;font-weight:500;text-align:center;font-size:clamp(10px,1.1vw,13px);line-height:1.6;}.announcement .line{display:block;}@media(max-width:768px){.announcement{padding:6px 14px;max-width:90%;font-size:clamp(12px,3.5vw,14px);}}';
+    s.textContent = '[data-notice="combined"]{display:none;margin-top:16px;width:100%;justify-content:center;}.announcement{border:1.5px solid #ef4444;border-radius:8px;padding:6px 20px;background:rgba(239,68,68,0.15);max-width:min(94vw,800px);box-sizing:border-box;color:#ffffff;font-weight:500;text-align:center;font-size:clamp(10px,1.1vw,13px);line-height:1.6;}.announcement .line{display:block;}.date-past{color:#94a3b8!important;opacity:.72;}.info-node.date-past .node-circle{background:#cbd5e1!important;color:#64748b!important;box-shadow:none!important;}.info-node.date-past .node-label,.info-node.date-past .node-date,.info-node.date-past .node-info{color:#94a3b8!important;}tr.date-past td{color:#94a3b8!important;background:#f8fafc!important;}@media(max-width:768px){.announcement{padding:6px 14px;max-width:90%;font-size:clamp(12px,3.5vw,14px);}}';
     document.head.appendChild(s);
 })();
 
@@ -52,22 +54,52 @@ document.addEventListener('DOMContentLoaded', async () => {
 /* LOCAL OVERRIDES — values here take priority over the CMS database.
    Update these when dates change and the CMS hasn't been updated yet. */
 const DATE_OVERRIDES = {
-    date_stdReg: '20 May 2026',   // Standard Registration deadline (was 31 May)
+    date_stdReg: '20 May 2026',
+    date_fullPaperExtended: '15 June 2026',
+    date_revisedPaper: '30 June 2026',
+    date_pubAcceptance: '15 July 2026',
+    date_proceedings: '31 July 2026',
 };
 
 function loadDates(s) {
     const map = {
-        callOpen: 'date_callOpen', subDeadline: 'date_subDeadline',
+        callOpen: 'date_callOpen', subRegOpen: 'date_subRegOpen',
+        subDeadline: 'date_subDeadline',
         notification: 'date_notification', earlyBird: 'date_earlyBird',
-        stdReg: 'date_stdReg', techCheck: 'date_techCheck',
+        stdReg: 'date_stdReg',
+        fullPaperExtended: 'date_fullPaperExtended',
+        revisedPaper: 'date_revisedPaper',
+        pubAcceptance: 'date_pubAcceptance',
+        techCheck: 'date_techCheck',
         reception: 'date_reception', day1: 'date_day1',
         day2: 'date_day2', proceedings: 'date_proceedings',
     };
+    const deadlines = {
+        callOpen: '2026-03-15T23:59:59+07:00',
+        subRegOpen: '2026-03-31T23:59:59+07:00',
+        subDeadline: '2026-04-30T23:59:59+07:00',
+        notification: '2026-05-10T23:59:59+07:00',
+        earlyBird: '2026-05-10T23:59:59+07:00',
+        stdReg: '2026-05-20T23:59:59+07:00',
+        fullPaperExtended: '2026-06-15T23:59:59+07:00',
+        revisedPaper: '2026-06-30T23:59:59+07:00',
+        pubAcceptance: '2026-07-15T23:59:59+07:00',
+        techCheck: '2026-06-03T23:59:59+07:00',
+        reception: '2026-06-05T23:59:59+07:00',
+        day1: '2026-06-06T23:59:59+07:00',
+        day2: '2026-06-07T23:59:59+07:00',
+        proceedings: '2026-07-31T23:59:59+07:00',
+    };
+    const now = new Date();
     for (const [attr, key] of Object.entries(map)) {
-        // Local overrides take priority over CMS value
         const val = DATE_OVERRIDES[key] || s[key];
-        if (!val) continue;
-        document.querySelectorAll(`[data-date="${attr}"]`).forEach(el => el.textContent = val);
+        const isPast = deadlines[attr] ? now > new Date(deadlines[attr]) : false;
+        document.querySelectorAll(`[data-date="${attr}"]`).forEach(el => {
+            if (val) el.textContent = val;
+            el.classList.toggle('date-past', isPast);
+            el.closest('.info-node')?.classList.toggle('date-past', isPast);
+            el.closest('tr')?.classList.toggle('date-past', isPast);
+        });
     }
 }
 
@@ -110,7 +142,7 @@ const BUTTON_OVERRIDES = {
     btn_register_state: 'enabled',
     btn_register_url:   'registration-payment.html',
     btn_submit_state:   'enabled',
-    btn_submit_url:     'submission.html#submission-closed',
+    btn_submit_url:     'https://www.conftool.com/ica-th-2026/',
 };
 
 function loadButtonLinks(s) {
@@ -121,12 +153,12 @@ function loadButtonLinks(s) {
 
     document.querySelectorAll('a.btn').forEach(btn => {
         const text = btn.textContent.trim();
-        if (text === 'Submit Your Abstract') {
+        if (text === 'Submit Your Abstract' || text === 'Submit Your Full Paper') {
             btn.href = submitState === 'enabled' ? submitUrl : 'javascript:void(0)';
             btn.style.opacity = submitState === 'enabled' ? '' : '0.5';
             btn.style.cursor  = submitState === 'enabled' ? '' : 'not-allowed';
         }
-        if (text === 'Register to Attend') {
+        if (text === 'Register to Attend' || text === 'Register to Attend as Attendee') {
             btn.href = registerState === 'enabled' ? registerUrl : 'javascript:void(0)';
             btn.style.opacity = registerState === 'enabled' ? '' : '0.5';
             btn.style.cursor  = registerState === 'enabled' ? '' : 'not-allowed';

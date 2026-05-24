@@ -80,9 +80,7 @@ header.navbar > div:nth-child(2) > div:first-child img,
 
 .organizers .container > div > div[style] > img,
 .organizers .org-logos img {
-  height: 86px !important;
   width: auto !important;
-  max-width: 220px !important;
   object-fit: contain !important;
 }
 
@@ -135,8 +133,78 @@ header.navbar > div:nth-child(2) > div:first-child img,
 
   .organizers .container > div > div[style] > img,
   .organizers .org-logos img {
-    height: 64px !important;
-    max-width: 140px !important;
+    width: auto !important;
+  }
+
+  /* Mobile: 2-col layout → stack vertically */
+  .org-split-row {
+    flex-direction: column !important;
+    align-items: center !important;
+    gap: 20px !important;
+  }
+
+  /* Hide vertical divider on mobile — high-specificity to beat inline <style> blocks */
+  .org-v-divider,
+  .organizers .container > div > div.org-v-divider,
+  .organizers .container > div > div.org-v-divider[style] {
+    display: none !important;
+    width: 0 !important;
+    min-height: 0 !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    overflow: hidden !important;
+  }
+
+  /* Each column full width on mobile */
+  .org-col-left,
+  .org-col-right {
+    flex: none !important;
+    width: 100% !important;
+    max-width: 100% !important;
+    min-width: 0 !important;
+    padding: 0 16px !important;
+    align-items: center !important;
+  }
+
+  /* Organized by logos: side by side, smaller on mobile */
+  .organizers .container > div > div[style*="gap: 40px"] {
+    flex-direction: row !important;
+    flex-wrap: wrap !important;
+    justify-content: center !important;
+    gap: 16px !important;
+  }
+  .organizers .container > div > div[style*="gap: 40px"] > img {
+    height: 70px !important;
+    width: auto !important;
+  }
+
+  /* Thai Media Fund smaller on mobile */
+  img[alt="Thai Media Fund"] {
+    height: 80px !important;
+    width: auto !important;
+  }
+
+  /* Partnership logo rows on mobile: center + smaller logos */
+  .partner-row {
+    justify-content: center !important;
+    gap: 12px !important;
+  }
+
+  .partner-row > div {
+    flex: 0 1 calc(50% - 10px) !important;
+    min-width: 0 !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    min-height: 0 !important;
+  }
+
+  .partner-row img {
+    height: auto !important;
+    max-height: 60px !important;
+    max-width: 100% !important;
+    width: auto !important;
+    object-fit: contain !important;
   }
 
   .site-footer .footer-top {
@@ -165,8 +233,7 @@ header.navbar > div:nth-child(2) > div:first-child img,
 
   .organizers .container > div > div[style] > img,
   .organizers .org-logos img {
-    height: 54px !important;
-    max-width: 120px !important;
+    width: auto !important;
   }
 
   .footer-col ul[style] {

@@ -3,7 +3,11 @@
  * news-detail.php — Public news article page
  * URL: /news-detail.php?slug=article-slug
  */
-require_once __DIR__ . '/admin/ica-cms-php/includes/db.php';
+$cmsDb = __DIR__ . '/../ica-cms-php/includes/db.php';
+if (!is_file($cmsDb)) {
+    $cmsDb = __DIR__ . '/admin/ica-cms-php/includes/db.php';
+}
+require_once $cmsDb;
 
 $slug = preg_replace('/[^a-z0-9\-]/', '', strtolower(trim($_GET['slug'] ?? '')));
 if (!$slug) { http_response_code(404); exit('Not found'); }

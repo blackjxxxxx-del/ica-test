@@ -8,7 +8,7 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="announcement.css?v=20260328">
+    <link rel="stylesheet" href="announcement.css?v=20260519-mobile">
 
     <style>
 /* ============================================================
@@ -258,8 +258,6 @@ a{text-decoration:none;transition:var(--transition)}
 
   .organizers .container > div > div[style] > img,
   .organizers .org-logos img {
-    height: 86px !important;
-    max-height: 86px !important;
     width: auto !important;
     max-width: none !important;
     object-fit: contain !important;
@@ -401,8 +399,48 @@ a{text-decoration:none;transition:var(--transition)}
 
     .organizers .container > div > div[style] > img,
     .organizers .org-logos img {
+
+    }
+
+    /* ── FIX: Divider → full-width horizontal line (matches border-top above) ── */
+    .organizers .container > div > div.org-v-divider[style] {
+      display: block !important;
+      width: 100% !important;
+      height: 1px !important;
+      min-height: 0 !important;
+      background: #e2e8f0 !important;
+      margin: 16px 0 !important;
+      padding: 0 !important;
+      align-self: stretch !important;
+      flex-shrink: 0 !important;
+    }
+
+    /* ── FIX: Partnership logos — grid 2 col, natural size, centered as pair ── */
+    .partner-row {
+      display: grid !important;
+      grid-template-columns: repeat(2, max-content) !important;
+      justify-content: center !important;
+      align-items: center !important;
+      gap: 20px !important;
+      margin-bottom: 24px !important;
+      width: 100% !important;
+    }
+
+    .partner-row:last-child {
+      margin-bottom: 0 !important;
+    }
+
+    .partner-row > div {
+      display: flex !important;
+      align-items: center !important;
+      justify-content: center !important;
+    }
+
+    .partner-row img {
       height: 64px !important;
-      max-height: 64px !important;
+      width: auto !important;
+      max-width: calc(46vw - 20px) !important;
+      object-fit: contain !important;
     }
   }
 
@@ -415,8 +453,7 @@ a{text-decoration:none;transition:var(--transition)}
 
     .organizers .container > div > div[style] > img,
     .organizers .org-logos img {
-      height: 54px !important;
-      max-height: 54px !important;
+
     }
   }
     </style>
@@ -662,17 +699,10 @@ a{text-decoration:none;transition:var(--transition)}
                             </a>
                         </div>
                         <div id="pending-approval-block" style="display:none;margin-top:8px;">
-                            <div style="text-align:center;padding:28px 20px;background:var(--light-bg);border-radius:14px;border:1px solid var(--border);">
-                                <div style="font-size:44px;margin-bottom:12px;">📧</div>
-                                <div style="font-weight:700;font-size:18px;margin-bottom:10px;">Request Submitted!</div>
-                                <div style="color:var(--text-muted);font-size:14px;line-height:1.7;">
-                                    Your request has been submitted for review.<br>
-                                    Once approved, you will receive an email with your payment link.
-                                </div>
-                                <div style="margin-top:18px;padding:14px 18px;background:#fff8e1;border:1.5px solid #f59e0b;border-radius:10px;text-align:left;">
-                                    <span style="font-weight:800;color:#b45309;font-size:13px;">⚠️ Important:</span>
-                                    <span style="color:#78350f;font-size:13px;line-height:1.6;"> Please wait for a confirmation email (within 1 working day) before proceeding with the payment.</span>
-                                </div>
+                            <div style="text-align:center;padding:32px 24px;background:#fef2f2;border:2px solid #dc2626;border-radius:14px;">
+                                <div style="font-size:48px;margin-bottom:14px;">📧</div>
+                                <div style="font-weight:800;color:#dc2626;font-size:18px;margin-bottom:12px;">🚨 IMPORTANT</div>
+                                <div style="color:#7f1d1d;font-size:14px;line-height:1.8;">Your request has been submitted for verification review.<br>A confirmation email will be sent within 24 hours.<br>Once approved, you will receive a link via email to complete your payment.</div>
                             </div>
                         </div>
                     </div>
@@ -699,28 +729,55 @@ a{text-decoration:none;transition:var(--transition)}
                 <img loading="lazy" src="im/1008453.webp" alt="Organizer 2" style="height:110px !important;width:auto !important;object-fit:contain !important;">
             </div>
         </div>
-        <div style="text-align:center;">
-            <span class="org-group-label" style="display:block;margin-bottom:28px;">In Partnership with</span>
-            <div style="display:flex !important;flex-wrap:nowrap !important;gap:12px !important;max-width:1200px !important;margin:0 auto !important;align-items:center !important;justify-content:center !important;">
-                <div style="display:flex;align-items:center;justify-content:center;min-height:96px;">
-                    <img loading="lazy" src="im/logooo-1.webp" alt="CMCT" style="height:96px !important;max-width:100%;width:auto !important;object-fit:contain !important;">
-                </div>
-                <div style="display:flex;align-items:center;justify-content:center;min-height:96px;">
-                    <img loading="lazy" src="im/S__13172761_0.webp" alt="COSCI SWU" style="height:96px !important;max-width:100%;width:auto !important;object-fit:contain !important;">
-                </div>
-                <div style="display:flex;align-items:center;justify-content:center;min-height:96px;">
-                    <img loading="lazy" src="im/GSCM.webp" alt="GSCM NIDA" style="height:96px !important;max-width:100%;width:auto !important;object-fit:contain !important;">
-                </div>
-                <div style="display:flex;align-items:center;justify-content:center;min-height:96px;">
-                    <img loading="lazy" src="im/New-JC-Logo-2018-Update-Cleanup_Outline-01.webp" alt="JC Thammasat" style="height:96px !important;max-width:100%;width:auto !important;object-fit:contain !important;">
-                </div>
-                <div style="display:flex;align-items:center;justify-content:center;min-height:96px;">
-                    <img loading="lazy" src="im/S__13172760_0.webp" alt="MassComm Chiang Mai University" style="height:96px !important;max-width:100%;width:auto !important;object-fit:contain !important;">
-                </div>
-                <div style="display:flex;align-items:center;justify-content:center;min-height:96px;">
-                    <img loading="lazy" src="im/psu-masscomm.webp" alt="PSU Faculty of Communication Sciences" style="height:96px !important;max-width:100%;width:auto !important;object-fit:contain !important;">
+        <!-- Bottom row: Sponsored by + In Partnership with -->
+        <div class="org-split-row" style="display:flex;gap:0;align-items:flex-start;justify-content:center;flex-wrap:wrap;border-top:1px solid #e2e8f0;padding-top:36px;">
+
+            <!-- Sponsored by -->
+            <div class="org-col-left" style="flex:2;min-width:280px;max-width:440px;display:flex;flex-direction:column;align-items:center;padding:0 40px;">
+                <span class="org-group-label" style="display:block;margin-bottom:28px;">In collaboration with</span>
+                <div style="display:flex;align-items:center;justify-content:center;">
+                    <img loading="lazy" src="im/Aw_Thai Media Fund_Logo2021-05.webp" alt="Thai Media Fund" style="height:110px;width:auto;object-fit:contain;">
                 </div>
             </div>
+
+            <!-- Vertical divider -->
+            <div class="org-v-divider" style="width:1px;background:#e2e8f0;align-self:stretch;min-height:120px;flex-shrink:0;margin:0 8px;"></div>
+
+            <!-- In Partnership with -->
+            <div class="org-col-right" style="flex:3;min-width:280px;display:flex;flex-direction:column;align-items:center;padding:0 40px;">
+                <span class="org-group-label" style="display:block;margin-bottom:28px;">In Partnership with</span>
+                    <div class="partner-row" style="display:flex;flex-wrap:wrap;gap:16px;align-items:center;justify-content:center;margin-bottom:16px;">
+                        <div style="display:flex;align-items:center;justify-content:center;">
+                            <img loading="lazy" src="im/logooo-1.webp" alt="CMCT" style="height:80px;width:auto;object-fit:contain;">
+                        </div>
+                        <div style="display:flex;align-items:center;justify-content:center;">
+                            <img loading="lazy" src="im/S__13172761_0.webp" alt="COSCI SWU" style="height:80px;width:auto;object-fit:contain;">
+                        </div>
+                        <div style="display:flex;align-items:center;justify-content:center;">
+                            <img loading="lazy" src="im/GSCM.webp" alt="GSCM NIDA" style="height:80px;width:auto;object-fit:contain;">
+                        </div>
+                        <div style="display:flex;align-items:center;justify-content:center;">
+                            <img loading="lazy" src="im/New-JC-Logo-2018-Update-Cleanup_Outline-01.webp" alt="JC Thammasat" style="height:80px;width:auto;object-fit:contain;">
+                        </div>
+                    </div>
+                    <div class="partner-row" style="display:flex;flex-wrap:wrap;gap:16px;align-items:center;justify-content:center;">
+                        <div style="display:flex;align-items:center;justify-content:center;">
+                            <img loading="lazy" src="im/S__13172760_0.webp" alt="MassComm Chiang Mai University" style="height:80px;width:auto;object-fit:contain;">
+                        </div>
+                        <div style="display:flex;align-items:center;justify-content:center;">
+                            <img loading="lazy" src="im/psu-masscomm.webp" alt="PSU Faculty of Communication Sciences" style="height:80px;width:auto;object-fit:contain;">
+                        </div>
+                    </div>
+                        </div>
+                    </div>
+                        </div>
+                    </div>
+                        </div>
+                    </div>
+                    </div>
+                </div>
+            </div>
+
         </div>
     </div>
 </section>
@@ -818,7 +875,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
 /* ── PHP CMS API base ── */
 var PHP_CMS_BASE = (location.hostname==='localhost'||location.hostname==='127.0.0.1')
-    ? location.protocol+'//'+location.hostname+(location.port?':'+location.port:'')+'/admin/ica-cms-php/api'
+    ? location.protocol+'//'+location.hostname+(location.port?':'+location.port:'')+'/ica-cms-php/api'
     : 'https://icahubthailand.org/admin/ica-cms-php/api';
 
 /* ── State ── */

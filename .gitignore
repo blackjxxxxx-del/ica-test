@@ -6,15 +6,6 @@
 .AppleDouble
 .LSOverride
 
-# Node / API
-api/node_modules/
-api/ica_registrations.db
-api/uploads/
-
 # Logs
 *.log
 npm-debug.log*
-
-# PHP CMS secrets / runtime uploads
-admin/ica-cms-php/config.php
-admin/ica-cms-php/uploads/

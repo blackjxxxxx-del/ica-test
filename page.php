@@ -3,7 +3,11 @@
  * page.php — Public renderer สำหรับหน้าที่สร้างจาก CMS
  * URL: /page.php?slug=about-us  หรือ /.htaccess → /about-us
  */
-require_once __DIR__ . '/admin/ica-cms-php/includes/db.php';
+$cmsDb = __DIR__ . '/../ica-cms-php/includes/db.php';
+if (!is_file($cmsDb)) {
+    $cmsDb = __DIR__ . '/admin/ica-cms-php/includes/db.php';
+}
+require_once $cmsDb;
 
 $slug = trim($_GET['slug'] ?? '');
 if (!$slug) { header('Location: index.html'); exit; }

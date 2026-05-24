@@ -5,7 +5,11 @@
  */
 header('Content-Type: application/xml; charset=UTF-8');
 
-require_once __DIR__ . '/admin/ica-cms-php/includes/db.php';
+$cmsDb = __DIR__ . '/../ica-cms-php/includes/db.php';
+if (!is_file($cmsDb)) {
+    $cmsDb = __DIR__ . '/admin/ica-cms-php/includes/db.php';
+}
+require_once $cmsDb;
 $db  = getDB();
 $now = date('Y-m-d');
 
