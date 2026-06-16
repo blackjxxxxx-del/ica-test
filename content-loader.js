@@ -142,7 +142,7 @@ const BUTTON_OVERRIDES = {
     btn_register_state: 'enabled',
     btn_register_url:   'registration-payment.html',
     btn_submit_state:   'enabled',
-    btn_submit_url:     'https://www.conftool.com/ica-th-2026/',
+    btn_submit_url:     'proceedings-journey.html',
 };
 
 function loadButtonLinks(s) {

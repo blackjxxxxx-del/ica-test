@@ -1,0 +1,2128 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>ICA Regional Hub Thailand 2026 Booklet</title>
+  <style>
+  :root {
+    --primary: #183A5A;
+    --secondary: #D65C93;
+    --accent: #E8B548;
+    --ink: #192532;
+    --muted: #607083;
+    --line: #D8E0E8;
+    --soft: #F4F7FA;
+    --soft-pink: #FCF0F6;
+    --soft-gold: #FFF7E3;
+  }
+  @page { size: A4 landscape; margin: 0; }
+  * { box-sizing: border-box; }
+  html, body { margin: 0; padding: 0; }
+  body {
+    background: #d8dde5;
+    color: var(--ink);
+    font-family: "Aptos", "Inter", "Helvetica Neue", Arial, sans-serif;
+    -webkit-print-color-adjust: exact;
+    print-color-adjust: exact;
+  }
+  .page {
+    position: relative;
+    width: 297mm;
+    height: 210mm;
+    margin: 0 auto;
+    overflow: hidden;
+    overflow: clip;
+    contain: layout paint;
+    background: white;
+    page-break-after: auto;
+    break-after: auto;
+  }
+  .page + .page {
+    page-break-before: always;
+    break-before: page;
+  }
+  .page:last-child,
+  .page:last-of-type {
+    page-break-after: auto;
+    break-after: auto;
+  }
+  .content {
+    position: absolute;
+    inset: 22mm 13mm 14mm 13mm;
+  }
+  .page-header {
+    position: absolute;
+    top: 7mm;
+    left: 13mm;
+    right: 13mm;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-bottom: 4mm;
+    border-bottom: 0.3mm solid var(--line);
+  }
+  .running-kicker {
+    color: var(--secondary);
+    font-size: 7.4pt;
+    font-weight: 800;
+    letter-spacing: 0;
+    text-transform: uppercase;
+  }
+  .running-title {
+    margin-top: 1.2mm;
+    color: var(--primary);
+    font-size: 13.4pt;
+    font-weight: 800;
+  }
+  .page-footer {
+    position: absolute;
+    bottom: 5mm;
+    left: 13mm;
+    right: 13mm;
+    display: flex;
+    justify-content: space-between;
+    color: #52657a;
+    font-size: 7.4pt;
+    border-top: 0.25mm solid var(--line);
+    padding-top: 2.2mm;
+  }
+  .logo-lockup {
+    display: flex;
+    gap: 5mm;
+    align-items: center;
+  }
+  .logo-lockup img {
+    max-width: 34mm;
+    max-height: 14mm;
+    object-fit: contain;
+  }
+  .logo-lockup img:first-child { max-width: 18mm; }
+  .logo-lockup img:nth-child(2) { max-width: 32mm; }
+  .logo-lockup img:nth-child(3) { max-width: 38mm; }
+  .logo-lockup.mini { gap: 3.5mm; }
+  .logo-lockup.mini img { max-height: 8.5mm; max-width: 24mm; }
+  .logo-lockup.mini img:first-child { max-width: 11mm; }
+  .logo-lockup.mini img:nth-child(3) { max-width: 29mm; }
+
+  .cover {
+    background:
+      radial-gradient(circle at 83% 18%, rgba(214, 92, 147, .18), transparent 31%),
+      linear-gradient(180deg, #1f456b 0%, var(--primary) 54%, #14314f 100%);
+  }
+  .cover::before {
+    content: none;
+  }
+  .cover::after {
+    content: "";
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: 8mm;
+    height: 1.2mm;
+    background: var(--accent);
+  }
+  .cover .content { inset: 0; }
+  .cover .page-footer {
+    color: rgba(255,255,255,.78);
+    border-top: 0;
+    bottom: 8mm;
+    left: auto;
+    right: 21mm;
+    justify-content: flex-end;
+    width: auto;
+    padding: 0;
+    font-size: 10pt;
+  }
+  .cover .page-footer span:first-child { display: none; }
+  .cover .page-footer span:last-child { display: none; }
+  .cover-panel {
+    position: absolute;
+    inset: 21mm 22mm 18mm 25mm;
+    color: white;
+  }
+  .cover-identity {
+    display: flex;
+    align-items: center;
+    gap: 4.5mm;
+    margin-bottom: 15mm;
+  }
+  .cover-identity img {
+    display: block;
+    object-fit: contain;
+    max-height: 21mm;
+    max-width: 53mm;
+  }
+  .cover-identity img:nth-child(2) {
+    width: 21mm;
+    height: 21mm;
+    object-fit: cover;
+  }
+  .cover-identity img:nth-child(3) {
+    max-width: 58mm;
+    max-height: 22mm;
+  }
+  .cover-kicker {
+    color: var(--accent);
+    font-size: 13pt;
+    line-height: 1;
+    font-weight: 500;
+    text-transform: uppercase;
+    margin: 0 0 7mm;
+  }
+  .cover h1 {
+    max-width: 214mm;
+    color: white;
+    font-size: 38pt;
+    font-weight: 400;
+    line-height: 1.05;
+    margin: 0;
+    letter-spacing: 0;
+  }
+  .cover-subtitle {
+    max-width: 190mm;
+    color: rgba(255,255,255,.78);
+    font-size: 17pt;
+    line-height: 1.25;
+    margin: 6mm 0 13mm;
+  }
+  .cover-facts {
+    display: grid;
+    grid-template-columns: 82mm 44mm 62mm 49mm;
+    gap: 5mm;
+    align-items: center;
+    margin-bottom: 0;
+  }
+  .fact-chip {
+    min-height: 12mm;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 2mm 4.5mm;
+    border-radius: 99px;
+    background: rgba(116, 154, 194, .55);
+    color: white;
+    text-align: center;
+  }
+  .fact-chip strong {
+    font-size: 10pt;
+    font-weight: 500;
+    line-height: 1.15;
+  }
+  .cover-program {
+    display: grid;
+    grid-template-columns: 82mm 96mm;
+    gap: 19mm;
+    margin: 5.5mm 0 0 4.5mm;
+  }
+  .cover-program article span {
+    display: none;
+  }
+  .cover-program p {
+    margin: 0;
+    color: rgba(255,255,255,.9);
+    font-size: 8.9pt;
+    font-weight: 700;
+    line-height: 1.25;
+  }
+  .cover-label {
+    position: absolute;
+    left: 0;
+    bottom: 5mm;
+    margin-top: 0;
+  }
+  .gold-rule {
+    width: 72mm;
+    height: 1.4mm;
+    background: var(--accent);
+    margin-bottom: 7mm;
+  }
+  .cover-label h2 {
+    margin: 0;
+    color: white;
+    font-size: 26pt;
+    font-weight: 400;
+    line-height: 1.08;
+  }
+  .cover-label p {
+    margin: 4mm 0 0;
+    color: rgba(255,255,255,.78);
+    font-size: 12.5pt;
+  }
+  .cover-bottom {
+    position: absolute;
+    right: 0;
+    bottom: 0;
+    color: rgba(255,255,255,.78);
+    font-size: 10pt;
+  }
+
+  .section-title p,
+  .day-title span,
+  .eyebrow,
+  .session-label {
+    margin: 0;
+    color: var(--secondary);
+    font-size: 8pt;
+    font-weight: 900;
+    text-transform: uppercase;
+  }
+  .section-title h1,
+  .day-title h1 {
+    margin: 1.5mm 0 0;
+    color: var(--primary);
+    font-size: 24pt;
+    line-height: 1.08;
+  }
+  .overview-timeline {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 9mm;
+    margin-top: 12mm;
+  }
+  .timeline-card {
+    position: relative;
+    min-height: 94mm;
+    padding: 9mm;
+    border: .4mm solid var(--line);
+    border-radius: 4mm;
+    background: linear-gradient(180deg, white, var(--soft));
+  }
+  .timeline-card.primary {
+    background: linear-gradient(180deg, var(--primary), #0f2942);
+    color: white;
+    border-color: var(--primary);
+  }
+  .day-marker {
+    display: inline-flex;
+    align-items: center;
+    min-width: 26mm;
+    height: 9mm;
+    padding: 0 3mm;
+    background: var(--accent);
+    color: var(--primary);
+    font-size: 8pt;
+    font-weight: 900;
+    text-transform: uppercase;
+  }
+  .timeline-card h2 {
+    margin: 8mm 0 2mm;
+    font-size: 26pt;
+    color: inherit;
+  }
+  .timeline-card .venue {
+    min-height: 13mm;
+    margin: 0 0 7mm;
+    color: inherit;
+    font-size: 12pt;
+    font-weight: 800;
+    line-height: 1.28;
+  }
+  .timeline-card ul {
+    margin: 0;
+    padding-left: 5mm;
+    font-size: 11.5pt;
+    line-height: 1.55;
+  }
+  .overview-note {
+    margin-top: 11mm;
+    display: flex;
+    gap: 5mm;
+    align-items: center;
+    padding: 5mm 6mm;
+    background: var(--soft-gold);
+    border-left: 1.1mm solid var(--accent);
+    font-size: 11pt;
+  }
+  .overview-note strong { color: var(--primary); }
+  .day-title {
+    display: flex;
+    justify-content: space-between;
+    align-items: end;
+    gap: 10mm;
+    margin-bottom: 4mm;
+  }
+  .day-title.tight { margin-bottom: 3mm; }
+  .day-title h1 { font-size: 20pt; }
+  .day-title p {
+    margin: 0;
+    color: var(--muted);
+    font-size: 10pt;
+    font-weight: 700;
+    text-align: right;
+  }
+  .agenda-band {
+    display: grid;
+    grid-auto-flow: column;
+    grid-auto-columns: 1fr;
+    gap: 2.5mm;
+    margin: 0 0 3.4mm;
+  }
+  .agenda-item {
+    min-height: 13mm;
+    padding: 2.2mm 2.8mm;
+    background: var(--soft);
+    border-left: .85mm solid var(--accent);
+  }
+  .agenda-item time,
+  .closing-band time,
+  .roundtable-card time,
+  .feature-card time,
+  .outreach-card time {
+    display: block;
+    color: var(--secondary);
+    font-size: 7.5pt;
+    font-weight: 900;
+  }
+  .agenda-item strong {
+    display: block;
+    color: var(--primary);
+    font-size: 8.7pt;
+    line-height: 1.1;
+    margin-top: .6mm;
+  }
+  .agenda-item span {
+    color: var(--muted);
+    display: block;
+    font-size: 7.5pt;
+    line-height: 1.15;
+    margin-top: .5mm;
+  }
+  .plenary-card,
+  .opening-card,
+  .speaker-grid article,
+  .roundtable-card,
+  .closing-band,
+  .outreach-card,
+  .masterclass-note {
+    border: .3mm solid var(--line);
+    border-radius: 3mm;
+    background: #fff;
+  }
+  .plenary-card {
+    display: grid;
+    grid-template-columns: 51mm 1fr;
+    gap: 5mm;
+    padding: 3.2mm 4mm;
+    margin-bottom: 3.2mm;
+  }
+  .plenary-card h2 {
+    margin: 0;
+    color: var(--primary);
+    font-size: 11.5pt;
+    line-height: 1.18;
+  }
+  .plenary-card ol {
+    margin: 0;
+    padding-left: 5mm;
+    columns: 3;
+    column-gap: 6mm;
+    font-size: 7.2pt;
+    line-height: 1.25;
+  }
+  .plenary-card li { break-inside: avoid; margin-bottom: 1.2mm; }
+  .opening-card {
+    display: grid;
+    grid-template-columns: 43mm 1fr;
+    gap: 7mm;
+    align-items: center;
+    padding: 6mm 7mm;
+    margin: 7mm 0 7mm;
+    background: var(--soft-gold);
+    border-left: 1.3mm solid var(--accent);
+  }
+  .opening-card h2 {
+    margin: 1mm 0 0;
+    color: var(--primary);
+    font-size: 18pt;
+  }
+  .opening-card p {
+    margin: 0;
+    color: #40566f;
+    font-size: 12pt;
+    line-height: 1.38;
+  }
+  .speaker-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 5mm;
+  }
+  .speaker-grid article {
+    min-height: 59mm;
+    padding: 6mm;
+    background: linear-gradient(180deg, #fff, var(--soft));
+  }
+  .speaker-grid span {
+    display: block;
+    color: var(--secondary);
+    font-size: 7.5pt;
+    font-weight: 900;
+    text-transform: uppercase;
+    margin-bottom: 3mm;
+  }
+  .speaker-grid h2 {
+    margin: 0 0 2mm;
+    color: var(--primary);
+    font-size: 15pt;
+    line-height: 1.1;
+  }
+  .speaker-grid p {
+    min-height: 13mm;
+    margin: 0 0 4mm;
+    color: var(--muted);
+    font-size: 9pt;
+    line-height: 1.25;
+  }
+  .speaker-grid strong {
+    color: #213850;
+    font-size: 10pt;
+    line-height: 1.28;
+  }
+  .roundtable-card {
+    display: grid;
+    grid-template-columns: 66mm 1fr 83mm;
+    gap: 4mm;
+    align-items: center;
+    padding: 3.2mm 4mm;
+    margin-bottom: 3mm;
+    background: var(--soft-gold);
+    border-color: #f0dfad;
+  }
+  .roundtable-card h2 {
+    color: var(--primary);
+    font-size: 11pt;
+    margin: .5mm 0 0;
+    line-height: 1.15;
+  }
+  .roundtable-card p {
+    margin: 0;
+    font-size: 7.4pt;
+    line-height: 1.24;
+  }
+  .roundtable-feature {
+    display: grid;
+    grid-template-columns: .92fr 1.08fr;
+    gap: 7mm;
+    margin-top: 7mm;
+    padding: 8mm;
+    border-radius: 4mm;
+    border: .3mm solid #eddba9;
+    border-left: 1.4mm solid var(--accent);
+    background: var(--soft-gold);
+  }
+  .roundtable-feature time {
+    display: block;
+    color: var(--secondary);
+    font-size: 8pt;
+    font-weight: 900;
+  }
+  .roundtable-feature h2 {
+    margin: 2mm 0 4mm;
+    color: var(--primary);
+    font-size: 21pt;
+    line-height: 1.08;
+  }
+  .roundtable-feature p {
+    margin: 0;
+    color: #40566f;
+    font-size: 11.2pt;
+    line-height: 1.42;
+  }
+  .roundtable-feature ul {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    display: grid;
+    gap: 2.4mm;
+  }
+  .roundtable-feature li {
+    padding: 2.5mm 3mm;
+    background: white;
+    border: .25mm solid #eadfbf;
+    border-radius: 2mm;
+  }
+  .roundtable-feature li strong {
+    display: block;
+    color: var(--primary);
+    font-size: 9.5pt;
+  }
+  .roundtable-feature li span {
+    display: block;
+    color: var(--muted);
+    font-size: 8.3pt;
+    line-height: 1.2;
+    margin-top: .6mm;
+  }
+  .roundtable-feature .moderator {
+    grid-column: 1 / -1;
+    padding: 3mm 4mm;
+    background: white;
+    border-radius: 2mm;
+    border: .25mm solid #eadfbf;
+    font-size: 10pt;
+  }
+
+  .session-block { width: 100%; }
+  .session-heading {
+    display: flex;
+    justify-content: space-between;
+    align-items: end;
+    margin-bottom: 2mm;
+  }
+  .session-heading h2 {
+    margin: .5mm 0 0;
+    color: var(--primary);
+    font-size: 15pt;
+  }
+  .venue-pill {
+    padding: 1.5mm 3mm;
+    border-radius: 99px;
+    color: var(--primary);
+    background: var(--soft);
+    font-size: 7.8pt;
+    font-weight: 800;
+  }
+  .session-table {
+    width: 100%;
+    border-collapse: collapse;
+    table-layout: fixed;
+    font-size: 6.65pt;
+    line-height: 1.17;
+  }
+  .session-table th,
+  .session-table td {
+    border: .24mm solid #d7e0e8;
+    padding: 1.15mm 1.25mm;
+    vertical-align: top;
+  }
+  .session-table thead th {
+    background: var(--primary);
+    color: white;
+    text-align: left;
+    font-weight: 800;
+    vertical-align: middle;
+  }
+  .session-table thead th span {
+    display: block;
+    color: #d7eafc;
+    font-size: 6.4pt;
+    margin-bottom: 1mm;
+  }
+  .session-table thead th strong {
+    display: block;
+    font-size: 7pt;
+    line-height: 1.16;
+  }
+  .session-table .slot-head,
+  .session-table tbody th {
+    width: 13mm;
+    text-align: center;
+  }
+  .session-table tbody th {
+    color: var(--primary);
+    background: #edf3f7;
+    font-size: 6.35pt;
+    font-weight: 900;
+    vertical-align: middle;
+  }
+  .session-table tbody tr:nth-child(even) td { background: #fbfcfd; }
+  .paper { break-inside: avoid; }
+  .paper-meta {
+    display: flex;
+    gap: 1.2mm;
+    align-items: center;
+    margin-bottom: .8mm;
+  }
+  .paper-id {
+    display: inline-block;
+    color: var(--secondary);
+    font-weight: 900;
+  }
+  .tag {
+    display: inline-block;
+    padding: .25mm 1.1mm;
+    border-radius: 99px;
+    background: var(--soft-pink);
+    color: var(--secondary);
+    font-size: 5.7pt;
+    font-weight: 900;
+    text-transform: uppercase;
+  }
+  .paper-title {
+    color: #1b3148;
+    font-weight: 800;
+  }
+  .paper-authors {
+    margin-top: .8mm;
+    color: #293b4f;
+    font-weight: 700;
+  }
+  .paper-affiliation {
+    margin-top: .35mm;
+    color: #667486;
+  }
+  .special-cell {
+    background: #fff9ec !important;
+    font-size: 6.3pt;
+    line-height: 1.16;
+  }
+  .special-cell p { margin: 0 0 1.7mm; }
+  .special-cell ol {
+    margin: .8mm 0 1.8mm 4mm;
+    padding-left: 2.8mm;
+  }
+  .special-cell li { margin-bottom: 1.2mm; }
+  .empty-slot {
+    color: #b2bdc8;
+    text-align: center;
+    padding-top: 3mm;
+  }
+  .day1-afternoon .session-table { font-size: 6.25pt; line-height: 1.12; }
+  .day1-afternoon .special-cell { font-size: 5.9pt; line-height: 1.1; }
+  .day2-afternoon .session-table { font-size: 6.35pt; line-height: 1.13; }
+  .day2-afternoon .special-cell { font-size: 6.05pt; line-height: 1.12; }
+  .compact-top .session-table { font-size: 6.65pt; }
+  .session-only .content { bottom: 13mm; }
+  .session-only .day-title { margin-bottom: 2.2mm; }
+  .session-only .session-table { font-size: 6.72pt; line-height: 1.15; }
+  .session-only .session-table th,
+  .session-only .session-table td { padding: 1.05mm 1.15mm; }
+  .session-only .special-cell { font-size: 6.2pt; line-height: 1.13; }
+  .session-a-only .agenda-band { margin-top: 3mm; }
+  .session-b-only .session-table { font-size: 6.16pt; line-height: 1.08; }
+  .session-b-only .session-table th,
+  .session-b-only .session-table td { padding: .78mm .95mm; }
+  .session-b-only .special-cell { font-size: 5.48pt; line-height: 1.06; }
+  .session-b-only .agenda-band { margin-top: 2.7mm; }
+  .day2-morning .agenda-band { margin-bottom: 2mm; }
+  .day2-morning .agenda-item { min-height: 10mm; padding: 1.6mm 2.5mm; }
+  .day2-morning .session-table { font-size: 6.15pt; line-height: 1.1; }
+  .day2-morning .session-table th,
+  .day2-morning .session-table td { padding: .85mm 1mm; }
+  .day2-morning .special-cell { font-size: 5.55pt; line-height: 1.08; }
+
+  .feature-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 7mm;
+    margin-top: 12mm;
+  }
+  .feature-card {
+    min-height: 67mm;
+    padding: 8mm;
+    border-radius: 4mm;
+    background: var(--primary);
+    color: white;
+    border-top: 2mm solid var(--accent);
+  }
+  .feature-card.secondary {
+    background: #223145;
+    border-top-color: var(--secondary);
+  }
+  .feature-card .eyebrow { color: var(--accent); margin-top: 6mm; }
+  .feature-card.secondary .eyebrow { color: #f1b8d2; }
+  .feature-card h2 {
+    margin: 2mm 0 6mm;
+    font-size: 20pt;
+    line-height: 1.05;
+    color: white;
+  }
+  .feature-card h3 {
+    margin: 0;
+    font-size: 14pt;
+    line-height: 1.28;
+    color: rgba(255,255,255,.93);
+  }
+  .outreach-card {
+    margin-top: 8mm;
+    padding: 7mm 8mm;
+    display: grid;
+    grid-template-columns: 34mm 1fr;
+    grid-template-rows: auto auto;
+    column-gap: 7mm;
+    row-gap: 1mm;
+    align-items: center;
+    background: var(--soft-gold);
+    border-left: 1.4mm solid var(--accent);
+  }
+  .outreach-card time { grid-column: 1; grid-row: 1; }
+  .outreach-card .eyebrow { grid-column: 1; grid-row: 2; }
+  .outreach-card h2 {
+    grid-column: 2;
+    grid-row: 1;
+    margin: 1mm 0;
+    color: var(--primary);
+    font-size: 19pt;
+  }
+  .outreach-card p:last-child {
+    grid-column: 2;
+    grid-row: 2;
+    margin: 0;
+    color: var(--muted);
+    font-size: 11pt;
+  }
+  .masterclass-note {
+    margin-top: 6mm;
+    padding: 4mm 5mm;
+    color: var(--primary);
+    background: var(--soft);
+    font-weight: 800;
+    font-size: 10pt;
+  }
+  .closing-band {
+    margin-top: 3.5mm;
+    display: grid;
+    grid-template-columns: 26mm 68mm 1fr;
+    gap: 4mm;
+    align-items: center;
+    padding: 3mm 4mm;
+    background: var(--soft);
+  }
+  .closing-band strong {
+    color: var(--primary);
+    font-size: 11pt;
+  }
+  .closing-band span {
+    color: var(--muted);
+    font-size: 9.2pt;
+  }
+  .day0-page .content { inset: 22mm 13mm 14mm 13mm; }
+  .day0-page .day-title { margin-bottom: 4mm; }
+  .day0-page .agenda-band {
+    grid-template-columns: repeat(5, 1fr);
+    grid-auto-flow: row;
+    margin-bottom: 6mm;
+  }
+  .day0-page .agenda-item {
+    min-height: 17mm;
+  }
+  .day0-page .agenda-item strong {
+    font-size: 8.2pt;
+  }
+  .day0-main-grid {
+    display: grid;
+    grid-template-columns: 1.08fr .92fr;
+    gap: 6mm;
+    align-items: start;
+  }
+  .day0-forum-card,
+  .day0-mini-card {
+    border: .3mm solid var(--line);
+    border-radius: 3mm;
+    background: white;
+  }
+  .day0-forum-card {
+    padding: 6mm;
+    background: var(--soft-gold);
+    border-left: 1.3mm solid var(--accent);
+  }
+  .day0-forum-card time,
+  .day0-mini-card time {
+    display: block;
+    color: var(--secondary);
+    font-size: 8pt;
+    font-weight: 900;
+  }
+  .day0-forum-card h2 {
+    margin: 1mm 0 2mm;
+    color: var(--primary);
+    font-size: 19pt;
+    line-height: 1.08;
+  }
+  .day0-session-note {
+    display: inline-block;
+    margin: 0;
+    padding: 1.3mm 2.4mm;
+    border-radius: 99px;
+    background: var(--secondary) !important;
+    color: white !important;
+    border: 0;
+    font-size: 9.4pt;
+    font-weight: 900;
+    text-transform: uppercase;
+  }
+  .day0-topic-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 5mm;
+    margin: 4mm 0 0;
+  }
+  .day0-topic-grid p {
+    margin: 0;
+    color: #283d53;
+    font-size: 10pt;
+    font-weight: 800;
+    line-height: 1.32;
+  }
+  .day0-note {
+    margin-top: 5mm;
+    padding: 3mm 4mm;
+    background: white;
+    color: var(--primary);
+    border: .25mm solid #eadfbf;
+    border-radius: 2mm;
+    font-size: 9pt;
+    font-weight: 800;
+    line-height: 1.25;
+  }
+  .day0-side-stack {
+    display: grid;
+    gap: 4mm;
+  }
+  .day0-mini-card {
+    padding: 4.2mm 4.8mm;
+    background: linear-gradient(180deg, #fff, var(--soft));
+  }
+  .day0-mini-card h2 {
+    margin: 1mm 0 1.8mm;
+    color: var(--primary);
+    font-size: 13pt;
+    line-height: 1.12;
+  }
+  .day0-mini-card p {
+    margin: 0;
+    color: var(--muted);
+    font-size: 9pt;
+    line-height: 1.35;
+  }
+  .day0-speakers ul {
+    margin: 1.5mm 0 0;
+    padding-left: 4mm;
+    columns: 2;
+    column-gap: 4mm;
+    color: #293b4f;
+    font-size: 7.7pt;
+    line-height: 1.18;
+  }
+  .day0-speakers li {
+    break-inside: avoid;
+    margin-bottom: 1.2mm;
+  }
+  .day0-speakers strong {
+    color: var(--primary);
+  }
+  .day0-format-badge {
+    display: block;
+    margin-top: .7mm;
+    color: var(--primary) !important;
+    font-size: 8.7pt;
+    font-weight: 900;
+    line-height: 1.1;
+  }
+  .sponsor-title { margin-bottom: 7mm; }
+  .sponsor-layout {
+    display: grid;
+    grid-template-columns: 1.2fr .8fr;
+    grid-template-rows: auto 1fr;
+    gap: 6mm;
+  }
+  .sponsor-section {
+    padding: 6mm;
+    border: .3mm solid var(--line);
+    border-radius: 4mm;
+    background: white;
+  }
+  .sponsor-section h2 {
+    margin: 0 0 5mm;
+    color: var(--primary);
+    font-size: 13pt;
+  }
+  .sponsor-section.major { background: var(--soft); }
+  .sponsor-section.partners {
+    grid-column: 1 / -1;
+    padding-bottom: 5mm;
+  }
+  .sponsor-grid,
+  .partner-grid {
+    display: grid;
+    gap: 5mm;
+  }
+  .sponsor-grid.two { grid-template-columns: 1.4fr .8fr; }
+  .partner-grid { grid-template-columns: repeat(7, 1fr); }
+  figure {
+    margin: 0;
+    min-height: 31mm;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 2.5mm;
+    padding: 4mm;
+    border-radius: 3mm;
+    background: white;
+    border: .25mm solid #e0e6ec;
+  }
+  .partners figure { min-height: 34mm; }
+  figure img {
+    max-width: 100%;
+    max-height: 18mm;
+    object-fit: contain;
+  }
+  .major figure img { max-height: 22mm; }
+  .major figure:nth-child(2) img { max-height: 25mm; }
+  .collaboration figure img { max-height: 22mm; }
+  figcaption {
+    color: #46576a;
+    font-size: 7.4pt;
+    font-weight: 700;
+    line-height: 1.15;
+    text-align: center;
+  }
+  @media screen {
+    .page { margin: 20px auto; box-shadow: 0 10px 28px rgba(0,0,0,.18); }
+  }
+</style>
+</head>
+<body>
+  
+    <section class="page cover">
+      
+      <main class="content">
+    <div class="cover-panel">
+      <div class="cover-identity" aria-label="conference logo lockup">
+        <img src="../im/LogoICA.webp" alt="International Communication Association logo">
+        <img src="../im/ICA26_regional_hub_-_bangkok_logo.webp" alt="ICA Bangkok Regional Hub Elephant">
+        <img src="../im/123.png" alt="Chulalongkorn University logo">
+      </div>
+
+      <div class="cover-copy">
+        <p class="cover-kicker">76th Annual ICA Regional Hub Thailand</p>
+        <h1>ICA-TH 2026<br>Detailed Program</h1>
+        <p class="cover-subtitle">International Communication Association Regional Hub Thailand</p>
+      </div>
+
+      <div class="cover-facts">
+        <div class="fact-chip wide"><strong>5 June 2026 / Faculty of Communication Arts<br>Chulalongkorn University</strong></div>
+        <div class="fact-chip"><strong>6-7 June 2026</strong></div>
+        <div class="fact-chip"><strong>Mandarin Hotel Bangkok</strong></div>
+        <div class="fact-chip"><strong>Bangkok, Thailand</strong></div>
+      </div>
+
+      <div class="cover-program">
+        <article>
+          <span>Day 0</span>
+          <p>Special Forum conducted in Thai with a summary in English. Guided University Tour. Networking Activities.</p>
+        </article>
+        <article>
+          <span>Day 1-2</span>
+          <p>Plenary Panels, Masterclass, Special Talks, and paper presentations.</p>
+        </article>
+      </div>
+
+      <div class="cover-label">
+        <div class="gold-rule"></div>
+        <h2>Conference Program</h2>
+        <p>As of 1 June 2026</p>
+      </div>
+
+      <div class="cover-bottom">Detailed Program | ICA Regional Hub Thailand 2026</div>
+    </div>
+  </main>
+      <footer class="page-footer">
+        <span>As of 1 June 2026</span>
+        <span>Page 1</span>
+      </footer>
+    </section>
+  
+
+    <section class="page program-page day0-page">
+      
+        <header class="page-header">
+          <div>
+            <div class="running-kicker">ICA Regional Hub Thailand 2026</div>
+            <div class="running-title">Welcoming Program</div>
+          </div>
+          
+    <div class="logo-lockup mini" aria-label="conference logo lockup">
+      <img src="../im/ICA26_regional_hub_-_bangkok_logo.webp" alt="ICA Bangkok Regional Hub logo">
+      <img src="../im/LogoICA.webp" alt="International Communication Association logo">
+      <img src="../im/123.png" alt="Chulalongkorn University logo">
+    </div>
+  
+        </header>
+      
+      <main class="content">
+    <div class="day-title">
+      <div><span>Day 0</span><h1>Friday, 5 June 2026</h1></div>
+      <p>Faculty of Communication Arts, Chulalongkorn University · Conference Hall on the 11th fl, MKSW bldg.</p>
+    </div>
+
+    <div class="agenda-band">
+      <div class="agenda-item">
+        <time>13:00-13:20</time>
+        <strong>Registration and Guided Tour Booking</strong>
+        <span>Conference Hall on the 11th fl, MKSW bldg.</span>
+      </div>
+      <div class="agenda-item">
+        <time>13:20-13:30</time>
+        <strong>Opening Speech</strong>
+        <span>By Dean, Assoc. Prof. Preeda Akarachantachoke (PhD.)</span>
+      </div>
+      <div class="agenda-item">
+        <time>13:30-15:00</time>
+        <strong>Special Forum</strong>
+        <span class="day0-format-badge">Thai session with English Summary</span>
+      </div>
+      <div class="agenda-item">
+        <time>15:00-15:30</time>
+        <strong>Group Photo and Coffee Break</strong>
+        <span>Faculty of Communication Arts</span>
+      </div>
+      <div class="agenda-item">
+        <time>15:30-16:30</time>
+        <strong>Chulalongkorn University Shuttle Bus Tour</strong>
+        <span>Campus highlights · 20 participants</span>
+      </div>
+    </div>
+
+    <div class="day0-main-grid">
+      <section class="day0-forum-card">
+        <time>13:30-15:00</time>
+        <h2>Special Forum</h2>
+        <p class="day0-session-note">Thai session with English Summary</p>
+        <div class="day0-topic-grid">
+          <p>“ถอดรหัสปรากฏการณ์ข่าวร้อน: อ่านความเหลื่อมล้ำเชิงโครงสร้างผ่าน ‘อำนาจ-ความจริง-แพลตฟอร์ม’ ในนิเวศสื่อไทย”</p>
+          <p>“Decoding Breaking News: Understanding Structural Inequality through Power, Truth, and Platforms in Thailand’s Media Ecology”</p>
+        </div>
+        <div class="day0-note">Moderator: Asst. Prof. Chanansara Oranop (Ph.D), Assistant Dean, Faculty of Communication Arts, Chulalongkorn University</div>
+      </section>
+
+      <div class="day0-side-stack">
+        <article class="day0-mini-card">
+          <time>13:20-13:30</time>
+          <h2>Opening Speech</h2>
+          <p>By Dean, Assoc. Prof. Preeda Akarachantachoke (PhD.)</p>
+        </article>
+        <article class="day0-mini-card day0-speakers">
+          <time>Forum Speakers</time>
+          <h2>Invited Speakers</h2>
+          <ul>
+            <li><strong>Dr. Dhanakorn Srisooksai</strong>, Chief Executive Officer, Thai Media Fund</li>
+            <li><strong>Supajitra Laohavatanapinyo</strong>, Director of Platform Business Supervision and Inspection, ETDA</li>
+            <li><strong>Anupong Chaiyarit</strong>, Former Deputy Director for Media Distribution Technology, Thai PBS</li>
+            <li><strong>Supinya Klangnarong</strong>, Co-founder, Cofact Thailand</li>
+          </ul>
+        </article>
+        <article class="day0-mini-card">
+          <time>15:00-15:30</time>
+          <h2>Group Photo and Coffee Break</h2>
+          <p>Networking break following the Special Forum.</p>
+        </article>
+        <article class="day0-mini-card">
+          <time>15:30-16:30</time>
+          <h2>Campus Tour</h2>
+          <p>Chulalongkorn University Shuttle Bus Tour: Campus Highlights and Guided Exploration (20 Participants)</p>
+        </article>
+      </div>
+    </div>
+  </main>
+      <footer class="page-footer">
+        <span>As of 1 June 2026</span>
+        <span>Page 2</span>
+      </footer>
+    </section>
+  
+
+    <section class="page program-page plenary-page">
+      
+        <header class="page-header">
+          <div>
+            <div class="running-kicker">ICA Regional Hub Thailand 2026</div>
+            <div class="running-title">Day 1 Morning</div>
+          </div>
+          
+    <div class="logo-lockup mini" aria-label="conference logo lockup">
+      <img src="../im/ICA26_regional_hub_-_bangkok_logo.webp" alt="ICA Bangkok Regional Hub logo">
+      <img src="../im/LogoICA.webp" alt="International Communication Association logo">
+      <img src="../im/123.png" alt="Chulalongkorn University logo">
+    </div>
+  
+        </header>
+      
+      <main class="content">
+    <div class="day-title">
+      <div><span>Day 1</span><h1>Saturday, 6 June 2026</h1></div>
+      <p>Mandarin Hotel Bangkok · Plenary Hall + Room A-D</p>
+    </div>
+    
+    <div class="agenda-band">
+      
+        <div class="agenda-item">
+          <time>08:30-09:00</time>
+          <strong>Registration &amp; Networking Coffee</strong>
+          <span>Foyer</span>
+        </div>
+      
+        <div class="agenda-item">
+          <time>09:00-09:30</time>
+          <strong>Opening Ceremony</strong>
+          <span>Plenary Hall / ROOM A (Mandarin A)</span>
+        </div>
+      
+        <div class="agenda-item">
+          <time>09:30-10:30</time>
+          <strong>Plenary Panel: Asian Perspectives on Communication and Inequalities</strong>
+          <span>Plenary Hall / ROOM A</span>
+        </div>
+      
+        <div class="agenda-item">
+          <time>10:30-11:00</time>
+          <strong>Coffee Break</strong>
+          <span>Foyer</span>
+        </div>
+      
+    </div>
+  
+    <div class="opening-card">
+      <div>
+        <time>09:00-09:30</time>
+        <h2>Opening Ceremony</h2>
+      </div>
+      <p>Presided over by the President of Chulalongkorn University, jointly with the Dean of the Faculty of Communication Arts, the President of ANPOR, and a video from the President of the International Communication Association (ICA).</p>
+    </div>
+    <div class="speaker-grid">
+      <article>
+        <span>Plenary Speaker 1</span>
+        <h2>Prof. Dr. Masato Kajimoto, PhD</h2>
+        <p>Professor of Practice in Journalism, University of Hong Kong</p>
+        <strong>From Fact-Checking to Information Integrity: Refining Media Literacy Education in the AI-Powered Ecosystem</strong>
+      </article>
+      <article>
+        <span>Plenary Speaker 2</span>
+        <h2>Prof. Dr. Phouphet Kyophilavong</h2>
+        <p>National University of Laos</p>
+        <strong>The Impact of Digital Transformation on the Economy in the Greater Mekong Subregion (GMS)</strong>
+      </article>
+      <article>
+        <span>Plenary Speaker 3</span>
+        <h2>Assoc. Prof. Dr. Long TV Nguyen</h2>
+        <p>School of Communication & Design, RMIT International University, Vietnam</p>
+        <strong>Health Communication in the Platform Society: Trust, Participation, and Digital Engagement</strong>
+      </article>
+    </div>
+  </main>
+      <footer class="page-footer">
+        <span>As of 1 June 2026</span>
+        <span>Page 3</span>
+      </footer>
+    </section>
+  
+
+    <section class="page program-page session-only session-a-only">
+      
+        <header class="page-header">
+          <div>
+            <div class="running-kicker">ICA Regional Hub Thailand 2026</div>
+            <div class="running-title">Parallel Session A</div>
+          </div>
+          
+    <div class="logo-lockup mini" aria-label="conference logo lockup">
+      <img src="../im/ICA26_regional_hub_-_bangkok_logo.webp" alt="ICA Bangkok Regional Hub logo">
+      <img src="../im/LogoICA.webp" alt="International Communication Association logo">
+      <img src="../im/123.png" alt="Chulalongkorn University logo">
+    </div>
+  
+        </header>
+      
+      <main class="content">
+    <div class="day-title tight">
+      <div><span>Day 1</span><h1>Parallel Session A</h1></div>
+      <p>11:00-12:30 · Mandarin Hotel Bangkok</p>
+    </div>
+    
+    <section class="session-block">
+      <div class="session-heading">
+        <div>
+          <span class="session-label">Parallel Session A</span>
+          <h2>11:00-12:30</h2>
+        </div>
+        <span class="venue-pill">Mandarin Hotel Bangkok</span>
+      </div>
+      <table class="session-table">
+        <thead>
+          <tr>
+            <th class="slot-head">Slot</th>
+            <th><span>Plenary Hall / ROOM A (Mandarin A)</span><strong>A1 | Narrative Inequality in Digital Battlegrounds: Social Media, Influencers, and Public Perception of the Thai-Cambodian Conflict</strong></th><th><span>ROOM B (Budsaba)</span><strong>A2 | The Editorial Algorithm: AI, Automation, and the Accountability Gap in Asian Media</strong></th><th><span>ROOM C (Rodsukon)</span><strong>A3 | Between Evidence and Algorithm: Health Communication, Medical Authority, and the Platform Challenge</strong></th><th><span>ROOM D (Karaked)</span><strong>A4 | The Price of Visibility: Queer Identities, Gendered Labour, and the Surveillance of Digital Selves</strong></th>
+          </tr>
+        </thead>
+        <tbody><tr><th scope="row">Paper 1</th><td class="special-cell" rowspan="5">
+          <p class="eyebrow">Thai Media Fund Special Session · All Onsite</p>
+          <p>This panel explores an example of communication inequality, where a small group of influencers and news agencies can dominate public discourse in the Thai-Cambodian Conflict, often prioritizing nationalistic views over factual and balanced information.</p>
+          <p>The panel highlights an urgent need to foster media literacy and encourage all stakeholders, including influencers, media outlets, and social platforms, to exercise social responsibility rather than chasing engagement through conflict.</p>
+          <p><strong>Speakers</strong><br>Dr. Dhanakorn Srisooksai, CEO, Thai Media Fund<br>Dr. Chamnan Ngammaneeudom, Deputy CEO, Thai Media Fund<br>Nattapol Zupasit, Thai Media Fund<br>Thamrong Chittapasata, Thai Media Fund</p>
+          <p><strong>Discussant</strong><br>Asst. Prof. Chanansara Oranop (Ph.D), Assistant Dean, Faculty of Communication Arts, Chulalongkorn University</p>
+        </td><td>
+    <article class="paper">
+      <div class="paper-meta"><span class="paper-id">#129</span></div>
+      <div class="paper-title">Automating the News: AI Anchors, Hype, and Bounded Journalism in China</div>
+      <div class="paper-authors">Chen, Yiming</div>
+      <div class="paper-affiliation">Xi'an Jiaotong-Liverpool University, China</div>
+    </article>
+  </td><td>
+    <article class="paper">
+      <div class="paper-meta"><span class="paper-id">#108</span></div>
+      <div class="paper-title">Efficacy of Constructive Journalism on Affective Wellbeing: A Systematic Review and Meta-Analysis</div>
+      <div class="paper-authors">Fu, Zhengke</div>
+      <div class="paper-affiliation">NingboTECH University, China</div>
+    </article>
+  </td><td>
+    <article class="paper">
+      <div class="paper-meta"><span class="paper-id">#116</span></div>
+      <div class="paper-title">Platform-Mediated Thai Queerness: Thai BL, Global Streaming, and Messy Hybrid Masculinities</div>
+      <div class="paper-authors">dela Cruz, Erwin James Alonzo</div>
+      <div class="paper-affiliation">Thammasat University, Thailand</div>
+    </article>
+  </td></tr><tr><th scope="row">Paper 2</th><td>
+    <article class="paper">
+      <div class="paper-meta"><span class="paper-id">#167</span></div>
+      <div class="paper-title">Governing AI in Journalism: Media Company and News Rooms' (Self) Regulation in Using AI for News Production</div>
+      <div class="paper-authors">Manalu, S. Rouli</div>
+      <div class="paper-affiliation">Universitas Diponegoro, Indonesia</div>
+    </article>
+  </td><td>
+    <article class="paper">
+      <div class="paper-meta"><span class="paper-id">#135</span></div>
+      <div class="paper-title">IDEA Model-Based Approaches to Risk and Crisis Communication in Non-Communicable Diseases</div>
+      <div class="paper-authors">Suppiah, S. Maartandan</div>
+      <div class="paper-affiliation">Universiti Utara Malaysia, Malaysia</div>
+    </article>
+  </td><td>
+    <article class="paper">
+      <div class="paper-meta"><span class="paper-id">#106</span></div>
+      <div class="paper-title">Reclaiming the Tourist Gaze: Indigenous Self-Representation Among Peruvian Content Creators and Its Resonance in Southeast Asian Digital Contexts</div>
+      <div class="paper-authors">Laura Paima, Emily Cecilia</div>
+      <div class="paper-affiliation">Universitas Gadjah Mada, Indonesia</div>
+    </article>
+  </td></tr><tr><th scope="row">Paper 3</th><td>
+    <article class="paper">
+      <div class="paper-meta"><span class="paper-id">#172</span></div>
+      <div class="paper-title">Creative AI Ecosystem for Children and Youth: A Comparative Analysis of Global and Regional Policy Frameworks</div>
+      <div class="paper-authors">Devahastin, Dean Deeprom</div>
+      <div class="paper-affiliation">KidWise Studios, Thailand</div>
+    </article>
+  </td><td>
+    <article class="paper">
+      <div class="paper-meta"><span class="paper-id">#190</span></div>
+      <div class="paper-title">Health Misinformation on Social Media: An Analysis of TikTok Content Related to Non-Communicable Diseases in the Philippines and Thailand</div>
+      <div class="paper-authors">Calib, Aleyah Nadia I.</div>
+      <div class="paper-affiliation">University of the Thai Chamber of Commerce, Thailand</div>
+    </article>
+  </td><td>
+    <article class="paper">
+      <div class="paper-meta"><span class="paper-id">#121</span></div>
+      <div class="paper-title">Controlling Visibility: Trans Women, Identity, and Risk on Instagram</div>
+      <div class="paper-authors">Putri, Sukma</div>
+      <div class="paper-affiliation">Monash University, Australia</div>
+    </article>
+  </td></tr><tr><th scope="row">Paper 4</th><td>
+    <article class="paper">
+      <div class="paper-meta"><span class="paper-id">#189</span></div>
+      <div class="paper-title">Innovation as Aspirational Performance: Big Data Development in Guizhou, China</div>
+      <div class="paper-authors">Zhao, Hanqing</div>
+      <div class="paper-affiliation">Keio University, Japan</div>
+    </article>
+  </td><td>
+    <article class="paper">
+      <div class="paper-meta"><span class="paper-id">#110</span></div>
+      <div class="paper-title">The Meaning of Nursing Homes: A Study on Communication and Interpretation Among Thai Consumers of Different Generations</div>
+      <div class="paper-authors">Palapreewan, Phittaya</div>
+      <div class="paper-affiliation">Panyapiwat Institute of Management, Thailand</div>
+    </article>
+  </td><td>
+    <article class="paper">
+      <div class="paper-meta"><span class="paper-id">#155</span></div>
+      <div class="paper-title">From Taboo to Meme: Negotiating Queer Meanings through 'Jomok' Content on Indonesian TikTok</div>
+      <div class="paper-authors">Firdaus, Muhammad Nauris</div>
+      <div class="paper-affiliation">The University of Melbourne, Australia</div>
+    </article>
+  </td></tr><tr><th scope="row">Paper 5</th><td>
+    <article class="paper">
+      <div class="paper-meta"><span class="paper-id">#183</span></div>
+      <div class="paper-title">Operationalizing Human-in-the-Loop Governance Across the AI Application Development Lifecycle: The L-HAT Framework</div>
+      <div class="paper-authors">Suksakul, Parm</div>
+      <div class="paper-affiliation">Chulalongkorn University, Thailand</div>
+    </article>
+  </td><td>
+    <article class="paper">
+      <div class="paper-meta"><span class="paper-id">#137</span></div>
+      <div class="paper-title">Crisis Communication and Public Health Messaging Framework Analysis for Hazmat Incident and Occupational Chemical Leakage in Thailand</div>
+      <div class="paper-authors">Rakshit, Pornpidcha</div>
+      <div class="paper-affiliation">Faculty of Medicine Ramathibodi Hospital, Mahidol University, Thailand</div>
+    </article>
+  </td><td>
+    <article class="paper">
+      <div class="paper-meta"><span class="paper-id">#213</span></div>
+      <div class="paper-title">Gendered Motivations and Platformed Sexual Labor: Cis and Trans Women Creators on OnlyFans</div>
+      <div class="paper-authors">Yutthaworakool, Saittawut</div>
+      <div class="paper-affiliation">Asian Institute of Technology, Thailand</div>
+    </article>
+  </td></tr></tbody>
+      </table>
+    </section>
+  
+    
+    <div class="agenda-band">
+      
+        <div class="agenda-item">
+          <time>12:30-13:30</time>
+          <strong>Lunch Break</strong>
+          <span>Mandarin Hotel Bangkok</span>
+        </div>
+      
+    </div>
+  
+  </main>
+      <footer class="page-footer">
+        <span>As of 1 June 2026</span>
+        <span>Page 4</span>
+      </footer>
+    </section>
+  
+
+    <section class="page program-page roundtable-page">
+      
+        <header class="page-header">
+          <div>
+            <div class="running-kicker">ICA Regional Hub Thailand 2026</div>
+            <div class="running-title">Day 1 Afternoon</div>
+          </div>
+          
+    <div class="logo-lockup mini" aria-label="conference logo lockup">
+      <img src="../im/ICA26_regional_hub_-_bangkok_logo.webp" alt="ICA Bangkok Regional Hub logo">
+      <img src="../im/LogoICA.webp" alt="International Communication Association logo">
+      <img src="../im/123.png" alt="Chulalongkorn University logo">
+    </div>
+  
+        </header>
+      
+      <main class="content">
+    <div class="day-title tight">
+      <div><span>Day 1</span><h1>Saturday, 6 June 2026 · Afternoon</h1></div>
+      <p>Lunch 12:30-13:30 · Coffee 15:00-15:30</p>
+    </div>
+    
+    <div class="agenda-band">
+      
+        <div class="agenda-item">
+          <time>12:30-13:30</time>
+          <strong>Lunch Break</strong>
+          <span>Mandarin Hotel Bangkok</span>
+        </div>
+      
+        <div class="agenda-item">
+          <time>13:30-15:00</time>
+          <strong>Hub-to-hub Roundtable</strong>
+          <span>Plenary Hall (Room A)</span>
+        </div>
+      
+        <div class="agenda-item">
+          <time>15:00-15:30</time>
+          <strong>Coffee Break</strong>
+          <span>Foyer</span>
+        </div>
+      
+        <div class="agenda-item">
+          <time>17:00-17:30</time>
+          <strong>Day 1 Highlights &amp; Recap</strong>
+          <span>Plenary Hall / ROOM A</span>
+        </div>
+      
+        <div class="agenda-item">
+          <time>18:30-21:00</time>
+          <strong>ICA Thailand Cultural Evening</strong>
+          <span>By invitation only</span>
+        </div>
+      
+    </div>
+  
+    <div class="roundtable-feature">
+      <div>
+        <time>13:30-15:00</time>
+        <h2>Hub-to-hub Roundtable Representing Five ICA Regional Hubs</h2>
+        <p>Bringing together ICA hub representatives from the Philippines, Nigeria, Indonesia, Thailand, and New Zealand to discuss algorithmic power, decolonial communication, and the politics of voice in the Global South.</p>
+      </div>
+      <ul>
+        <li><strong>Marco M. Polo — Philippines</strong><span>Associate Professor, De La Salle University–Dasmariñas | PACE & AMIC</span></li>
+        <li><strong>Ekaete George — Nigeria</strong><span>Development Communication Researcher | ICA Nigeria Chapter</span></li>
+        <li><strong>Dorien Kartigawangi — Indonesia</strong><span>Scholar of AI, epistemic coloniality, and non-Western knowledge systems</span></li>
+        <li><strong>Mohan J. Dutta — New Zealand</strong><span>Director of CARE, Massey University | Culture-centered communication scholar</span></li>
+        <li><strong>Alongkorn Parivudhiphongs — Thailand</strong><span>Deputy Dean, Faculty of Communication Arts, Chulalongkorn University</span></li>
+      </ul>
+      <p class="moderator"><strong>Moderator</strong> Jerwin S. Borres, Assistant Prof., University of Science and Technology of Southern Philippines (USTP)</p>
+    </div>
+  </main>
+      <footer class="page-footer">
+        <span>As of 1 June 2026</span>
+        <span>Page 5</span>
+      </footer>
+    </section>
+  
+
+    <section class="page program-page session-only session-b-only">
+      
+        <header class="page-header">
+          <div>
+            <div class="running-kicker">ICA Regional Hub Thailand 2026</div>
+            <div class="running-title">Parallel Session B</div>
+          </div>
+          
+    <div class="logo-lockup mini" aria-label="conference logo lockup">
+      <img src="../im/ICA26_regional_hub_-_bangkok_logo.webp" alt="ICA Bangkok Regional Hub logo">
+      <img src="../im/LogoICA.webp" alt="International Communication Association logo">
+      <img src="../im/123.png" alt="Chulalongkorn University logo">
+    </div>
+  
+        </header>
+      
+      <main class="content">
+    <div class="day-title tight">
+      <div><span>Day 1</span><h1>Parallel Session B</h1></div>
+      <p>15:30-17:00 · Mandarin Hotel Bangkok</p>
+    </div>
+    
+    <section class="session-block">
+      <div class="session-heading">
+        <div>
+          <span class="session-label">Parallel Session B</span>
+          <h2>15:30-17:00</h2>
+        </div>
+        <span class="venue-pill">Mandarin Hotel Bangkok</span>
+      </div>
+      <table class="session-table">
+        <thead>
+          <tr>
+            <th class="slot-head">Slot</th>
+            <th><span>Plenary Hall / ROOM A (Mandarin A)</span><strong>B1 | Special Talk on Creative Economy and Journalism in China</strong></th><th><span>ROOM B (Budsaba)</span><strong>B2 | What Cables Carry: Communication Infrastructure, State Power, and the Right to Speak in Asia</strong></th><th><span>ROOM C (Rodsukon)</span><strong>B3 | The Truth Was Never Trending: News Avoidance, Disinformation, and the Democratic Information Crisis</strong></th><th><span>ROOM D (Karaked)</span><strong>B4 | When Everyone Is a Publisher: Platform Governance, Content Labour, and Commercial Communication in Asia's New Media Economy</strong></th>
+          </tr>
+        </thead>
+        <tbody><tr><th scope="row">Paper 1</th><td class="special-cell" rowspan="6">
+          <p class="eyebrow">Special Talk Session I</p>
+          <p><strong>Creative and Cultural Industries in Asia</strong></p>
+          <p>This session discusses the transformation of creative industries in Asia, focusing on cultural labour, platform economies, and digital media industries.</p>
+          <ol>
+            <li><strong>Creative Labour and Trade Unions in East Asia</strong><br>Jocelyn Yi-Hsuan Lai, Associate Professor, Department of Communication Arts and Chief of Internationalization, College of Communication, Fu Jen Catholic University</li>
+            <li><strong>Digital Platform and Transformation of Creative Work in Malaysia</strong><br>Kenneth Lee Tze Wui, Media Scholar and Social Anthropologist; Assistant Professor and Head, Department of Mass Communication, Faculty of Creative Industries, Universiti Tunku Abdul Rahman</li>
+          </ol>
+          <p><strong>Discussant</strong><br>Assoc. Prof. Alongkorn Parivudhiphongs (PhD), Deputy Dean, Faculty of Communication Arts, Chulalongkorn University</p>
+          <p class="eyebrow">Special Talk Session II</p>
+          <p><strong>Journalism Education in China</strong></p>
+          <p>This session explores emerging trends in journalism education in China amid digital transformation and changing media industries.</p>
+          <ol>
+            <li><strong>Global Business Journalism Education in Contemporary China</strong><br>Lee Miller, Senior Editor, Bloomberg News and Visiting Professor of Journalism, Tsinghua University</li>
+            <li><strong>Transforming Journalism Education in Contemporary China</strong><br>Zhang Jianzhong, Professor, School of Journalism and Communication, Guangxi University</li>
+          </ol>
+          <p><strong>Discussant</strong><br>Prof. Dr. Masato Kajimoto, Professor of Practice in Journalism, University of Hong Kong</p>
+        </td><td>
+    <article class="paper">
+      <div class="paper-meta"><span class="paper-id">#147</span></div>
+      <div class="paper-title">The Impacts of China's SEA-H2X Submarine Cable: Telecommunications Regulatory Study under the NBTC Framework</div>
+      <div class="paper-authors">Kheokao, Thasan</div>
+      <div class="paper-affiliation">National Broadcasting and Telecommunications Commission (NBTC), Thailand</div>
+    </article>
+  </td><td>
+    <article class="paper">
+      <div class="paper-meta"><span class="paper-id">#179</span></div>
+      <div class="paper-title">A State of Knowledge Survey on Fact-Checking Research in Communication Studies</div>
+      <div class="paper-authors">Phothihang, Pratya</div>
+      <div class="paper-affiliation">Pibulsongkram Rajabhat University, Thailand</div>
+    </article>
+  </td><td>
+    <article class="paper">
+      <div class="paper-meta"><span class="paper-id">#188</span></div>
+      <div class="paper-title">Branding the Misbranded: An Exploratory Study of Influencer-Mediated Cultural Misbranding in Hanoi</div>
+      <div class="paper-authors">Nguyen, Chung Anh</div>
+      <div class="paper-affiliation">Vietnam Japan University - VNU, Vietnam</div>
+    </article>
+  </td></tr><tr><th scope="row">Paper 2</th><td>
+    <article class="paper">
+      <div class="paper-meta"><span class="paper-id">#202</span></div>
+      <div class="paper-title">The 'ThAI' Nationalism: The Pandemic of Information Operation (IO) in Arousing Nationalistic Sentiment during the Age of AI</div>
+      <div class="paper-authors">Bintorleb, Asia</div>
+      <div class="paper-affiliation">National University of Singapore, Singapore</div>
+    </article>
+  </td><td>
+    <article class="paper">
+      <div class="paper-meta"><span class="paper-id">#133</span></div>
+      <div class="paper-title">Selective News Avoidance and Misinformation Concerns among Women Councillors in Delhi, India</div>
+      <div class="paper-authors">Sharma, Annapurna</div>
+      <div class="paper-affiliation">Central University of Punjab, India</div>
+    </article>
+  </td><td>
+    <article class="paper">
+      <div class="paper-meta"><span class="paper-id">#218</span></div>
+      <div class="paper-title">From Columnists to Influencers: A Historical Study on the Digital Transition of Thai Football Journalists</div>
+      <div class="paper-authors">Supakitcharoen, Apisit</div>
+      <div class="paper-affiliation">Chulalongkorn University, Thailand</div>
+    </article>
+  </td></tr><tr><th scope="row">Paper 3</th><td>
+    <article class="paper">
+      <div class="paper-meta"><span class="paper-id">#157</span></div>
+      <div class="paper-title">The Sonic Sovereignty of the Voiceless: Silence, Inequality, and Recognition in Southeast Asian Cinema</div>
+      <div class="paper-authors">Serisamran, Teerapong</div>
+      <div class="paper-affiliation">Chulalongkorn University, Thailand</div>
+    </article>
+  </td><td>
+    <article class="paper">
+      <div class="paper-meta"><span class="paper-id">#174</span></div>
+      <div class="paper-title">Media Coverage of Crime and Its Effects on Thai Audiences' Perceptions of Criminal Suspects and Persons of Interest</div>
+      <div class="paper-authors">Phansab, Chanamon</div>
+      <div class="paper-affiliation">Chulalongkorn University, Thailand</div>
+    </article>
+  </td><td>
+    <article class="paper">
+      <div class="paper-meta"><span class="paper-id">#153</span></div>
+      <div class="paper-title">The Personal Branding Process of Historical Knowledge Influencers: A Case Study of Dr. Wit Sittivaekin and Nat Klinmalee (Farose)</div>
+      <div class="paper-authors">Immonen, Max</div>
+      <div class="paper-affiliation">Srinakharinwirot University, Thailand</div>
+    </article>
+  </td></tr><tr><th scope="row">Paper 4</th><td>
+    <article class="paper">
+      <div class="paper-meta"><span class="paper-id">#209</span></div>
+      <div class="paper-title">The Marketing Communication Governance in the Digital Era: An Analysis of Substantive Provisions and Practical Gaps</div>
+      <div class="paper-authors">Panichpapiboon, Sopark</div>
+      <div class="paper-affiliation">University of the Thai Chamber of Commerce, Thailand</div>
+    </article>
+  </td><td>
+    <article class="paper">
+      <div class="paper-meta"><span class="paper-id">#136</span></div>
+      <div class="paper-title">Triggering Polarization: Examining the Link Between Hard Talk Programs and Online Vigilantism in the Thai-Cambodian Border Dispute</div>
+      <div class="paper-authors">Oranop, Chanansara</div>
+      <div class="paper-affiliation">Chulalongkorn University, Thailand</div>
+    </article>
+  </td><td>
+    <article class="paper">
+      <div class="paper-meta"><span class="paper-id">#201</span></div>
+      <div class="paper-title">A Survey of the State of Research on Online Micro-Dramas in Mass Communication</div>
+      <div class="paper-authors">Kattirat, Witavas</div>
+      <div class="paper-affiliation">ChiangRai Rajabhat University, Thailand</div>
+    </article>
+  </td></tr><tr><th scope="row">Paper 5</th><td>
+    <article class="paper">
+      <div class="paper-meta"><span class="paper-id">#169</span></div>
+      <div class="paper-title">National Self-Reliance in Discursive Legitimation: A Study of Viet Nam's 'New Era' Discourse in State Media</div>
+      <div class="paper-authors">Gia Huy, Luu and Ngoc Thuy Duong, Le</div>
+      <div class="paper-affiliation">Diplomatic Academy of Vietnam, Vietnam (Q&amp;A with co-author at the end) - Zoom</div>
+    </article>
+  </td><td>
+    <article class="paper">
+      <div class="paper-meta"><span class="paper-id">#117</span></div>
+      <div class="paper-title">Institutional Failure and Crisis of Communicative Action in Indonesia's August 2025 Demonstration</div>
+      <div class="paper-authors">Ardiyanto, Erik</div>
+      <div class="paper-affiliation">Universitas Paramadina, Indonesia</div>
+    </article>
+  </td><td>
+    <article class="paper">
+      <div class="paper-meta"><span class="paper-id">#156</span></div>
+      <div class="paper-title">Motivations of Porn Game Developers: Movement under Moral Boundaries Among Japanese Anime-Style Adult Game Developers on Steam</div>
+      <div class="paper-authors">Srigom, Warapob</div>
+      <div class="paper-affiliation">Mahidol University, Thailand</div>
+    </article>
+  </td></tr><tr><th scope="row">Paper 6</th><td>
+    <article class="paper">
+      <div class="paper-meta"><span class="paper-id">#131</span></div>
+      <div class="paper-title">Decolonizing Experimental Methods in Communication Research: Notes from a Filipino Perspective</div>
+      <div class="paper-authors">Villacastin, Juven Nino</div>
+      <div class="paper-affiliation">University of Hawaii at Manoa, Philippines</div>
+    </article>
+  </td><td>
+    <article class="paper">
+      <div class="paper-meta"><span class="paper-id">#203</span></div>
+      <div class="paper-title">From Public Broadcasting to Platform Dependency: Regulatory Challenges, Information Inequality, and Media Access in Thailand</div>
+      <div class="paper-authors">Kamplean, Artima</div>
+      <div class="paper-affiliation">Faculty of Journalism and Mass Communication, Thammasat University, Thailand</div>
+    </article>
+  </td><td><div class="empty-slot">—</div></td></tr></tbody>
+      </table>
+    </section>
+  
+    
+    <div class="agenda-band">
+      
+        <div class="agenda-item">
+          <time>17:00-17:30</time>
+          <strong>Day 1 Highlights &amp; Recap</strong>
+          <span>Plenary Hall (Room A)</span>
+        </div>
+      
+        <div class="agenda-item">
+          <time>18:30-21:00</time>
+          <strong>ICA Thailand Cultural Evening (By Invitation only)</strong>
+          <span>Hosted Dinner &amp; Cultural Reception</span>
+        </div>
+      
+    </div>
+  
+  </main>
+      <footer class="page-footer">
+        <span>As of 1 June 2026</span>
+        <span>Page 6</span>
+      </footer>
+    </section>
+  
+
+    <section class="page program-page session-only day2-morning">
+      
+        <header class="page-header">
+          <div>
+            <div class="running-kicker">ICA Regional Hub Thailand 2026</div>
+            <div class="running-title">Day 2 Morning</div>
+          </div>
+          
+    <div class="logo-lockup mini" aria-label="conference logo lockup">
+      <img src="../im/ICA26_regional_hub_-_bangkok_logo.webp" alt="ICA Bangkok Regional Hub logo">
+      <img src="../im/LogoICA.webp" alt="International Communication Association logo">
+      <img src="../im/123.png" alt="Chulalongkorn University logo">
+    </div>
+  
+        </header>
+      
+      <main class="content">
+    <div class="day-title">
+      <div><span>Day 2</span><h1>Sunday, 7 June 2026</h1></div>
+      <p>Mandarin Hotel Bangkok · Conference Rooms A-D</p>
+    </div>
+    
+    <div class="agenda-band">
+      
+        <div class="agenda-item">
+          <time>08:30-09:00</time>
+          <strong>Registration &amp; Networking Coffee</strong>
+          <span>Foyer</span>
+        </div>
+      
+        <div class="agenda-item">
+          <time>10:30-11:00</time>
+          <strong>Coffee Break</strong>
+          <span>Foyer</span>
+        </div>
+      
+    </div>
+  
+    
+    <section class="session-block">
+      <div class="session-heading">
+        <div>
+          <span class="session-label">Parallel Session C</span>
+          <h2>09:00-10:30</h2>
+        </div>
+        <span class="venue-pill">Mandarin Hotel Bangkok</span>
+      </div>
+      <table class="session-table">
+        <thead>
+          <tr>
+            <th class="slot-head">Slot</th>
+            <th><span>Plenary Hall / ROOM A (Mandarin A)</span><strong>C1 | The Assemblages of Agency: Negotiating Visibility in Asian Digital Spaces</strong></th><th><span>ROOM B (Budsaba)</span><strong>C2 | Authority in Troubled Waters: Communication, Risk, and the Power to Shape Public Understanding (Hybrid)</strong></th><th><span>ROOM C (Rodsukon)</span><strong>C3 | Knowledge Is Not Enough: Health Communication, Behaviour Change, and the Body in Asian Contexts</strong></th><th><span>ROOM D (Karaked)</span><strong>C4 | Whose Story Is This? Historical Memory, Marginality, and the Right to Narrative Authority</strong></th>
+          </tr>
+        </thead>
+        <tbody><tr><th scope="row">Paper 1</th><td class="special-cell" rowspan="6">
+          <p class="eyebrow">QUT Special Session · All Virtual</p>
+          <p>This panel examines the complexities of digital visibility in Asian digital spaces. Through diverse case studies spanning digital advocacy in Indonesia, platform governance in Australia, virtual influencers in Vietnam, and cross-border creators in Myanmar, the speakers explore how marginalized groups negotiate agency amidst structural, cultural, and political constraints.</p>
+          <p><strong>Speakers</strong></p>
+          <ol>
+            <li><strong>Dr. Alia Azmi</strong>, University of Bengkulu, Indonesia: online conversations on sexual violence and digital advocacy as a trajectory of agency.</li>
+            <li><strong>Chuying Lu</strong>, University of Queensland, Australia: interaction architectures of Twitter/X during the COVID-19 pandemic and reply-based silencing.</li>
+            <li><strong>Do Doan Hanh Nguyen</strong>, Queensland University of Technology, Australia: virtual influencers in Vietnam, representation, memefication, and commercialisation.</li>
+            <li><strong>Dr. Yuxin Liu and Dr. Ming Zhang</strong>, Shanghai University of Political Science and Law, China; Wenzhou University of Technology, China: cross-border and transnational creators from Myanmar.</li>
+          </ol>
+          <p><strong>Discussant</strong><br>Dr. Xiaoting Yu, Queensland University of Technology</p>
+        </td><td>
+    <article class="paper">
+      <div class="paper-meta"><span class="paper-id">#109</span></div>
+      <div class="paper-title">Benevolent Leadership as a Relational Communication Signal: A Social Exchange Perspective on Customer Service Behavior</div>
+      <div class="paper-authors">Phochadom, Supissara</div>
+      <div class="paper-affiliation">Prince of Songkla University, Thailand</div>
+    </article>
+  </td><td>
+    <article class="paper">
+      <div class="paper-meta"><span class="paper-id">#161</span></div>
+      <div class="paper-title">Fighting a Laboring Women's Disease: Health Discourse about Uterine Prolapse in Socialist China (1958-1966)</div>
+      <div class="paper-authors">Zhang, Kaixuan</div>
+      <div class="paper-affiliation">NingboTech University, China</div>
+    </article>
+  </td><td>
+    <article class="paper">
+      <div class="paper-meta"><span class="paper-id">#139</span></div>
+      <div class="paper-title">Culturally Responsive Leadership Communication in Southeast Asia: A Case Study of Tony Fernandes and AirAsia</div>
+      <div class="paper-authors">Balakrishnan, Thiviya</div>
+      <div class="paper-affiliation">Tee Talks Services, Malaysia</div>
+    </article>
+  </td></tr><tr><th scope="row">Paper 2</th><td>
+    <article class="paper">
+      <div class="paper-meta"><span class="paper-id">#158</span></div>
+      <div class="paper-title">Mapping Policy Discourse on Flooding in Aceh: A Discourse Network Analysis of Government Responses</div>
+      <div class="paper-authors">Subektie, Rosalina</div>
+      <div class="paper-affiliation">Diponegoro University, Indonesia</div>
+    </article>
+  </td><td>
+    <article class="paper">
+      <div class="paper-meta"><span class="paper-id">#115</span></div>
+      <div class="paper-title">A DEMATEL-Based Systems Analysis of Health and Safety Risk Drivers Among Marginalized Worker Populations</div>
+      <div class="paper-authors">Bharadwaj, Manish</div>
+      <div class="paper-affiliation">ABV-IIITM Gwalior, India</div>
+    </article>
+  </td><td>
+    <article class="paper">
+      <div class="paper-meta"><span class="paper-id">#140</span></div>
+      <div class="paper-title">Representation of Historical Events in Malaysian National Historical Film</div>
+      <div class="paper-authors">Abd Halim, Siti Nur Izra Safra</div>
+      <div class="paper-affiliation">Universiti Kebangsaan Malaysia, Malaysia</div>
+    </article>
+  </td></tr><tr><th scope="row">Paper 3</th><td>
+    <article class="paper">
+      <div class="paper-meta"><span class="paper-id">#216</span></div>
+      <div class="paper-title">News Framing of PM 2.5 Air Pollution in Thailand: A Comparative Study of National and Local News Websites</div>
+      <div class="paper-authors">Jitkaroon, Lalita</div>
+      <div class="paper-affiliation">Naresuan University, Thailand</div>
+    </article>
+  </td><td>
+    <article class="paper">
+      <div class="paper-meta"><span class="paper-id">#134</span></div>
+      <div class="paper-title">Bridging the Knowledge-Behavior Gap: A Health Communication Study of Liver Fluke Prevention in Thailand</div>
+      <div class="paper-authors">Shaw, Kanyika</div>
+      <div class="paper-affiliation">Panyapiwat Institute of Management, Thailand</div>
+    </article>
+  </td><td>
+    <article class="paper">
+      <div class="paper-meta"><span class="paper-id">#173</span></div>
+      <div class="paper-title">'Talking about my Beneficiaries': Knowledge Brokering Organisation Disrupting the Dominant Authority under Hierarchical Governance in the Global South</div>
+      <div class="paper-authors">Tan, Amanda</div>
+      <div class="paper-affiliation">Monash University Indonesia, Indonesia</div>
+    </article>
+  </td></tr><tr><th scope="row">Paper 4</th><td>
+    <article class="paper">
+      <div class="paper-meta"><span class="paper-id">#111</span><span class="tag">Virtual</span></div>
+      <div class="paper-title">Bridging the Implementation Gap in One Health: A Systematic Review of the Poultry Sector in Japan and Beyond</div>
+      <div class="paper-authors">Harmawan, Febriangga</div>
+      <div class="paper-affiliation">Ehime University, Japan</div>
+    </article>
+  </td><td>
+    <article class="paper">
+      <div class="paper-meta"><span class="paper-id">#149</span></div>
+      <div class="paper-title">Health Communication through Edutainment: A Case Study of 'Raw Pork, Deafness, Do You Know?' by Tai Baan x Department of Disease Control</div>
+      <div class="paper-authors">Werajong, Oubonpun</div>
+      <div class="paper-affiliation">Department of Disease Control, Thailand</div>
+    </article>
+  </td><td>
+    <article class="paper">
+      <div class="paper-meta"><span class="paper-id">#197</span></div>
+      <div class="paper-title">Active Ageing through Meaning, Routine, and Voice: An Onsite Study of Older Adults in Myanmar</div>
+      <div class="paper-authors">Pyae, Aung</div>
+      <div class="paper-affiliation">Chulalongkorn University, Thailand</div>
+    </article>
+  </td></tr><tr><th scope="row">Paper 5</th><td>
+    <article class="paper">
+      <div class="paper-meta"><span class="paper-id">#193</span><span class="tag">Virtual</span></div>
+      <div class="paper-title">Constructing the 'Good Student': Digital Wellbeing and AI Use in Higher Education Discourses</div>
+      <div class="paper-authors">Buragohain, Dipima</div>
+      <div class="paper-affiliation">Chulalongkorn University, Thailand</div>
+    </article>
+  </td><td>
+    <article class="paper">
+      <div class="paper-meta"><span class="paper-id">#168</span></div>
+      <div class="paper-title">The Persuasive Impact of Narrative Storytelling in Entertainment-Education Audiovisual Media: Effects on Attitudes and Behavioral Intentions of Caregivers</div>
+      <div class="paper-authors">Sukittanon, Siwaporn</div>
+      <div class="paper-affiliation">Chiang Mai University, Thailand</div>
+    </article>
+  </td><td>
+    <article class="paper">
+      <div class="paper-meta"><span class="paper-id">#152</span></div>
+      <div class="paper-title">From Audience to Local Content Creators: Participatory Storytelling and the Expansion of Cultural Voices</div>
+      <div class="paper-authors">Srisaracam, Sakulsri</div>
+      <div class="paper-affiliation">Chulalongkorn University, Thailand</div>
+    </article>
+  </td></tr><tr><th scope="row">Paper 6</th><td>
+    <article class="paper">
+      <div class="paper-meta"><span class="paper-id">#180</span><span class="tag">Virtual</span></div>
+      <div class="paper-title">Who Defines the Risk? Framing Analysis of Thailand's PM 2.5 Crisis</div>
+      <div class="paper-authors">Chanthapan, Worapron</div>
+      <div class="paper-affiliation">California State University, Long Beach, USA</div>
+    </article>
+  </td><td><div class="empty-slot">—</div></td><td><div class="empty-slot">—</div></td></tr></tbody>
+      </table>
+    </section>
+  
+  </main>
+      <footer class="page-footer">
+        <span>As of 1 June 2026</span>
+        <span>Page 7</span>
+      </footer>
+    </section>
+  
+
+    <section class="page feature-page">
+      
+        <header class="page-header">
+          <div>
+            <div class="running-kicker">ICA Regional Hub Thailand 2026</div>
+            <div class="running-title">Masterclass &amp; Outreach</div>
+          </div>
+          
+    <div class="logo-lockup mini" aria-label="conference logo lockup">
+      <img src="../im/ICA26_regional_hub_-_bangkok_logo.webp" alt="ICA Bangkok Regional Hub logo">
+      <img src="../im/LogoICA.webp" alt="International Communication Association logo">
+      <img src="../im/123.png" alt="Chulalongkorn University logo">
+    </div>
+  
+        </header>
+      
+      <main class="content">
+    <div class="day-title">
+      <div><span>Day 2</span><h1>Masterclass & Outreach</h1></div>
+      <p>Plenary Hall / ROOM A (Mandarin A)</p>
+    </div>
+    <div class="feature-grid">
+      <article class="feature-card">
+        <time>11:00-11:45</time>
+        <p class="eyebrow">Masterclass · Session 1</p>
+        <h2>Prof. Sung Kyum Cho</h2>
+        <h3>From Prompt to Verified Findings:<br>AI for Research Data Analysis and Validation in Communication Studies</h3>
+      </article>
+      <article class="feature-card secondary">
+        <time>11:45-12:30</time>
+        <p class="eyebrow">Masterclass · Session 2</p>
+        <h2>Prof. Mohan J. Dutta</h2>
+        <h3>CARE Methodology:<br>Culture-Centered Approach to Research and Evaluation:<br>Voice, Reflexivity, and Structural Transformation</h3>
+      </article>
+    </div>
+    <div class="outreach-card">
+      <time>13:30-15:00</time>
+      <p class="eyebrow">Outreach</p>
+      <h2>ICA Handshake from Cape Town</h2>
+      <p>Showcases and highlights from ICA family · Arranged by ICA Secretariat</p>
+    </div>
+    <div class="masterclass-note">All Masterclass sessions are virtual. Lunch Break: 12:30-13:30 · Coffee Break: 15:00-15:30.</div>
+  </main>
+      <footer class="page-footer">
+        <span>As of 1 June 2026</span>
+        <span>Page 8</span>
+      </footer>
+    </section>
+  
+
+    <section class="page program-page day2-afternoon">
+      
+        <header class="page-header">
+          <div>
+            <div class="running-kicker">ICA Regional Hub Thailand 2026</div>
+            <div class="running-title">Day 2 Afternoon</div>
+          </div>
+          
+    <div class="logo-lockup mini" aria-label="conference logo lockup">
+      <img src="../im/ICA26_regional_hub_-_bangkok_logo.webp" alt="ICA Bangkok Regional Hub logo">
+      <img src="../im/LogoICA.webp" alt="International Communication Association logo">
+      <img src="../im/123.png" alt="Chulalongkorn University logo">
+    </div>
+  
+        </header>
+      
+      <main class="content">
+    <div class="day-title tight">
+      <div><span>Day 2</span><h1>Sunday, 7 June 2026 · Afternoon</h1></div>
+      <p>Mandarin Hotel Bangkok · Rooms A-D</p>
+    </div>
+    
+    <section class="session-block">
+      <div class="session-heading">
+        <div>
+          <span class="session-label">Parallel Session D</span>
+          <h2>15:30-17:00</h2>
+        </div>
+        <span class="venue-pill">Mandarin Hotel Bangkok</span>
+      </div>
+      <table class="session-table">
+        <thead>
+          <tr>
+            <th class="slot-head">Slot</th>
+            <th><span>Plenary Hall / ROOM A (Mandarin A)</span><strong>D1 | The Global Algorithm: Digital Divides, Disinformation, and Algorithmic Power across Six Countries</strong></th><th><span>ROOM B (Budsaba)</span><strong>D2 | Communicating Green Energy and Sustainability in ASEAN</strong></th><th><span>ROOM C (Rodsukon)</span><strong>D3 | The Canon Was Never Neutral: Decolonial Methods, Cultural Memory, and Knowledge from the Global South</strong></th><th><span>ROOM D (Karaked)</span><strong>D4 | Add to Cart, Add to Culture: Digital Media, Youth Consumption, and the Platform Economy in Asia</strong></th>
+          </tr>
+        </thead>
+        <tbody><tr><th scope="row">Paper 1</th><td>
+    <article class="paper">
+      <div class="paper-meta"><span class="paper-id">#130</span><span class="tag">Virtual</span></div>
+      <div class="paper-title">The Reproduction of the Vertical Digital Divide in Vietnam's AI Education Strategy</div>
+      <div class="paper-authors">Tran, Long Xuan Bao</div>
+      <div class="paper-affiliation">Dalat University, Vietnam</div>
+    </article>
+  </td><td class="special-cell" rowspan="6">
+          <p class="eyebrow">Australia-Asean Network Special Session</p>
+          <p>This special panel explores the role of communication, policy, science, and public engagement in advancing green energy and sustainability across ASEAN. The session is connected to the Aus4ASEAN Fellowship, an initiative by the Australian Government Department of Foreign Affairs and Trade (DFAT) supporting emerging regional leaders working on sustainability, climate resilience, and innovation.</p>
+          <p>The panel highlights how communication and media can help bridge scientific knowledge, policy discussions, and public understanding in the transition toward sustainable energy futures.</p>
+          <p><strong>Speakers</strong><br>1. Alongkorn Parivudhiphongs, Associate Professor and Deputy Dean, Faculty of Communication Arts, Chulalongkorn University<br>2. Amornrat Limmanee, Team Leader, Solar Photovoltaic Technology Research Team, National Energy Technology Center (ENTEC), National Science and Technology Development Agency<br>3. Cleodette Latagan Lagata, Environmental Science Department, Ateneo de Manila University<br>4. Karnklon Raktham, Head of Communications, United Nations Development Programme</p>
+          <p><strong>Moderator</strong><br>Ms. Suriwassa Thanyanattawit</p>
+        </td><td>
+    <article class="paper">
+      <div class="paper-meta"><span class="paper-id">#142</span></div>
+      <div class="paper-title">Komunikograpiya: A Methodological Framework for Filipino Communication Research</div>
+      <div class="paper-authors">Villacastin, Juven Nino</div>
+      <div class="paper-affiliation">University of Hawaii at Manoa, USA</div>
+    </article>
+  </td><td>
+    <article class="paper">
+      <div class="paper-meta"><span class="paper-id">#171</span></div>
+      <div class="paper-title">Media Role in Promoting Y-Series as Soft Power through Online News and Online Conversation</div>
+      <div class="paper-authors">Puntakarnkul, Chonnikarn</div>
+      <div class="paper-affiliation">Chulalongkorn University, Thailand</div>
+    </article>
+  </td></tr><tr><th scope="row">Paper 2</th><td>
+    <article class="paper">
+      <div class="paper-meta"><span class="paper-id">#204</span><span class="tag">Virtual</span></div>
+      <div class="paper-title">The 'Second Parliament' in the Age of Algorithms: Invisibilisation and Transformation of French Street Politics</div>
+      <div class="paper-authors">Zuo, Chen</div>
+      <div class="paper-affiliation">Communication University of China, China</div>
+    </article>
+  </td><td>
+    <article class="paper">
+      <div class="paper-meta"><span class="paper-id">#100</span></div>
+      <div class="paper-title">Making Sense of Letters: The Reframing of the Javanese Script through Multisensory Communication Design</div>
+      <div class="paper-authors">Turangan, Jeremia</div>
+      <div class="paper-affiliation">Chulalongkorn University, Thailand</div>
+    </article>
+  </td><td>
+    <article class="paper">
+      <div class="paper-meta"><span class="paper-id">#107</span></div>
+      <div class="paper-title">The Influence of Social Media Content on Vietnamese Gen Z's Domestic Tourism Intention: The Mediating Roles of Flow Experience and Destination Envy</div>
+      <div class="paper-authors">Hoang, Thu-Trang and Duc-Phuc Nguyen</div>
+      <div class="paper-affiliation">Diplomatic Academy of Viet Nam, Vietnam</div>
+    </article>
+  </td></tr><tr><th scope="row">Paper 3</th><td>
+    <article class="paper">
+      <div class="paper-meta"><span class="paper-id">#181</span><span class="tag">Virtual</span></div>
+      <div class="paper-title">American Public and Commercial Medical Influence in Indonesia's Digital Health Space: Challenging Information Authority and Reliability</div>
+      <div class="paper-authors">Kartikawangi, Dorien</div>
+      <div class="paper-affiliation">Le Havre Normandy University, France</div>
+    </article>
+  </td><td>
+    <article class="paper">
+      <div class="paper-meta"><span class="paper-id">#150</span></div>
+      <div class="paper-title">Development of Thai Tourism Communication and Representation: A Case Study of Osotho Magazine</div>
+      <div class="paper-authors">Cheyjunya, Chavisa</div>
+      <div class="paper-affiliation">Chulalongkorn University, Thailand</div>
+    </article>
+  </td><td>
+    <article class="paper">
+      <div class="paper-meta"><span class="paper-id">#154</span></div>
+      <div class="paper-title">The Influence of the BookTok Media Community on the Book Purchasing Decision Behavior of Thai Readers</div>
+      <div class="paper-authors">Senawongse, Pasin</div>
+      <div class="paper-affiliation">Srinakharinwirot University, Thailand</div>
+    </article>
+  </td></tr><tr><th scope="row">Paper 4</th><td>
+    <article class="paper">
+      <div class="paper-meta"><span class="paper-id">#101</span><span class="tag">Virtual</span></div>
+      <div class="paper-title">Disinformation about the Oil Crisis: Filter Bubbles and Confirmation Bias in Social Media among South Korea's Gen-Z</div>
+      <div class="paper-authors">Chan, Steve K.L.</div>
+      <div class="paper-affiliation">Keimyung University, South Korea</div>
+    </article>
+  </td><td>
+    <article class="paper">
+      <div class="paper-meta"><span class="paper-id">#176</span></div>
+      <div class="paper-title">Language and Journalistic Style in a Rapidly Expanding English-Language Media: A Professional Discourse Perspective on Nepal</div>
+      <div class="paper-authors">Adhikari, Dharma</div>
+      <div class="paper-affiliation">Xi'an Jiaotong-Liverpool University, China</div>
+    </article>
+  </td><td>
+    <article class="paper">
+      <div class="paper-meta"><span class="paper-id">#187</span></div>
+      <div class="paper-title">Narrative Strategies for Bangkok Street Food on YouTube: A Case Study of 'BANGKOKCIAGA'</div>
+      <div class="paper-authors">Prapaiboon, Preechaphol</div>
+      <div class="paper-affiliation">Srinakharinwirot University, Thailand</div>
+    </article>
+  </td></tr><tr><th scope="row">Paper 5</th><td>
+    <article class="paper">
+      <div class="paper-meta"><span class="paper-id">#215</span><span class="tag">Virtual</span></div>
+      <div class="paper-title">Silencing the Rational: Affective Publics and Power Imbalances in the Digital Discourse of Indonesia's Free Nutritious Meal Program</div>
+      <div class="paper-authors">Hanifah, Adenovi</div>
+      <div class="paper-affiliation">Universitas Gadjah Mada, Indonesia</div>
+    </article>
+  </td><td>
+    <article class="paper">
+      <div class="paper-meta"><span class="paper-id">#151</span></div>
+      <div class="paper-title">Political Identity as a Driver of Inadvertent Disinformation Sharing: Evidence from Thailand and Implications for Civic Participation</div>
+      <div class="paper-authors">Sittijinda, Sucheewa</div>
+      <div class="paper-affiliation">Chulalongkorn University, Thailand</div>
+    </article>
+  </td><td>
+    <article class="paper">
+      <div class="paper-meta"><span class="paper-id">#206</span></div>
+      <div class="paper-title">Designing for Discovery Beyond Virality: A Mobile Platform for Cultural-Heritage Tourism in Nepal</div>
+      <div class="paper-authors">Panta, Oshin and Chongvongruk, Jidapa</div>
+      <div class="paper-affiliation">Chulalongkorn University, Thailand</div>
+    </article>
+  </td></tr><tr><th scope="row">Paper 6</th><td><div class="empty-slot">—</div></td><td><div class="empty-slot">—</div></td><td>
+    <article class="paper">
+      <div class="paper-meta"><span class="paper-id">#164</span></div>
+      <div class="paper-title">Factors Influencing the Willingness to Pay for Sustainable Fashion among Generation Z</div>
+      <div class="paper-authors">Kontong, Tatkamon</div>
+      <div class="paper-affiliation">Srinakharinwirot University, Thailand</div>
+    </article>
+  </td></tr></tbody>
+      </table>
+    </section>
+  
+    <div class="closing-band">
+      <time>17:00-17:30</time>
+      <strong>Closing Forum & Legacy Building</strong>
+      <span>Reflections · Future Directions · Regional Research Agenda · Plenary Hall / ROOM A</span>
+    </div>
+  </main>
+      <footer class="page-footer">
+        <span>As of 1 June 2026</span>
+        <span>Page 9</span>
+      </footer>
+    </section>
+  
+
+    <section class="page sponsor-page">
+      
+        <header class="page-header">
+          <div>
+            <div class="running-kicker">ICA Regional Hub Thailand 2026</div>
+            <div class="running-title">Organized By</div>
+          </div>
+          
+    <div class="logo-lockup mini" aria-label="conference logo lockup">
+      <img src="../im/ICA26_regional_hub_-_bangkok_logo.webp" alt="ICA Bangkok Regional Hub logo">
+      <img src="../im/LogoICA.webp" alt="International Communication Association logo">
+      <img src="../im/123.png" alt="Chulalongkorn University logo">
+    </div>
+  
+        </header>
+      
+      <main class="content">
+    <div class="section-title sponsor-title">
+      <p>Organized By</p>
+      <h1>Conference hosts, collaborators, and partners</h1>
+    </div>
+    <div class="sponsor-layout">
+      <section class="sponsor-section major">
+        <h2>Organized By</h2>
+        <div class="sponsor-grid two">
+          <figure><img src="../im/LOGO_Eng.webp" alt="Faculty of Communication Arts, Chulalongkorn University"><figcaption>Faculty of Communication Arts<br>Chulalongkorn University</figcaption></figure>
+          <figure><img src="../im/ICA26_regional_hub_-_bangkok_logo.webp" alt="ICA Regional Hub Thailand"><figcaption>ICA Regional Hub Thailand</figcaption></figure>
+        </div>
+      </section>
+      <section class="sponsor-section collaboration">
+        <h2>In Collaboration With</h2>
+        <figure><img src="../im/Aw_Thai Media Fund_Logo2021-05.webp" alt="Thai Media Fund"><figcaption>Thai Media Fund</figcaption></figure>
+      </section>
+      <section class="sponsor-section partners">
+        <h2>In Partnership With</h2>
+        <div class="partner-grid">
+          <figure><img src="../im/1008453.webp" alt="ANPOR"><figcaption>ANPOR</figcaption></figure>
+          <figure><img src="../im/GSCM.webp" alt="GSCM NIDA"><figcaption>GSCM NIDA</figcaption></figure>
+          <figure><img src="../im/New-JC-Logo-2018-Update-Cleanup_Outline-01.webp" alt="Faculty of Journalism and Mass Communication"><figcaption>Faculty of Journalism and Mass Communication</figcaption></figure>
+          <figure><img src="../im/S__13172760_0.webp" alt="Damrong Rajanubhab Institute"><figcaption>Damrong Rajanubhab Institute</figcaption></figure>
+          <figure><img src="../im/S__13172761_0.webp" alt="College of Social Communication Innovation"><figcaption>College of Social Communication Innovation</figcaption></figure>
+          <figure><img src="../im/logooo-1.webp" alt="C.M.C.T."><figcaption>C.M.C.T.</figcaption></figure>
+          <figure><img src="../im/psu-masscomm.webp" alt="PSU Faculty of Communication Sciences"><figcaption>PSU Faculty of Communication Sciences</figcaption></figure>
+        </div>
+      </section>
+    </div>
+  </main>
+      <footer class="page-footer">
+        <span>As of 1 June 2026</span>
+        <span>Page 10</span>
+      </footer>
+    </section>
+  
+</body>
+</html>
