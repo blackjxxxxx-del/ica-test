@@ -504,15 +504,15 @@
             const imgSrc = rawImg ? (rawImg.startsWith('http') || rawImg.startsWith('im/') ? rawImg : imgBase+'/'+rawImg) : null;
             const imgHtml = imgSrc ? `<img src="${esc(imgSrc)}" alt="${esc(n.title)}" loading="lazy">` : `<span style="font-size:48px;">📰</span>`;
             const tag = n.speaker ? `<div class="news-card-tag" style="margin-bottom:6px;">${esc(n.speaker)}</div>` : `<div class="news-card-tag">ICA-TH 2026</div>`;
-            return `<div class="news-card">
+            return `<a class="news-card" href="${detailPage}?slug=${esc(n.slug)}" style="display:block;text-decoration:none;color:inherit;">
                 <div class="news-card-img">${imgHtml}</div>
                 <div class="news-card-body">
                     ${tag}
                     <h3 class="news-card-title">${esc(n.title)}</h3>
                     ${n.excerpt?`<p class="news-card-excerpt">${esc(n.excerpt)}</p>`:''}
-                    <a class="news-card-link" href="${detailPage}?slug=${esc(n.slug)}">Read more <span>→</span></a>
+                    <span class="news-card-link">Read more <span>→</span></span>
                 </div>
-            </div>`;
+            </a>`;
         }
 
         function renderPage(page) {
