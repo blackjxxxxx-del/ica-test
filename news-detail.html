@@ -6,7 +6,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title id="page-title">Article | ICA-TH 2026</title>
     <meta property="og:type" content="article">
-    <meta property="og:url" id="og-url" content="https://icahubthailand.org/news-detail.html">
     <meta property="og:title" id="og-title" content="ICA-TH 2026 News">
     <meta property="og:description" id="og-desc" content="">
     <meta property="og:image" id="og-img" content="https://icahubthailand.org/im/og-cover.jpg">
@@ -21,6 +20,7 @@
     body{margin:0;font-family:'Inter',-apple-system,sans-serif;color:var(--text-main);line-height:1.7;background:var(--white);-webkit-font-smoothing:antialiased}
     .container{max-width:1200px;margin:auto;padding:0 24px}
     a{text-decoration:none;transition:var(--transition)}
+    /* Navbar */
     .navbar{height:auto;background:rgba(255,255,255,0.98);backdrop-filter:blur(10px);padding:0;position:sticky;top:0;width:100%;z-index:1000;box-shadow:0 2px 20px rgba(0,0,0,0.08);border-bottom:1px solid var(--border)}
     .nav-menu{display:flex;align-items:center;gap:18px;list-style:none;margin:0;padding:0}
     .nav-menu a{color:var(--secondary);font-size:14px;font-weight:600;text-transform:uppercase;letter-spacing:0.8px}
@@ -37,23 +37,47 @@
     .hamburger.open span:nth-child(2){opacity:0}
     .hamburger.open span:nth-child(3){transform:translateY(-7px) rotate(-45deg)}
     @media(min-width:769px){.dropdown:hover .dropdown-menu{display:block;margin-top:15px}}
-    /* Article hero */
-    .article-hero{background:linear-gradient(135deg,rgba(15,47,87,0.88) 0%,rgba(39,76,119,0.75) 100%),url("im/wat-arun-temple-bangkok-thailand.webp") center/cover no-repeat;background-attachment:fixed;margin-top:0;padding:80px 20px 60px;text-align:center;color:white}
-    .article-hero h1{font-size:40px;font-weight:800;margin:0 0 16px;line-height:1.2;max-width:860px;margin-left:auto;margin-right:auto}
-    .article-hero .meta{font-size:15px;opacity:0.75;font-weight:400}
-    /* Article body */
-    .article-wrap{max-width:860px;margin:0 auto;padding:60px 24px 80px}
-    .article-featured-img{width:100%;max-height:480px;object-fit:cover;border-radius:16px;margin-bottom:40px;box-shadow:0 8px 40px rgba(26,58,95,0.12)}
-    .article-excerpt{font-size:19px;font-weight:500;color:var(--text-main);line-height:1.75;border-left:4px solid var(--accent);padding-left:20px;margin:0 0 36px;color:var(--secondary)}
-    .back-link{display:inline-flex;align-items:center;gap:8px;color:var(--primary);font-size:14px;font-weight:600;margin-bottom:32px;padding:10px 20px;border:2px solid var(--border);border-radius:10px;transition:var(--transition)}
-    .back-link:hover{border-color:var(--primary);background:var(--light-bg)}
+
+    /* Article layout */
+    .article-page{max-width:800px;margin:0 auto;padding:48px 24px 80px}
+    .back-link{display:inline-flex;align-items:center;gap:6px;color:var(--text-muted);font-size:13px;font-weight:600;margin-bottom:32px;letter-spacing:0.3px;transition:color .2s}
+    .back-link:hover{color:var(--primary)}
+    .back-link svg{width:14px;height:14px;stroke:currentColor;fill:none;stroke-width:2.5;stroke-linecap:round;stroke-linejoin:round}
+    .article-tag{display:inline-block;background:var(--accent);color:#0e2340;font-size:10px;font-weight:900;letter-spacing:2px;text-transform:uppercase;padding:4px 12px;border-radius:4px;margin-bottom:20px}
+    .article-title{font-size:36px;font-weight:800;color:var(--primary);line-height:1.2;margin:0 0 20px}
+    .article-meta{display:flex;align-items:center;gap:12px;font-size:13px;color:var(--text-muted);padding-bottom:24px;border-bottom:1px solid var(--border);margin-bottom:36px;flex-wrap:wrap}
+    .article-meta-dot{width:4px;height:4px;background:var(--border);border-radius:50%;flex-shrink:0}
+    .article-featured-img{width:100%;height:auto;border-radius:12px;margin-bottom:36px;display:block}
+    .article-body{font-size:18px;line-height:1.85;color:#334155}
+    .article-body p{margin:0 0 28px}
+    .article-body img{width:100%;height:auto;border-radius:10px;margin:8px 0 28px;display:block}
+    .article-body h2{font-size:22px;font-weight:700;color:var(--primary);margin:40px 0 16px}
+    .article-body a{color:var(--secondary);text-decoration:underline;text-decoration-color:rgba(39,76,119,0.3);text-underline-offset:3px}
+    .article-body a:hover{color:var(--accent)}
+    .article-body strong{font-weight:700;color:var(--text-main)}
+
+    /* Related articles */
+    .related-section{border-top:2px solid var(--border);padding-top:56px;margin-top:64px}
+    .related-title{font-size:13px;font-weight:700;letter-spacing:2.5px;text-transform:uppercase;color:var(--text-muted);margin-bottom:28px}
+    .related-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:20px}
+    .related-card{display:block;border-radius:14px;overflow:hidden;border:1px solid var(--border);background:white;transition:var(--transition);color:inherit;text-decoration:none}
+    .related-card:hover{transform:translateY(-3px);box-shadow:0 12px 32px rgba(26,58,95,0.10)}
+    .related-card-img{height:160px;overflow:hidden;background:linear-gradient(135deg,#1a3a5f,#274c77);display:flex;align-items:center;justify-content:center}
+    .related-card-img img{width:100%;height:100%;object-fit:cover;transition:transform .4s}
+    .related-card:hover .related-card-img img{transform:scale(1.05)}
+    .related-card-body{padding:16px}
+    .related-card-tag{font-size:10px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;color:var(--accent);margin-bottom:8px}
+    .related-card-title{font-size:14px;font-weight:700;color:var(--primary);line-height:1.4;margin:0;display:-webkit-box;-webkit-line-clamp:3;-webkit-box-orient:vertical;overflow:hidden}
+
+    /* Not found */
     .not-found{text-align:center;padding:100px 24px}
     .not-found h2{color:var(--primary);font-size:28px;margin-bottom:12px}
-    /* Footer */
-    .section-title{color:var(--primary);font-size:32px;font-weight:700;margin:0 0 16px;position:relative;padding-bottom:16px;display:block;text-align:center}
-    .section-title::after{content:'';position:absolute;bottom:0;left:50%;transform:translateX(-50%);width:50px;height:4px;background:var(--accent);border-radius:2px}
+
+    /* Organizers */
     .organizers{background:#f8fafc;padding:40px 0;border-top:1px solid #e2e8f0;border-bottom:1px solid #e2e8f0}
     .org-group-label{font-size:16px;font-weight:700;letter-spacing:2.5px;text-transform:uppercase;color:var(--text-muted);margin-bottom:28px}
+
+    /* Footer */
     .site-footer{background:var(--primary);color:rgba(255,255,255,0.65);padding:20px 0 10px}
     .site-footer .container{max-width:1200px;padding:0 48px}
     .footer-top{display:grid;grid-template-columns:repeat(3,1fr);gap:48px;padding-bottom:18px;border-bottom:1px solid rgba(255,255,255,0.08);margin-bottom:15px}
@@ -68,12 +92,12 @@
     .footer-bottom{display:flex;justify-content:space-between;align-items:center;font-size:13px;flex-wrap:wrap;gap:12px}
     .footer-bottom a{color:rgba(255,255,255,0.5)}
     .footer-bottom a:hover{color:var(--white)}
+
     @media(max-width:768px){
-        .article-hero{background-attachment:scroll;padding:60px 20px 40px}
-        .article-hero h1{font-size:26px}
-        .article-wrap{padding:36px 20px 60px}
+        .article-title{font-size:26px}
+        .article-body{font-size:16px}
+        .related-grid{grid-template-columns:1fr}
         .footer-top{grid-template-columns:1fr}
-        .section-title{font-size:26px}
     }
     @media(max-width:768px){html,body{overflow-x:hidden!important;max-width:100%!important}nav#mainNav{display:none!important;position:fixed!important;top:60px!important;left:0!important;width:100%!important;height:calc(100vh - 60px)!important;background:#fff!important;overflow-y:auto!important;z-index:9997!important;box-shadow:0 4px 20px rgba(0,0,0,0.12)!important}nav#mainNav.open{display:block!important}.nav-menu{position:static!important;flex-direction:column!important;align-items:stretch!important;gap:0!important;padding:8px 0!important}.nav-menu>li>a{display:block!important;padding:14px 24px!important;font-size:15px!important;color:#1a2e4a!important;border-bottom:1px solid #f1f5f9!important;font-weight:600!important}.dropdown-menu{position:static!important;background:#f8fafc!important;box-shadow:none!important;border:none!important;border-radius:0!important;padding:0!important;margin:0!important;display:none!important}.dropdown-menu.active{display:block!important}.dropdown-menu li a{padding:12px 40px!important;font-size:14px!important;color:#1a2e4a!important;border-bottom:1px solid #e2e8f0!important;display:block!important}.hamburger{display:flex!important}.navbar{padding:0!important;background:#fff!important}}
     </style>
@@ -101,7 +125,7 @@
         header.navbar > div:nth-child(2) > div:first-child img,.navbar > div:not(.ticker-wrap) > div:first-child img{height:30px!important;max-height:30px!important}
     }
     </style>
-    <script id="global-mobile-logo-override-script">
+    <script>
     (function(){function setOffset(){var nav=document.querySelector('header.navbar');if(!nav)return;var h=nav.getBoundingClientRect().height;document.documentElement.style.setProperty('--global-nav-offset',Math.ceil(h)+'px')}window.addEventListener('load',setOffset);window.addEventListener('resize',setOffset);setOffset();})();
     </script>
 </head>
@@ -110,7 +134,6 @@
     .ticker-wrap{overflow:hidden;background:#1a3a5f;padding:9px 0}
     .ticker-inner{display:flex;width:max-content}
     .ticker-inner span{color:rgba(255,255,255,0.92);font-size:13px;font-weight:600;letter-spacing:2.5px;text-transform:uppercase;white-space:nowrap;padding-right:100px;flex-shrink:0}
-    @keyframes tickerScroll{0%{transform:translateX(0)}100%{transform:translateX(-50%)}}
     </style>
     <header class="navbar" style="height:auto;min-height:auto;background:transparent;box-shadow:none;border:none;">
         <div class="ticker-wrap">
@@ -149,22 +172,33 @@
         </div>
     </header>
 
-    <!-- Article hero (filled by JS) -->
-    <section class="article-hero" id="article-hero" style="display:none;">
-        <div class="container">
-            <p class="meta" id="article-meta"></p>
-            <h1 id="article-title-hero"></h1>
-        </div>
-    </section>
+    <!-- Article page -->
+    <main id="article-main" style="display:none;">
+        <div class="article-page">
+            <a href="ica-news.html" class="back-link">
+                <svg viewBox="0 0 24 24"><polyline points="15 18 9 12 15 6"/></svg>
+                Back to News
+            </a>
 
-    <!-- Article body -->
-    <div id="article-body" style="display:none;">
-        <div class="article-wrap">
-            <a href="ica-news.html" class="back-link">← Back to News</a>
-            <img id="article-img" class="article-featured-img" src="" alt="" style="display:none;">
-            <p class="article-excerpt" id="article-excerpt"></p>
+            <div id="article-tag-el" class="article-tag"></div>
+            <h1 class="article-title" id="article-title-el"></h1>
+            <div class="article-meta">
+                <span id="article-source-el"></span>
+                <span class="article-meta-dot"></span>
+                <span>ICA-TH 2026</span>
+            </div>
+
+            <img id="article-img-el" class="article-featured-img" src="" alt="" style="display:none;">
+
+            <div class="article-body" id="article-body-el"></div>
+
+            <!-- Related articles -->
+            <div class="related-section">
+                <p class="related-title">More articles</p>
+                <div class="related-grid" id="related-grid"></div>
+            </div>
         </div>
-    </div>
+    </main>
 
     <!-- Not found -->
     <div id="article-notfound" class="not-found" style="display:none;">
@@ -282,58 +316,85 @@
 
     <script>
     (async () => {
+        const isStatic = location.hostname.includes('github.io') || location.hostname === 'localhost' || location.hostname === '127.0.0.1';
+        const detailPage = isStatic ? 'news-detail.html' : 'news-detail.php';
+
         const STATIC_NEWS = [
-            {title:'Beyond the Headlines: Decoding Power, Truth, and Platform Inequality in Thailand\'s Digital Society',slug:'beyond-the-headlines-decoding-power-truth-platform-inequality',excerpt:'A special public forum at Chulalongkorn University invites audiences to look beyond breaking news and examine the deeper structural inequalities shaping Thailand\'s media ecosystem.',featured_img:'im/711475334_1590379049761544_4970811595077600998_n.jpg',speaker:'Public Forum — 5 June 2026'},
-            {title:'ICA Regional Hub Thailand 2026 Highlight Program: Three Days of Global Dialogue on Communication and Inequalities',slug:'ica-th-2026-highlight-program-5-7-june',excerpt:'The full highlight program for the 76th Annual ICA Regional Hub Thailand is now live — three days of plenary sessions, parallel tracks, masterclasses, and hub-to-hub roundtables across Chulalongkorn University and Mandarin Hotel Bangkok.',featured_img:'im/714223583_1591596609639788_2932782461566962850_n.jpg',speaker:'Announcement — 5–7 June 2026'},
-            {title:'Plenary Panel: Communication, Trust, and Transformation in Digital Asia',slug:'plenary-panel-communication-trust-transformation-digital-asia',excerpt:'Three leading scholars take the stage at Mandarin Hotel Bangkok to explore media literacy in the AI era, digital transformation across the Greater Mekong Subregion, and trust in health communication on digital platforms.',featured_img:'im/714363738_1593029376163178_3875406439416001972_n.jpg',speaker:'Plenary Panel — 6 June 2026, 9:30–10:30'},
-            {title:'Masterclass: AI-Powered Research, CARE Methodology, and Special Sessions on Digital Asia',slug:'masterclass-ai-research-care-methodology-digital-asia',excerpt:'The ICA-TH 2026 Masterclass brings together Prof. Sung Kyum Cho on AI for research validation and Prof. Mohan J. Dutta on culture-centred approaches, alongside special sessions on digital visibility and green communication in ASEAN.',featured_img:'im/714384152_1593029406163175_4154042098293614336_n.jpg',speaker:'Masterclass — 7 June 2026, 11:00–12:30'},
-            {title:'Thailand Makes History as Host of ICA Regional Hub 2026: Chulalongkorn University Welcomes Global Scholars to Bangkok',slug:'thailand-hosts-ica-regional-hub-2026-chulalongkorn',excerpt:'For the first time, Thailand has been selected as the official host of an ICA Regional Hub — bringing together scholars, researchers, and communication professionals from Thailand, the Mekong region, Asia, and beyond under the theme "Bridges Divides and Amplifies Voices."',featured_img:'im/719637390_1661151908525476_731538373550458795_n.jpeg',speaker:'Event Recap — 5–7 June 2026'},
-            {title:'Special Forum Calls for Structural Reform of Thailand\'s Media Ecosystem Amid Platform Inequality',slug:'special-forum-platform-inequality-media-ecosystem-thailand',excerpt:'Experts at the ICA-TH 2026 Special Forum agreed that Thailand\'s digital media challenges — from unregulated platform content to expiring broadcast licences — reflect deep structural inequalities in power, truth, and access that demand urgent coordinated action.',featured_img:'im/720564595_3345660652282118_7510972614280542517_n.jpeg',speaker:'Special Forum — 5 June 2026, 13:30–15:00'},
-            {title:'Chulalongkorn Faculty of Communication Arts Celebrates Two Best Oral Presentation Awards at ICA Regional Hub Thailand 2026',slug:'chula-commarts-best-oral-presentation-award-ica-th-2026',excerpt:'Asst. Prof. Dr. Teerapat Sereesaran and doctoral student Chanamon Phannasap have both been honoured with the Best Oral Presentation Award at ICA Regional Hub Thailand 2026, out of over 200 submissions from around the world.',featured_img:'im/720860748_1363542945677704_2856942711761297241_n.jpeg',speaker:'Awards — ICA Regional Hub Thailand 2026'},
-            {title:'Plenary Panel Recap: Trust, Digital Transformation, and Health Communication in Digital Asia',slug:'plenary-panel-recap-trust-digital-transformation-health-communication',excerpt:'Scholars from Hong Kong, Laos, and Vietnam explored how media literacy must evolve beyond fact-checking, how digital transformation reshapes the Mekong economy, and why trust in health communication is now co-created through platforms and communities.',featured_img:'im/721880337_1383132686964333_3479800516406830265_n.jpeg',speaker:'Plenary Panel Recap — 6 June 2026'},
-            {title:'ICA Regional Hub Thailand 2026 Opens Global Dialogue on Communication Inequality in the Age of AI',slug:'ica-th-2026-opens-global-dialogue-communication-inequality-ai',excerpt:'Scholars from five ICA Regional Hubs across Asia, Africa, and Oceania convened in Bangkok — and virtually — to discuss algorithmic power, decolonial communication, and the politics of voice in the Global South at the Hub-to-Hub Roundtable.',featured_img:'im/723042560_2426111794538024_1469258713650926509_n.jpeg',speaker:'Hub-to-Hub Roundtable — 6 June 2026'},
-            {title:'Communication Is the Missing Link in ASEAN\'s Green Energy Transition, Experts Say at ICA-TH 2026',slug:'communication-green-energy-sustainability-asean-ica-th-2026',excerpt:'Panellists from academia, science, public policy, and international organisations at the Aus4ASEAN-linked special session agreed that technology and investment alone cannot drive a just and lasting energy transition — trusted communication and meaningful public participation are equally essential.',featured_img:'im/722521046_1239174860905424_4019047800041394380_n.jpeg',speaker:'Special Session — 7 June 2026'},
-            {title:'ICA-TH 2026 Masterclass and Special Sessions: AI in Journalism, CARE Methodology, and the Future of Creative Industries',slug:'ica-th-2026-masterclass-special-sessions-ai-journalism-creative-industries',excerpt:'Day two of ICA Regional Hub Thailand 2026 brought together over 150 participants for a packed afternoon of masterclasses and special sessions — from AI\'s role in journalism and research to culture-centred communication and the economics of creative industries.',featured_img:'im/722935232_1456455658866703_1484485085034581521_n.jpeg',speaker:'Masterclass & Special Sessions — 7 June 2026'},
-            {title:'Thai Media Fund and Researchers Examine Influencer Regulation and Algorithm-Driven Conflict Narratives at ICA-TH 2026',slug:'thai-media-fund-influencer-algorithm-thai-cambodian-conflict-narratives',excerpt:'A Thai Media Fund-supported panel at ICA-TH 2026 examined how algorithms shape public narratives during national conflicts — finding that Thai social media users were exposed to significantly more emotionally charged and nationalistic content during the Thai-Cambodian border tensions than Cambodian users.',featured_img:'im/724073107_1418491069639977_8162049560041574406_n.jpeg',speaker:'Panel Session — ICA Regional Hub Thailand 2026'},
-            {title:'Three Days. Countless Conversations. Endless Possibilities.',slug:'three-days-countless-conversations-ica-th-2026-wrap-up',excerpt:'ICA Regional Hub Thailand 2026 brought together scholars, researchers, and practitioners from across the world for three transformative days of dialogue on communication, inequality, and the future of digital Asia.',featured_img:'im/722563926_1322416045596897_3684600989419753286_n.jpeg',speaker:'ICA Regional Hub Thailand 2026 — Wrap-up'},
-            {title:'Chulalongkorn University Hosts ICA Regional Hub for the First Time in Thailand',slug:'chula-hosts-ica-regional-hub-first-time-thailand-chula-news',excerpt:'Chulalongkorn University\'s Faculty of Communication Arts made history by hosting the ICA Regional Hub in Thailand for the first time, welcoming over 300 participants from more than 80 countries to the 76th Annual ICA Regional Hub Thailand 2026.',featured_img:'im/cover-412196-1780986957.webp',speaker:'Chulalongkorn University News — 5–7 June 2026'},
-            {title:'Chula Advances Global Engagement Through Thailand\'s First ICA Regional Hub',slug:'chula-advances-global-engagement-thailand-first-ica-regional-hub',excerpt:'Chulalongkorn University hosted the inaugural ICA Regional Hub in Thailand, bringing together scholars, media professionals, students, and policymakers from over 80 countries under the theme "Where Thailand, the Mekong Region, and Asia Bridge Divides and Amplify Voices."',featured_img:'im/cover-412229-1780998757.webp',speaker:'Chulalongkorn University News — 5–7 June 2026'},
-            {title:'ICA Regional Hub Thailand 2026 Explores Trust, Digital Transformation, and the Future of Communication in Digital Asia',slug:'ica-th-2026-trust-digital-transformation-future-communication-digital-asia-chula',excerpt:'Leading academics from across Asia gathered to examine how digital transformation is reshaping communication, trust, and civic participation — with experts arguing that "information integrity" must move beyond traditional fact-checking to help citizens understand how algorithms shape online information.',featured_img:'im/cover-412922-1781489234.webp',speaker:'Chulalongkorn University News — 5–7 June 2026'},
-            {title:'ICA Regional Hub Thailand 2026 Highlights the Role of Communication in Advancing Green Energy and Sustainability in ASEAN',slug:'ica-th-2026-communication-green-energy-sustainability-asean-chula',excerpt:'A special Aus4ASEAN panel at ICA-TH 2026 reached a clear consensus: technology, policy, and investment alone cannot drive ASEAN\'s green energy transition — effective communication and meaningful citizen participation are equally critical to making sustainable change real and lasting.',featured_img:'im/cover-413176-1781519508.webp',speaker:'Chulalongkorn University News — 5–7 June 2026'},
-            {title:'Decoding Breaking News: Chula Forum Examines Power, Truth, and Platform Inequalities in Thailand',slug:'decoding-breaking-news-chula-forum-power-truth-platform-inequalities-thailand',excerpt:'A public forum at Chulalongkorn University\'s Faculty of Communication Arts examined structural inequalities in Thailand\'s media ecosystem — from Facebook content moderation failures to barriers for sexual violence survivors — through the lens of platform power, truth construction, and digital governance.',featured_img:'im/cover-413272-1781590701.webp',speaker:'Chulalongkorn University News — 5 June 2026'}
+            {title:'Beyond the Headlines: Decoding Power, Truth, and Platform Inequality in Thailand\'s Digital Society',slug:'beyond-the-headlines-decoding-power-truth-platform-inequality',excerpt:'A special public forum at Chulalongkorn University invites audiences to look beyond breaking news and examine the deeper structural inequalities shaping Thailand\'s media ecosystem. The Faculty of Communication Arts, in collaboration with ANPOR and the Thai Media Fund, organized a public forum on 5 June 2026 — the opening day of ICA Regional Hub Thailand 2026.\n\nThe forum explored four major areas of structural inequality: platform power and content moderation failures (including prolonged livestreaming of inappropriate content on Facebook), barriers to justice faced by survivors of sexual violence, the use of public opinion polls and data to shape public perception, and delays in defining the future of Thailand\'s digital television industry amid intensifying competition from global platforms.\n\nSpeakers included senior figures from the Thai Media Fund, ETDA, the digital television sector, and civil society organisations, who discussed not only what happened in recent high-profile news events, but the systemic conditions that allowed them to occur.',featured_img:'im/711475334_1590379049761544_4970811595077600998_n.jpg',speaker:'Public Forum — 5 June 2026'},
+            {title:'ICA Regional Hub Thailand 2026 Highlight Program: Three Days of Global Dialogue on Communication and Inequalities',slug:'ica-th-2026-highlight-program-5-7-june',excerpt:'The full highlight program for the 76th Annual ICA Regional Hub Thailand is now live — three days of plenary sessions, parallel tracks, masterclasses, and hub-to-hub roundtables across Chulalongkorn University and Mandarin Hotel Bangkok.\n\nThe program spans 5–7 June 2026 and brings together scholars, researchers, and practitioners from Thailand, the Mekong region, Asia, and beyond. Sessions cover a wide range of topics including communication inequality, platform governance, AI in journalism, health communication, and green energy in ASEAN.\n\nHighlights include a hub-to-hub roundtable connecting five ICA Regional Hubs across Asia, Africa, and Oceania, a masterclass series featuring leading international scholars, and a special public forum on structural inequality in Thailand\'s media ecosystem.',featured_img:'im/714223583_1591596609639788_2932782461566962850_n.jpg',speaker:'Announcement — 5–7 June 2026'},
+            {title:'Plenary Panel: Communication, Trust, and Transformation in Digital Asia',slug:'plenary-panel-communication-trust-transformation-digital-asia',excerpt:'Three leading scholars took the stage at Mandarin Hotel Bangkok to explore the evolving relationship between communication, trust, and digital transformation across Asia.\n\nProf. Masato Kajimoto (University of Hong Kong) examined how media literacy must evolve beyond fact-checking to help citizens navigate algorithmic information environments. Dr. Viphaphone Xaiyachack (National University of Laos) explored digital transformation across the Greater Mekong Subregion. Prof. Tu Linh Nguyen (Vietnam National University) addressed trust in health communication on digital platforms.\n\nThe panel drew a full audience of over 200 participants and set the tone for three days of dialogue on communication in Digital Asia.',featured_img:'im/714363738_1593029376163178_3875406439416001972_n.jpg',speaker:'Plenary Panel — 6 June 2026, 9:30–10:30'},
+            {title:'Masterclass: AI-Powered Research, CARE Methodology, and Special Sessions on Digital Asia',slug:'masterclass-ai-research-care-methodology-digital-asia',excerpt:'The ICA-TH 2026 Masterclass series brought together two internationally renowned scholars for deep-dive sessions on research methodology and communication practice.\n\nProf. Sung Kyum Cho (Chungnam National University, South Korea) led a session on AI-powered tools for research validation, exploring how large language models are reshaping academic workflows in communication studies. Prof. Mohan J. Dutta (Massey University, New Zealand) presented the Culture-Centred Approach (CARE), a framework for community-driven health and development communication.\n\nSpecial parallel sessions addressed digital visibility, algorithmic inequality, and green communication in ASEAN.',featured_img:'im/714384152_1593029406163175_4154042098293614336_n.jpg',speaker:'Masterclass — 7 June 2026, 11:00–12:30'},
+            {title:'Thailand Makes History as Host of ICA Regional Hub 2026: Chulalongkorn University Welcomes Global Scholars to Bangkok',slug:'thailand-hosts-ica-regional-hub-2026-chulalongkorn',excerpt:'For the first time, Thailand has been selected as the official host of an ICA Regional Hub — bringing together scholars, researchers, and communication professionals from Thailand, the Mekong region, Asia, and beyond under the theme "Bridges Divides and Amplifies Voices."\n\nThe 76th Annual ICA Regional Hub Thailand 2026 was held at Chulalongkorn University and Mandarin Hotel Bangkok from 5–7 June 2026, drawing over 300 participants from more than 80 countries. The event featured plenary panels, parallel sessions, masterclasses, and a hub-to-hub roundtable connecting ICA Regional Hubs across Asia, Africa, and Oceania.\n\nThe Faculty of Communication Arts at Chulalongkorn University served as the host institution, with support from ANPOR, the Thai Media Fund, and partner universities across Thailand.',featured_img:'im/719637390_1661151908525476_731538373550458795_n.jpeg',speaker:'Event Recap — 5–7 June 2026'},
+            {title:'Special Forum Calls for Structural Reform of Thailand\'s Media Ecosystem Amid Platform Inequality',slug:'special-forum-platform-inequality-media-ecosystem-thailand',excerpt:'Experts at the ICA-TH 2026 Special Forum on 5 June 2026 reached a clear consensus: Thailand\'s digital media challenges reflect deep structural inequalities in power, truth, and access that demand urgent coordinated action.\n\nSpeakers examined how platform companies have failed to act on harmful content, how survivors of sexual violence face systemic barriers to justice and public communication, how polling data can be weaponised to shape public opinion, and how years of regulatory delay have left Thailand\'s digital television broadcasters in an impossible competitive position against global platforms.\n\nParticipants called for stronger platform regulation, greater media transparency, and a more robust public interest framework for digital communication governance in Thailand.',featured_img:'im/720564595_3345660652282118_7510972614280542517_n.jpeg',speaker:'Special Forum — 5 June 2026, 13:30–15:00'},
+            {title:'Chulalongkorn Faculty of Communication Arts Celebrates Two Best Oral Presentation Awards at ICA Regional Hub Thailand 2026',slug:'chula-commarts-best-oral-presentation-award-ica-th-2026',excerpt:'Asst. Prof. Dr. Teerapat Sereesaran and doctoral student Chanamon Phannasap have both been honoured with the Best Oral Presentation Award at ICA Regional Hub Thailand 2026, representing the Faculty of Communication Arts, Chulalongkorn University.\n\nBoth awards were drawn from a competitive pool of over 200 paper submissions from scholars across the world. Dr. Teerapat\'s work focused on the sonic politics of silence in Southeast Asian cinema, while Chanamon\'s research examined media coverage of crime and its effects on Thai audiences\' perceptions of criminal suspects.\n\nThe Faculty expressed deep pride in the recognition, reflecting both the quality of its academic community and its commitment to advancing communication research in Southeast Asia.',featured_img:'im/720860748_1363542945677704_2856942711761297241_n.jpeg',speaker:'Awards — ICA Regional Hub Thailand 2026'},
+            {title:'Plenary Panel Recap: Trust, Digital Transformation, and Health Communication in Digital Asia',slug:'plenary-panel-recap-trust-digital-transformation-health-communication',excerpt:'Scholars from Hong Kong, Laos, and Vietnam took the plenary stage on 6 June to examine how digital transformation is reshaping communication, trust, and public health across Asia.\n\nProf. Masato Kajimoto argued that media literacy must evolve beyond fact-checking — helping citizens understand how algorithms shape the information they encounter. Dr. Viphaphone Xaiyachack explored how digital infrastructure is transforming economic and social connectivity across the Greater Mekong Subregion. Prof. Tu Linh Nguyen discussed how trust in health communication is now co-created through digital platforms and community networks rather than top-down institutional messaging.\n\nThe panel drew an audience of over 200 and sparked extended discussion on what "information integrity" means in the age of platform-mediated public discourse.',featured_img:'im/721880337_1383132686964333_3479800516406830265_n.jpeg',speaker:'Plenary Panel Recap — 6 June 2026'},
+            {title:'ICA Regional Hub Thailand 2026 Opens Global Dialogue on Communication Inequality in the Age of AI',slug:'ica-th-2026-opens-global-dialogue-communication-inequality-ai',excerpt:'Scholars from five ICA Regional Hubs across Asia, Africa, and Oceania convened in Bangkok — and virtually — to discuss algorithmic power, decolonial communication, and the politics of voice in the Global South.\n\nThe Hub-to-Hub Roundtable on 6 June brought together representatives from ICA Regional Hubs in Thailand, South Asia, Southeast Asia, Sub-Saharan Africa, and Oceania. Discussions focused on how AI systems reproduce structural inequalities, how scholars in the Global South are developing alternative frameworks for communication research, and what solidarity looks like across regional academic communities.\n\nThe roundtable marked a milestone in ICA\'s effort to build a genuinely global community of communication scholars.',featured_img:'im/723042560_2426111794538024_1469258713650926509_n.jpeg',speaker:'Hub-to-Hub Roundtable — 6 June 2026'},
+            {title:'Communication Is the Missing Link in ASEAN\'s Green Energy Transition, Experts Say at ICA-TH 2026',slug:'communication-green-energy-sustainability-asean-ica-th-2026',excerpt:'Panellists from academia, science, public policy, and international organisations at the Aus4ASEAN special session agreed: technology and investment alone cannot drive a just and lasting energy transition — trusted communication and meaningful public participation are equally essential.\n\nThe session examined case studies from across ASEAN where energy transition projects have stalled or faced public resistance due to poor communication strategies. Experts highlighted the importance of culturally relevant messaging, community engagement, and transparent data communication in building public support for renewable energy development.\n\nParticipants called for communication scholars to take a more active role in shaping energy transition narratives across the region.',featured_img:'im/722521046_1239174860905424_4019047800041394380_n.jpeg',speaker:'Special Session — 7 June 2026'},
+            {title:'ICA-TH 2026 Masterclass and Special Sessions: AI in Journalism, CARE Methodology, and the Future of Creative Industries',slug:'ica-th-2026-masterclass-special-sessions-ai-journalism-creative-industries',excerpt:'Day two of ICA Regional Hub Thailand 2026 brought together over 150 participants for a packed afternoon of masterclasses and special sessions.\n\nProf. Sung Kyum Cho led a session on AI-assisted research validation, demonstrating how large language models can support systematic literature reviews and data triangulation in communication research. Prof. Mohan J. Dutta presented the Culture-Centred Approach (CARE), with case studies from marginalised communities in South and Southeast Asia.\n\nParallel special sessions explored the impact of AI on journalism workflows in Thailand and the region, the economics and communication strategies of the creative industries, and emerging frameworks for digital visibility and algorithmic governance.',featured_img:'im/722935232_1456455658866703_1484485085034581521_n.jpeg',speaker:'Masterclass & Special Sessions — 7 June 2026'},
+            {title:'Thai Media Fund and Researchers Examine Influencer Regulation and Algorithm-Driven Conflict Narratives at ICA-TH 2026',slug:'thai-media-fund-influencer-algorithm-thai-cambodian-conflict-narratives',excerpt:'A Thai Media Fund-supported panel at ICA-TH 2026 examined how algorithms shape public narratives during national conflicts — and what this means for media regulation and platform governance in Thailand.\n\nResearchers presented findings showing that Thai social media users were exposed to significantly more emotionally charged and nationalistic content during the Thai-Cambodian border tensions than their Cambodian counterparts, with algorithmic amplification playing a key role in escalating public sentiment.\n\nThe panel also discussed the regulation of influencers and social media personalities in Thailand, examining the gaps between existing media law and the realities of platform-driven content distribution. Speakers called for updated regulatory frameworks that account for algorithmic amplification and cross-border information flows.',featured_img:'im/724073107_1418491069639977_8162049560041574406_n.jpeg',speaker:'Panel Session — ICA Regional Hub Thailand 2026'},
+            {title:'Three Days. Countless Conversations. Endless Possibilities.',slug:'three-days-countless-conversations-ica-th-2026-wrap-up',excerpt:'ICA Regional Hub Thailand 2026 has come to a close — three transformative days of global dialogue on communication, inequality, and the future of digital Asia.\n\nFrom the opening plenary on trust and digital transformation to the closing masterclasses and special sessions, ICA-TH 2026 brought together over 300 participants from more than 80 countries for conversations that crossed borders, disciplines, and perspectives.\n\nThe Faculty of Communication Arts at Chulalongkorn University is proud to have hosted this landmark event — the first ICA Regional Hub in Thailand — and grateful to every scholar, practitioner, and student who made it possible. The conversations started here will continue.',featured_img:'im/722563926_1322416045596897_3684600989419753286_n.jpeg',speaker:'ICA Regional Hub Thailand 2026 — Wrap-up'},
+            {title:'Chulalongkorn University Hosts ICA Regional Hub for the First Time in Thailand',slug:'chula-hosts-ica-regional-hub-first-time-thailand-chula-news',excerpt:'Chulalongkorn University\'s Faculty of Communication Arts made history by hosting the ICA Regional Hub in Thailand for the first time, welcoming over 300 participants from more than 80 countries to the 76th Annual ICA Regional Hub Thailand 2026.\n\nHeld at Chulalongkorn University and Mandarin Hotel Bangkok from 5–7 June 2026, the event brought together academics, researchers, media professionals, and policymakers under the theme "Where Thailand, the Mekong Region, and Asia Bridge Divides and Amplify Voices."\n\nThe conference featured plenary sessions, parallel paper presentations, masterclasses, and special forums addressing communication inequality, digital transformation, platform governance, and the future of media in Asia. It marked a significant milestone for Thai communication scholarship and for the Faculty of Communication Arts on the global academic stage.',featured_img:'im/cover-412196-1780986957.webp',speaker:'Chulalongkorn University News — 5–7 June 2026'},
+            {title:'Chula Advances Global Engagement Through Thailand\'s First ICA Regional Hub',slug:'chula-advances-global-engagement-thailand-first-ica-regional-hub',excerpt:'Chulalongkorn University hosted the inaugural ICA Regional Hub in Thailand, bringing together scholars, media professionals, students, and policymakers from over 80 countries under the theme "Where Thailand, the Mekong Region, and Asia Bridge Divides and Amplify Voices."\n\nThe 76th Annual ICA Regional Hub Thailand 2026 represented a landmark moment for Chulalongkorn University\'s global engagement strategy. As the first Thai institution to host an ICA Regional Hub, the Faculty of Communication Arts demonstrated the international standing of Thai communication scholarship and opened new channels for research collaboration across Asia and beyond.\n\nThe event strengthened partnerships with universities and research centres across the Mekong region, ASEAN, and the broader Asia-Pacific, laying the groundwork for sustained academic exchange and joint research initiatives.',featured_img:'im/cover-412229-1780998757.webp',speaker:'Chulalongkorn University News — 5–7 June 2026'},
+            {title:'ICA Regional Hub Thailand 2026 Explores Trust, Digital Transformation, and the Future of Communication in Digital Asia',slug:'ica-th-2026-trust-digital-transformation-future-communication-digital-asia-chula',excerpt:'Leading academics from across Asia gathered at ICA-TH 2026 to examine how digital transformation is reshaping communication, trust, and civic participation — with experts arguing that "information integrity" must move beyond traditional fact-checking.\n\nThe plenary panel on 6 June brought together scholars from Hong Kong, Laos, and Vietnam to explore how citizens and institutions are adapting to algorithm-driven information environments. Experts argued that helping people understand how platforms curate and amplify content is now as important as teaching them to identify false information.\n\nSession discussions also addressed digital literacy education, the role of public institutions in building information trust, and how communication researchers can contribute to evidence-based platform governance in the region.',featured_img:'im/cover-412922-1781489234.webp',speaker:'Chulalongkorn University News — 5–7 June 2026'},
+            {title:'ICA Regional Hub Thailand 2026 Highlights the Role of Communication in Advancing Green Energy and Sustainability in ASEAN',slug:'ica-th-2026-communication-green-energy-sustainability-asean-chula',excerpt:'A special Aus4ASEAN panel at ICA-TH 2026 reached a clear consensus: technology, policy, and investment alone cannot drive ASEAN\'s green energy transition — effective communication and meaningful citizen participation are equally critical.\n\nExperts from academia, science communication, public policy, and international development organisations examined why renewable energy projects across Southeast Asia often face public resistance or stall despite technical feasibility. The common thread: communication failures.\n\nSpeakers called for communication scholars and practitioners to take a central role in designing energy transition narratives, building community trust, and ensuring that the benefits of the green transition are clearly and equitably communicated to all segments of society.',featured_img:'im/cover-413176-1781519508.webp',speaker:'Chulalongkorn University News — 5–7 June 2026'},
+            {title:'Decoding Breaking News: Chula Forum Examines Power, Truth, and Platform Inequalities in Thailand',slug:'decoding-breaking-news-chula-forum-power-truth-platform-inequalities-thailand',excerpt:'A public forum at Chulalongkorn University\'s Faculty of Communication Arts examined structural inequalities in Thailand\'s media ecosystem — from Facebook content moderation failures to barriers for sexual violence survivors — through the lens of platform power, truth construction, and digital governance.\n\nThe Faculty of Communication Arts, in collaboration with ANPOR and the Thai Media Fund, organised the forum "Decoding Breaking News: Reading Structural Inequality Through \'Power–Truth–Platform\' in Thailand\'s Media Ecosystem" on 5 June 2026.\n\nThe forum invited the public to look beyond daily headlines and examine the power structures underlying major news events in Thai society. Topics analysed included prolonged livestreaming of inappropriate content on Facebook, barriers to justice faced by survivors of sexual violence, debates surrounding public opinion polls, and delays in defining the future direction of Thailand\'s digital television industry amid increasing competition from global platforms.',featured_img:'im/cover-413272-1781590701.webp',speaker:'Chulalongkorn University News — 5 June 2026'}
         ];
 
         const params = new URLSearchParams(location.search);
         const slug = params.get('slug');
-        const article = STATIC_NEWS.find(a => a.slug === slug);
+        const articleIdx = STATIC_NEWS.findIndex(a => a.slug === slug);
 
-        if (!article) {
+        if (articleIdx === -1) {
             document.getElementById('article-notfound').style.display = 'block';
             return;
         }
 
+        const article = STATIC_NEWS[articleIdx];
+
         // Update meta tags
         document.getElementById('page-title').textContent = article.title + ' | ICA-TH 2026';
         document.getElementById('og-title').content = article.title;
-        document.getElementById('og-desc').content = article.excerpt || '';
+        document.getElementById('og-desc').content = article.excerpt.split('\n')[0] || '';
         if (article.featured_img) document.getElementById('og-img').content = 'https://icahubthailand.org/' + article.featured_img;
 
-        // Fill hero
-        document.getElementById('article-meta').textContent = article.speaker || 'ICA-TH 2026';
-        document.getElementById('article-title-hero').textContent = article.title;
-        document.getElementById('article-hero').style.display = '';
+        // Fill article elements
+        document.getElementById('article-tag-el').textContent = 'ICA-TH 2026';
+        document.getElementById('article-title-el').textContent = article.title;
+        document.getElementById('article-source-el').textContent = article.speaker || 'ICA-TH 2026';
 
-        // Fill body
+        // Featured image — full width, no crop
         if (article.featured_img) {
-            var img = document.getElementById('article-img');
+            var img = document.getElementById('article-img-el');
             img.src = article.featured_img;
             img.alt = article.title;
-            img.style.display = '';
+            img.style.display = 'block';
         }
-        document.getElementById('article-excerpt').textContent = article.excerpt || '';
-        document.getElementById('article-body').style.display = '';
 
-        // Try to load full article from CMS API
+        // Body — convert newlines to paragraphs
+        var bodyEl = document.getElementById('article-body-el');
+        var paragraphs = article.excerpt.split('\n').filter(p => p.trim());
+        bodyEl.innerHTML = paragraphs.map(p => '<p>' + p.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;') + '</p>').join('');
+
+        // Show article
+        document.getElementById('article-main').style.display = 'block';
+
+        // Related articles — pick 3 others
+        var others = STATIC_NEWS.filter((_, i) => i !== articleIdx);
+        var shuffled = others.sort(() => 0.5 - Math.random()).slice(0, 3);
+        var relGrid = document.getElementById('related-grid');
+        relGrid.innerHTML = shuffled.map(function(n) {
+            var imgHtml = n.featured_img
+                ? '<img src="' + n.featured_img + '" alt="' + n.title.replace(/"/g,'&quot;') + '" loading="lazy">'
+                : '<span style="font-size:32px;">📰</span>';
+            return '<a class="related-card" href="' + detailPage + '?slug=' + encodeURIComponent(n.slug) + '">'
+                + '<div class="related-card-img">' + imgHtml + '</div>'
+                + '<div class="related-card-body">'
+                + '<p class="related-card-tag">' + (n.speaker || 'ICA-TH 2026') + '</p>'
+                + '<p class="related-card-title">' + n.title.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;') + '</p>'
+                + '</div></a>';
+        }).join('');
+
+        // Try to load full body from CMS (real server only)
         try {
             const BASE = (location.hostname === 'localhost' || location.hostname === '127.0.0.1')
                 ? location.protocol + '//' + location.hostname + (location.port ? ':' + location.port : '') + '/ica-cms-php'
@@ -341,13 +402,14 @@
             const res = await fetch(BASE + '/api/news.php?slug=' + encodeURIComponent(slug));
             const data = await res.json();
             if (data.ok && data.data && data.data.content) {
-                const wrap = document.querySelector('.article-wrap');
-                const contentDiv = document.createElement('div');
-                contentDiv.style.cssText = 'font-size:17px;line-height:1.85;color:var(--text-main);';
-                contentDiv.innerHTML = data.data.content;
-                wrap.appendChild(contentDiv);
+                bodyEl.innerHTML = data.data.content;
+                if (data.data.featured_img) {
+                    var img2 = document.getElementById('article-img-el');
+                    img2.src = data.data.featured_img;
+                    img2.style.display = 'block';
+                }
             }
-        } catch(e) { /* static fallback already shown */ }
+        } catch(e) { /* static content already shown */ }
     })();
     </script>
 </body>
