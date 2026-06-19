@@ -15,6 +15,8 @@
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="announcement.css?v=20260519-mobile">
     <style>
+    @font-face{font-family:'ChulaCharasNew';src:url('Chula-Fonts/ChulaCharasNewReg.ttf') format('truetype');font-weight:400;font-style:normal;font-display:swap}
+    @font-face{font-family:'ChulaCharasNew';src:url('Chula-Fonts/ChulaCharasNewBold.ttf') format('truetype');font-weight:700;font-style:normal;font-display:swap}
     :root{--primary:#1a3a5f;--secondary:#274c77;--accent:#ffb400;--light-bg:#f8fafc;--white:#ffffff;--text-main:#1e293b;--text-muted:#64748b;--border:#e2e8f0;--transition:all 0.3s cubic-bezier(0.4,0,0.2,1)}
     html,body{overflow-x:hidden;max-width:100%}
     body{margin:0;font-family:'Inter',-apple-system,sans-serif;color:var(--text-main);line-height:1.7;background:var(--white);-webkit-font-smoothing:antialiased}
@@ -55,6 +57,12 @@
     .article-body a{color:var(--secondary);text-decoration:underline;text-decoration-color:rgba(39,76,119,0.3);text-underline-offset:3px}
     .article-body a:hover{color:var(--accent)}
     .article-body strong{font-weight:700;color:var(--text-main)}
+    body.thai-article .article-title,
+    body.thai-article .article-meta,
+    body.thai-article .article-body{font-family:'ChulaCharasNew','Inter',-apple-system,sans-serif}
+    body.thai-article .article-title{font-weight:700;line-height:1.25}
+    body.thai-article .article-body{font-size:20px;line-height:1.9}
+    body.thai-article .article-body strong{font-weight:700}
 
     /* Photo gallery */
     .photo-gallery{display:grid;grid-template-columns:repeat(2,1fr);gap:12px;margin:40px 0 8px}
@@ -356,6 +364,8 @@
         }
 
         const article = STATIC_NEWS[articleIdx];
+        const isThaiArticle = /[\u0E00-\u0E7F]/.test((article.title || '') + (article.excerpt || ''));
+        document.body.classList.toggle('thai-article', isThaiArticle);
 
         // Update meta tags
         document.getElementById('page-title').textContent = article.title + ' | ICA-TH 2026';
