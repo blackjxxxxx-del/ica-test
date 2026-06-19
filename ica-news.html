@@ -496,6 +496,9 @@
         const PER_PAGE = 6;
         let allArticles = [], imgBase = '', currentPage = 1;
 
+        const isStatic = location.hostname.includes('github.io') || location.hostname === 'localhost' || location.hostname === '127.0.0.1';
+        const detailPage = isStatic ? 'news-detail.html' : 'news-detail.php';
+
         function buildCard(n) {
             const rawImg = n.featured_img || '';
             const imgSrc = rawImg ? (rawImg.startsWith('http') || rawImg.startsWith('im/') ? rawImg : imgBase+'/'+rawImg) : null;
@@ -507,7 +510,7 @@
                     ${tag}
                     <h3 class="news-card-title">${esc(n.title)}</h3>
                     ${n.excerpt?`<p class="news-card-excerpt">${esc(n.excerpt)}</p>`:''}
-                    <a class="news-card-link" href="news-detail.php?slug=${esc(n.slug)}">Read more <span>→</span></a>
+                    <a class="news-card-link" href="${detailPage}?slug=${esc(n.slug)}">Read more <span>→</span></a>
                 </div>
             </div>`;
         }
