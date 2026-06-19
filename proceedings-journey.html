@@ -261,9 +261,10 @@
     /* TIMELINE SECTION */
     .pj-section{padding:100px 0;background:#fff}
     .pj-section-alt{padding:100px 0;background:#f8fafc}
-    .pj-section-label{font-size:11px;font-weight:800;letter-spacing:3px;text-transform:uppercase;color:var(--accent);margin-bottom:10px;display:block}
-    .pj-section-title{font-size:36px;font-weight:800;color:var(--primary);margin:0 0 12px;line-height:1.15}
-    .pj-section-sub{font-size:16px;color:var(--text-muted);line-height:1.75;max-width:640px;margin:0 0 60px}
+    .pj-section-label{font-size:11px;font-weight:800;letter-spacing:3px;text-transform:uppercase;color:var(--accent);margin-bottom:10px;display:block;text-align:center}
+    .pj-section-title{font-size:36px;font-weight:800;color:var(--primary);margin:0 0 12px;line-height:1.15;text-align:center;position:relative;padding-bottom:16px;display:block}
+    .pj-section-title::after{content:'';position:absolute;bottom:0;left:50%;transform:translateX(-50%);width:50px;height:4px;background:var(--accent);border-radius:2px}
+    .pj-section-sub{font-size:16px;color:var(--text-muted);line-height:1.75;max-width:640px;margin:0 auto 60px;text-align:center}
     /* Timeline redesign — horizontal cards with connector line */
     .timeline-grid{display:grid;grid-template-columns:repeat(5,1fr);gap:0;position:relative;margin-bottom:64px}
     .timeline-grid::before{content:'';position:absolute;top:36px;left:10%;right:10%;height:2px;background:linear-gradient(90deg,var(--accent),#274c77 50%,var(--accent));opacity:0.25;z-index:0}
@@ -302,14 +303,14 @@
     .ethics-body p{margin:0 0 14px}.ethics-body p:last-child{margin:0}
     .ethics-body ul{margin:10px 0 0;padding-left:22px}.ethics-body li{margin-bottom:6px}
     /* Warning box */
-    .warn-box{background:linear-gradient(135deg,#fffbef 0%,#fff8e1 100%);border:1.5px solid #f5c518;border-radius:18px;padding:32px 36px;margin-top:36px}
+    .warn-box{background:linear-gradient(135deg,#fffbef 0%,#fff8e1 100%);border:1.5px solid #f5c518;border-radius:18px;padding:32px 36px;margin-top:36px;max-width:720px;margin-left:auto;margin-right:auto}
     .warn-box-head{display:flex;align-items:center;gap:10px;font-weight:800;color:var(--primary);font-size:16px;margin-bottom:14px}
     .warn-box-head svg{width:20px;height:20px;stroke:#e6a800;fill:none;stroke-width:2.5;stroke-linecap:round;stroke-linejoin:round}
     .warn-box p{margin:0 0 10px;font-size:15px;color:var(--text-main);line-height:1.75}.warn-box p:last-child{margin:0}
     /* Journal cards */
     .journal-cards{display:grid;grid-template-columns:1fr 1fr;gap:24px}
     .journal-card{background:#fff;border:1px solid var(--border);border-radius:22px;padding:36px 32px;display:flex;flex-direction:column;gap:16px;transition:all .3s;position:relative;overflow:hidden}
-    .journal-card::before{content:'';position:absolute;top:0;left:0;right:0;height:4px;background:linear-gradient(90deg,var(--accent),#274c77)}
+    .journal-card::before{display:none}
     .journal-card:hover{transform:translateY(-6px);box-shadow:0 20px 48px rgba(26,58,95,.10);border-color:rgba(26,58,95,.15)}
     .journal-tag{font-size:10px;font-weight:800;letter-spacing:2px;text-transform:uppercase;color:var(--accent)}
     .journal-card h3{font-size:18px;font-weight:800;color:var(--primary);margin:0;line-height:1.35}
@@ -424,8 +425,8 @@
                     <div>
                         <h4>Submission Guidelines</h4>
                         <p>Authors must follow standard academic proceedings requirements and acknowledge that the paper was presented at ICA Regional Hub Thailand 2026.</p>
-                        <a href="Guidelines for Publication Process and Quality of the Conference Proceedings.pdf" target="_blank" style="display:inline-flex;align-items:center;gap:6px;margin-top:10px;font-size:13px;font-weight:700;color:#2a7a4b;">
-                            <svg viewBox="0 0 24 24" width="14" height="14"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+                        <a href="Guidelines for Publication Process and Quality of the Conference Proceedings.pdf" target="_blank" style="display:inline-flex;align-items:center;gap:8px;margin-top:14px;font-size:14px;font-weight:700;color:#fff;background:#2a7a4b;padding:11px 20px;border-radius:10px;box-shadow:0 4px 12px rgba(42,122,75,.25);">
+                            <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
                             Download Guidelines PDF
                         </a>
                     </div>
@@ -439,7 +440,7 @@
     <section class="pj-section-alt">
         <div class="container" style="max-width:860px;">
             <span class="pj-section-label">Ethics &amp; Integrity</span>
-            <h2 class="pj-section-title">Publication Ethics and Malpractice Statement</h2>
+            <h2 class="pj-section-title">Publication Ethics<br>and Malpractice Statement</h2>
             <p class="pj-section-sub">The ICA Regional Hub Thailand 2026 Proceedings is committed to maintaining the highest standards of academic integrity, transparency, and ethical publication practices.</p>
 
             <div style="display:flex;flex-direction:column;gap:12px;">
