@@ -227,8 +227,9 @@
   .org-split-row { flex-direction: column !important; gap: 0 !important; }
   .org-col-left, .org-col-right { flex: 1 1 auto !important; min-width: 0 !important; max-width: 100% !important; width: 100% !important; padding: 20px 0 !important; }
   .org-v-divider { display: block !important; width: 100% !important; height: 1px !important; min-height: 0 !important; background: #e2e8f0 !important; margin: 0 !important; align-self: auto !important; }
-  .partner-row { display: flex !important; flex-wrap: wrap !important; gap: 16px !important; justify-content: center !important; }
-  .partner-row img { height: 60px !important; width: auto !important; max-width: calc(46vw - 20px) !important; object-fit: contain !important; }
+  .partner-row { display: grid !important; grid-template-columns: repeat(3, 1fr) !important; gap: 12px !important; width: 100% !important; }
+  .partner-row > div { display: flex !important; align-items: center !important; justify-content: center !important; }
+  .partner-row img { height: 55px !important; width: auto !important; max-width: 100% !important; object-fit: contain !important; }
   .organizers .container > div > div[style] > img { height: 70px !important; width: auto !important; max-width: calc(46vw - 20px) !important; object-fit: contain !important; }
 }
 </style>
@@ -251,13 +252,11 @@
                 <div class="org-v-divider" style="width:1px;background:#e2e8f0;align-self:stretch;min-height:120px;flex-shrink:0;margin:0 8px;"></div>
                 <div class="org-col-right" style="flex:3;min-width:280px;display:flex;flex-direction:column;align-items:center;padding:0 40px;">
                     <span class="org-group-label" style="display:block;margin-bottom:28px;">In Partnership with</span>
-                    <div class="partner-row" style="display:flex;flex-wrap:wrap;gap:16px;align-items:center;justify-content:center;margin-bottom:16px;">
+                    <div class="partner-row" style="display:flex;flex-wrap:wrap;gap:16px;align-items:center;justify-content:center;">
                         <div style="display:flex;align-items:center;justify-content:center;"><img loading="lazy" src="im/logooo-1.webp" alt="CMCT" style="height:80px;width:auto;object-fit:contain;"></div>
                         <div style="display:flex;align-items:center;justify-content:center;"><img loading="lazy" src="im/S__13172761_0.webp" alt="COSCI SWU" style="height:80px;width:auto;object-fit:contain;"></div>
                         <div style="display:flex;align-items:center;justify-content:center;"><img loading="lazy" src="im/GSCM.webp" alt="GSCM NIDA" style="height:80px;width:auto;object-fit:contain;"></div>
                         <div style="display:flex;align-items:center;justify-content:center;"><img loading="lazy" src="im/New-JC-Logo-2018-Update-Cleanup_Outline-01.webp" alt="JC Thammasat" style="height:80px;width:auto;object-fit:contain;"></div>
-                    </div>
-                    <div class="partner-row" style="display:flex;flex-wrap:wrap;gap:16px;align-items:center;justify-content:center;">
                         <div style="display:flex;align-items:center;justify-content:center;"><img loading="lazy" src="im/S__13172760_0.webp" alt="MassComm Chiang Mai University" style="height:80px;width:auto;object-fit:contain;"></div>
                         <div style="display:flex;align-items:center;justify-content:center;"><img loading="lazy" src="im/psu-masscomm.webp" alt="PSU Faculty of Communication Sciences" style="height:80px;width:auto;object-fit:contain;"></div>
                     </div>

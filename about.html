@@ -176,15 +176,9 @@
     /* ── FIX: Partnership logos — grid 2 col, natural size, centered as pair ── */
     .partner-row {
       display: grid !important;
-      grid-template-columns: repeat(2, max-content) !important;
-      justify-content: center !important;
-      align-items: center !important;
-      gap: 20px !important;
-      margin-bottom: 24px !important;
+      grid-template-columns: repeat(3, 1fr) !important;
+      gap: 12px !important;
       width: 100% !important;
-    }
-
-    .partner-row:last-child {
       margin-bottom: 0 !important;
     }
 
@@ -195,9 +189,9 @@
     }
 
     .partner-row img {
-      height: 64px !important;
+      height: 55px !important;
       width: auto !important;
-      max-width: calc(46vw - 20px) !important;
+      max-width: 100% !important;
       object-fit: contain !important;
     }
   }
@@ -449,7 +443,7 @@
                 <!-- In Partnership with -->
                 <div class="org-col-right" style="flex:3;min-width:280px;display:flex;flex-direction:column;align-items:center;padding:0 40px;">
                     <span class="org-group-label" style="display:block;margin-bottom:28px;">In Partnership with</span>
-                    <div class="partner-row" style="display:flex;flex-wrap:wrap;gap:16px;align-items:center;justify-content:center;margin-bottom:16px;">
+                    <div class="partner-row" style="display:flex;flex-wrap:wrap;gap:16px;align-items:center;justify-content:center;">
                         <div style="display:flex;align-items:center;justify-content:center;">
                             <img loading="lazy" src="im/logooo-1.webp" alt="CMCT" style="height:80px;width:auto;object-fit:contain;">
                         </div>
@@ -462,8 +456,6 @@
                         <div style="display:flex;align-items:center;justify-content:center;">
                             <img loading="lazy" src="im/New-JC-Logo-2018-Update-Cleanup_Outline-01.webp" alt="JC Thammasat" style="height:80px;width:auto;object-fit:contain;">
                         </div>
-                    </div>
-                    <div class="partner-row" style="display:flex;flex-wrap:wrap;gap:16px;align-items:center;justify-content:center;">
                         <div style="display:flex;align-items:center;justify-content:center;">
                             <img loading="lazy" src="im/S__13172760_0.webp" alt="MassComm Chiang Mai University" style="height:80px;width:auto;object-fit:contain;">
                         </div>
