@@ -256,6 +256,16 @@
         </div>
     </section>
 
+<style>
+@media (max-width: 768px) {
+  .org-split-row { flex-direction: column !important; gap: 0 !important; }
+  .org-col-left, .org-col-right { flex: 1 1 auto !important; min-width: 0 !important; max-width: 100% !important; width: 100% !important; padding: 20px 0 !important; }
+  .org-v-divider { display: block !important; width: 100% !important; height: 1px !important; min-height: 0 !important; background: #e2e8f0 !important; margin: 0 !important; align-self: auto !important; }
+  .partner-row { display: flex !important; flex-wrap: wrap !important; gap: 16px !important; justify-content: center !important; }
+  .partner-row img { height: 60px !important; width: auto !important; max-width: calc(46vw - 20px) !important; object-fit: contain !important; }
+  .organizers .container > div > div[style] > img { height: 70px !important; width: auto !important; max-width: calc(46vw - 20px) !important; object-fit: contain !important; }
+}
+</style>
     <section class="organizers">
         <div class="container">
             <div style="text-align:center;margin-bottom:40px;">
