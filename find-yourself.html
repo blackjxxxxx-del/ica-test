@@ -239,27 +239,46 @@
 
     <section style="padding:80px 0;background:#f8fafc;">
         <div class="container">
-            <h2 class="section-title">Participants &amp; Scholars</h2>
-            <p style="text-align:center;color:var(--text-muted);font-size:16px;max-width:640px;margin:16px auto 40px;">Search for your name, institution, or paper title below. The list covers all accepted presentations across sessions A–D.</p>
+            <h2 class="section-title">Photo Albums</h2>
+            <p style="text-align:center;color:var(--text-muted);font-size:16px;max-width:600px;margin:16px auto 48px;">Browse photos from each day of ICA-TH 2026. Click a day to open the full album on Google Photos.</p>
 
-            <input type="text" id="searchInput" class="search-bar" placeholder="Search by name, institution, or paper title…" oninput="filterTable()">
-            <p id="resultCount" style="color:var(--text-muted);font-size:13px;margin-bottom:16px;"></p>
-
-            <div style="overflow-x:auto;">
-            <table class="participant-table" id="participantTable">
-                <thead>
-                    <tr>
-                        <th>#</th>
-                        <th>Name</th>
-                        <th>Affiliation</th>
-                        <th>Paper Title</th>
-                        <th>Session</th>
-                    </tr>
-                </thead>
-                <tbody id="tableBody">
-                    <tr><td colspan="5" style="text-align:center;padding:40px;color:var(--text-muted);">Participant list coming soon.</td></tr>
-                </tbody>
-            </table>
+            <div style="max-width:760px;margin:0 auto;border:1px solid var(--border);border-radius:16px;overflow:hidden;">
+                <a href="https://photos.app.goo.gl/wBUTymEZuNXqHWYh8" target="_blank" rel="noopener"
+                   style="display:flex;align-items:center;justify-content:space-between;padding:22px 28px;background:var(--white);border-bottom:1px solid var(--border);text-decoration:none;transition:background .15s;"
+                   onmouseover="this.style.background='#f0f4f8'" onmouseout="this.style.background='var(--white)'">
+                    <div style="display:flex;align-items:center;gap:18px;">
+                        <div style="width:42px;height:42px;border-radius:50%;background:var(--primary);display:flex;align-items:center;justify-content:center;color:var(--accent);font-size:15px;font-weight:700;flex-shrink:0;">1</div>
+                        <div>
+                            <div style="font-size:11px;font-weight:700;letter-spacing:1px;text-transform:uppercase;color:var(--text-muted);margin-bottom:3px;">Day 1</div>
+                            <div style="font-size:19px;font-weight:700;color:var(--primary);">5 June 2026</div>
+                        </div>
+                    </div>
+                    <div style="display:flex;align-items:center;gap:6px;font-size:14px;font-weight:600;color:var(--text-muted);">View Album <svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg></div>
+                </a>
+                <a href="https://photos.app.goo.gl/LgMntkkRTE1VrP9BA" target="_blank" rel="noopener"
+                   style="display:flex;align-items:center;justify-content:space-between;padding:22px 28px;background:var(--white);border-bottom:1px solid var(--border);text-decoration:none;transition:background .15s;"
+                   onmouseover="this.style.background='#f0f4f8'" onmouseout="this.style.background='var(--white)'">
+                    <div style="display:flex;align-items:center;gap:18px;">
+                        <div style="width:42px;height:42px;border-radius:50%;background:var(--primary);display:flex;align-items:center;justify-content:center;color:var(--accent);font-size:15px;font-weight:700;flex-shrink:0;">2</div>
+                        <div>
+                            <div style="font-size:11px;font-weight:700;letter-spacing:1px;text-transform:uppercase;color:var(--text-muted);margin-bottom:3px;">Day 2</div>
+                            <div style="font-size:19px;font-weight:700;color:var(--primary);">6 June 2026</div>
+                        </div>
+                    </div>
+                    <div style="display:flex;align-items:center;gap:6px;font-size:14px;font-weight:600;color:var(--text-muted);">View Album <svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg></div>
+                </a>
+                <a href="https://photos.app.goo.gl/5xT5Hku3V4LDqCDz5" target="_blank" rel="noopener"
+                   style="display:flex;align-items:center;justify-content:space-between;padding:22px 28px;background:var(--white);text-decoration:none;transition:background .15s;"
+                   onmouseover="this.style.background='#f0f4f8'" onmouseout="this.style.background='var(--white)'">
+                    <div style="display:flex;align-items:center;gap:18px;">
+                        <div style="width:42px;height:42px;border-radius:50%;background:var(--primary);display:flex;align-items:center;justify-content:center;color:var(--accent);font-size:15px;font-weight:700;flex-shrink:0;">3</div>
+                        <div>
+                            <div style="font-size:11px;font-weight:700;letter-spacing:1px;text-transform:uppercase;color:var(--text-muted);margin-bottom:3px;">Day 3</div>
+                            <div style="font-size:19px;font-weight:700;color:var(--primary);">7 June 2026</div>
+                        </div>
+                    </div>
+                    <div style="display:flex;align-items:center;gap:6px;font-size:14px;font-weight:600;color:var(--text-muted);">View Album <svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg></div>
+                </a>
             </div>
         </div>
     </section>
