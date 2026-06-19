@@ -207,18 +207,12 @@
       flex-shrink: 0 !important;
     }
 
-    /* ── FIX: Partnership logos — grid 2 col, natural size, centered as pair ── */
+    /* ── FIX: Partnership logos — 3-col grid ── */
     .partner-row {
       display: grid !important;
-      grid-template-columns: repeat(2, max-content) !important;
-      justify-content: center !important;
-      align-items: center !important;
-      gap: 20px !important;
-      margin-bottom: 24px !important;
+      grid-template-columns: repeat(3, 1fr) !important;
+      gap: 12px !important;
       width: 100% !important;
-    }
-
-    .partner-row:last-child {
       margin-bottom: 0 !important;
     }
 
@@ -229,9 +223,9 @@
     }
 
     .partner-row img {
-      height: 64px !important;
+      height: 55px !important;
       width: auto !important;
-      max-width: calc(46vw - 20px) !important;
+      max-width: 100% !important;
       object-fit: contain !important;
     }
   }
@@ -566,8 +560,9 @@
       .org-split-row { flex-direction: column !important; gap: 0 !important; }
       .org-col-left, .org-col-right { flex: 1 1 auto !important; min-width: 0 !important; max-width: 100% !important; width: 100% !important; padding: 20px 0 !important; }
       .org-v-divider { display: block !important; width: 100% !important; height: 1px !important; min-height: 0 !important; background: #e2e8f0 !important; margin: 0 !important; align-self: auto !important; }
-      .partner-row { display: flex !important; flex-wrap: wrap !important; gap: 16px !important; justify-content: center !important; }
-      .partner-row img { height: 60px !important; width: auto !important; max-width: calc(46vw - 20px) !important; object-fit: contain !important; }
+      .partner-row { display: grid !important; grid-template-columns: repeat(3, 1fr) !important; gap: 12px !important; width: 100% !important; margin-bottom: 0 !important; }
+      .partner-row > div { display: flex !important; align-items: center !important; justify-content: center !important; }
+      .partner-row img { height: 55px !important; width: auto !important; max-width: 100% !important; object-fit: contain !important; }
       .organizers .container > div > div[style] > img { height: 70px !important; width: auto !important; max-width: calc(46vw - 20px) !important; object-fit: contain !important; }
     }
     </style>
