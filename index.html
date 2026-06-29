@@ -584,11 +584,11 @@
         }
 
         function goTo(idx){
-            cur=Math.max(0,Math.min(idx,maxIdx));
+            if(idx<0) idx=maxIdx;
+            if(idx>maxIdx) idx=0;
+            cur=idx;
             var cardW=cards[0].offsetWidth+28;
             track.style.transform='translateX(-'+(cur*cardW)+'px)';
-            prevBtn.disabled=cur===0;
-            nextBtn.disabled=cur>=maxIdx;
             updateDots();
         }
 
