@@ -400,14 +400,16 @@
 
         const isStatic = location.hostname.includes('github.io') || location.hostname === 'localhost' || location.hostname === '127.0.0.1';
         const detailPage = isStatic ? 'news-detail.html' : 'news-detail.php';
+        const staticDetailPage = 'news-detail.html';
 
-        function buildCard(n) {
+        function buildCard(n, cardDetailPage) {
+            cardDetailPage = cardDetailPage || detailPage;
             const rawImg = n.featured_img || '';
             const imgSrc = rawImg ? (rawImg.startsWith('http') || rawImg.startsWith('im/') ? rawImg : imgBase+'/'+rawImg) : null;
             const imgHtml = imgSrc ? `<img src="${esc(imgSrc)}" alt="${esc(n.title)}" loading="lazy">` : `<span style="font-size:48px;">📰</span>`;
             const tag = n.speaker ? `<div class="news-card-tag" style="margin-bottom:6px;">${esc(n.speaker)}</div>` : `<div class="news-card-tag">ICA-TH 2026</div>`;
             const thaiClass = hasThaiText((n.title || '') + (n.excerpt || '')) ? ' thai-news-card' : '';
-            return `<a class="news-card${thaiClass}" href="${detailPage}?slug=${esc(n.slug)}" style="display:block;text-decoration:none;color:inherit;">
+            return `<a class="news-card${thaiClass}" href="${cardDetailPage}?slug=${esc(n.slug)}" style="display:block;text-decoration:none;color:inherit;">
                 <div class="news-card-img">${imgHtml}</div>
                 <div class="news-card-body">
                     ${tag}
@@ -426,7 +428,7 @@
             const slice = allArticles.slice(start, start + PER_PAGE);
 
             grid.style.display = 'grid';
-            grid.innerHTML = slice.map(buildCard).join('');
+            grid.innerHTML = slice.map(n => buildCard(n, activeDetailPage)).join('');
 
             const pag = document.getElementById('news-pagination');
             if (totalPages <= 1) { pag.style.display = 'none'; return; }
@@ -454,11 +456,13 @@
             };
         }
 
-        function renderNews(articles, imgBaseUrl) {
+        let activeDetailPage = detailPage;
+        function renderNews(articles, imgBaseUrl, useDetailPage) {
             loading.style.display = 'none';
             if (!articles.length) { empty.style.display = 'block'; return; }
             allArticles = articles;
             imgBase = imgBaseUrl;
+            activeDetailPage = useDetailPage || detailPage;
             renderPage(1);
         }
 
@@ -467,13 +471,13 @@
             const data = await res.json();
             loading.style.display = 'none';
             if(data.ok && data.data.length){
-                renderNews(data.data, BASE);
+                renderNews(data.data, BASE, detailPage);
             } else {
-                renderNews(STATIC_NEWS, '');
+                renderNews(STATIC_NEWS, '', staticDetailPage);
             }
         } catch(e){
             loading.style.display = 'none';
-            renderNews(STATIC_NEWS, '');
+            renderNews(STATIC_NEWS, '', staticDetailPage);
         }
     })();
     </script>

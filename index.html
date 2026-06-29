@@ -457,58 +457,181 @@
     <section id="video-section" style="padding:80px 0;background:#f8fafc;border-top:1px solid #e2e8f0;">
         <div class="container" style="max-width:1200px;">
             <h2 class="section-title" style="display:block;text-align:center;margin-bottom:48px;">Conference Highlights</h2>
-            <div class="yt-grid">
-                <!-- Video 1: แทนที่ data-videoid="VIDEO_ID" ด้วย YouTube ID จริง เช่น data-videoid="dQw4w9WgXcQ" -->
-                <div class="yt-wrap" data-videoid="x967FJ3KrmA">
-                    <div class="yt-placeholder" id="yt-ph-1">
-                        <div class="yt-thumb-bg"></div>
-                        <div class="yt-play-btn">
-                            <svg viewBox="0 0 68 48" width="68" height="48"><path d="M66.5 7.7c-.8-2.9-3-5.2-5.9-6C55.8.1 34 0 34 0S12.2.1 7.4 1.7C4.5 2.5 2.3 4.8 1.5 7.7 0 12.5 0 24 0 24s0 11.5 1.5 16.3c.8 2.9 3 5.2 5.9 6C12.2 47.9 34 48 34 48s21.8-.1 26.6-1.7c2.9-.8 5.1-3.1 5.9-6C68 35.5 68 24 68 24s0-11.5-1.5-16.3z" fill="#ff0000"/><path d="M45 24 27 14v20" fill="#fff"/></svg>
+            <div class="yt-carousel-wrap">
+                <button class="yt-arrow yt-arrow-left" id="ytPrev" aria-label="Previous">
+                    <svg viewBox="0 0 24 24" width="28" height="28" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"/></svg>
+                </button>
+                <div class="yt-track-outer">
+                    <div class="yt-track" id="ytTrack">
+                        <!-- Video 1 -->
+                        <div class="yt-card">
+                            <div class="yt-wrap" data-videoid="x967FJ3KrmA">
+                                <div class="yt-placeholder"><div class="yt-thumb-bg"></div><div class="yt-play-btn"><svg viewBox="0 0 68 48" width="68" height="48"><path d="M66.5 7.7c-.8-2.9-3-5.2-5.9-6C55.8.1 34 0 34 0S12.2.1 7.4 1.7C4.5 2.5 2.3 4.8 1.5 7.7 0 12.5 0 24 0 24s0 11.5 1.5 16.3c.8 2.9 3 5.2 5.9 6C12.2 47.9 34 48 34 48s21.8-.1 26.6-1.7c2.9-.8 5.1-3.1 5.9-6C68 35.5 68 24 68 24s0-11.5-1.5-16.3z" fill="#ff0000"/><path d="M45 24 27 14v20" fill="#fff"/></svg></div></div>
+                                <iframe class="yt-iframe" src="" frameborder="0" allow="accelerometer;autoplay;clipboard-write;encrypted-media;gyroscope;picture-in-picture" allowfullscreen style="display:none;position:absolute;top:0;left:0;width:100%;height:100%;"></iframe>
+                            </div>
+                            <div class="yt-title"></div>
                         </div>
-                        
-                    </div>
-                    <iframe class="yt-iframe" id="yt-video-1" src="" title="ICA-TH 2026 Video 1" frameborder="0" allow="accelerometer;autoplay;clipboard-write;encrypted-media;gyroscope;picture-in-picture" allowfullscreen style="display:none;position:absolute;top:0;left:0;width:100%;height:100%;"></iframe>
-                </div>
-                <!-- Video 2: แทนที่ data-videoid="VIDEO_ID" ด้วย YouTube ID จริง -->
-                <div class="yt-wrap" data-videoid="7Ym5VSVGojA">
-                    <div class="yt-placeholder" id="yt-ph-2">
-                        <div class="yt-thumb-bg"></div>
-                        <div class="yt-play-btn">
-                            <svg viewBox="0 0 68 48" width="68" height="48"><path d="M66.5 7.7c-.8-2.9-3-5.2-5.9-6C55.8.1 34 0 34 0S12.2.1 7.4 1.7C4.5 2.5 2.3 4.8 1.5 7.7 0 12.5 0 24 0 24s0 11.5 1.5 16.3c.8 2.9 3 5.2 5.9 6C12.2 47.9 34 48 34 48s21.8-.1 26.6-1.7c2.9-.8 5.1-3.1 5.9-6C68 35.5 68 24 68 24s0-11.5-1.5-16.3z" fill="#ff0000"/><path d="M45 24 27 14v20" fill="#fff"/></svg>
+                        <!-- Video 2 -->
+                        <div class="yt-card">
+                            <div class="yt-wrap" data-videoid="7Ym5VSVGojA">
+                                <div class="yt-placeholder"><div class="yt-thumb-bg"></div><div class="yt-play-btn"><svg viewBox="0 0 68 48" width="68" height="48"><path d="M66.5 7.7c-.8-2.9-3-5.2-5.9-6C55.8.1 34 0 34 0S12.2.1 7.4 1.7C4.5 2.5 2.3 4.8 1.5 7.7 0 12.5 0 24 0 24s0 11.5 1.5 16.3c.8 2.9 3 5.2 5.9 6C12.2 47.9 34 48 34 48s21.8-.1 26.6-1.7c2.9-.8 5.1-3.1 5.9-6C68 35.5 68 24 68 24s0-11.5-1.5-16.3z" fill="#ff0000"/><path d="M45 24 27 14v20" fill="#fff"/></svg></div></div>
+                                <iframe class="yt-iframe" src="" frameborder="0" allow="accelerometer;autoplay;clipboard-write;encrypted-media;gyroscope;picture-in-picture" allowfullscreen style="display:none;position:absolute;top:0;left:0;width:100%;height:100%;"></iframe>
+                            </div>
+                            <div class="yt-title"></div>
                         </div>
-                        
+                        <!-- Video 3 -->
+                        <div class="yt-card">
+                            <div class="yt-wrap" data-videoid="B4GcC6RjsWo">
+                                <div class="yt-placeholder"><div class="yt-thumb-bg"></div><div class="yt-play-btn"><svg viewBox="0 0 68 48" width="68" height="48"><path d="M66.5 7.7c-.8-2.9-3-5.2-5.9-6C55.8.1 34 0 34 0S12.2.1 7.4 1.7C4.5 2.5 2.3 4.8 1.5 7.7 0 12.5 0 24 0 24s0 11.5 1.5 16.3c.8 2.9 3 5.2 5.9 6C12.2 47.9 34 48 34 48s21.8-.1 26.6-1.7c2.9-.8 5.1-3.1 5.9-6C68 35.5 68 24 68 24s0-11.5-1.5-16.3z" fill="#ff0000"/><path d="M45 24 27 14v20" fill="#fff"/></svg></div></div>
+                                <iframe class="yt-iframe" src="" frameborder="0" allow="accelerometer;autoplay;clipboard-write;encrypted-media;gyroscope;picture-in-picture" allowfullscreen style="display:none;position:absolute;top:0;left:0;width:100%;height:100%;"></iframe>
+                            </div>
+                            <div class="yt-title"></div>
+                        </div>
+                        <!-- Video 4 -->
+                        <div class="yt-card">
+                            <div class="yt-wrap" data-videoid="4C_vH2DQQfg">
+                                <div class="yt-placeholder"><div class="yt-thumb-bg"></div><div class="yt-play-btn"><svg viewBox="0 0 68 48" width="68" height="48"><path d="M66.5 7.7c-.8-2.9-3-5.2-5.9-6C55.8.1 34 0 34 0S12.2.1 7.4 1.7C4.5 2.5 2.3 4.8 1.5 7.7 0 12.5 0 24 0 24s0 11.5 1.5 16.3c.8 2.9 3 5.2 5.9 6C12.2 47.9 34 48 34 48s21.8-.1 26.6-1.7c2.9-.8 5.1-3.1 5.9-6C68 35.5 68 24 68 24s0-11.5-1.5-16.3z" fill="#ff0000"/><path d="M45 24 27 14v20" fill="#fff"/></svg></div></div>
+                                <iframe class="yt-iframe" src="" frameborder="0" allow="accelerometer;autoplay;clipboard-write;encrypted-media;gyroscope;picture-in-picture" allowfullscreen style="display:none;position:absolute;top:0;left:0;width:100%;height:100%;"></iframe>
+                            </div>
+                            <div class="yt-title"></div>
+                        </div>
+                        <!-- Video 5 -->
+                        <div class="yt-card">
+                            <div class="yt-wrap" data-videoid="At4tIZkxxZY">
+                                <div class="yt-placeholder"><div class="yt-thumb-bg"></div><div class="yt-play-btn"><svg viewBox="0 0 68 48" width="68" height="48"><path d="M66.5 7.7c-.8-2.9-3-5.2-5.9-6C55.8.1 34 0 34 0S12.2.1 7.4 1.7C4.5 2.5 2.3 4.8 1.5 7.7 0 12.5 0 24 0 24s0 11.5 1.5 16.3c.8 2.9 3 5.2 5.9 6C12.2 47.9 34 48 34 48s21.8-.1 26.6-1.7c2.9-.8 5.1-3.1 5.9-6C68 35.5 68 24 68 24s0-11.5-1.5-16.3z" fill="#ff0000"/><path d="M45 24 27 14v20" fill="#fff"/></svg></div></div>
+                                <iframe class="yt-iframe" src="" frameborder="0" allow="accelerometer;autoplay;clipboard-write;encrypted-media;gyroscope;picture-in-picture" allowfullscreen style="display:none;position:absolute;top:0;left:0;width:100%;height:100%;"></iframe>
+                            </div>
+                            <div class="yt-title"></div>
+                        </div>
+                        <!-- Video 6 -->
+                        <div class="yt-card">
+                            <div class="yt-wrap" data-videoid="8msaME8doGE">
+                                <div class="yt-placeholder"><div class="yt-thumb-bg"></div><div class="yt-play-btn"><svg viewBox="0 0 68 48" width="68" height="48"><path d="M66.5 7.7c-.8-2.9-3-5.2-5.9-6C55.8.1 34 0 34 0S12.2.1 7.4 1.7C4.5 2.5 2.3 4.8 1.5 7.7 0 12.5 0 24 0 24s0 11.5 1.5 16.3c.8 2.9 3 5.2 5.9 6C12.2 47.9 34 48 34 48s21.8-.1 26.6-1.7c2.9-.8 5.1-3.1 5.9-6C68 35.5 68 24 68 24s0-11.5-1.5-16.3z" fill="#ff0000"/><path d="M45 24 27 14v20" fill="#fff"/></svg></div></div>
+                                <iframe class="yt-iframe" src="" frameborder="0" allow="accelerometer;autoplay;clipboard-write;encrypted-media;gyroscope;picture-in-picture" allowfullscreen style="display:none;position:absolute;top:0;left:0;width:100%;height:100%;"></iframe>
+                            </div>
+                            <div class="yt-title"></div>
+                        </div>
+                        <!-- Video 7 -->
+                        <div class="yt-card">
+                            <div class="yt-wrap" data-videoid="-ZqvH4T2D0g">
+                                <div class="yt-placeholder"><div class="yt-thumb-bg"></div><div class="yt-play-btn"><svg viewBox="0 0 68 48" width="68" height="48"><path d="M66.5 7.7c-.8-2.9-3-5.2-5.9-6C55.8.1 34 0 34 0S12.2.1 7.4 1.7C4.5 2.5 2.3 4.8 1.5 7.7 0 12.5 0 24 0 24s0 11.5 1.5 16.3c.8 2.9 3 5.2 5.9 6C12.2 47.9 34 48 34 48s21.8-.1 26.6-1.7c2.9-.8 5.1-3.1 5.9-6C68 35.5 68 24 68 24s0-11.5-1.5-16.3z" fill="#ff0000"/><path d="M45 24 27 14v20" fill="#fff"/></svg></div></div>
+                                <iframe class="yt-iframe" src="" frameborder="0" allow="accelerometer;autoplay;clipboard-write;encrypted-media;gyroscope;picture-in-picture" allowfullscreen style="display:none;position:absolute;top:0;left:0;width:100%;height:100%;"></iframe>
+                            </div>
+                            <div class="yt-title"></div>
+                        </div>
                     </div>
-                    <iframe class="yt-iframe" id="yt-video-2" src="" title="ICA-TH 2026 Video 2" frameborder="0" allow="accelerometer;autoplay;clipboard-write;encrypted-media;gyroscope;picture-in-picture" allowfullscreen style="display:none;position:absolute;top:0;left:0;width:100%;height:100%;"></iframe>
                 </div>
+                <button class="yt-arrow yt-arrow-right" id="ytNext" aria-label="Next">
+                    <svg viewBox="0 0 24 24" width="28" height="28" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg>
+                </button>
             </div>
+            <div class="yt-dots" id="ytDots"></div>
         </div>
     </section>
     <style>
-    .yt-grid{display:grid;grid-template-columns:1fr 1fr;gap:28px}
+    .yt-carousel-wrap{position:relative;display:flex;align-items:center;gap:0}
+    .yt-track-outer{overflow:hidden;width:100%}
+    .yt-track{display:flex;gap:28px;transition:transform 0.4s cubic-bezier(.4,0,.2,1)}
+    .yt-card{flex:0 0 calc(50% - 14px);display:flex;flex-direction:column;gap:12px}
+    .yt-title{font-size:15px;font-weight:600;color:#1e293b;line-height:1.4;font-family:'Inter',sans-serif;min-height:1.4em;text-align:center}
     .yt-wrap{position:relative;padding-bottom:56.25%;height:0;border-radius:16px;overflow:hidden;box-shadow:0 8px 32px rgba(0,0,0,0.15)}
     .yt-placeholder{position:absolute;inset:0;background:#0f0f0f;display:flex;align-items:center;justify-content:center;flex-direction:column;gap:16px;cursor:pointer}
     .yt-thumb-bg{position:absolute;inset:0;background:linear-gradient(135deg,#1a1a2e 0%,#16213e 50%,#0f3460 100%);opacity:0.9}
     .yt-play-btn{position:relative;z-index:2;transition:transform 0.2s ease,filter 0.2s ease}
     .yt-placeholder:hover .yt-play-btn{transform:scale(1.12);filter:brightness(1.15)}
-    .yt-coming-label{position:relative;z-index:2;color:rgba(255,255,255,0.55);font-size:13px;font-weight:600;letter-spacing:2px;text-transform:uppercase;font-family:'Inter',sans-serif}
     .yt-iframe{border-radius:16px}
-    @media(max-width:768px){.yt-grid{grid-template-columns:1fr;gap:20px}}
+    .yt-arrow{flex-shrink:0;width:48px;height:48px;border-radius:50%;border:2px solid #e2e8f0;background:#fff;color:#1a3a5f;cursor:pointer;display:flex;align-items:center;justify-content:center;box-shadow:0 2px 12px rgba(0,0,0,0.1);transition:all .2s;z-index:2}
+    .yt-arrow:hover{background:#1a3a5f;color:#fff;border-color:#1a3a5f}
+    .yt-arrow:disabled{opacity:0.3;cursor:default}
+    .yt-arrow-left{margin-right:16px}
+    .yt-arrow-right{margin-left:16px}
+    .yt-dots{display:flex;justify-content:center;gap:8px;margin-top:24px}
+    .yt-dot{width:10px;height:10px;border-radius:50%;background:#cbd5e1;border:none;cursor:pointer;padding:0;transition:background .2s}
+    .yt-dot.active{background:#1a3a5f}
+    @media(max-width:768px){
+        .yt-card{flex:0 0 100%}
+        .yt-arrow{width:40px;height:40px}
+        .yt-arrow-left{margin-right:10px}
+        .yt-arrow-right{margin-left:10px}
+    }
     </style>
     <script>
-    document.querySelectorAll('.yt-wrap').forEach(function(wrap){
-        var vid=wrap.dataset.videoid;
-        if(!vid)return;
-        var ph=wrap.querySelector('.yt-placeholder');
-        var iframe=wrap.querySelector('.yt-iframe');
-        var img=new Image();
-        img.onload=function(){wrap.querySelector('.yt-thumb-bg').style.backgroundImage='url('+img.src+')';wrap.querySelector('.yt-thumb-bg').style.backgroundSize='cover';wrap.querySelector('.yt-thumb-bg').style.backgroundPosition='center';wrap.querySelector('.yt-thumb-bg').style.opacity='1'};
-        img.src='https://i.ytimg.com/vi/'+vid+'/hqdefault.jpg';
-        ph.addEventListener('click',function(){
-            iframe.src='https://www.youtube.com/embed/'+vid+'?autoplay=1';
-            iframe.style.display='block';
-            ph.style.display='none';
+    (function(){
+        var track=document.getElementById('ytTrack');
+        var cards=track.querySelectorAll('.yt-card');
+        var prevBtn=document.getElementById('ytPrev');
+        var nextBtn=document.getElementById('ytNext');
+        var dotsEl=document.getElementById('ytDots');
+        var perView=window.innerWidth<=768?1:2;
+        var total=cards.length;
+        var maxIdx=total-perView;
+        var cur=0;
+
+        // Build dots
+        var numDots=Math.ceil(total/perView);
+        for(var d=0;d<numDots;d++){
+            var dot=document.createElement('button');
+            dot.className='yt-dot'+(d===0?' active':'');
+            dot.dataset.idx=d;
+            dot.addEventListener('click',(function(di){return function(){goTo(di*perView);};})(d));
+            dotsEl.appendChild(dot);
+        }
+
+        function updateDots(){
+            var dots=dotsEl.querySelectorAll('.yt-dot');
+            var activeDot=Math.round(cur/perView);
+            dots.forEach(function(dt,i){dt.classList.toggle('active',i===activeDot);});
+        }
+
+        function goTo(idx){
+            cur=Math.max(0,Math.min(idx,maxIdx));
+            var cardW=cards[0].offsetWidth+28;
+            track.style.transform='translateX(-'+(cur*cardW)+'px)';
+            prevBtn.disabled=cur===0;
+            nextBtn.disabled=cur>=maxIdx;
+            updateDots();
+        }
+
+        prevBtn.addEventListener('click',function(){goTo(cur-perView);});
+        nextBtn.addEventListener('click',function(){goTo(cur+perView);});
+        goTo(0);
+
+        window.addEventListener('resize',function(){
+            perView=window.innerWidth<=768?1:2;
+            maxIdx=total-perView;
+            goTo(0);
         });
-    });
+
+        // Init each video card
+        cards.forEach(function(card){
+            var wrap=card.querySelector('.yt-wrap');
+            var vid=wrap.dataset.videoid;
+            if(!vid)return;
+            var ph=wrap.querySelector('.yt-placeholder');
+            var iframe=wrap.querySelector('.yt-iframe');
+            var titleEl=card.querySelector('.yt-title');
+            var img=new Image();
+            img.onload=function(){
+                var bg=wrap.querySelector('.yt-thumb-bg');
+                bg.style.backgroundImage='url('+img.src+')';
+                bg.style.backgroundSize='cover';
+                bg.style.backgroundPosition='center';
+                bg.style.opacity='1';
+            };
+            img.src='https://i.ytimg.com/vi/'+vid+'/hqdefault.jpg';
+            if(titleEl){
+                fetch('https://www.youtube.com/oembed?url=https://www.youtube.com/watch?v='+vid+'&format=json')
+                    .then(function(r){return r.json();})
+                    .then(function(d){if(d.title)titleEl.textContent=d.title;})
+                    .catch(function(){});
+            }
+            ph.addEventListener('click',function(){
+                iframe.src='https://www.youtube.com/embed/'+vid+'?autoplay=1';
+                iframe.style.display='block';
+                ph.style.display='none';
+            });
+        });
+    })();
     </script>
 
     <!-- ============================================================
