@@ -573,7 +573,7 @@
             var dot=document.createElement('button');
             dot.className='yt-dot'+(d===0?' active':'');
             dot.dataset.idx=d;
-            dot.addEventListener('click',(function(di){return function(){goTo(di*perView);};})(d));
+            dot.addEventListener('click',(function(di){return function(){goTo(Math.min(di*perView,maxIdx));};})(d));
             dotsEl.appendChild(dot);
         }
 
