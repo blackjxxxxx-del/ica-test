@@ -592,8 +592,12 @@
             updateDots();
         }
 
-        prevBtn.addEventListener('click',function(){goTo(cur-perView);});
-        nextBtn.addEventListener('click',function(){goTo(cur+perView);});
+        prevBtn.addEventListener('click',function(){
+            if(cur===0) goTo(maxIdx); else goTo(Math.max(cur-perView,0));
+        });
+        nextBtn.addEventListener('click',function(){
+            if(cur>=maxIdx) goTo(0); else goTo(Math.min(cur+perView,maxIdx));
+        });
         goTo(0);
 
         window.addEventListener('resize',function(){
